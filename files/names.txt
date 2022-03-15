@@ -18,6 +18,11 @@ Abraham-Ian
 Abraham-Diego
 Abraham-Adela
 Abraham-Daniel
+Rodrigo-Messi
+Rodrigo-Neymar
+Rodrigo-Mbape
+Rodrigo-Chumacero
+Rodrigo-Cristiano
 ALBERT-Martin
 ALBERT-Sonia
 ALBERT-Mauricio
@@ -45,9 +50,10 @@ ALBERT-Pepe
 
 
 
+>>>>>>> 453d1b4482bee70741b224cbd6704808556fd38e
 dayler Olga Torricos
 dayler Alejandra Martinez
 dayler pilar Martinez
 dayler claudia Martinez
 dayler Jhulenka Martinez
->>>>>>> d88c95ca84ce9dd6fe9510af5f52b6ee50701d9a
+
