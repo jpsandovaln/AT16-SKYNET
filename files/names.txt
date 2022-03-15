@@ -38,8 +38,13 @@ dayler Alejandra Martinez
 dayler pilar Martinez
 dayler claudia Martinez
 dayler Jhulenka Martinez
+<<<<<<< HEAD
 AT16 Freddy Claros
 AT16-ALBERT_LlANOS
+=======
+
+AT16Garnica
+>>>>>>> be5227d27ec121eb337fe435b2fffad202bf1122
 At16Reynel
 AT16 ALEX
 aT16Rodrigo
