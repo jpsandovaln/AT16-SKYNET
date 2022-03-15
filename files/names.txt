@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Paolo
 Juana
 Pepe
@@ -11,3 +12,62 @@ Ivan-Elfy
 Ivan-Eusebio
 Ivan-Herminia
 Ivan-Dolly
+=======
+Alex - Andrea
+Alex - Ruth
+Alex - Saul
+Alex - Mateo
+Alex - Gaby
+Reynel-Marco
+Reynel-Luisa
+Reynel-Patty
+Reynel-Liz
+Reynel-Rene
+Freddy - Esperanza Perez
+Freddy - Freddy Claros
+Freddy - Dolly Claros
+Freddy - Daysi Claros
+Freddy - Claudia Claros
+Abraham-Sara
+Abraham-Ian
+Abraham-Diego
+Abraham-Adela
+Abraham-Daniel
+ALBERT-Martin
+ALBERT-Sonia
+ALBERT-Mauricio
+ALBERT-Maria
+ALBERT-Pepe
+Ivan-jacqueline
+Ivan-Elfy
+Ivan-Eusebio
+Ivan-Herminia
+Ivan-Vivian
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+dayler Olga Torricos
+dayler Alejandra Martinez
+dayler pilar Martinez
+dayler claudia Martinez
+dayler Jhulenka Martinez
+>>>>>>> d88c95ca84ce9dd6fe9510af5f52b6ee50701d9a
+>>>>>>> 453d1b4482bee70741b224cbd6704808556fd38e
