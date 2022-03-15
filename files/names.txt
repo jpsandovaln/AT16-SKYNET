@@ -1,16 +1,18 @@
-Paolo
-Juana
-Pepe
-Maria
-Tomas
-Carlos
-tereza
-manuel
+Alex - Andrea
+Alex - Ruth
+Alex - Saul
+Alex - Mateo
+Alex - Gaby
 Reynel-Marco
 Reynel-Luisa
 Reynel-Patty
 Reynel-Liz
 Reynel-Rene
+Freddy - Esperanza Perez
+Freddy - Freddy Claros
+Freddy - Dolly Claros
+Freddy - Daysi Claros
+Freddy - Claudia Claros
 Abraham-Sara
 Abraham-Ian
 Abraham-Diego
@@ -21,4 +23,9 @@ Rodrigo-Neymar
 Rodrigo-Mbape
 Rodrigo-Chumacero
 Rodrigo-Cristiano
+dayler Olga Torricos
+dayler Alejandra Martinez
+dayler pilar Martinez
+dayler claudia Martinez
+dayler Jhulenka Martinez
 
