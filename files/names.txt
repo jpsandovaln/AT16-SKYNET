@@ -8,11 +8,11 @@ Reynel-Luisa
 Reynel-Patty
 Reynel-Liz
 Reynel-Rene
-Freddy - Esperanza Perez
-Freddy - Freddy Claros
-Freddy - Dolly Claros
-Freddy - Daysi Claros
-Freddy - Claudia Claros
+Freddy-Esperanza Perez
+Freddy-Freddy Claros
+Freddy-Dolly Claros
+Freddy-Daysi Claros
+Freddy-Claudia Claros
 Abraham-Sara
 Abraham-Ian
 Abraham-Diego
