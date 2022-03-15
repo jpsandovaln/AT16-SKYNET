@@ -1,7 +1,6 @@
 Paolo
 Juana
-Pepe
-Maria
+PepeMaria
 Tomas
 Carlos
 tereza
@@ -11,3 +10,50 @@ Said America
 Said Gunar
 Said Lourdes
 Said Jhair
+Alex - Andrea
+Alex - Ruth
+Alex - Saul
+Alex - Mateo
+Alex - Gaby
+Reynel-Marco
+Reynel-Luisa
+Reynel-Patty
+Reynel-Liz
+Reynel-Rene
+Freddy - Esperanza Perez
+Freddy - Freddy Claros
+Freddy - Dolly Claros
+Freddy - Daysi Claros
+Freddy - Claudia Claros
+Abraham-Sara
+Abraham-Ian
+Abraham-Diego
+Abraham-Adela
+Abraham-Daniel
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+dayler Olga Torricos
+dayler Alejandra Martinez
+dayler pilar Martinez
+dayler claudia Martinez
+dayler Jhulenka Martinez
+>>>>>>> d88c95ca84ce9dd6fe9510af5f52b6ee50701d9a
+>>>>>>> 739e2d19eec81119611023be07744b16a0c381bd
