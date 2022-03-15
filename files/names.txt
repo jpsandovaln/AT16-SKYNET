@@ -39,8 +39,12 @@ dayler pilar Martinez
 dayler claudia Martinez
 dayler Jhulenka Martinez
 <<<<<<< HEAD
+<<<<<<< HEAD
 AT16 ALEX
 =======
 AT16 Freddy Claros
 AT16-ALBERT_LlANOS
 >>>>>>> b27cd6f15d4226a537442ef86923e71a70ec236a
+=======
+AT16 Abraham Jurado
+>>>>>>> 6f9b46a80cd606d22e76f128d764cddab8d536b9
