@@ -28,31 +28,8 @@ Alvaro-Carlos
 Alvaro-Eduardo
 Alvaro-Raul
 Alvaro-Gustavo
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 dayler Olga Torricos
 dayler Alejandra Martinez
 dayler pilar Martinez
 dayler claudia Martinez
 dayler Jhulenka Martinez
->>>>>>> d88c95ca84ce9dd6fe9510af5f52b6ee50701d9a
