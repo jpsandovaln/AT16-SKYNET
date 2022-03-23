@@ -1,0 +1,45 @@
+version: '3.8'
+services:
+  mysql:
+    container_name: mysql
+    image: mysql:${TAG}
+    restart: always
+    volumes:
+      - ./sql-data/db:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    hostname: ${HOSTNAME}
+    environment:
+      MYSQL_DATABASE: 'test_database'
+      MYSQL_USER: 'root'
+      MYSQL_PASSWORD: '123456'
+      MYSQL_ROOT_PASSWORD: '123456'
+      MYSQL_ROOT_PASSWORD: '123456'
+
+  adminer:
+    image: adminer
+    ports:
+      - 8090:8080
+    depends_on:
+    - mysql
+     
+  postgres:
+    image: postgres
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      - DATABASE_HOST=127.0.0.1
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=root
+  
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "admin@admin.com"
+      PGADMIN_DEFAULT_PASSWORD: "admin"
+    ports:
+    - "80:80"
+    depends_on:
+    - postgres
