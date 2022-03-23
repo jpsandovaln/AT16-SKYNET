@@ -1,0 +1,47 @@
+Los entornos virtuales son lo suficientemente útiles como para ser usados ​​en cada proyecto. En particular, los entornos virtuales le permiten:
+1. Gestionar dependencias sin necesidad de acceso root.
+2. Instale diferentes versiones de la misma dependencia, por ejemplo, al trabajar en diferentes proyectos con diferentes requisitos
+3. Trabaja con diferentes versiones de python.
+
+Instalando la herramienta virtualenv//(normalmente el pycharm ya instala estas funciones)
+Esto solo se requiere una vez. El programa virtualenv puede estar disponible a través de su distribución. En las distribuciones similares a Debian, el paquete se llama python-virtualenv o python3-virtualenv .
+Alternativamente, puede instalar virtualenv usando pip :
+$ pip install virtualenv 
+
+Creando un nuevo entorno virtual.
+Esto solo se requiere una vez por proyecto. Al iniciar un proyecto para el que desea aislar dependencias, puede configurar un nuevo entorno virtual para este proyecto:
+$ virtualenv foo 
+Esto creará una carpeta foo contiene scripts de herramientas y una copia del propio binario de python . El nombre de la carpeta no es relevante. Una vez que se crea el entorno virtual, es autónomo y no requiere más manipulación con la herramienta virtualenv . Ahora puedes empezar a utilizar el entorno virtual.
+
+Creando un entorno virtual para una versión diferente de python
+Suponiendo que python y python3 estén instalados, es posible crear un entorno virtual para Python 3, incluso si python3 no es el Python predeterminado:
+virtualenv -p python3 foo 
+o
+virtualenv --python=python3 foo 
+o
+python3 -m venv foo 
+o
+pyvenv foo 
+
+Para crear un entorno virtual, use:
+conda create --name my-env
+Conda creará la carpeta correspondiente dentro del directorio de instalación de Conda.
+También puedes especificar con qué versión de Python quieres trabajar:
+conda create --name my-env python=3.6 
+
+Finalmente, para migrar el entorno virtual con las mismas librerias que estan en requirements.txt, primero copio el archivo requirements.txt en el nuevo entorno virtual .
+
+pip freeze: genera el paquete y su versión instalada en el entorno actual en forma de un archivo de configuración que se puede usar con pip install -r. 
+Si genera pip freeze un archivo con redirección >, puede usar ese archivo para instalar paquetes de la misma versión que el entorno original en otro entorno.
+Primero, salida requirements.txt a un archivo.
+
+pip3 freeze > requirements.txt
+
+Copie o mueva esto requirements.txt a otro entorno e instálelo con él. 
+
+pip3 install -r requirements.txt 
+
+En pip, el sistema de administración de paquetes para Python, puede consultar la lista de paquetes instalados con pip list y pip freeze comandos.
+Con pip list, es posible seleccionar y generar paquetes de la última versión (= actualizados), paquetes que no son de la última versión (= desactualizados), paquetes que no son dependencias de otros paquetes, etc.
+pip freeze es útil para crear requirements.txt, que es un archivo de configuración para instalar paquetes de forma masiva.
+
