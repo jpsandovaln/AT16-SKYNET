@@ -44,8 +44,6 @@ services:
     depends_on:
     - postgres
 
-version: "3.7"
-
 services:
   db:
     container_name: mongo-dev
