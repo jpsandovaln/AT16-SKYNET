@@ -1,6 +1,6 @@
-from PRACTICES.src.classes.bicycle import Bicycle
-from PRACTICES.src.classes.car import Car
-from PRACTICES.src.classes.list_land_transport import ListLandTransport
+from PRACTICES.DaylerClasses.src.classes.bicycle import Bicycle
+from PRACTICES.DaylerClasses.src.classes.car import Car
+from PRACTICES.DaylerClasses.src.classes.list_land_transport import ListLandTransport
 
 
 def main():
