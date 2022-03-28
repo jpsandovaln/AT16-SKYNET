@@ -42,11 +42,10 @@ class ModelTest(unittest.TestCase):
         is_found = search_object(list_object_result, object_searched)
         self.assertTrue(True, is_found)
 
-    # Test to search a refrigerator
+    # Test to search a image of refrigerator
     def test_search_refrigerator(self):
         object_searched = "refrigerator"
         model_vgg16 = ModelVgg16()
         list_object_result = model_vgg16.predict(r"..\src\utils\images_vgg16", object_searched)
         is_found = search_object(list_object_result, object_searched)
         self.assertTrue(True, is_found)
-
