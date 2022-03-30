@@ -1,0 +1,33 @@
+#
+# @uploader.py Copyright (c) 2022 Jalasoft.
+# 2643 Av Melchor Perez de Olguin, Colquiri Sud, Cochabamba, Bolivia.
+# Edificio Union № 1376 Av. General Inofuentes esquina Calle 20, La Paz, Bolivia.
+# All rights reserved.
+#
+# This software is the confidential and proprietary information of
+# Jalasoft, ("Confidential Information"). You shall not
+# disclose such Confidential Information and shall use it only in
+# accordance with the terms of the license agreement you entered into
+# with Jalasoft.
+#
+
+from flask import request
+import os
+
+
+class Uploader:
+    def __init__(self, request, save_location):
+        self.request = request
+        self.save_location = save_location
+
+    def upload(self):
+        if request.method == 'POST':
+            fl = request.files['file']
+            fr = request.form.get('frame')
+            cl = request.form.get('color')
+            frm = request.form.get('format')
+            wid = request.form.get('width')
+            hei = request.form.get('height')
+            qua = request.form.get('quality')
+            fl.save(os.path.join(self.save_location, fl.filename))
+        return f"http://127.0.0.1:5000/download/{fl.filename}"

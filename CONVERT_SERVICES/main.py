@@ -1,17 +1,41 @@
-# This is a sample Python script.
+#
+# @main.py Copyright (c) 2022 Jalasoft.
+# 2643 Av Melchor Perez de Olguin, Colquiri Sud, Cochabamba, Bolivia.
+# Edificio Union № 1376 Av. General Inofuentes esquina Calle 20, La Paz, Bolivia.
+# All rights reserved.
+#
+# This software is the confidential and proprietary information of
+# Jalasoft, ("Confidential Information"). You shall not
+# disclose such Confidential Information and shall use it only in
+# accordance with the terms of the license agreement you entered into
+# with Jalasoft.
+#
 
-# Press Mayús+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+from flask import Flask
+from flask_restful import Api
+from flask import request
+
+from src.converter.controller.apis.uploader import Uploader
+from src.converter.controller.apis.downloader import Downloader
+
+UPLOAD_FOLDER = 'saved_files/'
+
+app = Flask(__name__)
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+api = Api(app)
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+@app.route('/upl', methods=['GET', 'POST'])
+def save_file():
+    save = Uploader(request, app.config['UPLOAD_FOLDER'])
+    return save.upload()
 
 
-# Press the green button in the gutter to run the script.
+@app.route('/download/<string:file_name>')
+def download_file(file_name):
+    download = Downloader(request, app.config['UPLOAD_FOLDER'], file_name)
+    return download.donwload()
+
+
 if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
-
+    app.run(debug=True)
