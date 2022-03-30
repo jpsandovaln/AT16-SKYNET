@@ -22,7 +22,7 @@ class Uploader:
 
     def upload(self):
         if request.method == 'POST':
-            fl = request.files['file']
+            fl = request.files['file']  # This is for the file, the rest is for converter imagen
             fr = request.form.get('frame')
             cl = request.form.get('color')
             frm = request.form.get('format')
@@ -30,4 +30,13 @@ class Uploader:
             hei = request.form.get('height')
             qua = request.form.get('quality')
             fl.save(os.path.join(self.save_location, fl.filename))
-        return f"http://127.0.0.1:5000/download/{fl.filename}"
+        return f"http://127.0.0.1:5000/download/{fl.filename}"  # return the image URL for download
+
+    # this is for pass the params in the format that Said was using
+    def _build_string_s(frame, color, format, width, height, quality):
+        return f"{frame},{color},{format},{width},{height},{quality}"
+
+    # this is for pass the params in the format that
+    def _build_string_r(frame, color, format, width, height, quality):
+        return (f"frame={frame}, color={color}, format={format}, width={width}, height={height},"
+                f" quality={quality}")

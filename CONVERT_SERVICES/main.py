@@ -18,23 +18,23 @@ from flask import request
 from src.converter.controller.apis.uploader import Uploader
 from src.converter.controller.apis.downloader import Downloader
 
-UPLOAD_FOLDER = 'saved_files/'
+UPLOAD_FOLDER = 'saved_files/'  # here is the file where the images will be downloaded
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 api = Api(app)
 
 
-@app.route('/upl', methods=['GET', 'POST'])
+@app.route('/upload', methods=['GET', 'POST'])
 def save_file():
-    save = Uploader(request, app.config['UPLOAD_FOLDER'])
-    return save.upload()
+    file = Uploader(request, app.config['UPLOAD_FOLDER'])
+    return file.upload()
 
 
 @app.route('/download/<string:file_name>')
 def download_file(file_name):
-    download = Downloader(request, app.config['UPLOAD_FOLDER'], file_name)
-    return download.donwload()
+    file = Downloader(request, app.config['UPLOAD_FOLDER'], file_name)
+    return file.donwload()
 
 
 if __name__ == '__main__':
