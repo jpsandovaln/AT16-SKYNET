@@ -16,7 +16,7 @@ import os
 import keras
 from keras.applications.inception_v3 import InceptionV3, decode_predictions
 from keras.preprocessing.image import load_img, img_to_array
-from classes.object_result import ObjectResult
+from Result.object_result import ObjectResult
 
 class ModelInceptionV3:
     def select_img_in_folder(self, path: str):
