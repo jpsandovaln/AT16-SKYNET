@@ -32,7 +32,7 @@ class ConvertImage(Convertor):
 
     def Concatenate(self):
         dic = self.Init_dic()
-        cod_cmd = "magick convert " + self.inputfile + " "
+        cod_cmd = "magick converter " + self.inputfile + " "
         for key, val in self.instructions.items():
             if key in dic:
                 dic[key] = dic[key].format(val)
@@ -46,7 +46,7 @@ class ConvertImage(Convertor):
 
 """  def Execute(self):
         self.Verify()
-        #cod = 'magick convert {} -colorspace {}{}{}{}{} '.format()
+        #cod = 'magick converter {} -colorspace {}{}{}{}{} '.format()
         print (self.instructions)
 
     def Verify(self):

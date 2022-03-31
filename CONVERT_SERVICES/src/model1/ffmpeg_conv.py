@@ -14,7 +14,7 @@
 from model1.parameters import Parameters
 
 
-#This class inherits the inputs of the converter and convert visual content.
+#This class inherits the inputs of the converter and converter visual content.
 class CommandFfmpeg(Parameters):
     def __init__(self, str_input, path_out, path_in):
         super().__init__(str_input, path_out, path_in)
@@ -38,7 +38,7 @@ class CommandFfmpeg(Parameters):
         cmd_input_copy = cmd_input[:-1]
         return cmd_input_copy
 
-    #This method convert the visual content.
+    #This method converter the visual content.
     def cmd_ff(self):
         form_conv = ""
         for key, val in self.dictionary.items():
