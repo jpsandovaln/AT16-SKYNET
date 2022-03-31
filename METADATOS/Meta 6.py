@@ -33,13 +33,13 @@ class Metadata:
                     self.ext):##limitamos el tipo de archivo que entrara con la extencion ".jpg"
 
                 name = str(file)
-                name2 = name[:-4]## eliminamos la extencion del archivo en el caso del ejemplo el
+                namef = name[:-4]## eliminamos la extencion del archivo en el caso del ejemplo el
                 # ".jpg"
 
                 ##procesamos cada archivo con el Exiftool.exe y sacamos sus dependencias en
                 # formato JSON creando un archivo.JSON para cada imagen
                 process = subprocess.run([exe,str(self.path) + "/" + str(file), '-json', '-W+!',
-                                            str(self.direct) + name2 + ".json"])
+                                            str(self.direct) + namef + ".json"])
 
                 ## imprimimos el estado de cada conversion
                 print(process.stdout)
