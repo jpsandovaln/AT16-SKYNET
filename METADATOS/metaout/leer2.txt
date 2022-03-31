@@ -1,1 +1,0 @@
-Esta es la carpeta en donde estan las salidas de los archivos JSON
