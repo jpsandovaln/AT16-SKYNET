@@ -15,8 +15,8 @@ from flask import Flask
 from flask_restful import Api
 from flask import request
 
-from src.converter.controller.apis.uploader import Uploader
-from src.converter.controller.apis.downloader import Downloader
+from CONVERT_SERVICES.src.controller.apis.uploader import Uploader
+from CONVERT_SERVICES.src.controller.apis.downloader import Downloader
 
 UPLOAD_FOLDER = 'saved_files/'  # here is the file where the images will be downloaded
 

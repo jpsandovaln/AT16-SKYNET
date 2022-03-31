@@ -14,8 +14,8 @@
 from flask import Flask
 from flask_restful import Api
 
-from CONVERT_SERVICES.src.converter.controller.rest_api_dayler.resources.file_downloader import FileDownloader
-from CONVERT_SERVICES.src.converter.controller.rest_api_dayler.resources.file_uploader import FileUploader
+from CONVERT_SERVICES.src.controller.backup.rest_api_dayler.resources.file_downloader import FileDownloader
+from CONVERT_SERVICES.src.controller.backup.rest_api_dayler.resources.file_uploader import FileUploader
 
 app = Flask(__name__)
 api = Api(app)
