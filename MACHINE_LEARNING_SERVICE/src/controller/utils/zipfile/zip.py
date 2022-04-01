@@ -14,11 +14,11 @@
 import zipfile
 
 # creation of compressed files
-with zipfile.ZipFile("comprimidos.zip", "w") as fzip:
+with zipfile.ZipFile("compressed.zip", "w") as fzip:
     fzip.write("calzip.txt")
-    print("Archivos comprimidos")
+    print("compressed files")
 #list zip file content
-fzip = zipfile.ZipFile("comprimidos.zip")
+fzip = zipfile.ZipFile("compressed.zip")
 print(fzip.printdir())
 listaArchivos = fzip.namelist()
 print(listaArchivos)
@@ -26,5 +26,5 @@ print(listaArchivos)
 info = fzip.infolist()
 for archivo in info:
         print(archivo.filename.archivo.date_time,archivo.compress_size)
-        #descomprimir fichero
-        fzip.extractall()#(ruta del archivo)
+        #unzip file
+        fzip.extractall()#(service route)
