@@ -13,7 +13,7 @@
 
 from flask import request
 from src.reporting.criteria.filters_time_location import Filters_Time_Location
-from src.reporting.criteria.criteria import Criteria
+
 
 
 class SearchReport:

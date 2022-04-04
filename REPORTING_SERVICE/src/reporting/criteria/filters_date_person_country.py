@@ -10,11 +10,10 @@
 # accordance with the terms of the license agreement you entered into
 # with Jalasoft.
 #
-from csv import excel
-from textwrap import fill
+
 
 from src.reporting.criteria.criteria import Criteria
-import pandas as pd
+
 
 
 class Filters_Date_Person_Country(Criteria):

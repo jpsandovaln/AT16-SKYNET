@@ -14,7 +14,7 @@ from csv import excel
 from textwrap import fill
 
 from src.reporting.criteria.criteria import Criteria
-import pandas as pd
+
 
 
 class Filters_Start_Finish_Time_Person_Gender(Criteria):
