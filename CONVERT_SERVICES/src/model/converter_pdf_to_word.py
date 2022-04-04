@@ -10,11 +10,11 @@
 #accordance with the terms of the license agreement you entered into
 #with Jalasoft.
 #
-from src.obtName import ObtName
+
 
 import win32com.client
 import os
-archivo = ObtName('Test.pdf')
+archivo = 'Test.pdf'
 word = win32com.client.Dispatch("word.Application")
 word.visible = 0
 

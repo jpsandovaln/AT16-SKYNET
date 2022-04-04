@@ -1,20 +1,20 @@
 #
 # @video_converter.py Copyright (c)
 # 2643 Av  Melchor Perez de Olguin, Colquiri Sud, Cochabamba, Bolivia.
-#1376 Av General Inofuentes esquina calle 20, La Paz, Bolivia.
-#All rights reserved.
+# 1376 Av General Inofuentes esquina calle 20, La Paz, Bolivia.
+# All rights reserved.
 #
-#This software is the confidential and proprietary information of
-#Jalasoft, ("Condidential Information"). You shall # not
-#disclose such Confidential Information and shall use it only in
-#accordance with the terms of the license agreement you entered into
-#with Jalasoft.
+# This software is the confidential and proprietary information of
+# Jalasoft, ("Condidential Information"). You shall # not
+# disclose such Confidential Information and shall use it only in
+# accordance with the terms of the license agreement you entered into
+# with Jalasoft.
 #
 
 from model1.parameters import Parameters
 
 
-#This class inherits the inputs of the converter and converter visual content.
+# This class inherits the inputs of the converter and converter visual content.
 class CommandFfmpeg(Parameters):
     def __init__(self, str_input, path_out, path_in):
         super().__init__(str_input, path_out, path_in)
@@ -22,7 +22,7 @@ class CommandFfmpeg(Parameters):
         self.cmd_input_copy = self.compare_dic()
         self.ffmpeg_cmd = self.cmd_ff()
 
-    #This method compare the data and create the ffmpeg command.
+    # This method compare the data and create the ffmpeg command.
     def compare_dic(self):
         dic_param = {'frame': 'fps={}',
                      'fr': 'fps={}',
