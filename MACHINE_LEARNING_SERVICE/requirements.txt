@@ -1,0 +1,5 @@
+Flask==2.1.1
+Flask-RESTful==0.3.9
+tensorflow==2.8.0
+pillow==9.1.0
+keras==2.8.0
