@@ -1,5 +1,5 @@
 #
-# @filters.py Copyright (c)
+# @filters_age_gender.py Copyright (c)
 # 2643 Av  Melchor Perez de Olguin, Colquiri Sud, Cochabamba, Bolivia.
 # 1376 Av General Inofuentes esquina calle 20, La Paz, Bolivia.
 # All rights reserved.
@@ -22,11 +22,6 @@ class Filters_Age_Gender(Criteria):
         super().__init__(direction)
         self.person_age = person_age
         self.person_gender = person_gender
-
-    def get_df(self):
-        excel = self.direction
-        df = pd.read_excel(excel)
-        return df
 
     def filters_age_gender(self):
         filters = (self.get_df()["person_age"] < self.person_age) & (self.get_df()["person_gender"] == self.person_gender)

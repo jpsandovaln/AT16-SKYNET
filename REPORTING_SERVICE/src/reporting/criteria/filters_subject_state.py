@@ -1,5 +1,5 @@
 #
-# @filters.py Copyright (c)
+# @filters_subject_state.py Copyright (c)
 # 2643 Av  Melchor Perez de Olguin, Colquiri Sud, Cochabamba, Bolivia.
 # 1376 Av General Inofuentes esquina calle 20, La Paz, Bolivia.
 # All rights reserved.
@@ -22,11 +22,6 @@ class Filters_Subject_State(Criteria):
         super().__init__(direction)
         self.subject = subject
         self.state = state
-
-    def get_df(self):
-        excel = self.direction
-        df = pd.read_excel(excel)
-        return df
 
     def filters_subject_state(self):
         filters = (self.get_df()["subject"] == self.subject) & (self.get_df()["state"] == self.state)

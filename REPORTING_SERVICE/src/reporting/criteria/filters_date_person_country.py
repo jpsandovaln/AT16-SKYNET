@@ -1,5 +1,5 @@
 #
-# @filters.py Copyright (c)
+# @filters_date_person_country.py Copyright (c)
 # 2643 Av  Melchor Perez de Olguin, Colquiri Sud, Cochabamba, Bolivia.
 # 1376 Av General Inofuentes esquina calle 20, La Paz, Bolivia.
 # All rights reserved.
@@ -22,11 +22,6 @@ class Filters_Date_Person_Country(Criteria):
         super().__init__(direction)
         self.date = date
         self.person_country = person_country
-
-    def get_df(self):
-        excel = self.direction
-        df = pd.read_excel(excel)
-        return df
 
     def filters_date_person_country(self):
         filters = (self.get_df()["date"] <= self.date) & (self.get_df()["person_country"] == self.person_country)

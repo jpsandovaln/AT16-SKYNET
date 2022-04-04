@@ -10,9 +10,17 @@
 # accordance with the terms of the license agreement you entered into
 # with Jalasoft.
 #
+import pandas as pd
+
+
 class Criteria:
     def __init__(self, direction):
         self.direction = direction
 
     def get_direction(self):
         return self.direction
+
+    def get_df(self):
+        excel = self.direction
+        df = pd.read_excel(excel)
+        return df

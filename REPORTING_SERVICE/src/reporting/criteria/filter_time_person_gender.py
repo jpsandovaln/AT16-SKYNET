@@ -1,5 +1,5 @@
 #
-# @filters.py Copyright (c)
+# @filters_time_person_gender.py Copyright (c)
 # 2643 Av  Melchor Perez de Olguin, Colquiri Sud, Cochabamba, Bolivia.
 # 1376 Av General Inofuentes esquina calle 20, La Paz, Bolivia.
 # All rights reserved.
@@ -23,11 +23,6 @@ class Filters_Start_Finish_Time_Person_Gender(Criteria):
         self.start_time = start_time
         self.finish_time = finish_time
         self.person_age = person_age
-
-    def get_df(self):
-        excel = self.direction
-        df = pd.read_excel(excel)
-        return df
 
     def filters_start_finish_time_person_gender(self):
         filters = (self.get_df()["start_time"] >= self.start_time) & (self.get_df()["finish_time"] <= self.finish_time)\

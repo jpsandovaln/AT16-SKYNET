@@ -1,5 +1,5 @@
 #
-# @filters.py Copyright (c)
+# @filters_time_location.py Copyright (c)
 # 2643 Av  Melchor Perez de Olguin, Colquiri Sud, Cochabamba, Bolivia.
 # 1376 Av General Inofuentes esquina calle 20, La Paz, Bolivia.
 # All rights reserved.
@@ -24,14 +24,7 @@ class Filters_Time_Location(Criteria):
         self.finish_time = finish_time
         self.location = location
 
-    def get_df(self):
-        excel = self.direction
-        df = pd.read_excel(excel)
-        return df
-
     def fil_time_location(self):
         filters = (self.get_df()['start_time'] >= self.star_time) & (self.get_df()['end_time'] <= self.finish_time) & (
                 self.get_df()['person_city'] == self.location)
         return filters
-
-
