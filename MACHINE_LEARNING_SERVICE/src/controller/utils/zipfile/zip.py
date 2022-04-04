@@ -10,21 +10,13 @@
 # accordance with the terms of the license agreement you entered into
 # with Jalasoft.
 #
-
 import zipfile
 
-# creation of compressed files
-with zipfile.ZipFile("compressed.zip", "w") as fzip:
-    fzip.write("calzip.txt")
-    print("compressed files")
-#list zip file content
-fzip = zipfile.ZipFile("compressed.zip")
-print(fzip.printdir())
-listaArchivos = fzip.namelist()
-print(listaArchivos)
-#We get more information
-info = fzip.infolist()
-for archivo in info:
-        print(archivo.filename.archivo.date_time,archivo.compress_size)
-        #unzip file
-        fzip.extractall()#(service route)
+
+class Classroom:
+
+    def decom_zip(self, filename):
+        path_zip = '../../../../../compress_file/{}'.format(filename)
+        fzip = zipfile.ZipFile(path_zip)  # This is the input path
+        fzip.extractall("../../../../saved_files")  # This is the output path
+        print('Ya está')

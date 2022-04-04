@@ -40,4 +40,3 @@ class Uploader:
                                  self.model_request)
             result_model = result.models_results()
             return result_model
-
