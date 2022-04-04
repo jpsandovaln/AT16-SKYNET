@@ -15,7 +15,7 @@ from keras.preprocessing.image import load_img
 from keras.preprocessing.image import img_to_array
 from keras.applications.vgg16 import preprocess_input
 from keras.applications.vgg16 import decode_predictions
-from src.classes.object_result import ObjectResult
+from MACHINE_LEARNING_SERVICE.src.classes.object_result import ObjectResult
 import os
 
 
@@ -42,7 +42,7 @@ class ModelVgg16:
             image = image.reshape((1, image.shape[0], image.shape[1], image.shape[2]))
             image = preprocess_input(image)
             result_prediction = model.predict(image)
-            result = decode_predictions(result_prediction, top=5)
+            result = decode_predictions(result_prediction, top=10)
 
             # Fill the list with results that match to the Word variable
             for predictions in result:
@@ -55,15 +55,12 @@ class ModelVgg16:
                         object_result.set_path_file(file)
                         list_object_result.append(object_result)
 
-        # Print the list of the results
-        i = 0
+        object_array = []
         for object_result in list_object_result:
-            i = i + 1
-            print("========OBJECT FOUND========")
-            print("Object : " + str(i) + ", Id : " + object_result.get_id_object())
-            print("Name : " + object_result.get_name())
-            print("Percentage : " + str(round(object_result.get_percentage()*100)) + " % ")
-            print("File : " + object_result.get_path_file())
-            print()
+            object_array.append((object_result.get_id_object(),
+                                 object_result.get_name(),
+                                 str(round(
+                                     object_result.get_percentage() * 100))))
+        return object_array
 
-        return list_object_result
+
