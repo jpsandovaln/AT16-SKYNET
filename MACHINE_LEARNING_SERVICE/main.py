@@ -15,27 +15,33 @@ from flask import Flask
 from flask_restful import Api
 from flask import request
 
+
 from src.controller.apis.uploader import Uploader
 from src.controller.apis.downloader import Downloader
 
-UPLOAD_FOLDER = 'saved_files/'  # here is the file where the images will be downloaded
+# This is the path where the zip file will be saved
+UPLOAD_FOLDER = 'saved_files\compress_files'
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 api = Api(app)
 
 
+# End point of the uploader file
 @app.route('/upload', methods=['GET', 'POST'])
 def save_file():
     file = Uploader(request, app.config['UPLOAD_FOLDER'])
     return file.upload()
 
 
+# End point of the downloader file
 @app.route('/download/<string:file_name>')
 def download_file(file_name):
     file = Downloader(request, app.config['UPLOAD_FOLDER'], file_name)
-    return file.donwload()
+    return file.download()
 
 
+# Starts the API, maintains the debugger active, don't use it in a production
+# deployment
 if __name__ == '__main__':
     app.run(debug=True)

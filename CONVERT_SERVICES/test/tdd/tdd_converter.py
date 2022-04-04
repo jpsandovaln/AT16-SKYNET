@@ -12,7 +12,7 @@
 #
 
 import unittest
-from CONVERT_SERVICES.src.model1.ffmpeg_conv import CommandFfmpeg
+from CONVERT_SERVICES.src.model.ffmpeg_conv import CommandFfmpeg
 
 
 class Test_converter(unittest.TestCase):
