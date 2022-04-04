@@ -11,20 +11,8 @@
 # with Jalasoft.
 #
 class Criteria:
-    def __init__(self, star_time, finish_time, location, direction):
-        self.star_time = star_time
-        self.finish_time = finish_time
-        self.location = location
+    def __init__(self, direction):
         self.direction = direction
-
-    def get_star_time(self):
-        return self.star_time
-
-    def get_finish_time(self):
-        return self.finish_time
-
-    def get_location(self):
-        return self.location
 
     def get_direction(self):
         return self.direction

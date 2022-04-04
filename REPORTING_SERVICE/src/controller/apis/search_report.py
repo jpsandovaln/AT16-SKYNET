@@ -12,8 +12,9 @@
 #
 
 from flask import request
-from src.reporting.criteria.filters import Filters
+from src.reporting.criteria.filters import Filters_Time_Location
 from src.reporting.criteria.criteria import Criteria
+
 
 class SearchReport:
     def __init__(self, request):
@@ -25,7 +26,6 @@ class SearchReport:
             star_time = request.form.get('star_time')
             end_time = request.form.get('end_time')
             location = request.form.get('location')
-            Criteria = Filters(int(star_time), int(end_time), str(location), file_route)
-        print(Criteria.get_df()[Criteria.fil()])
-        return str(Criteria.get_df()[Criteria.fil()])
-
+            Criteria = Filters_Time_Location(int(star_time), int(end_time), str(location), file_route)
+        print(Criteria.get_df()[Criteria.fil_time_location()])
+        return str(Criteria.get_df()[Criteria.fil_time_location()])

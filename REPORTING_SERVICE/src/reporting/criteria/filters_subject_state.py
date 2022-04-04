@@ -17,21 +17,22 @@ from src.reporting.criteria.criteria import Criteria
 import pandas as pd
 
 
-class Filters_Time_Location(Criteria):
-    def __init__(self, star_time, finish_time, location, direction):
+class Filters_Subject_State(Criteria):
+    def __init__(self, subject, state, direction):
         super().__init__(direction)
-        self.star_time = star_time
-        self.finish_time = finish_time
-        self.location = location
+        self.subject = subject
+        self.state = state
 
     def get_df(self):
         excel = self.direction
         df = pd.read_excel(excel)
         return df
 
-    def fil_time_location(self):
-        filters = (self.get_df()['start_time'] >= self.star_time) & (self.get_df()['end_time'] <= self.finish_time) & (
-                self.get_df()['person_city'] == self.location)
+    def filters_subject_state(self):
+        filters = (self.get_df()["subject"] == self.subject) & (self.get_df()["state"] == self.state)
         return filters
+
+
+
 
 
