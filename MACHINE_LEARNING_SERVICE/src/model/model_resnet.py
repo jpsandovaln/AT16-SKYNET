@@ -1,11 +1,26 @@
+#
+# @model_resnet.py Copyright (c)
+# 2643 Av  Melchor Perez de Olguin, Colquiri Sud, Cochabamba, Bolivia.
+# 1376 Av General Inofuentes esquina calle 20, La Paz, Bolivia.
+# All rights reserved.
+#
+# This software is the confidential and proprietary information of
+# Jalasoft, ("Confidential Information"). You shall # not
+# disclose such Confidential Information and shall use it only in
+# accordance with the terms of the license agreement you entered into
+# with Jalasoft.
+#
 from imageai.Detection import ObjectDetection
-from object_result_resnet import ObjectResult
+from Result.object_result import ObjectResult
 import os
 
 
 class Resnet:
+# Class that represent to the Object Recognition Model
 
     def prediction(self, path, word):
+
+        # Method that return a list with the objects predicted
         output_path = "./output/newimage.jpg"
         list_object_result = []
         execution_path = os.getcwd()
@@ -17,6 +32,8 @@ class Resnet:
                       if os.path.isfile(os.path.join(path, f))]
         for file in path_files:
             detections = detector.detectObjectsFromImage(input_image=file, output_image_path=output_path)
+
+            # Fill the list with results that match to the Word variable
             for eachObject in detections:
                 if eachObject["name"] == word and eachObject["percentage_probability"] >= 70:
                     name_obj = eachObject["name"]
