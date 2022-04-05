@@ -42,10 +42,12 @@ class Resnet:
                     object_result.set_path_file(file)
                     list_object_result.append(object_result)
 
-        object_array = []
+
+        object_dict = {}
+        num_obj = 1
         for object_result in list_object_result:
-            object_array.append((object_result.get_path_file(),
-                                 object_result.get_name(),
-                                 str(round(
-                                     object_result.get_percentage() * 100))))
-        return object_array
+            object_dict["Object " + str(num_obj)] = {"Name": object_result.get_name(),
+                                                     "Image": object_result.get_path_file(),
+                                                     "Percentage": object_result.get_percentage() * 100}
+            num_obj += 1
+        return object_dict
