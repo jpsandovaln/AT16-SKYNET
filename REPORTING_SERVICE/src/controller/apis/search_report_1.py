@@ -10,22 +10,22 @@
 # accordance with the terms of the license agreement you entered into
 # with Jalasoft.
 #
-
 from flask import request
-from src.reporting.criteria.filter_time_person_gender import Filters_Start_Finish_Time_Person_Gender
+from src.reporting.criteria.filters_age_gender import Filters_Age_Gender
 
 
-class SearchReport:
+
+
+class SearchReport1:
     def __init__(self, request):
         self.request = request
 
 
-    def search_report(self):
+    def search_report_1(self):
         if request.method == 'POST':
                 file_route = request.form.get('file_route')  # This is for the file, the rest is for converter imagen
-                star_time = request.form.get('star_time')
-                end_time = request.form.get('end_time')
                 person_age = request.form.get('person_age')
-                Criteria = Filters_Start_Finish_Time_Person_Gender(str(file_route), int(star_time), int(end_time), str(person_age))
+                person_gender = request.form.get('person_gender')
+                Criteria = Filters_Age_Gender(str(file_route), str(person_age), str(person_gender))
         #print(Criteria.get_df()[Criteria.fil_time_location()])
         return str(Criteria.get_df()[Criteria.fil_time_location()])
