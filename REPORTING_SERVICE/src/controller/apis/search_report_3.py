@@ -12,20 +12,21 @@
 #
 
 from flask import request
-from src.reporting.criteria.filter_time_person_age import Filters_Start_Finish_Time_Person_Age
+from src.reporting.criteria.filters_model_type import Filters_Model_Type
 
 
-class SearchReport:
+
+
+class SearchReport3:
     def __init__(self, request):
         self.request = request
 
 
-    def search_report(self):
+    def search_report_3(self):
         if request.method == 'POST':
                 file_route = request.form.get('file_route')  # This is for the file, the rest is for converter imagen
-                start_time = request.form.get('start_time')
-                end_time = request.form.get('end_time')
-                person_age = request.form.get('person_age')
-                Criteria = Filters_Start_Finish_Time_Person_Age(int(start_time), int(end_time), int(person_age), str(file_route))
+                model = request.form.get('model')
+                type = request.form.get('type')
+                Criteria = Filters_Model_Type(str(model), str(type), str(file_route))
         #print(Criteria.get_df()[Criteria.fil_time_location()])
-        return str(Criteria.get_df()[Criteria.filters_start_finish_time_person_age()])
+        return str(Criteria.get_df()[Criteria.filters_model_type()])

@@ -1,14 +1,14 @@
 #
 # @model_inception_v3.py Copyright (c)
 # 2643 Av  Melchor Perez de Olguin, Colquiri Sud, Cochabamba, Bolivia.
-#1376 Av General Inofuentes esquina calle 20, La Paz, Bolivia.
-#All rights reserved.
+# 1376 Av General Inofuentes esquina calle 20, La Paz, Bolivia.
+# All rights reserved.
 #
-#This software is the confidential and proprietary information of
-#Jalasoft, ("Condidential Information"). You shall # not
-#disclose such Confidential Information and shall use it only in
-#accordance with the terms of the license agreement you entered into
-#with Jalasoft.
+# This software is the confidential and proprietary information of
+# Jalasoft, ("Condidential Information"). You shall # not
+# disclose such Confidential Information and shall use it only in
+# accordance with the terms of the license agreement you entered into
+# with Jalasoft.
 #
 
 
@@ -16,39 +16,53 @@ import os
 import keras
 from keras.applications.inception_v3 import InceptionV3, decode_predictions
 from keras.preprocessing.image import load_img, img_to_array
-from Result.object_result import ObjectResult
+from MACHINE_LEARNING_SERVICE.src.classes.object_result import ObjectResult
+
 
 class ModelInceptionV3:
-    def select_img_in_folder(self, path: str):
-        content = os.listdir(path)
-        imgs = []
-        for file in content:
-            if os.path.isfile(os.path.join(path, file)) and file.endswith('.jpg'):
-                imgs.append(file)
-        complete_path = str(path) + "/" + str(imgs[0])
-        return complete_path
+    """Class that represent to the Object Recognition Model"""
 
-    def prediction(self, complete_path, word):
-        this_word = word
-        path = complete_path
+    def prediction(self, path, word):
+        """Method that return a list with the objects predicted"""
 
-        filename = ModelInceptionV3.select_img_in_folder(self, path)
+        # List of the objects predicted
+        list_object_result = []
 
-        iv3 = InceptionV3()
-        target_size = (299, 299)
-        img = load_img(filename, target_size=target_size)
-        x = img_to_array(img)
-        x = x.reshape([1, x.shape[0], x.shape[1], x.shape[2]])
-        keras.applications.inception_v3.preprocess_input(x)
-        y = iv3.predict(x)
-        raw_data = decode_predictions(y)
+        # Load the model
+        model = InceptionV3()
 
-        object_result = ObjectResult()
-        object_result.set_name(raw_data[0][0][1])
-        object_result.set_percentage("{:.0%}".format(raw_data[0][0][2]))
-        object_result.set_path_file(filename)
-        return object_result
+        # Create the paths for the images
+        path_files = [(path + "\\" + f) for f in os.listdir(path)
+                      if os.path.isfile(os.path.join(path, f))]
 
+        # Predict the objects that are in the images
+        for file in path_files:
+            image = load_img(file, target_size=(299, 299))
+            image = img_to_array(image)
+            image = image.reshape((1, image.shape[0], image.shape[1], image.shape[2]))
+            image = keras.applications.inception_v3.preprocess_input(image)
+            result_prediction = model.predict(image)
+            result = decode_predictions(result_prediction, top=10)
+
+            # Fill the list with results that match to the Word variable
+            for predictions in result:
+                for object_predicted in predictions:
+                    if object_predicted[1] == word and object_predicted[2] >= 0.2:
+                        object_result = ObjectResult()
+                        object_result.set_id_object(object_predicted[0])
+                        object_result.set_name(object_predicted[1])
+                        object_result.set_percentage(object_predicted[2])
+                        object_result.set_path_file(file)
+                        list_object_result.append(object_result)
+
+        object_dict = {}
+        num_obj = 1
+        for object_result in list_object_result:
+            object_dict["Object " + str(num_obj)] = {"Name": object_result.get_name(),
+                                                     "Image": object_result.get_path_file(),
+                                                     "Percentage": object_result.get_percentage() * 100}
+            num_obj += 1
+        return object_dict
 
 
 

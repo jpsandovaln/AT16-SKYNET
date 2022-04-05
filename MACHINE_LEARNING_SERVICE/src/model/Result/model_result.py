@@ -11,32 +11,38 @@
 # with Jalasoft.
 #
 
+from MACHINE_LEARNING_SERVICE.src.model.model_vgg16 import ModelVgg16
+from MACHINE_LEARNING_SERVICE.src.model.model_inception_v3 import ModelInceptionV3
+from MACHINE_LEARNING_SERVICE.src.model.model_resnet import Resnet
+import json
 
-from flask import request
-from MACHINE_LEARNING_SERVICE.src.model.Result.model_result import ModelResult
-from MACHINE_LEARNING_SERVICE.src.controller.utils.zipfile.decompress import \
-    Decompress
-import os
 
-# This is for to upload a file.
-class Uploader:
-    def __init__(self, request, save_location):
-        self.request = request
+# Returns a list of images that contain the word.
+class ModelResult:
+    def __init__(self, save_location, name_request, model_request):
+        self.name_request = name_request
         self.save_location = save_location
+        self.model_request = model_request
 
-    # The function gets the zipped file, name and model. Returns a list of
-    # images that contain the word.
-    def upload(self):
-        if self.request.method == 'POST':
-            file_request = self.request.files['file']
-            self.name_request = request.form.get('name')
-            self.model_request = request.form.get('model')
-            path_saved = os.path.join(self.save_location,
-                                      file_request.filename)
-            file_request.save(path_saved)
-            path_zip = Decompress(path_saved)
-            path_zip_result = path_zip.path_decompress()
-            result = ModelResult(path_zip_result, self.name_request,
-                                 self.model_request)
-            result_model = result.models_results()
-            return result_model
+    # Returns a list of images that contain the word.
+    def models_results(self):
+        if self.model_request == 'ModelVgg16':
+            model_vgg16 = ModelVgg16()
+            list_object_result = model_vgg16.predict(self.save_location,
+                                                     self.name_request)
+            dic_json = json.dumps(list_object_result, indent=4)
+            return dic_json
+
+        elif self.model_request == 'InceptionV3':
+            inception_v3_match = ModelInceptionV3()
+            list_object_result = inception_v3_match.prediction(
+                self.save_location, self.name_request)
+            dic_json = json.dumps(list_object_result, indent=4)
+            return dic_json
+
+        elif self.model_request == 'Resnet':
+            model_resnet = Resnet()
+            list_object_result = model_resnet.prediction(
+                self.save_location, self.name_request)
+            dic_json = json.dumps(list_object_result, indent=4)
+            return dic_json

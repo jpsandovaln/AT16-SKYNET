@@ -1,5 +1,5 @@
 #
-# @filters_time_location.py Copyright (c)
+# @filters_time_person_age.py Copyright (c)
 # 2643 Av  Melchor Perez de Olguin, Colquiri Sud, Cochabamba, Bolivia.
 # 1376 Av General Inofuentes esquina calle 20, La Paz, Bolivia.
 # All rights reserved.
@@ -10,19 +10,25 @@
 # accordance with the terms of the license agreement you entered into
 # with Jalasoft.
 #
-
+from csv import excel
+from textwrap import fill
 
 from src.reporting.criteria.criteria import Criteria
 
 
-class Filters_Time_Location(Criteria):
-    def __init__(self, start_time, finish_time, location, direction):
+
+class Filters_Start_Finish_Time_Person_Age(Criteria):
+    def __init__(self, start_time, finish_time, person_age, direction):
         super().__init__(direction)
         self.start_time = start_time
         self.finish_time = finish_time
-        self.location = location
+        self.person_age = person_age
 
-    def fil_time_location(self):
-        filters = (self.get_df()['start_time'] >= self.start_time) & (self.get_df()['end_time'] <= self.finish_time) & (
-                self.get_df()['person_city'] == self.location)
+    def filters_start_finish_time_person_age(self):
+        filters = (self.get_df()["start_time"] >= self.start_time) & (self.get_df()["end_time"] <= self.finish_time)\
+                  & (self.get_df()["person_age"] >= self.person_age)
         return filters
+
+
+
+
