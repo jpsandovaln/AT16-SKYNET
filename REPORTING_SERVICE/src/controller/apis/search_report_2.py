@@ -27,6 +27,6 @@ class SearchReport2:
                 file_route = request.form.get('file_route')  # This is for the file, the rest is for converter imagen
                 date = request.form.get('date')
                 person_country = request.form.get('person_country')
-                Criteria = Filters_Date_Person_Country(str(file_route), str(date), str(person_country))
+                Criteria = Filters_Date_Person_Country(str(date), str(person_country), str(file_route))
         #print(Criteria.get_df()[Criteria.fil_time_location()])
-        return str(Criteria.get_df()[Criteria.fil_time_location()])
+        return str(Criteria.get_df()[Criteria.filters_date_person_country()])

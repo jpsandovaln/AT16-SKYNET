@@ -23,9 +23,9 @@ class SearchReport:
     def search_report(self):
         if request.method == 'POST':
                 file_route = request.form.get('file_route')  # This is for the file, the rest is for converter imagen
-                star_time = request.form.get('star_time')
+                start_time = request.form.get('start_time')
                 end_time = request.form.get('end_time')
                 person_age = request.form.get('person_age')
-                Criteria = Filters_Start_Finish_Time_Person_Gender(str(file_route), int(star_time), int(end_time), str(person_age))
+                Criteria = Filters_Start_Finish_Time_Person_Gender(int(start_time), int(end_time), int(person_age), str(file_route))
         #print(Criteria.get_df()[Criteria.fil_time_location()])
-        return str(Criteria.get_df()[Criteria.fil_time_location()])
+        return str(Criteria.get_df()[Criteria.filters_start_finish_time_person_gender()])

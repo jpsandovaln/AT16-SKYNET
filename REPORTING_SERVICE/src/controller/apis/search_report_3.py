@@ -27,6 +27,6 @@ class SearchReport3:
                 file_route = request.form.get('file_route')  # This is for the file, the rest is for converter imagen
                 model = request.form.get('model')
                 type = request.form.get('type')
-                Criteria = Filters_Model_Type(str(file_route), str(model), str(type))
+                Criteria = Filters_Model_Type(str(model), str(type), str(file_route))
         #print(Criteria.get_df()[Criteria.fil_time_location()])
-        return str(Criteria.get_df()[Criteria.fil_time_location()])
+        return str(Criteria.get_df()[Criteria.filters_model_type()])

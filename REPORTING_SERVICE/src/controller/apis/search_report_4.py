@@ -27,6 +27,6 @@ class SearchReport4:
                 file_route = request.form.get('file_route')  # This is for the file, the rest is for converter imagen
                 state = request.form.get('state')
                 person_gender = request.form.get('person_gender')
-                Criteria = Filters_State_Person_Gender(str(file_route), str(state), str(person_gender))
+                Criteria = Filters_State_Person_Gender(str(state), str(person_gender), str(file_route))
         #print(Criteria.get_df()[Criteria.fil_time_location()])
-        return str(Criteria.get_df()[Criteria.fil_time_location()])
+        return str(Criteria.get_df()[Criteria.filters_state_person_gender()])

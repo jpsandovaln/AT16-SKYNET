@@ -27,6 +27,6 @@ class SearchReport5:
                 file_route = request.form.get('file_route')  # This is for the file, the rest is for converter imagen
                 subject = request.form.get('subject')
                 state = request.form.get('state')
-                Criteria = Filters_Subject_State(str(file_route), str(subject), str(state))
+                Criteria = Filters_Subject_State(str(subject), str(state), str(file_route))
         #print(Criteria.get_df()[Criteria.fil_time_location()])
-        return str(Criteria.get_df()[Criteria.fil_time_location()])
+        return str(Criteria.get_df()[Criteria.filters_subject_state()])
