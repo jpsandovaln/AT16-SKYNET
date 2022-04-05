@@ -14,6 +14,7 @@
 from MACHINE_LEARNING_SERVICE.src.model.model_vgg16 import ModelVgg16
 from MACHINE_LEARNING_SERVICE.src.model.model_inception_v3 import ModelInceptionV3
 from MACHINE_LEARNING_SERVICE.src.model.model_resnet import Resnet
+import json
 
 
 # Returns a list of images that contain the word.
