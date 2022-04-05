@@ -22,7 +22,7 @@ from MACHINE_LEARNING_SERVICE.src.classes.object_result import ObjectResult
 class ModelInceptionV3:
     """Class that represent to the Object Recognition Model"""
 
-    def prediction(self, path, word):
+    def prediction(self, path, word, percentage):
         """Method that return a list with the objects predicted"""
 
         # List of the objects predicted
@@ -47,7 +47,7 @@ class ModelInceptionV3:
             # Fill the list with results that match to the Word variable
             for predictions in result:
                 for object_predicted in predictions:
-                    if object_predicted[1] == word and object_predicted[2] >= 0.2:
+                    if object_predicted[1] == word and object_predicted[2] >= float(percentage):
                         object_result = ObjectResult()
                         object_result.set_id_object(object_predicted[0])
                         object_result.set_name(object_predicted[1])
@@ -58,11 +58,22 @@ class ModelInceptionV3:
         object_dict = {}
         num_obj = 1
         for object_result in list_object_result:
-            object_dict["Object " + str(num_obj)] = {"Name": object_result.get_name(),
-                                                     "Image": object_result.get_path_file(),
-                                                     "Percentage": object_result.get_percentage() * 100}
+            path = object_result.get_path_file()
+            normalized_path = os.path.normpath(path)
+            path_components = normalized_path.split(os.sep)
+            img = path_components[-1]
+            try:
+                time_img = int(img[:-4])
+                convert_time = str(datetime.timedelta(seconds=time_img))
+            except:
+                convert_time = img[:-4]
+
+            object_dict["Object "+str(num_obj)] = {"Name": object_result.get_name(),
+                                                   "Time": convert_time,
+                                                   "Percentage": object_result.get_percentage() * 100}
             num_obj += 1
         return object_dict
+
 
 
 
