@@ -10,6 +10,7 @@
 # with Jalasoft.
 #
 
+import datetime
 from imageai.Detection import ObjectDetection
 from object_result import ObjectResult
 import os
@@ -18,7 +19,7 @@ import os
 class Resnet:
     """Class that represent to the Object Recognition Model"""
 
-    def prediction(self, path, word):
+    def prediction(self, path, word, per):
     """Method that return a list with the objects predicted"""
 
         output_path = "./output/newimage.jpg"
@@ -33,7 +34,7 @@ class Resnet:
         for file in path_files:
             detections = detector.detectObjectsFromImage(input_image=file, output_image_path=output_path)
             for eachObject in detections:
-                if eachObject["name"] == word and eachObject["percentage_probability"] >= 70:
+                if eachObject["name"] == word and eachObject["percentage_probability"] >= float(per):
                     name_obj = eachObject["name"]
                     percentage = eachObject["percentage_probability"]
                     object_result = ObjectResult()
@@ -46,8 +47,19 @@ class Resnet:
         object_dict = {}
         num_obj = 1
         for object_result in list_object_result:
-            object_dict["Object " + str(num_obj)] = {"Name": object_result.get_name(),
-                                                     "Image": object_result.get_path_file(),
-                                                     "Percentage": object_result.get_percentage() * 100}
+            path = object_result.get_path_file()
+            normalized_path = os.path.normpath(path)
+            path_components = normalized_path.split(os.sep)
+            img = path_components[-1]
+            try:
+                time_img = int(img[:-4])
+                convert_time = str(datetime.timedelta(seconds=time_img))
+            except:
+                convert_time = img[:-4]
+
+            object_dict["Object "+str(num_obj)] = {"Name": object_result.get_name(),
+                                                   "Time": convert_time,
+                                                   "Percentage": object_result.get_percentage() * 100}
             num_obj += 1
         return object_dict
+

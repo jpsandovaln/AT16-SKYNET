@@ -16,7 +16,7 @@ from flask_restful import Api
 from flask import request
 
 
-from src.controller.apis.uploader import Uploader
+from src.controller.apis.controller_machine import ControllerMachineLearning
 from src.controller.apis.downloader import Downloader
 
 # This is the path where the zip file will be saved
@@ -28,9 +28,9 @@ api = Api(app)
 
 
 # End point of the uploader file
-@app.route('/upload', methods=['GET', 'POST'])
+@app.route('/object_recognizer', methods=['GET', 'POST'])
 def save_file():
-    file = Uploader(request, app.config['UPLOAD_FOLDER'])
+    file = ControllerMachineLearning(request, app.config['UPLOAD_FOLDER'])
     return file.upload()
 
 

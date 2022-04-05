@@ -1,5 +1,5 @@
 #
-# @uploader.py Copyright (c) 2022 Jalasoft.
+# @controller_machine.py Copyright (c) 2022 Jalasoft.
 # 2643 Av Melchor Perez de Olguin, Colquiri Sud, Cochabamba, Bolivia.
 # Edificio Union № 1376 Av. General Inofuentes esquina Calle 20, La Paz, Bolivia.
 # All rights reserved.
@@ -18,8 +18,9 @@ from MACHINE_LEARNING_SERVICE.src.controller.utils.zipfile.decompress import \
     Decompress
 import os
 
+
 # This is for to upload a file.
-class Uploader:
+class ControllerMachineLearning:
     def __init__(self, request, save_location):
         self.request = request
         self.save_location = save_location
@@ -31,13 +32,15 @@ class Uploader:
             file_request = self.request.files['file']
             self.name_request = request.form.get('name')
             self.model_request = request.form.get('model')
+            self.percentage_request = request.form.get('percentage')
             path_saved = os.path.join(self.save_location,
                                       file_request.filename)
             file_request.save(path_saved)
             path_zip = Decompress(path_saved)
             path_zip_result = path_zip.path_decompress()
             result = ModelResult(path_zip_result, self.name_request,
-                                 self.model_request)
+                                 self.model_request, self.percentage_request)
             result_model = result.models_results()
             return result_model
+
 
