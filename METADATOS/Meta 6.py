@@ -17,44 +17,44 @@ import os
 ##CREAMOS NUESTRA CLASE
 class Metadata:
 
-### DEFINIMOS LAS ENTRADAS DE LA CLASE
+### define the input of class
     def __init__(self,meti):
-        self.path = "C:/IVAN/CODING/Metadatos/filein"
-        self.direct = "C:/IVAN/CODING/Metadatos/metaout/"
+        self.path = "..//filein"
+        self.direct = "..//metadata_output"
         self.meti = meti
 
-### definimosla funcion
+### define function
     def select_file(self):
-        direc = os.listdir(self.path)## sacamos el nombre de cada archivo de la carpeta
-        exe = "Exiftool"##inicializamos el ejecutable como constante
+        direc = os.listdir(self.path)## charge the name of all files in folder
+        exe = "Exiftool"## rename executable
         for file in direc:
             if os.path.isfile(os.path.join(self.path,file)):
                 name = str(file)
                 namef=name.split('.')
-#                namef = name[:-5]## eliminamos la extencion del archivo en el caso del ejemplo el
-                # ".jpg"
+
+                ##Process all files with exiftools.exe and extract Metadatos in .JSON format
+
                 if self.meti == 'json':
-                ##procesamos cada archivo con el Exiftool.exe y sacamos sus dependencias en
-                # formato JSON creando un archivo.JSON para cada imagen
                     process = subprocess.run([exe,str(self.path) + "/" + str(file), '-' + str(
-                        self.meti), '-W+!', str(self.direct) + namef[0] + '.' + str(self.meti)])
-                ## imprimimos el estado de cada conversion
-                    print(process.stdout)
-                ###--******************************************************************************
+                        self.meti), '-W+!', str(self.direct) + "/" + namef[0] + '.' + str(
+                                                                                 self.meti)])
+
+                ##Process all files with exiftools.exe and extract Metadatos in .txt format
+
                 elif self.meti == 'txt':
                     process = subprocess.run([exe, str(self.path) + "/" + str(file), '-W+!',
-                                              str(self.direct) + namef[0] + '.' + str(self.meti)])
-                    ## imprimimos el estado de cada conversion
-                    print(process.stdout)
-                ##-********************************************************************************
-                else : ## si es XMP
-                    process = subprocess.run([exe, str(self.path) + "/" + str(file), '-o',
-                                               str(self.direct) + namef[0] + '.' + str(self.meti)])
-                    ## imprimimos el estado de cada conversion
-                    print(process.stdout)
+                                              str(self.direct) + "/" + namef[0] + '.' + str(self.meti)])
+
+                ##Process all files with exiftools.exe and extract Metadatos in .XMP format
+
+                else:
+                    process = subprocess.run([exe, str(self.path) + "/" + str(file), '-O',
+                                               str(self.direct) + "/" + namef[0] + '.' + str(self.meti)])
+                ## print the state conversion
+                print(process.stdout)
 
 
-######### LLAMAMOS A NUESTRA CLASE CON LOS VALORES DE LA DIRECCION DE ENTRADA, LA EXTENCION Y LA
-# SALIDA
+##### Call the object and run the function with 1 parameter, it is the extencion of output
+
 prueba = Metadata('xmp')
 prueba.select_file()

@@ -1,0 +1,2 @@
+La carpeta de salida estara fuera del convertidos para compartir una sola carpeta de entrada
+y especificando una carpeta de salida

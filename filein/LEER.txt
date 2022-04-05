@@ -1,0 +1,2 @@
+esta carpeta sera una carpeta comun con la cual podremos recibir los archivos a convertir
+esta carpeta estara afuera de la carpeta metadatos para hacerla comun
