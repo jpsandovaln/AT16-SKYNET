@@ -11,46 +11,84 @@
 # with Jalasoft.
 #
 
+from pymongo import ReturnDocument
 from .data_base_collections import select_booking_collection
 from bson.objectid import ObjectId
 
 
+booking = select_booking_collection()
+
+
 class Booking:
     def booking_create(self, str_json):
-        booking = select_booking_collection()
         inserted_data = booking.insert_one(str_json)
 
-        #If need add delete field
+        # Add delete field
         id_inserted = inserted_data.inserted_id
-        booking.find_one_and_update({'_id': id_inserted}, {'$set': {'delete': 0}})
+        result = inserted_booking = booking.find_one_and_update({'_id': id_inserted}, {'$set': {'delete': 0}})
+
+        # Convert ObjectId to string
+        result['_id'] = str(result['_id'])
+
+        return result
 
     def booking_read_all(self):
-        booking = select_booking_collection()
+        # Dictionary that save all results
+        all_results = []
+
         filter = {"delete": 0}
         result = booking.find(filter)
+
+        # Fill the dictionary
         for result_by_element in result:
-            print(result_by_element)
+            result_by_element['_id'] = str(result_by_element['_id'])
+            all_results.append(result_by_element)
+
+        return all_results
 
     def booking_read_specific_name(self, name):
-        booking = select_booking_collection()
         filter = {"delete": 0}
         result = booking.find_one(name, filter)
-        print(result)
+
+        if result:
+            # Convert ObjectId to string
+            result['_id'] = str(result['_id'])
+        else:
+            result = {"message": "Not found"}
+        return result
 
     def booking_read_specific_id(self, id_booking):
-        booking = select_booking_collection()
         id_object = ObjectId(id_booking)
         filter = {"delete": 0}
-        print(booking.find_one({"_id": id_object}, filter))
+        result = booking.find_one({"_id": id_object}, filter)
+
+        if result:
+            # Convert ObjectId to string
+            result['_id'] = str(result['_id'])
+        else:
+            result = {"message": "Not found"}
+        return result
 
     def booking_update(self, id_booking, str_json):
-        booking = select_booking_collection()
         id_object = ObjectId(id_booking)
-        booking.find_one_and_update({'_id': id_object}, {'$set': str_json})
-        print("Update!")
+        result = booking.find_one_and_update({'_id': id_object}, {'$set': str_json},
+                                             return_document=ReturnDocument.AFTER)
+
+        if result:
+            # Convert ObjectId to string
+            result['_id'] = str(result['_id'])
+        else:
+            result = {"message": "Not found"}
+        return result
 
     def booking_delete(self, id_booking):
-        booking = select_booking_collection()
         id_object = ObjectId(id_booking)
-        booking.find_one_and_update({'_id': id_object}, {'$set': {'delete': 1}})
-        print("Soft delete!")
+        result = booking.find_one_and_update({'_id': id_object}, {'$set': {'delete': 1}},
+                                             return_document=ReturnDocument.AFTER)
+
+        if result:
+            # Convert ObjectId to string
+            result['_id'] = str(result['_id'])
+        else:
+            result = {"message": "Not found"}
+        return result
