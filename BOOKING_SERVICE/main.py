@@ -20,14 +20,14 @@ from flask import Flask, request, Response, jsonify
 app = Flask(__name__)
 
 
-# Endpoint resource
+# Create a Resource for Booking
 @app.route('/CreateResource', methods=['POST'])
 def create_resource():
     resource = Resource()
     result = resource.resource_create(request.json)
     return jsonify(result)
 
-
+# Get all Resources of the Database of Booking
 @app.route('/GetResourceAll', methods=['GET'])
 def get_resource_all():
     resource = Resource()
@@ -35,6 +35,7 @@ def get_resource_all():
     return jsonify(result)
 
 
+# Get a Resource by Id of the Database of Booking
 @app.route('/GetResourceById/<string:id_resource>', methods=['GET'])
 def get_resource_by_id(id_resource):
     resource = Resource()
@@ -42,6 +43,7 @@ def get_resource_by_id(id_resource):
     return jsonify(result)
 
 
+# Get a Resource by Name of the Database of Booking
 @app.route('/GetResourceByName', methods=['GET'])
 def get_resource_by_name():
     resource = Resource()
@@ -49,6 +51,7 @@ def get_resource_by_name():
     return jsonify(result)
 
 
+# Update a Resource by Id of the Database of Booking
 @app.route('/UpdateResource/<string:id_resource>', methods=['PUT'])
 def update_resource(id_resource):
     resource = Resource()
@@ -56,6 +59,7 @@ def update_resource(id_resource):
     return jsonify(result)
 
 
+# Delete a Resource by Id of the Database of Booking
 @app.route('/DeleteResource/<string:id_resource>', methods=['DELETE'])
 def delete_resource(id_resource):
     resource = Resource()
@@ -63,7 +67,7 @@ def delete_resource(id_resource):
     return jsonify(result)
 
 
-# Endpoint person
+# Create a Person into the Database of Booking
 @app.route('/CreatePerson', methods=['POST'])
 def create_person():
     person = Person()
@@ -71,6 +75,7 @@ def create_person():
     return jsonify(result)
 
 
+# Get all Persons of the Database of Booking
 @app.route('/GetPersonAll', methods=['GET'])
 def get_person_all():
     person = Person()
@@ -78,6 +83,7 @@ def get_person_all():
     return jsonify(result)
 
 
+# Get a Person by Id of the Database of Booking
 @app.route('/GetPersonById/<string:id_person>', methods=['GET'])
 def get_person_by_id(id_person):
     person = Person()
@@ -85,6 +91,7 @@ def get_person_by_id(id_person):
     return jsonify(result)
 
 
+# Get a Person by Name of the Database of Booking
 @app.route('/GetPersonByName', methods=['GET'])
 def get_person_by_name():
     person = Person()
@@ -92,6 +99,7 @@ def get_person_by_name():
     return jsonify(result)
 
 
+# Update a Person by Id of the Database of Booking
 @app.route('/UpdatePerson/<string:id_person>', methods=['PUT'])
 def update_person(id_person):
     person = Person()
