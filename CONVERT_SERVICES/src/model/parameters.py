@@ -1,5 +1,5 @@
 #
-# @video_converter.py Copyright (c)
+# @object_result.py Copyright (c)
 # 2643 Av  Melchor Perez de Olguin, Colquiri Sud, Cochabamba, Bolivia.
 #1376 Av General Inofuentes esquina calle 20, La Paz, Bolivia.
 #All rights reserved.
@@ -8,16 +8,12 @@
 #Jalasoft, ("Condidential Information"). You shall # not
 #disclose such Confidential Information and shall use it only in
 #accordance with the terms of the license agreement you entered into
-#with Jalasoft.
+#with Jalasoft .
 #
 
-from model1.converter import Converter
-
-
-#This class inherits the inputs of the converter.
-class Parameters(Converter):
-    def __init__(self, str_input, path_out, path_in):
-        super().__init__(str_input, path_out, path_in)
+#By Rodrigo This class inherits the inputs of the converter.
+class Parameters():
+    def __init__(self, str_input):
         self.spl_str_input = str_input.split(',')
         self.dictionary = self.dic_str_input()
 
@@ -31,6 +27,3 @@ class Parameters(Converter):
             else:
                 dictionary[(k_v[:]).strip().lower()] = ''
         return dictionary
-
-
-
