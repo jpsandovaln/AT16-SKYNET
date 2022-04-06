@@ -18,13 +18,11 @@ class SearchReportFilTimeLocation:
     def __init__(self, request):
         self.request = request
 
-
     def search_report_fil_time_location(self):
         if request.method == 'POST':
-                file_route = request.form.get('file_route')  # This is for the file, the rest is for converter imagen
-                start_time = request.form.get('start_time')
-                end_time = request.form.get('end_time')
-                location = request.form.get('location')
-                Criteria = Filters_Time_Location(int(start_time), int(end_time), str(location), file_route)
-        #print(Criteria.get_df()[Criteria.fil_time_location()])
+            file_route = request.form.get('file_route')  # This is for the file, the rest is for converter imagen
+            start_time = request.form.get('start_time')
+            end_time = request.form.get('end_time')
+            location = request.form.get('location')
+            Criteria = Filters_Time_Location(int(start_time), int(end_time), str(location), file_route)
         return str(Criteria.get_df()[Criteria.fil_time_location()])

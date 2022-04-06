@@ -11,8 +11,6 @@
 # with Jalasoft.
 #
 import pandas as pd
-from csv import excel
-from textwrap import fill
 
 
 class Criteria:
