@@ -1,5 +1,5 @@
 #
-# @search_report.py Copyright (c) 2022 Jalasoft.
+# @search_report_start_finish_time_person_gender.py Copyright (c) 2022 Jalasoft.
 # 2643 Av Melchor Perez de Olguin, Colquiri Sud, Cochabamba, Bolivia.
 # Edificio Union № 1376 Av. General Inofuentes esquina Calle 20, La Paz, Bolivia.
 # All rights reserved.
@@ -12,19 +12,21 @@
 #
 
 from flask import request
-from src.reporting.criteria.filters_time_location import Filters_Time_Location
+from src.reporting.criteria.filters_model_type import Filters_Model_Type
 
-class SearchReport6:
+
+
+
+class SearchReport3:
     def __init__(self, request):
         self.request = request
 
 
-    def search_report_6(self):
+    def search_report_3(self):
         if request.method == 'POST':
                 file_route = request.form.get('file_route')  # This is for the file, the rest is for converter imagen
-                start_time = request.form.get('start_time')
-                end_time = request.form.get('end_time')
-                location = request.form.get('location')
-                Criteria = Filters_Time_Location(int(start_time), int(end_time), str(location), file_route)
+                model = request.form.get('model')
+                type = request.form.get('type')
+                Criteria = Filters_Model_Type(str(model), str(type), str(file_route))
         #print(Criteria.get_df()[Criteria.fil_time_location()])
-        return str(Criteria.get_df()[Criteria.fil_time_location()])
+        return str(Criteria.get_df()[Criteria.filters_model_type()])

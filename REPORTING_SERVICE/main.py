@@ -15,14 +15,14 @@ from flask import Flask
 from flask_restful import Api
 from flask import request
 
-from src.controller.apis.search_report import SearchReport
+from src.controller.apis.search_report_start_finish_time_person_gender import SearchReportStartFinishTimePersonGender
 from src.controller.apis.downloader import Downloader
-from src.controller.apis.search_report_1 import SearchReport1
-from src.controller.apis.search_report_2 import SearchReport2
-from src.controller.apis.search_report_3 import SearchReport3
-from src.controller.apis.search_report_4 import SearchReport4
-from src.controller.apis.search_report_5 import SearchReport5
-from src.controller.apis.search_report_6 import SearchReport6
+from src.controller.apis.search_report_age_gender import SearchReportAgeGender
+from src.controller.apis.search_report_date_person_country import SearchReportDatePersonCountry
+from src.controller.apis.search_report_model_type import SearchReportModelType
+from src.controller.apis.search_report_state_person_gender import SearchReportStatePersonGender
+from src.controller.apis.search_report_subject_state import SearchReportSubjectState
+from src.controller.apis.search_report_fil_time_location import SearchReportFilTimeLocation
 
 UPLOAD_FOLDER = 'saved_files/'  # here is the file where the images will be downloaded
 
@@ -31,40 +31,40 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 api = Api(app)
 
 
-@app.route('/search_report', methods=['GET', 'POST'])
+@app.route('/search_report_start_finish_time_person_gender', methods=['GET', 'POST'])
 def save_file():
-    report = SearchReport(request)
-    return report.search_report()
+    report = SearchReportStartFinishTimePersonGender(request)
+    return report.search_report_start_finish_time_person_gender()
 
-@app.route('/search_report_1', methods=['GET', 'POST'])
+@app.route('/search_report_age_gender', methods=['GET', 'POST'])
 def save_file_1():
-    report = SearchReport1(request)
-    return report.search_report_1()
+    report = SearchReportAgeGender(request)
+    return report.search_report_age_gender()
 
-@app.route('/search_report_2', methods=['GET', 'POST'])
+@app.route('/search_report_date_person_country', methods=['GET', 'POST'])
 def save_file_2():
-    report = SearchReport2(request)
-    return report.search_report_2()
+    report = SearchReportDatePersonCountry(request)
+    return report.search_report_date_person_country()
 
-@app.route('/search_report_3', methods=['GET', 'POST'])
+@app.route('/search_report_model_type', methods=['GET', 'POST'])
 def save_file_3():
-    report = SearchReport3(request)
-    return report.search_report_3()
+    report = SearchReportModelType(request)
+    return report.search_report_model_type()
 
-@app.route('/search_report_4', methods=['GET', 'POST'])
+@app.route('/search_report_state_person_gender', methods=['GET', 'POST'])
 def save_file_4():
-    report = SearchReport4(request)
-    return report.search_report_4()
+    report = SearchReportStatePersonGender(request)
+    return report.search_report_state_person_gender()
 
-@app.route('/search_report_5', methods=['GET', 'POST'])
+@app.route('/search_report_subject_state', methods=['GET', 'POST'])
 def save_file_5():
-    report = SearchReport5(request)
-    return report.search_report_5()
+    report = SearchReportSubjectState(request)
+    return report.search_report_subject_state()
 
-@app.route('/search_report_6', methods=['GET', 'POST'])
+@app.route('/search_report_fil_time_location', methods=['GET', 'POST'])
 def save_file_6():
-    report = SearchReport6(request)
-    return report.search_report_6()
+    report = SearchReportFilTimeLocation(request)
+    return report.search_report_fil_time_location()
 
 
 @app.route('/download/<string:file_name>')

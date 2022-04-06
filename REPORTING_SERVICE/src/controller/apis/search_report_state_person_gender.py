@@ -1,5 +1,5 @@
 #
-# @search_report.py Copyright (c) 2022 Jalasoft.
+# @search_report_start_finish_time_person_gender.py Copyright (c) 2022 Jalasoft.
 # 2643 Av Melchor Perez de Olguin, Colquiri Sud, Cochabamba, Bolivia.
 # Edificio Union № 1376 Av. General Inofuentes esquina Calle 20, La Paz, Bolivia.
 # All rights reserved.
@@ -12,21 +12,21 @@
 #
 
 from flask import request
-from src.reporting.criteria.filters_date_person_country import Filters_Date_Person_Country
+from src.reporting.criteria.filters_state_person_gender import Filters_State_Person_Gender
 
 
 
 
-class SearchReport2:
+class SearchReport4:
     def __init__(self, request):
         self.request = request
 
 
-    def search_report_2(self):
+    def search_report_4(self):
         if request.method == 'POST':
                 file_route = request.form.get('file_route')  # This is for the file, the rest is for converter imagen
-                date = request.form.get('date')
-                person_country = request.form.get('person_country')
-                Criteria = Filters_Date_Person_Country(str(date), str(person_country), str(file_route))
+                state = request.form.get('state')
+                person_gender = request.form.get('person_gender')
+                Criteria = Filters_State_Person_Gender(str(state), str(person_gender), str(file_route))
         #print(Criteria.get_df()[Criteria.fil_time_location()])
-        return str(Criteria.get_df()[Criteria.filters_date_person_country()])
+        return str(Criteria.get_df()[Criteria.filters_state_person_gender()])
