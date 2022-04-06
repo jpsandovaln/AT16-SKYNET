@@ -25,7 +25,7 @@ class Filters_Start_Finish_Time_Person_Gender(Criteria):
         self.person_age = person_age
 
     def filters_start_finish_time_person_gender(self):
-        filters = (self.get_df()["start_time"] >= self.start_time) & (self.get_df()["finish_time"] <= self.finish_time)\
+        filters = (self.get_df()["start_time"] >= self.start_time) & (self.get_df()["end_time"] <= self.finish_time)\
                   & (self.get_df()["person_age"] >= self.person_age)
         return filters
 
