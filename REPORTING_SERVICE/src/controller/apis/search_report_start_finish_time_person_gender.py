@@ -15,12 +15,12 @@ from flask import request
 from src.reporting.criteria.filter_time_person_gender import Filters_Start_Finish_Time_Person_Gender
 
 
-class SearchReport:
+class SearchReportStartFinishTimePersonGender:
     def __init__(self, request):
         self.request = request
 
 
-    def search_report(self):
+    def search_report_start_finish_time_person_gender(self):
         if request.method == 'POST':
                 file_route = request.form.get('file_route')  # This is for the file, the rest is for converter imagen
                 start_time = request.form.get('start_time')

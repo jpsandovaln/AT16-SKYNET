@@ -14,12 +14,12 @@
 from flask import request
 from src.reporting.criteria.filters_time_location import Filters_Time_Location
 
-class SearchReport6:
+class SearchReportFilTimeLocation:
     def __init__(self, request):
         self.request = request
 
 
-    def search_report_6(self):
+    def search_report_fil_time_location(self):
         if request.method == 'POST':
                 file_route = request.form.get('file_route')  # This is for the file, the rest is for converter imagen
                 start_time = request.form.get('start_time')

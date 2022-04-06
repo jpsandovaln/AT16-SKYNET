@@ -17,12 +17,12 @@ from src.reporting.criteria.filters_state_person_gender import Filters_State_Per
 
 
 
-class SearchReport4:
+class SearchReportStatePersonGender:
     def __init__(self, request):
         self.request = request
 
 
-    def search_report_4(self):
+    def search_report_state_person_gender(self):
         if request.method == 'POST':
                 file_route = request.form.get('file_route')  # This is for the file, the rest is for converter imagen
                 state = request.form.get('state')

@@ -17,12 +17,12 @@ from src.reporting.criteria.filters_subject_state import Filters_Subject_State
 
 
 
-class SearchReport5:
+class SearchReportSubjectState:
     def __init__(self, request):
         self.request = request
 
 
-    def search_report_5(self):
+    def search_report_subject_state(self):
         if request.method == 'POST':
                 file_route = request.form.get('file_route')  # This is for the file, the rest is for converter imagen
                 subject = request.form.get('subject')

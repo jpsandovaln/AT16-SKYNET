@@ -17,12 +17,12 @@ from src.reporting.criteria.filters_date_person_country import Filters_Date_Pers
 
 
 
-class SearchReport2:
+class SearchReportDatePersonCountry:
     def __init__(self, request):
         self.request = request
 
 
-    def search_report_2(self):
+    def search_report_date_person_country(self):
         if request.method == 'POST':
                 file_route = request.form.get('file_route')  # This is for the file, the rest is for converter imagen
                 date = request.form.get('date')

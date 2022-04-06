@@ -16,12 +16,12 @@ from src.reporting.criteria.filters_age_gender import Filters_Age_Gender
 
 
 
-class SearchReport1:
+class SearchReportAgeGender:
     def __init__(self, request):
         self.request = request
 
 
-    def search_report_1(self):
+    def search_report_age_gender(self):
         if request.method == 'POST':
                 file_route = request.form.get('file_route')  # This is for the file, the rest is for converter imagen
                 person_age = request.form.get('person_age')

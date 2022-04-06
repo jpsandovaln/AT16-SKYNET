@@ -17,12 +17,12 @@ from src.reporting.criteria.filters_model_type import Filters_Model_Type
 
 
 
-class SearchReport3:
+class SearchReportModelType:
     def __init__(self, request):
         self.request = request
 
 
-    def search_report_3(self):
+    def search_report_model_type(self):
         if request.method == 'POST':
                 file_route = request.form.get('file_route')  # This is for the file, the rest is for converter imagen
                 model = request.form.get('model')
