@@ -14,7 +14,7 @@
 from params import Params
 
 
-
+# This class inherits the inputs of the converter and converter visual content.
 class ConvertAudio(Params):
     def __init__(self, str_input, path_out, path_in):
         super().__init__(str_input, path_out, path_in)
@@ -22,7 +22,7 @@ class ConvertAudio(Params):
         self.cmd_input_copy = self.compare_dic()
         self.ffmpeg_cmd = self.cmd_ff()
 
-
+# This method compare the data and create the ffmpeg command.
     def compare_dic(self):
         dic_param = {'acodex': 'c:a {}',
                      'bitrate': 'ab {}k ',
@@ -35,7 +35,7 @@ class ConvertAudio(Params):
         cmd_input_copy = cmd_input[:-1]
         return cmd_input_copy
 
-
+# This method converter the visual content.
     def cmd_ff(self):
         form_conv = ""
         for key, val in self.dictionary.items():

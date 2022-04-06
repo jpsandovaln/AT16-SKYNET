@@ -10,10 +10,10 @@
 # accordance with the terms of the license agreement you entered into
 # with Jalasoft.
 #
-# This class inherits the inputs of the converter.
+
 from converter import Converter
 
-
+#This class inherits the inputs of the converter.
 class Params(Converter):
     def __init__(self, str_input, path_out, path_in):
         super().__init__(str_input, path_out, path_in)
