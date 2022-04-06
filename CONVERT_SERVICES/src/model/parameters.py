@@ -12,7 +12,9 @@
 #
 
 #By Rodrigo This class inherits the inputs of the converter.
-class Parameters():
+
+
+class Parameters:
     def __init__(self, str_input):
         self.spl_str_input = str_input.split(',')
         self.dictionary = self.dic_str_input()

@@ -11,30 +11,33 @@
 # with Jalasoft.
 #
 
+from src.model.convertimage import ConvertImage
+from src.model.convertvideo import ConvertVideo
 from flask import Flask
 from flask_restful import Api
 from flask import request
+from src.controller.apis.endpointconverter import EndPointConverter
 
-from CONVERT_SERVICES.src.controller.apis.uploader import Uploader
-from CONVERT_SERVICES.src.controller.apis.downloader import Downloader
 
-UPLOAD_FOLDER = 'saved_files/'  # here is the file where the images will be downloaded
+UPLOAD_FOLDER = r'saved_files/upload'
+
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 api = Api(app)
 
 
-@app.route('/upload', methods=['GET', 'POST'])
+@app.route('/Convert', methods=['POST'])
 def save_file():
-    file = Uploader(request, app.config['UPLOAD_FOLDER'])
-    return file.upload()
-
-
-@app.route('/download/<string:file_name>')
-def download_file(file_name):
-    file = Downloader(request, app.config['UPLOAD_FOLDER'], file_name)
-    return file.donwload()
+    file = EndPointConverter(request, app.config['UPLOAD_FOLDER'])
+    result = file.Upload()
+    if result == 1:
+        if request.values.get('Convert') == 'Image':
+            prueba = ConvertImage(request, UPLOAD_FOLDER)
+        if request.values.get('Convert') == 'Video':
+            prueba = ConvertVideo(request, UPLOAD_FOLDER)
+        prueba.Exec()
+        return file.Send_File(prueba.output_file, prueba.name_output)
 
 
 if __name__ == '__main__':

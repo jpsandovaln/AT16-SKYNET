@@ -11,15 +11,16 @@
 #with Jalasoft .
 #
 
-from src.convert.parameters import Parameters
-
-class Convertor(Parameters):
-    def __init__(self, input_file, output_file, outformat, instructions):
-        super().__init__(instructions)
-        self.inputfile = input_file
-        self.outputfile = output_file
-        self.format = outformat
-        self.instructions = self.dic_str_input()
+class Convertor:
+    #  constructor  instruciones folder
+    def __init__(self, instructions, folder):
+        name = instructions.files['file'].filename
+        self.input_file = folder+'/' + name
+        self.output_file = r'saved_files/' + (instructions.values.get('Convert')).lower() + '_download'
+        name = name.split('.')
+        self.format = instructions.values.get('format')
+        self.name_output = name[0] + 'new.' + self.format
+        self.instructions = instructions
 
     def getInputFile(self):
         return self.inputfile
@@ -32,4 +33,7 @@ class Convertor(Parameters):
 
     def getInstructions(self):
         return self.instructions
+
+    def setNameOutput(self, val):
+        self.name_output = val
 

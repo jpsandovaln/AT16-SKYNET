@@ -1,24 +1,25 @@
 #
 # @object_result.py Copyright (c)
 # 2643 Av  Melchor Perez de Olguin, Colquiri Sud, Cochabamba, Bolivia.
-#1376 Av General Inofuentes esquina calle 20, La Paz, Bolivia.
-#All rights reserved.
+# 1376 Av General Inofuentes esquina calle 20, La Paz, Bolivia.
+# All rights reserved.
 #
-#This software is the confidential and proprietary information of
-#Jalasoft, ("Condidential Information"). You shall # not
-#disclose such Confidential Information and shall use it only in
-#accordance with the terms of the license agreement you entered into
-#with Jalasoft.
+# This software is the confidential and proprietary information of
+# Jalasoft, ("Condidential Information"). You shall # not
+# disclose such Confidential Information and shall use it only in
+# accordance with the terms of the license agreement you entered into
+# with Jalasoft.
 #
 
-from src.convert.convertor import Convertor
+from CONVERT_SERVICES.src.model.convertor import Convertor
 import os
 
 
 class ConvertImage(Convertor):
 
-    def __init__(self, input_data, input_file, output_file, out_format):
-        super().__init__(input_file, output_file, out_format, input_data)
+    #  constructor   instruciones folder formato folder_salida
+    def __init__(self, input_data, input_file):
+        super().__init__(input_data, input_file)
         self.instructions = self.getInstructions()
 
     def Init_dic(self):
@@ -27,44 +28,20 @@ class ConvertImage(Convertor):
                      'mirrorvert': ' -flip ',
                      'mirrorhori': ' -flop ',
                      'widht': ' -resize {}',
-                      'height': 'x{}! '}
+                     'height': 'x{}! '}
         return dic_param
 
     def Concatenate(self):
         dic = self.Init_dic()
-        cod_cmd = "magick converter " + self.inputfile + " "
-        for key, val in self.instructions.items():
-            if key in dic:
+        cod_cmd = "magick convert " + self.input_file + " "
+        for key in dic:
+            val = self.instructions.values.get(key)
+            if len(val) > 0:
                 dic[key] = dic[key].format(val)
                 cod_cmd += dic[key]
-        cod_cmd += self.outputfile + '\output12.'+self.format
+        cod_cmd += self.output_file + '/' + self.name_output
         return cod_cmd
 
     def Exec(self):
         cod_cmd = self.Concatenate()
         os.system(cod_cmd)
-
-"""  def Execute(self):
-        self.Verify()
-        #cod = 'magick converter {} -colorspace {}{}{}{}{} '.format()
-        print (self.instructions)
-
-    def Verify(self):
-        self.instructions = self.instructions.split(sep=',')
-        for i in range(len(self.instructions)):
-           self.instructions[i] = self.instructions[i].strip().lower()
-        #verify color
-        val = self.instructions[0]
-        if (val != 'sRGB') and (val != 'gray') and (val != 'sRGB'):
-            self.instructions[0] = 'sRGB'
-        #verify horizontal mirror
-        if self.instructions[-1] == 'true':
-            self.instructions[-1] = '-flip'
-        else:
-            self.instructions[-1] = ''
-        # verify vertical mirror
-        if self.instructions[-2] == 'true':
-            self.instructions[-2] = '-flop'
-        else:
-            self.instructions[-2] =  '
-        """
