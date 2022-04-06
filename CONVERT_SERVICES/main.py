@@ -13,6 +13,7 @@
 
 from src.model.convertimage import ConvertImage
 from src.model.convertvideo import ConvertVideo
+from src.model.convertmetadata import ConvertMetadata
 from flask import Flask
 from flask_restful import Api
 from flask import request
@@ -36,6 +37,8 @@ def save_file():
             prueba = ConvertImage(request, UPLOAD_FOLDER)
         if request.values.get('Convert') == 'Video':
             prueba = ConvertVideo(request, UPLOAD_FOLDER)
+        if request.values.get('Convert') == 'Metadata':
+            prueba = ConvertMetadata(request, UPLOAD_FOLDER)
         prueba.Exec()
         return file.Send_File(prueba.output_file, prueba.name_output)
 
