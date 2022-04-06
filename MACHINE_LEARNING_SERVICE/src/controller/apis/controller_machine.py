@@ -13,9 +13,8 @@
 
 
 from flask import request
-from MACHINE_LEARNING_SERVICE.src.model.Result.model_result import ModelResult
-from MACHINE_LEARNING_SERVICE.src.controller.utils.zipfile.decompress import \
-    Decompress
+from src.model.Result.model_result import ModelResult
+from src.controller.utils.zipfile.decompress import Decompress
 import os
 
 
