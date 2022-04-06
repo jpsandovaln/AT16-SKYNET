@@ -27,6 +27,7 @@ def create_resource():
     result = resource.resource_create(request.json)
     return jsonify(result)
 
+
 # Get all Resources of the Database of Booking
 @app.route('/GetResourceAll', methods=['GET'])
 def get_resource_all():
@@ -44,10 +45,10 @@ def get_resource_by_id(id_resource):
 
 
 # Get a Resource by Name of the Database of Booking
-@app.route('/GetResourceByName', methods=['GET'])
-def get_resource_by_name():
+@app.route('/GetResourceByName/<string:resource_name>', methods=['GET'])
+def get_resource_by_name(resource_name):
     resource = Resource()
-    result = resource.resource_read_specific_name(request.json)
+    result = resource.resource_read_specific_name({"name": str(resource_name)})
     return jsonify(result)
 
 
@@ -92,10 +93,10 @@ def get_person_by_id(id_person):
 
 
 # Get a Person by Name of the Database of Booking
-@app.route('/GetPersonByName', methods=['GET'])
-def get_person_by_name():
+@app.route('/GetPersonByName/<string:name_person>', methods=['GET'])
+def get_person_by_name(name_person):
     person = Person()
-    result = person.person_read_specific_name(request.json)
+    result = person.person_read_specific_name({"person_full_name": str(name_person)})
     return jsonify(result)
 
 
@@ -106,7 +107,7 @@ def update_person(id_person):
     result = person.person_update(id_person, request.json)
     return jsonify(result)
 
-
+# Delete a Person by Id of the Database of Booking
 @app.route('/DeletePerson/<string:id_person>', methods=['DELETE'])
 def delete_person(id_person):
     person = Person()
@@ -114,7 +115,7 @@ def delete_person(id_person):
     return jsonify(result)
 
 
-# Endpoint booking
+# Create a Person for the Database of Booking
 @app.route('/CreateBooking', methods=['POST'])
 def create_booking():
     booking = Booking()
@@ -128,7 +129,7 @@ def get_booking_all():
     result = booking.booking_read_all()
     return jsonify(result)
 
-
+# Get a Booking by Id of the Database of Booking
 @app.route('/GetBookingById/<string:id_booking>', methods=['GET'])
 def get_booking_by_id(id_booking):
     booking = Booking()
@@ -142,14 +143,14 @@ def get_booking_by_name():
     result = booking.booking_read_specific_name(request.json)
     return jsonify(result)
 
-
+# Update a Booking by Id of the Database of Booking
 @app.route('/UpdateBooking/<string:id_booking>', methods=['PUT'])
 def update_booking(id_booking):
     booking = Booking()
     result = booking.booking_update(id_booking, request.json)
     return jsonify(result)
 
-
+# Delete a Booking by Id of the Database of Booking
 @app.route('/DeleteBooking/<string:id_booking>', methods=['DELETE'])
 def delete_booking(id_booking):
     booking = Booking()

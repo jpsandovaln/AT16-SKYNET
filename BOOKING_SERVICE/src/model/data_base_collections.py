@@ -20,8 +20,8 @@ MONGO_DB = "database"
 MONGO_USER = "admin"
 MONGO_PASS = "pass"
 
-uri = "mongodb://{}:{}@{}:{}/{}?authSource=admin".format(MONGO_USER, MONGO_PASS, MONGO_HOST, MONGO_PORT, MONGO_DB)
-
+#uri = "mongodb://{}:{}@{}:{}/{}?authSource=admin".format(MONGO_USER, MONGO_PASS, MONGO_HOST, MONGO_PORT, MONGO_DB)
+uri = 'mongodb://localhost:27017/'
 client = MongoClient(uri)
 db = client['project']
 
