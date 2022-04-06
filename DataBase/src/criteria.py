@@ -10,6 +10,7 @@
 # accordance with the terms of the license agreement you entered into
 # with Jalasoft.
 #
+
 class Criteria:
     def __init__(self, star_time, finish_time, location, direction):
         self.star_time = star_time
