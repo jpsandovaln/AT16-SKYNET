@@ -11,7 +11,7 @@
 # with Jalasoft.
 #
 
-from models.data_base_collections import select_booking_collection
+from .data_base_collections import select_booking_collection
 from bson.objectid import ObjectId
 
 

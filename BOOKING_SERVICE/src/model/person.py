@@ -10,8 +10,9 @@
 # accordance with the terms of the license agreement you entered into
 # with Jalasoft.
 #
+from pymongo import ReturnDocument
 
-from models.data_base_collections import select_person_collection
+from .data_base_collections import select_person_collection
 from bson.objectid import ObjectId
 
 
@@ -24,13 +25,15 @@ class Person:
 
         #If need add delete field
         id_inserted = inserted_data.inserted_id
-        person.find_one_and_update({'_id': id_inserted}, {'$set': {'delete': 0}})
+        result = person.find_one_and_update({'_id': id_inserted}, {'$set': {'delete': 0}})
+        return result
 
     def person_read_all(self):
         filter = {"delete": 0}
         result = person.find(filter)
-        for result_by_element in result:
-            print(result_by_element)
+        return result
+        # for result_by_element in result:
+        #     print(result_by_element)
 
     def person_read_specific_name(self, name):
         filter = {"delete": 0}
@@ -44,10 +47,13 @@ class Person:
 
     def person_update(self, id_person, str_json):
         id_object = ObjectId(id_person)
-        person.find_one_and_update({'_id': id_object}, {'$set': str_json})
-        print("Update!")
+        result = person.find_one_and_update({'_id': id_object}, {'$set': str_json},
+                                            return_document=ReturnDocument.AFTER)
+        return result
 
     def person_delete(self, id_person):
         id_object = ObjectId(id_person)
-        person.find_one_and_update({'_id': id_object}, {'$set': {'delete': 1}})
-        print("Soft delete!")
+        result = person.find_one_and_update({'_id': id_object}, {'$set': {'delete': 1}},
+                                            return_document=ReturnDocument.AFTER)
+        return result
+
