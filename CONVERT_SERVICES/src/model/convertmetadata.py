@@ -43,11 +43,3 @@ class ConvertMetadata(Convertor):
             process = subprocess.run([exe, str(self.path) + "/" + str(self.file), '-O',
                                       str(self.output_file) + "/" + self.name_output])
 
-# (exe,entrada path,-jason,-W+!,salidapath/name.json)
-# (exe,entrada path,-W+!,salidapath/name.txt)
-# (exe, entradapath,-o,salidapath/name.xmp)
-# Call the object and run the function with 1 parameter, it is the extencion of output
-
-
-# prueba = Metadata('xmp', "BugAdvocacy2008.pdf")
-# prueba.Select_File()
