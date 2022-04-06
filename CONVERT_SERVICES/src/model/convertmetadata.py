@@ -30,7 +30,7 @@ class ConvertMetadata(Convertor):
         exe = "third_party/win/Exiftool"## rename executable
 #        for file in direc:
 #            if os.path.isfile(os.path.join(self.path,file)):
-        name = str(self.file)
+#        name = str(self.file)
         ##Process all files with exiftools.exe and extract Metadatos
 
         if self.format == 'json':

@@ -12,8 +12,11 @@
 #
 
 import os
+import json
+from flask import request
 from flask import send_file
-
+from flask import Flask
+from flask_restful import Api
 
 class EndPointConverter:
     def __init__(self, request, save_location):
@@ -30,4 +33,4 @@ class EndPointConverter:
         return self.request
 
     def Send_File(self, dir_output, file_name):
-        return send_file( os.path.join(dir_output, file_name) )
+        return ( r'http://127.0.0.1:5000/downloader/' + os.path.join(dir_output, file_name))
