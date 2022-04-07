@@ -22,10 +22,11 @@ class ControllerFaceRecognizer:
         self.save_location = save_location
         self.name_request = request.form.get('name')
 
+
+
     def get_path(self):
         if self.request.method == 'POST':
             file_request = self.request.files['file']
-            #self.name_request = request.form.get('name')
             file_request.save(os.path.join(self.save_location, file_request.filename))
             print(os.path.join(self.save_location, file_request.filename))
         return os.path.join(self.save_location, file_request.filename)
@@ -34,6 +35,5 @@ class ControllerFaceRecognizer:
         return self.name_request
 
 
-#fl.save(os.path.join(self.save_location, fl.filename))
 
 

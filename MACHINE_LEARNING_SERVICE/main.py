@@ -15,6 +15,7 @@ from flask import Flask
 from flask_restful import Api
 from flask import request
 
+
 from src.model.model_haarcascade import ModelHaarcascade
 from src.controller.apis.controller_face_recognizer import ControllerFaceRecognizer
 from src.controller.apis.controller_machine import ControllerMachineLearning
@@ -48,10 +49,8 @@ def download_file(file_name):
 def identify():
     file = ControllerFaceRecognizer(request, app.config['UPLOAD_FACE_FOLDER'])
     print(file.get_path())
-    model = ModelHaarcascade(file.get_name(), file.get_path())
-    model.face_recognizer()
-    return 0
-
+    model = ModelHaarcascade()
+    return model.face_recognizer(file.get_name(), file.get_path())
 
 # Starts the API, maintains the debugger active, don't use it in a production
 # deployment
