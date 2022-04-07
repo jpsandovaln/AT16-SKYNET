@@ -27,6 +27,7 @@ def create_resource():
     result = resource.resource_create(request.json)
     return jsonify(result)
 
+
 # Get all Resources of the Database of Booking
 @app.route('/resource', methods=['GET'])
 def get_resource_all():
@@ -106,6 +107,7 @@ def update_person(id_person):
     result = person.person_update(id_person, request.json)
     return jsonify(result)
 
+
 # Delete a Person by Id of the Database of Booking
 @app.route('/person/<string:id_person>', methods=['DELETE'])
 def delete_person(id_person):
@@ -130,6 +132,7 @@ def get_booking_all():
     return jsonify(result)
 
 
+# Get a Booking by Id
 @app.route('/booking/id/<string:id_booking>', methods=['GET'])
 def get_booking_by_id(id_booking):
     booking = Booking()
@@ -138,7 +141,7 @@ def get_booking_by_id(id_booking):
 
 
 # Update a Booking by Id
-@app.route('/booking/id/<string:id_booking>', methods=['PUT'])
+@app.route('/booking/<string:id_booking>', methods=['PUT'])
 def update_booking(id_booking):
     booking = Booking()
     result = booking.booking_update(id_booking, request.json)
