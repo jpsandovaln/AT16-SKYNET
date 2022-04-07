@@ -16,7 +16,7 @@ import os
 import keras
 from keras.applications.inception_v3 import InceptionV3, decode_predictions
 from keras.preprocessing.image import load_img, img_to_array
-from MACHINE_LEARNING_SERVICE.src.classes.object_result import ObjectResult
+from src.model.Result.object_result import ObjectResult
 
 
 class ModelInceptionV3:

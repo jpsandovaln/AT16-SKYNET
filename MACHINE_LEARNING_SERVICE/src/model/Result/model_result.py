@@ -11,9 +11,9 @@
 # with Jalasoft.
 #
 
-from MACHINE_LEARNING_SERVICE.src.model.model_vgg16 import ModelVgg16
-from MACHINE_LEARNING_SERVICE.src.model.model_inception_v3 import ModelInceptionV3
-from MACHINE_LEARNING_SERVICE.src.model.model_resnet import Resnet
+from src.model.model_vgg16 import ModelVgg16
+from src.model.model_inception_v3 import ModelInceptionV3
+#from src.model.model_resnet import Resnet
 import json
 
 
@@ -41,9 +41,9 @@ class ModelResult:
             dic_json = json.dumps(list_object_result, indent=4)
             return dic_json
 
-        elif self.model_request == 'Resnet':
-            model_resnet = Resnet()
-            list_object_result = model_resnet.prediction(self.save_location, self.name_request,
-                                                         self.percentage_request)
-            dic_json = json.dumps(list_object_result, indent=4)
-            return dic_json
+        #elif self.model_request == 'Resnet':
+        #    model_resnet = Resnet()
+        #    list_object_result = model_resnet.prediction(self.save_location, self.name_request,
+        #                                                 self.percentage_request)
+        #    dic_json = json.dumps(list_object_result, indent=4)
+        #    return dic_json
