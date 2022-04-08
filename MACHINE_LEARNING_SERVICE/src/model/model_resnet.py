@@ -12,7 +12,7 @@
 
 import datetime
 from imageai.Detection import ObjectDetection
-from object_result import ObjectResult
+from src.model.Result.object_result import ObjectResult
 import os
 
 
