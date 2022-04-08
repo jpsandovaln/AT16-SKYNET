@@ -12,7 +12,7 @@
 #
 import zipfile
 
-PATH = r'C:\Users\rodri\Desktop\AT16\AT16-SKYNET\MACHINE_LEARNING_SERVICE'
+PATH = r'C:\Skynet\AT16-SKYNET\MACHINE_LEARNING_SERVICE'
 
 
 # Unzip a compressed file.
