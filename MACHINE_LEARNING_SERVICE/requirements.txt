@@ -16,6 +16,8 @@ google-pasta==0.2.0
 grpcio==1.44.0
 h5py==3.6.0
 idna==3.3
+importlib-metadata==4.11.3
+imutils==0.5.4
 itsdangerous==2.1.2
 Jinja2==3.1.1
 keras==2.8.0
@@ -25,6 +27,7 @@ Markdown==3.3.6
 MarkupSafe==2.1.1
 numpy==1.22.3
 oauthlib==3.2.0
+opencv-contrib-python==4.5.5.64
 opt-einsum==3.3.0
 Pillow==9.1.0
 protobuf==3.20.0
@@ -43,6 +46,13 @@ tensorflow-io-gcs-filesystem==0.24.0
 termcolor==1.1.0
 tf-estimator-nightly==2.8.0.dev2021122109
 typing-extensions==4.1.1
+typing_extensions==4.1.1
 urllib3==1.26.9
 Werkzeug==2.1.1
 wrapt==1.14.0
+distlib==0.3.4
+filelock==3.6.0
+Flask-Cors==3.0.10
+platformdirs==2.5.1
+virtualenv==20.14.0
+zipp==3.8.0

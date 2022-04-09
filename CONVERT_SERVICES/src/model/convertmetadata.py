@@ -11,7 +11,7 @@
 # with Jalasoft
 
 import subprocess
-from CONVERT_SERVICES.src.model.convertor import Convertor
+from src.model.convertor import Convertor
 
 
 # CREAMOS NUESTRA CLASE
