@@ -1,3 +1,8 @@
-class Command:
+import abc
+
+
+class Command(abc.ABC):
+
+    @abc.abstractmethod
     def build(self, parameter):
-        pass
+        """Implement build method"""
