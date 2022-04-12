@@ -12,9 +12,7 @@ from src.model.execute import Execute
 from src.model.parameter import Parameter
 from src.controller.result.success_result import SuccessResult
 from src.controller.result.error_result import ErrorResult
-from src.model.exceptions.command_exception import CommandException
-from src.model.exceptions.parameter_exception import ParameterException
-from src.model.exceptions.execute_exception import ExecuteException
+from src.model.exceptions.compiler_exception import CompilerException
 
 app = Flask(__name__)
 ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -33,61 +31,35 @@ def route():
     file_code.save(file_path)
 
     try:
+        parameter = Parameter(file_path, UPLOAD_DIR)
+
         if lang == 'java':
             java_command = JavaCommand()
-            execute = Execute()
-            parameter = Parameter(file_path, UPLOAD_DIR)
             command = java_command.build(parameter)
-            result = execute.run(command)
-            result_compiler = SuccessResult(HTTPStatus.OK, str(result))
-            return Response(
-                json.dumps(result_compiler.__dict__),
-                status=HTTPStatus.OK,
-                mimetype='application/json'
-            )
         if lang == 'python':
             python_command = PythonCommand()
-            execute = Execute()
-            parameter = Parameter(file_path, UPLOAD_DIR)
             command = python_command.build(parameter)
-            result = execute.run(command)
-            result_compiler = SuccessResult(HTTPStatus.OK, str(result))
-            return Response(
-                json.dumps(result_compiler.__dict__),
-                status=HTTPStatus.OK,
-                mimetype='application/json'
-            )
-        if lang == 'nodejs':
-            nodejs_command = NodeJSCommand()
-            execute = Execute()
-            parameter = Parameter(file_path, UPLOAD_DIR)
-            command = nodejs_command.build(parameter)
-            result = execute.run(command)
-            result_compiler = SuccessResult(HTTPStatus.OK, str(result))
-            return Response(
-                json.dumps(result_compiler.__dict__),
-                status=HTTPStatus.OK,
-                mimetype='application/json'
-            )
-    except ParameterException as error:
+
+        execute = Execute()
+        result = execute.run(command)
+        result_compiler = SuccessResult(HTTPStatus.OK, str(result))
+        return Response(
+            json.dumps(result_compiler.__dict__),
+            status=HTTPStatus.OK,
+            mimetype='application/json'
+        )
+    except CompilerException as error:
         result_error = ErrorResult(error.status, error.message, error.code)
         return Response(
             json.dumps(result_error.__dict__),
             status=error.status,
             mimetype='application/json'
         )
-    except CommandException as error:
-        result_error = ErrorResult(error.status, error.message, error.code)
+    except Exception as error:
+        result_error = ErrorResult(HTTPStatus.NOT_FOUND, error, 'AT16-000451')
         return Response(
             json.dumps(result_error.__dict__),
-            status=error.status,
-            mimetype='application/json'
-        )
-    except ExecuteException as error:
-        result_error = ErrorResult(error.status, error.message, error.code)
-        return Response(
-            json.dumps(result_error.__dict__),
-            status=error.status,
+            status=HTTPStatus.NOT_FOUND,
             mimetype='application/json'
         )
 

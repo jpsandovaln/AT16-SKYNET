@@ -1,6 +1,6 @@
-class ParameterException(Exception):
+from src.model.exceptions.compiler_exception import CompilerException
+
+
+class ParameterException(CompilerException):
     def __init__(self, message, status, code):
-        self.message = message
-        self.status = status
-        self.code = code
-        super().__init__(self.message)
+        super().__init__(message, status, code)
