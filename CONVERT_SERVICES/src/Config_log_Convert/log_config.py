@@ -18,7 +18,7 @@ import os
 
 
 class Log_Config():
-    file_path = os.path.join((os.path.dirname(os.path.abspath(__file__))), 'Logs')
+    file_path = os.path.join((os.path.dirname(os.path.abspath(__file__))), 'logs')
     name_log = "convert_service"
     LOG_FILENAME = file_path + datetime.datetime.now().strftime("/" + name_log + ".log")
     logger = logging.getLogger('MyLogger')
