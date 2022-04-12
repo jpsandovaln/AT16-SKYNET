@@ -11,7 +11,7 @@
 # with Jalasoft.
 #
 
-from CONVERT_SERVICES.src.model.convertor import Convertor
+from src.model.convertor import Convertor
 import os
 
 
