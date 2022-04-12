@@ -1,6 +1,7 @@
-class CommandException(Exception):
+from src.model.exceptions.compiler_exception import CompilerException
+
+
+class CommandException(CompilerException):
     def __init__(self, message, status):
-        self.message = message
-        self.status = status
-        self.code = 'AT16-ERR-101'
-        super().__init__(self.message)
+        code = 'AT16-ERR-101'
+        super().__init__(message, status, code)

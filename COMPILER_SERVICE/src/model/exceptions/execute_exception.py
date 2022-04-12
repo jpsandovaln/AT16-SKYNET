@@ -1,6 +1,8 @@
-class ExecuteException(Exception):
+from src.model.exceptions.compiler_exception import CompilerException
+
+
+class ExecuteException(CompilerException):
     def __init__(self, message):
-        self.message = message
-        self.status = '404'
-        self.code = 'AT16-ERR-201'
-        super().__init__(self.message)
+        status = '404'
+        code = 'AT16-ERR-201'
+        super().__init__(message, status, code)
