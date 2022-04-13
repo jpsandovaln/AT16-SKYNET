@@ -5,7 +5,7 @@
 # All rights reserved.
 #
 # This software is the confidential and proprietary information of
-# Jalasoft, ("Condidential Information"). You shall # not
+# Jalasoft, ("Confidential Information"). You shall # not
 # disclose such Confidential Information and shall use it only in
 # accordance with the terms of the license agreement you entered into
 # with Jalasoft.
@@ -14,7 +14,6 @@ from csv import excel
 from textwrap import fill
 
 from src.reporting.criteria.criteria import Criteria
-
 
 
 class Filters_Start_Finish_Time_Person_Age(Criteria):
