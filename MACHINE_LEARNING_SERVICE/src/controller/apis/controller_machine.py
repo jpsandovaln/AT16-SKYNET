@@ -41,5 +41,3 @@ class ControllerMachineLearning:
                                  self.model_request, self.percentage_request)
             result_model = result.models_results()
             return result_model
-
-

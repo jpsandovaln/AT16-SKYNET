@@ -32,7 +32,3 @@ class ControllerFaceRecognizer:
 
     def get_name(self):
         return self.name_request
-
-
-
-

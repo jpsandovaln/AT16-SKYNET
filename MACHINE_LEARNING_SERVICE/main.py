@@ -21,16 +21,6 @@ from src.controller.apis.controller_machine import ControllerMachineLearning
 from src.controller.apis.downloader import Downloader
 from src.controller.apis.controller_vggface import ControllerVggFace
 
-from mtcnn.mtcnn import MTCNN
-import matplotlib.pyplot as pyplot
-from PIL import Image
-import numpy as np
-from flask import send_file
-import os
-from keras_vggface.vggface import VGGFace
-from keras_vggface.utils import preprocess_input
-from src.model.model_vggface import ModelVggFace
-
 
 # This is the path where the zip file will be saved
 UPLOAD_FOLDER = 'saved_files\compress_files'

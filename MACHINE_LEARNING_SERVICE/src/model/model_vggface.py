@@ -56,5 +56,3 @@ class ModelVggFace:
             print('>face is NOT a Match (%.3f > %.3f)' % (score, thresh))
             resp = 'No'
         return resp
-
-
