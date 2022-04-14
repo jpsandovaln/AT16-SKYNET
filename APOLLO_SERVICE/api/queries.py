@@ -11,7 +11,7 @@
 # with Jalasoft.
 #
 from .models import Post
-
+from ariadne import convert_kwargs_to_snake_case
 # query resolver that will return all the posts in the database
 
 
@@ -27,5 +27,21 @@ def listPosts_resolver(obj, info):
         payload = {
             "success": False,
             "errors": [str(error)]
+        }
+    return payload
+
+@convert_kwargs_to_snake_case
+ # Querying a single post by id
+def getPost_resolver(obj, info, id):
+    try:
+        post = Post.query.get(id)
+        payload = {
+            "success": True,
+            "post": post.to_dict()
+        }
+    except AttributeError:  # todo not found
+        payload = {
+            "success": False,
+            "errors": ["Post item matching {id} not found"]
         }
     return payload
