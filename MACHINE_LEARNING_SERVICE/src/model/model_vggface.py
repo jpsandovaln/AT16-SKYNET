@@ -12,6 +12,7 @@
 #
 
 # face verification with the VGGFace2 model
+
 from matplotlib import pyplot
 from PIL import Image
 from numpy import asarray
@@ -22,7 +23,7 @@ from keras_vggface.utils import preprocess_input
 
 
 class ModelVggFace:
-
+    # Extracts the face from an image
     def extract_face(self, filename, required_size=(224, 224)):
         pixels = pyplot.imread(filename)
         detector = MTCNN()
@@ -35,6 +36,7 @@ class ModelVggFace:
         face_array = asarray(image)
         return face_array
 
+    # Calculates the embedding for the faces
     def get_embeddings(self, filenames):
         faces = [self.extract_face(f) for f in filenames]
         samples = asarray(faces, 'float32')
@@ -44,6 +46,7 @@ class ModelVggFace:
         yhat = model.predict(samples)
         return yhat
 
+    # Proves if the face images are from the same person
     def is_match(self, known_embedding, candidate_embedding, thresh=0.5):
         score = cosine(known_embedding, candidate_embedding)
         if score <= thresh:
@@ -52,7 +55,6 @@ class ModelVggFace:
         else:
             print('>face is NOT a Match (%.3f > %.3f)' % (score, thresh))
             resp = 'No'
-        #return resp + " percentaje: " + str(1-score)
         return resp
 
 

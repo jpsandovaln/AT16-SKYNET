@@ -16,13 +16,12 @@ from src.controller.utils.zipfile.decompress import \
     Decompress
 import os
 
+
 class ControllerFaceRecognizer:
     def __init__(self, request, save_location):
         self.request = request
         self.save_location = save_location
         self.name_request = request.form.get('name')
-
-
 
     def get_path(self):
         if self.request.method == 'POST':
