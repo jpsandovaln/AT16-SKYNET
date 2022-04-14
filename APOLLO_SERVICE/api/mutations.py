@@ -1,9 +1,20 @@
-# mutations.py
+#
+# @mutations.py Copyright (c)
+# 2643 Av  Melchor Perez de Olguin, Colquiri Sud, Cochabamba, Bolivia.
+# 1376 Av General Inofuentes esquina calle 20, La Paz, Bolivia.
+# All rights reserved.
+#
+# This software is the confidential and proprietary information of
+# Jalasoft, ("Confidential Information"). You shall # not
+# disclose such Confidential Information and shall use it only in
+# accordance with the terms of the license agreement you entered into
+# with Jalasoft.
+#
 from datetime import date
 from ariadne import convert_kwargs_to_snake_case
 from api import db
 from api.models import Post
-
+#
 @convert_kwargs_to_snake_case
 def create_post_resolver(obj, info, title, description):
     try:

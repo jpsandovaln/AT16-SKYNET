@@ -13,8 +13,6 @@
 from .models import Post
 from ariadne import convert_kwargs_to_snake_case
 # query resolver that will return all the posts in the database
-
-
 def listPosts_resolver(obj, info):
     try:
         posts = [post.to_dict() for post in Post.query.all()]
