@@ -24,10 +24,13 @@ type_defs = load_schema_from_path("schema.graphql")
 schema = make_executable_schema(
     type_defs, query, snake_case_fallback_resolvers
 )
+
+ # Load up the GraphQL user interface
 @app.route("/graphql", methods=["GET"])
 def graphql_playground():
     return PLAYGROUND_HTML, 200
-
+    
+ # Endpoint used by our clients to run queries
 @app.route("/graphql", methods=["POST"])
 def graphql_server():
     data = request.get_json()

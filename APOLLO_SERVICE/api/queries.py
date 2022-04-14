@@ -11,6 +11,10 @@
 # with Jalasoft.
 #
 from .models import Post
+
+# query resolver that will return all the posts in the database
+
+
 def listPosts_resolver(obj, info):
     try:
         posts = [post.to_dict() for post in Post.query.all()]
