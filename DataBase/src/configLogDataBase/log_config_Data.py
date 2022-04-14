@@ -17,9 +17,9 @@ import time
 import os
 
 
-class Log_Config_Convert():
+class LogConfigData:
     file_path = os.path.join((os.path.dirname(os.path.abspath(__file__))), 'logs')
-    name_log = "convert_service"
+    name_log = "data_base_service"
     LOG_FILENAME = file_path + datetime.datetime.now().strftime("/" + name_log + ".log")
     logger = logging.getLogger('MyLogger')
     logger.setLevel(logging.DEBUG)

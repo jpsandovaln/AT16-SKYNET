@@ -17,9 +17,9 @@ import time
 import os
 
 
-class Log_Config_Reporting():
+class LogConfigBooking:
     file_path = os.path.join((os.path.dirname(os.path.abspath(__file__))), 'logs')
-    name_log = "reporting_service"
+    name_log = "booking_service"
     LOG_FILENAME = file_path + datetime.datetime.now().strftime("/" + name_log + ".log")
     logger = logging.getLogger('MyLogger')
     logger.setLevel(logging.DEBUG)
@@ -28,3 +28,5 @@ class Log_Config_Reporting():
                                                         when='s', interval=86400, backupCount=100)
     handler.setFormatter(f)
     logger.addHandler(handler)
+
+    
