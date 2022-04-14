@@ -13,6 +13,7 @@
 from BOOKING_SERVICE.src.model.data_base_collections import *
 import pandas as pd
 
+
 class Mongo_2_pandas():
     # This function extract the data of MongoDB and show in pandas format
     def extract_data(self):
@@ -26,3 +27,4 @@ class Mongo_2_pandas():
                                 dataB['schedule.end_time'], dataB['state'], dataR,
                                 dataP], axis=1)
         return dataReduce
+
