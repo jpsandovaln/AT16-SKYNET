@@ -32,8 +32,7 @@ class ControllerMachineLearning:
             self.name_request = request.form.get('name')
             self.model_request = request.form.get('model')
             self.percentage_request = request.form.get('percentage')
-            path_saved = os.path.join(self.save_location,
-                                      file_request.filename)
+            path_saved = os.path.join(self.save_location, file_request.filename)
             file_request.save(path_saved)
             path_zip = Decompress(path_saved)
             path_zip_result = path_zip.path_decompress()

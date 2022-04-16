@@ -26,11 +26,16 @@ from src.controller.apis.controller_vggface import ControllerVggFace
 UPLOAD_FOLDER = 'saved_files\compress_files'
 UPLOAD_FACE_FOLDER = 'saved_files\save_recognizer_videos'
 UPLOAD_VGGFACE = r'saved_files/vgg_files/'
+HAARCASCADE_IMAGES = r'src\controller\utils\images_haarcascade'
+HAARCASCADE_XML = r'src\controller\utils\images_haarcascade'
+
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['UPLOAD_FACE_FOLDER'] = UPLOAD_FACE_FOLDER
 app.config['UPLOAD_VGGFACE'] = UPLOAD_VGGFACE
+app.config['HAARCASCADE_IMAGES'] = HAARCASCADE_IMAGES
+app.config['HAARCASCADE_XML'] = HAARCASCADE_XML
 api = Api(app)
 
 
@@ -51,8 +56,9 @@ def download_file(file_name):
 @app.route('/face_recognizer', methods=['POST'])
 def identify():
     file = ControllerFaceRecognizer(request, app.config['UPLOAD_FACE_FOLDER'])
-    print(file.get_path())
-    model = ModelHaarcascade()
+    file.save_file()
+    #print(file.get_path())
+    model = ModelHaarcascade(app.config['HAARCASCADE_IMAGES'], app.config['HAARCASCADE_XML'])
     return model.face_recognizer(file.get_name(), file.get_path())
 
 
