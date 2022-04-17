@@ -15,6 +15,7 @@ from src.model.convertimage import ConvertImage
 from src.model.convertvideo import ConvertVideo
 from src.model.convertmetadata import ConvertMetadata
 from src.model.convertaudio import ConvertAudio
+from src.model.converterocr import ConvertOCR
 from flask import send_file
 from flask import Flask
 from flask_restful import Api
@@ -52,6 +53,8 @@ def save_file():
             prueba = ConvertMetadata(request, UPLOAD_FOLDER)
         if request.values.get('Convert') == 'Audio':
             prueba = ConvertAudio(request, UPLOAD_FOLDER)
+        if request.values.get('Convert') == 'OCR':
+            prueba = ConvertOCR(request, UPLOAD_FOLDER)
         prueba.Exec()
         return file.Send_File(prueba.output_file, prueba.name_output)
 
