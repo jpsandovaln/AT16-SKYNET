@@ -56,3 +56,8 @@ Flask-Cors==3.0.10
 platformdirs==2.5.1
 virtualenv==20.14.0
 zipp==3.8.0
+
+opencv-python~=4.5.5.64
+matplotlib~=3.5.1
+mtcnn~=0.1.1
+scipy~=1.8.0
