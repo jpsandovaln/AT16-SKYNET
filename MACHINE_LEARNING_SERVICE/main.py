@@ -57,7 +57,6 @@ def download_file(file_name):
 def identify():
     file = ControllerFaceRecognizer(request, app.config['UPLOAD_FACE_FOLDER'])
     file.save_file()
-    #print(file.get_path())
     model = ModelHaarcascade(app.config['HAARCASCADE_IMAGES'], app.config['HAARCASCADE_XML'])
     return model.face_recognizer(file.get_name(), file.get_path())
 

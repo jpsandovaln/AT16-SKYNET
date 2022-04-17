@@ -27,8 +27,6 @@ class ModelHaarcascade:
         result_str = 'No se ha encontrado a ' + str(name)
         data_path = self.data_path
         image_paths = os.listdir(data_path)
-        print('image_Paths = ', image_paths)
-
         face_recognizer = cv.face.EigenFaceRecognizer_create()
         face_recognizer.read(self.model_path)
         cap = cv.VideoCapture(0)

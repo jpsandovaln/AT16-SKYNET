@@ -37,8 +37,8 @@ class ModelVggFace:
         return face_array
 
     # Calculates the embedding for the faces
-    def get_embeddings(self, filenames):
-        faces = [self.extract_face(f) for f in filenames]
+    def get_embeddings(self, file_names):
+        faces = [self.extract_face(f) for f in file_names]
         samples = asarray(faces, 'float32')
         samples = preprocess_input(samples, version=2)
         model = VGGFace(model='resnet50', include_top=False, input_shape=(224, 224, 3),

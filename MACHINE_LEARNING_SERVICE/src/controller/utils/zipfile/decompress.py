@@ -23,7 +23,6 @@ class Decompress:
 
     # Unzip a compressed file.
     def dec_zip(self):
-        #zip_path = '{}\{}'.format(PATH, self.path_saved)
         zip_path = format(self.path_saved)
         fzip = zipfile.ZipFile(zip_path)
         print(zip_path)

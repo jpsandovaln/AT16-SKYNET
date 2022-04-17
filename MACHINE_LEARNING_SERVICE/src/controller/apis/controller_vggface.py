@@ -35,9 +35,9 @@ class ControllerVggFace:
     def compare_faces(self):
         face1 = self.request.files['person1']
         face2 = self.request.files['person2']
-        filenames = [face1, face2]
+        file_names = [face1, face2]
         model = ModelVggFace()
-        embeddings = model.get_embeddings(filenames)
+        embeddings = model.get_embeddings(file_names)
         resp = model.is_match(embeddings[0], embeddings[1])
         value = {
             "Are they the same person?": resp
