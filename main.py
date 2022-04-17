@@ -12,11 +12,11 @@
 #
 import logging
 
-from BOOKING_SERVICE.src.configLogBooking.logconfigbooking import LogConfigBooking
-from COMPILER_SERVICE.src.configLogCompiler.logconfigcompiler import LogConfigCompiler
-from CONVERT_SERVICES.src.configLogConvert.logconfigconvert import LogConfigConvert
-from MACHINE_LEARNING_SERVICE.src.configLogMachineLearning.logconfigmachine import LogConfigMachine
-from REPORTING_SERVICE.src.configLogReporting.logconfigreporting import LogConfigReporting
+from BOOKING_SERVICE.src.configLogBooking.logConfigBooking import LogConfigBooking
+from COMPILER_SERVICE.src.configLogCompiler.logConfigCompiler import LogConfigCompiler
+from CONVERT_SERVICES.src.configLogConvert.logConfigConvert import LogConfigConvert
+from MACHINE_LEARNING_SERVICE.src.configLogMachineLearning.logConfigMachine import LogConfigMachine
+from REPORTING_SERVICE.src.configLogReporting.logConfigReporting import LogConfigReporting
 
 def print_hi(name):
     # Use a breakpoint in the code line below to debug your script.
