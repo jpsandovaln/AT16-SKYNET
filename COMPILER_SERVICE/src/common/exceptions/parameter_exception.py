@@ -1,4 +1,4 @@
-from src.model.exceptions.compiler_exception import CompilerException
+from src.common.exceptions.compiler_exception import CompilerException
 
 
 class ParameterException(CompilerException):
