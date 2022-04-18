@@ -22,5 +22,6 @@ class Filters_Age_Gender(Criteria):
         self.person_gender = person_gender
 
     def filters_age_gender(self):
+        Criteria.validate_criteria()
         filters = (self.get_df()["person_age"] < self.person_age) & (self.get_df()["person_gender"] == self.person_gender)
         return filters
