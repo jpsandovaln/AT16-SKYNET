@@ -5,7 +5,7 @@
 # All rights reserved.
 #
 # This software is the confidential and proprietary information of
-# Jalasoft, ("Condidential Information"). You shall # not
+# Jalasoft, ("Confidential Information"). You shall # not
 # disclose such Confidential Information and shall use it only in
 # accordance with the terms of the license agreement you entered into
 # with Jalasoft.
@@ -25,3 +25,4 @@ class Filters_Age_Gender(Criteria):
         Criteria.validate_criteria()
         filters = (self.get_df()["person_age"] < self.person_age) & (self.get_df()["person_gender"] == self.person_gender)
         return filters
+

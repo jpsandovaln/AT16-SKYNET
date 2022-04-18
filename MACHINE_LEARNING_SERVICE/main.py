@@ -15,19 +15,27 @@ from flask import Flask
 from flask_restful import Api
 from flask import request
 
-
 from src.model.model_haarcascade import ModelHaarcascade
 from src.controller.apis.controller_face_recognizer import ControllerFaceRecognizer
 from src.controller.apis.controller_machine import ControllerMachineLearning
 from src.controller.apis.downloader import Downloader
+from src.controller.apis.controller_vggface import ControllerVggFace
+
 
 # This is the path where the zip file will be saved
 UPLOAD_FOLDER = 'saved_files\compress_files'
 UPLOAD_FACE_FOLDER = 'saved_files\save_recognizer_videos'
+UPLOAD_VGGFACE = r'saved_files/vgg_files/'
+HAARCASCADE_IMAGES = r'src\controller\utils\images_haarcascade'
+HAARCASCADE_XML = r'src\controller\utils\images_haarcascade'
+
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['UPLOAD_FACE_FOLDER'] = UPLOAD_FACE_FOLDER
+app.config['UPLOAD_VGGFACE'] = UPLOAD_VGGFACE
+app.config['HAARCASCADE_IMAGES'] = HAARCASCADE_IMAGES
+app.config['HAARCASCADE_XML'] = HAARCASCADE_XML
 api = Api(app)
 
 
@@ -48,9 +56,24 @@ def download_file(file_name):
 @app.route('/face_recognizer', methods=['POST'])
 def identify():
     file = ControllerFaceRecognizer(request, app.config['UPLOAD_FACE_FOLDER'])
-    print(file.get_path())
-    model = ModelHaarcascade()
+    file.save_file()
+    model = ModelHaarcascade(app.config['HAARCASCADE_IMAGES'], app.config['HAARCASCADE_XML'])
     return model.face_recognizer(file.get_name(), file.get_path())
+
+
+# Endpoint for crop a face in an image
+@app.route('/vggface_crop', methods=['POST'])
+def crop_face():
+    face = ControllerVggFace(request)
+    return face.crop_face()
+
+
+# Endpoint for compare 2 persons in 2 images
+@app.route('/vggface', methods=['POST'])
+def face_compare():
+    response = ControllerVggFace(request)
+    return response.compare_faces()
+
 
 # Starts the API, maintains the debugger active, don't use it in a production
 # deployment
