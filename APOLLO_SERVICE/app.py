@@ -15,8 +15,8 @@ from ariadne import load_schema_from_path, make_executable_schema, \
     graphql_sync, snake_case_fallback_resolvers, ObjectType
 from ariadne.constants import PLAYGROUND_HTML
 from flask import request, jsonify
-from api.queries import listPosts_resolver, getPost_resolver
-from api.mutations import create_post_resolver, update_post_resolver, delete_post_resolver
+from api.mutations import listPosts_resolver, getPost_resolver, create_post_resolver, update_post_resolver, \
+    delete_post_resolver
 
 query = ObjectType("Query")
 mutation = ObjectType("Mutation")
@@ -31,12 +31,14 @@ schema = make_executable_schema(
     type_defs, query, mutation, snake_case_fallback_resolvers
 )
 
- # Load up the GraphQL user interface
+
+# Load up the GraphQL user interface
 @app.route("/graphql", methods=["GET"])
 def graphql_playground():
     return PLAYGROUND_HTML, 200
-    
- # Endpoint used by our clients to run queries
+
+
+# Endpoint used by our clients to run queries
 @app.route("/graphql", methods=["POST"])
 def graphql_server():
     data = request.get_json()
