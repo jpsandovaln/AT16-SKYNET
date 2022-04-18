@@ -23,15 +23,15 @@ class ConvertVideo(Convertor):
         self.instructions = self.getInstructions()
 
     # This method compare the data and create the ffmpeg command.
-    def Init_dic(self):
+    def init_dic(self):
         dic_param = {'frame': 'fps={}',
                      'widht': '{}/1:',
                      'height': '{}/2',
                      'color': 'format=gray'}
         return dic_param
 
-    def Concatenate(self):
-        dic = self.Init_dic()
+    def concatenate(self):
+        dic = self.init_dic()
         cmd_input = ""
         for key in dic:
             val = self.instructions.values.get(key)
@@ -45,8 +45,8 @@ class ConvertVideo(Convertor):
         return cmd_input_copy
 
     #This method converter the visual content.
-    def Exec(self):
-        concatenate = self.Concatenate()
+    def exec(self):
+        concatenate = self.concatenate()
         try:
             name = self.name_output.split('.')
             output_file = self.output_file + '/' + name[0]
