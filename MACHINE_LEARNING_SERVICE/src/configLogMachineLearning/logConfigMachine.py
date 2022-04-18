@@ -1,5 +1,5 @@
 #
-# @main.py Copyright (c)
+# @logConfigMachine.py Copyright (c)
 # 2643 Av  Melchor Perez de Olguin, Colquiri Sud, Cochabamba, Bolivia.
 # 1376 Av General Inofuentes esquina calle 20, La Paz, Bolivia.
 # All rights reserved.
@@ -17,7 +17,7 @@ import time
 import os
 
 
-class Log_Config():
+class LogConfigMachine:
     file_path = os.path.join((os.path.dirname(os.path.abspath(__file__))), 'logs')
     name_log = "machine_learning_service"
     LOG_FILENAME = file_path + datetime.datetime.now().strftime("/" + name_log + ".log")
