@@ -5,15 +5,13 @@ from flask import request
 from flask import Response
 from http import HTTPStatus
 from dotenv import load_dotenv
-from src.model.commands.java_command import JavaCommand
-from src.model.commands.python_command import PythonCommand
-from src.model.execute import Execute
-from src.model.parameter import Parameter
 from src.controller.result.success_result import SuccessResult
 from src.controller.result.error_result import ErrorResult
 from src.common.exceptions.compiler_exception import CompilerException
 from src.controller.services.file_service import FileService
 from src.common.exceptions.file_exception import FileException
+from src.model.compiler_facade import CompilerFacade
+from src.controller.properties.properties import Properties
 
 app = Flask(__name__)
 load_dotenv()
@@ -27,17 +25,7 @@ def route():
 
     try:
         file_path = FileService.get_file_path(request.files['file'], upload_dir)
-        if lang == 'java':
-            parameter = Parameter(file_path, upload_dir, os.getenv('JAVA_BINARY_PATH'))
-            java_command = JavaCommand()
-            command = java_command.build(parameter)
-        if lang == 'python':
-            parameter = Parameter(file_path, upload_dir, os.getenv('PYTHON_BINARY_PATH'))
-            python_command = PythonCommand()
-            command = python_command.build(parameter)
-
-        execute = Execute()
-        result = execute.run(command)
+        result = CompilerFacade.compiler_code(lang, file_path, upload_dir, Properties.get_binary_path(lang, version))
         result_compiler = SuccessResult(HTTPStatus.OK, str(result))
         return Response(
             json.dumps(result_compiler.__dict__),
