@@ -23,18 +23,30 @@ from keras_vggface.utils import preprocess_input
 
 
 class ModelVggFace:
+    def image_has_face(self, filename):
+        pixels = pyplot.imread(filename)
+        detector = MTCNN()
+        results = detector.detect_faces(pixels)
+        if not results:
+            return False
+        else:
+            return True
+
     # Extracts the face from an image
     def extract_face(self, filename, required_size=(224, 224)):
         pixels = pyplot.imread(filename)
         detector = MTCNN()
         results = detector.detect_faces(pixels)
-        x1, y1, width, height = results[0]['box']
-        x2, y2 = x1 + width, y1 + height
-        face = pixels[y1:y2, x1:x2]
-        image = Image.fromarray(face)
-        image = image.resize(required_size)
-        face_array = asarray(image)
-        return face_array
+        if self.image_has_face(filename):
+            x1, y1, width, height = results[0]['box']
+            x2, y2 = x1 + width, y1 + height
+            face = pixels[y1:y2, x1:x2]
+            image = Image.fromarray(face)
+            image = image.resize(required_size)
+            face_array = asarray(image)
+            return face_array
+        else:
+            return 'There is not a recognizable face'
 
     # Calculates the embedding for the faces
     def get_embeddings(self, file_names):
@@ -51,8 +63,8 @@ class ModelVggFace:
         score = cosine(known_embedding, candidate_embedding)
         if score <= thresh:
             print('>face is a Match (%.3f <= %.3f)' % (score, thresh))
-            resp = 'Yes'
+            resp = True
         else:
             print('>face is NOT a Match (%.3f > %.3f)' % (score, thresh))
-            resp = 'No'
+            resp = False
         return resp

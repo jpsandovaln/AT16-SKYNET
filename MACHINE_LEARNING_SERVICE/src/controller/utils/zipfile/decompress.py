@@ -25,7 +25,6 @@ class Decompress:
     def dec_zip(self):
         zip_path = format(self.path_saved)
         fzip = zipfile.ZipFile(zip_path)
-        print(zip_path)
         find_path_decompress = zip_path.find('compress_files')
         path_decompress_saved = zip_path[:find_path_decompress]+'decompress_files'
         fzip.extractall(path_decompress_saved)
@@ -36,7 +35,3 @@ class Decompress:
         path_decompress = self.dec_zip()
         file_name = self.path_saved.find('compress_files')
         return path_decompress+self.path_saved[file_name+14:-4]
-
-
-
-

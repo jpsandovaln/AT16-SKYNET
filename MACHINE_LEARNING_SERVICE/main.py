@@ -27,7 +27,9 @@ UPLOAD_FOLDER = 'saved_files\compress_files'
 UPLOAD_FACE_FOLDER = 'saved_files\save_recognizer_videos'
 UPLOAD_VGGFACE = r'saved_files/vgg_files/'
 HAARCASCADE_IMAGES = r'src\controller\utils\images_haarcascade'
-HAARCASCADE_XML = r'src\controller\utils\images_haarcascade'
+HAARCASCADE_XML = r'src\controller\utils\haarcascade_algorithms'
+VGGFACE_COMPRESS = r'saved_files\vggface_files\compress_files'
+VGGFACE_DECOMPRESS = r'saved_files\vggface_files\decompress_files'
 
 
 app = Flask(__name__)
@@ -36,6 +38,8 @@ app.config['UPLOAD_FACE_FOLDER'] = UPLOAD_FACE_FOLDER
 app.config['UPLOAD_VGGFACE'] = UPLOAD_VGGFACE
 app.config['HAARCASCADE_IMAGES'] = HAARCASCADE_IMAGES
 app.config['HAARCASCADE_XML'] = HAARCASCADE_XML
+app.config['VGGFACE_COMPRESS'] = VGGFACE_COMPRESS
+app.config['VGGFACE_DECOMPRESS'] = VGGFACE_DECOMPRESS
 api = Api(app)
 
 
@@ -65,14 +69,21 @@ def identify():
 @app.route('/vggface_crop', methods=['POST'])
 def crop_face():
     face = ControllerVggFace(request)
-    return face.crop_face()
+    return face.crop_face(app.config['VGGFACE_DECOMPRESS'])
 
 
 # Endpoint for compare 2 persons in 2 images
-@app.route('/vggface', methods=['POST'])
+@app.route('/vggface_compare', methods=['POST'])
 def face_compare():
     response = ControllerVggFace(request)
     return response.compare_faces()
+
+
+# Endpoint for compare 1 persons in a folder with images
+@app.route('/vggface_search_person', methods=['POST'])
+def face_search():
+    response = ControllerVggFace(request)
+    return response.search_person(app.config['VGGFACE_COMPRESS'])
 
 
 # Starts the API, maintains the debugger active, don't use it in a production
