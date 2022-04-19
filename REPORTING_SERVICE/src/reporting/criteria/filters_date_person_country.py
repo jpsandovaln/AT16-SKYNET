@@ -12,16 +12,14 @@
 #
 
 
-from src.reporting.criteria.criteria import Criteria
+from REPORTING_SERVICE.src.reporting.criteria.criteria import Criteria
 
 
-
-class Filters_Date_Person_Country(Criteria):
-    def __init__(self, date, person_country, direction):
-        super().__init__(direction)
+class Filters_Date_Person_Country:
+    def __init__(self, date, person_country):
         self.date = date
         self.person_country = person_country
 
     def filters_date_person_country(self):
-        filters = (self.get_df()["date"] <= self.date) & (self.get_df()["person_country"] == self.person_country)
+        filters = (Criteria.get_df()["date"] <= self.date) & (Criteria.get_df()["person_country"] == self.person_country)
         return filters

@@ -11,16 +11,16 @@
 # with Jalasoft.
 #
 
-from src.reporting.criteria.criteria import Criteria
+from REPORTING_SERVICE.src.reporting.criteria.criteria import Criteria
 
 
-class Filters_State_Person_Gender(Criteria):
-    def __init__(self, state, person_gender, direction):
-        super().__init__(direction)
+class Filters_State_Person_Gender:
+    def __init__(self, state, person_gender):
         self.state = state
         self.person_gender = person_gender
 
 
     def filters_state_person_gender(self):
-        filters = (self.get_df()["state"] == self.state) & (self.get_df()["person_gender"] == self.person_gender)
+        filters = (Criteria.get_df()["state"] == self.state) & \
+                  (Criteria.get_df()["person_gender"] == self.person_gender)
         return filters
