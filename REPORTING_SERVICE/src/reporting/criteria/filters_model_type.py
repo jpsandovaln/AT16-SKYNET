@@ -5,23 +5,22 @@
 # All rights reserved.
 #
 # This software is the confidential and proprietary information of
-# Jalasoft, ("Condidential Information"). You shall # not
+# Jalasoft, ("Confidential Information"). You shall # not
 # disclose such Confidential Information and shall use it only in
 # accordance with the terms of the license agreement you entered into
 # with Jalasoft.
 #
 
 
-from src.reporting.criteria.criteria import Criteria
+from REPORTING_SERVICE.src.reporting.criteria.criteria import Criteria
 
 
-
-class Filters_Model_Type(Criteria):
-    def __init__(self, model, type, direction):
-        super().__init__(direction)
+class Filters_Model_Type:
+    def __init__(self, model, type):
         self.model = model
         self.type = type
 
     def filters_model_type(self):
-        filters = (self.get_df()["model"] == self.model) & (self.get_df()["type"] == self.type)
+        filters = (Criteria.get_df()["resource_model"] == self.model) & \
+                  (Criteria.get_df()["resource_type"] == self.type)
         return filters

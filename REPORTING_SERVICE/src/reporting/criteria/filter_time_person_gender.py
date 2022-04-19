@@ -11,23 +11,20 @@
 # with Jalasoft.
 #
 
-from csv import excel
-from textwrap import fill
-
-from src.reporting.criteria.criteria import Criteria
+from REPORTING_SERVICE.src.reporting.criteria.criteria import Criteria
 
 
 
-class Filters_Start_Finish_Time_Person_Gender(Criteria):
-    def __init__(self, start_time, finish_time, person_age, direction):
-        super().__init__(direction)
+class Filters_Start_Finish_Time_Person_Gender:
+    def __init__(self, start_time, finish_time, person_age):
         self.start_time = start_time
         self.finish_time = finish_time
         self.person_age = person_age
 
     def filters_start_finish_time_person_gender(self):
-        filters = (self.get_df()["start_time"] >= self.start_time) & (self.get_df()["end_time"] <= self.finish_time)\
-                  & (self.get_df()["person_age"] >= self.person_age)
+        filters = (Criteria.get_df()["start_time"] >= self.start_time) & \
+                  (Criteria.get_df()["end_time"] <= self.finish_time)\
+                  & (Criteria.get_df()["person_age"] >= self.person_age)
         return filters
 
 

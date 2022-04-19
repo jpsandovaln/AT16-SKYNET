@@ -11,7 +11,10 @@
 # with Jalasoft.
 #
 from flask import request
-from src.reporting.criteria.filters_age_gender import Filters_Age_Gender
+from REPORTING_SERVICE.src.reporting.criteria.filters_age_gender import \
+    Filters_Age_Gender
+import json
+from REPORTING_SERVICE.src.reporting.criteria.criteria import Criteria
 
 
 class SearchReportAgeGender:
@@ -20,8 +23,11 @@ class SearchReportAgeGender:
 
     def search_report_age_gender(self):
         if request.method == 'POST':
-            file_route = request.form.get('file_route')  # This is for the file, the rest is for converter imagen
             person_age = request.form.get('person_age')
             person_gender = request.form.get('person_gender')
-            Criteria = Filters_Age_Gender(int(person_age), str(person_gender), str(file_route))
-        return str(Criteria.get_df()[Criteria.filters_age_gender()])
+            filters = Filters_Age_Gender(int(person_age), str(person_gender))
+            filter_result = filters.filters_age_gender()
+        filter_rows = (Criteria.get_df()[filter_result])
+        result = filter_rows.to_json(date_format="iso", orient="records")
+        parsed = json.loads(result)
+        return json.dumps(parsed, indent=4)

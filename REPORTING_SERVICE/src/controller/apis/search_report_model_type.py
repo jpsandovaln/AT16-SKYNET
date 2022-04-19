@@ -12,7 +12,9 @@
 #
 
 from flask import request
-from src.reporting.criteria.filters_model_type import Filters_Model_Type
+from REPORTING_SERVICE.src.reporting.criteria.filters_model_type import Filters_Model_Type
+import json
+from REPORTING_SERVICE.src.reporting.criteria.criteria import Criteria
 
 
 class SearchReportModelType:
@@ -21,8 +23,12 @@ class SearchReportModelType:
 
     def search_report_model_type(self):
         if request.method == 'POST':
-            file_route = request.form.get('file_route')  # This is for the file, the rest is for converter imagen
             model = request.form.get('model')
             type = request.form.get('type')
-            Criteria = Filters_Model_Type(str(model), str(type), str(file_route))
-        return str(Criteria.get_df()[Criteria.filters_model_type()])
+            filters = Filters_Model_Type(str(model), str(type))
+            filter_result = filters.filters_model_type()
+        filter_rows = (Criteria.get_df()[filter_result])
+        result = filter_rows.to_json(date_format="iso", orient="records")
+        parsed = json.loads(result)
+        return json.dumps(parsed, indent=4)
+
