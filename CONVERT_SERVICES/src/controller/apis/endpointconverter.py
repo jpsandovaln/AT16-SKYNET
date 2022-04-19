@@ -33,4 +33,11 @@ class EndPointConverter:
         return self.request
 
     def Send_File(self, dir_output, file_name):
-        return ( r'http://127.0.0.1:5000/downloader/' + os.path.join(dir_output, file_name))
+        path = r'http://127.0.0.1:5000/downloader/' + os.path.join(dir_output, file_name)
+        download_path = {
+            'dir_output': dir_output,
+            'file_name': file_name,
+            'os_path': os.path.join(dir_output, file_name),
+            'path': path
+        }
+        return (download_path)

@@ -56,7 +56,7 @@ def save_file():
         if request.values.get('Convert') == 'OCR':
             prueba = ConvertOCR(request, UPLOAD_FOLDER)
         prueba.exec()
-        return file.Send_File(prueba.output_file, prueba.name_output)
+        return return jsonify(file.Send_File(prueba.output_file, prueba.name_output))
 
 
 if __name__ == '__main__':
