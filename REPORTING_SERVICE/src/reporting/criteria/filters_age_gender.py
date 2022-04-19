@@ -12,7 +12,8 @@
 #
 
 from REPORTING_SERVICE.src.reporting.criteria.criteria import Criteria
-
+from src.reporting.criteria.criteria import Criteria
+from src.common.exceptions.filter_exception import FilterException
 
 class Filters_Age_Gender:
     def __init__(self, person_age, person_gender):
@@ -23,4 +24,8 @@ class Filters_Age_Gender:
         Criteria.validate_criteria()
         filters = (Criteria.get_df()["person_age"] < self.person_age) & \
                   (Criteria.get_df()["person_gender"] == self.person_gender)
-        return filters
+        if filters is None or filters == "":
+            raise FilterException("Invalid Filter, the value is empty", "101", "AT16-ERROR-101",
+                                  "Filters_Start_Finish_Time_Person_Age")
+        else:
+            return filters

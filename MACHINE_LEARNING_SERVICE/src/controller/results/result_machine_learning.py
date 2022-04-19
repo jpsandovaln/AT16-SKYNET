@@ -1,4 +1,4 @@
-class ResultReporting(object):
+class ResultMachineLearning(object):
     def __init__(self, status):
         self.status = status
 

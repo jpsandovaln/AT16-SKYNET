@@ -1,7 +1,7 @@
-from src.controller.results.result_reporting import ResultReporting
+from src.controller.results.result_convert import ResultConvert
 
 
-class SuccessResult(ResultReporting):
+class SuccessResult(ResultConvert):
     def __init__(self, status, message):
         super().__init__(status)
         self.message = message

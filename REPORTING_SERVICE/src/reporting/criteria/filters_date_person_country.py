@@ -12,8 +12,10 @@
 #
 
 
-from REPORTING_SERVICE.src.reporting.criteria.criteria import Criteria
 
+from REPORTING_SERVICE.src.reporting.criteria.criteria import Criteria
+from src.reporting.criteria.criteria import Criteria
+from src.common.exceptions.filter_exception import FilterException
 
 class Filters_Date_Person_Country:
     def __init__(self, date, person_country):
@@ -21,5 +23,10 @@ class Filters_Date_Person_Country:
         self.person_country = person_country
 
     def filters_date_person_country(self):
+        Criteria.validate_criteria()
         filters = (Criteria.get_df()["date"] <= self.date) & (Criteria.get_df()["person_country"] == self.person_country)
-        return filters
+        if filters is None or filters == "":
+            raise FilterException("Invalid Filter, the value is empty", "101", "AT16-ERROR-101",
+                                  "Filters_Start_Finish_Time_Person_Age")
+        else:
+            return filters

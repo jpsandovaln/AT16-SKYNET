@@ -14,7 +14,7 @@
 from pymongo import ReturnDocument
 from .data_base_collections import select_person_collection
 from bson.objectid import ObjectId
-
+from src.common.exceptions.booking_exception import BookingException
 
 person = select_person_collection()
 
@@ -27,6 +27,8 @@ class Person:
         id_inserted = inserted_data.inserted_id
         result = inserted_person = person.find_one_and_update({'_id': id_inserted}, {'$set': {'delete': 0}})
 
+        if result is None or result == "":
+            raise BookingException("Error insert in data base", "601", "AT16-ERROR-100", "person_create")
         # Convert ObjectId to string
         result['_id'] = str(result['_id'])
 
@@ -38,6 +40,9 @@ class Person:
 
         filter = {"delete": 0}
         result = person.find(filter)
+
+        if result is None or result == "":
+            raise BookingException("Error read in data base", "602", "AT16-ERROR-101", "person_read_all")
 
         # Fill the dictionary
         for result_by_element in result:
@@ -54,7 +59,7 @@ class Person:
             # Convert ObjectId to string
             result['_id'] = str(result['_id'])
         else:
-            result = {"message": "Not found"}
+            raise BookingException("Invalid specific name", "603", "AT16-ERROR-105", "person_read_specific_name")
         return result
 
     def person_read_specific_id(self, id_person):
@@ -66,7 +71,7 @@ class Person:
             # Convert ObjectId to string
             result['_id'] = str(result['_id'])
         else:
-            result = {"message": "Not found"}
+            raise BookingException("Invalid specific ID", "603", "AT16-ERROR-106", "person_read_specific_id")
         return result
 
     def person_update(self, id_person, str_json):
@@ -78,7 +83,7 @@ class Person:
             # Convert ObjectId to string
             result['_id'] = str(result['_id'])
         else:
-            result = {"message": "Not found"}
+            raise BookingException("Can not be update", "606", "AT16-ERROR-107", "person_update")
         return result
 
     def person_delete(self, id_person):
@@ -90,5 +95,5 @@ class Person:
             # Convert ObjectId to string
             result['_id'] = str(result['_id'])
         else:
-            result = {"message": "Not found"}
+            raise BookingException("Can not be delete", "608", "AT16-ERROR-108", "person_delete")
         return result

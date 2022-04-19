@@ -1,4 +1,4 @@
-from src.controller.results.result_reporting import ResultReporting
+from src.controller.results.result_machine_learning import ResultReporting
 
 
 class ErrorResult(ResultReporting):

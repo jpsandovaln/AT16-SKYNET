@@ -12,7 +12,10 @@
 #
 
 
+
 from REPORTING_SERVICE.src.reporting.criteria.criteria import Criteria
+from src.reporting.criteria.criteria import Criteria
+from src.common.exceptions.filter_exception import FilterException
 
 
 class Filters_Time_Location:
@@ -22,7 +25,12 @@ class Filters_Time_Location:
         self.location = location
 
     def fil_time_location(self):
+        Criteria.validate_criteria()
         filters = (Criteria.get_df()['start_time'] >= self.start_time) & \
                   (Criteria.get_df()['end_time'] <= self.finish_time) & \
                   (Criteria.get_df()['person_city'] == self.location)
-        return filters
+        if filters is None or filters == "":
+            raise FilterException("Invalid Filter, the value is empty", "101", "AT16-ERROR-101",
+                                  "Filters_Start_Finish_Time_Person_Age")
+        else:
+            return filters

@@ -1,6 +1,6 @@
 class ReportingException(Exception):
-    def __init__(self, message, status, type):
+    def __init__(self, message, status, code):
         self.message = message
         self.status = status
-        self.type = type
+        self.code = code
         super().__init__(self.message)

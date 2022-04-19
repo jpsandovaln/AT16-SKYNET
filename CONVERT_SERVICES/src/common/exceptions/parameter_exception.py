@@ -2,6 +2,5 @@ from src.common.exceptions.convert_services_exception import ConvertServicesExce
 
 
 class ParameterException(ConvertServicesException):
-    def __init__(self, message, status, code, type):
-        self.type = type
+    def __init__(self, message, status, code):
         super().__init__(message, status, code)

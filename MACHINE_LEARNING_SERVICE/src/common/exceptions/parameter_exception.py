@@ -2,5 +2,5 @@ from src.common.exceptions.machine_learning_exception import MachineLearningExce
 
 
 class ParameterException(MachineLearningException):
-    def __init__(self, message, status, code):
-        super().__init__(message, status, code)
+    def __init__(self, message, status, code, model):
+        super().__init__(message, status, code, model)

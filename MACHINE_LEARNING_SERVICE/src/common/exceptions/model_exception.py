@@ -1,6 +1,7 @@
 from src.common.exceptions.machine_learning_exception import MachineLearningException
 
 
-class FilterException(MachineLearningException):
-    def __init__(self, message, status, code):
-        super().__init__(message, status, code)
+class ModelException(MachineLearningException):
+    def __init__(self, message, status, code, model):
+        self.model = model
+        super().__init__(message, status, code, model)
