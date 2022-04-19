@@ -12,7 +12,7 @@
 #
 
 from pymongo import MongoClient
-
+from src.common.exceptions.execute_exception import ExecuteException
 
 MONGO_HOST = "127.0.0.1"
 MONGO_PORT = "27017"
@@ -27,6 +27,8 @@ uri = 'mongodb://db_mongo/'
 client = MongoClient(uri)
 db = client['project']
 
+if uri is None or uri == "":
+    raise ExecuteException("Error connection", "700", "AT16-ERROR-200", "uri = 'mongodb://db_mongo/'")
 
 def select_booking_collection():
     booking = db['booking']

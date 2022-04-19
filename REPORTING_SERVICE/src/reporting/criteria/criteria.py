@@ -12,6 +12,8 @@
 #
 
 import pandas as pd
+import os
+from src.common.exceptions.parameter_exception import ParameterException
 from REPORTING_SERVICE.src.reporting.sql_query import SqlQuery
 import psycopg2
 from decouple import config
@@ -51,3 +53,15 @@ class Criteria:
         except KeyError:
             print('Failed')
 
+    def get_df(self):
+        excel = self.direction
+        df = pd.read_excel(excel)
+        return df
+
+    def validate_criteria(self):
+        if self.direction is None or self.direction == "":
+            raise ParameterException("Invalid direccion, the value is empty", "606", "AT16-ERROR-101")
+
+        is_file = os.path.isfile(self.direction)
+        if not is_file:
+            raise ParameterException("It is not file", "406", "AT16-ERROR-201")

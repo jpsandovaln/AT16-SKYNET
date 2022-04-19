@@ -66,7 +66,7 @@ class ModelVgg16:
             try:
                 time_img = int(img[:-4])
                 convert_time = str(datetime.timedelta(seconds=time_img))
-            except:
+            except :
                 convert_time = img[:-4]
 
             object_dict["Object "+str(num_obj)] = {"Name": object_result.get_name(),

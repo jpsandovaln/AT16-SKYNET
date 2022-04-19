@@ -46,6 +46,7 @@ api = Api(app)
 # End point of the uploader file
 @app.route('/object_recognizer', methods=['GET', 'POST'])
 def save_file():
+
     file = ControllerMachineLearning(request, app.config['UPLOAD_FOLDER'])
     return file.upload()
 

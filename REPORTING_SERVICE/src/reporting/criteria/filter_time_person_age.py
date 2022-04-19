@@ -14,6 +14,9 @@ from csv import excel
 from textwrap import fill
 
 from REPORTING_SERVICE.src.reporting.criteria.criteria import Criteria
+from src.reporting.criteria.criteria import Criteria
+from src.common.exceptions.filter_exception import FilterException
+
 
 
 class Filters_Start_Finish_Time_Person_Age:
@@ -23,10 +26,16 @@ class Filters_Start_Finish_Time_Person_Age:
         self.person_age = person_age
 
     def filters_start_finish_time_person_age(self):
+
+        Criteria.validate_criteria()
         filters = (Criteria.get_df()["start_time"] >= self.start_time) & \
-                  (Criteria.get_df()["end_time"] <= self.finish_time)\
+                  (Criteria.get_df()["end_time"] <= self.finish_time) \
                   & (Criteria.get_df()["person_age"] >= self.person_age)
-        return filters
+        if filters is None or filters == "":
+            raise FilterException("Invalid Filter, the value is empty", "101", "AT16-ERROR-101",
+                                  "Filters_Start_Finish_Time_Person_Age")
+        else:
+            return filters
 
 
 
