@@ -10,11 +10,9 @@
 # accordance with the terms of the license agreement you entered into
 # with Jalasoft.
 #
-from flask import request
-from src.model.Result.model_result import ModelResult
-from src.controller.utils.zipfile.decompress import \
-    Decompress
+
 import os
+
 
 class ControllerFaceRecognizer:
     def __init__(self, request, save_location):
@@ -22,7 +20,9 @@ class ControllerFaceRecognizer:
         self.save_location = save_location
         self.name_request = request.form.get('name')
 
-
+    def save_file(self):
+        file = self.request.files['file']
+        file.save(os.path.join(self.save_location, file.filename))
 
     def get_path(self):
         if self.request.method == 'POST':
@@ -33,7 +33,3 @@ class ControllerFaceRecognizer:
 
     def get_name(self):
         return self.name_request
-
-
-
-

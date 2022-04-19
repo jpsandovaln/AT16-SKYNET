@@ -11,7 +11,7 @@
 #
 
 import unittest
-from src.model_vgg16 import ModelVgg16
+from src.model.model_vgg16 import ModelVgg16
 
 
 # Method to search the name of the object in the list of result
@@ -30,7 +30,8 @@ class ModelTest(unittest.TestCase):
     def test_search_a_pickup(self):
         object_searched = "pickup"
         model_vgg16 = ModelVgg16()
-        list_object_result = model_vgg16.predict(r"..\src\utils\images_vgg16", object_searched)
+        list_object_result = model_vgg16.predict(r"..\src\controller\utils\images_vgg16",
+                                                 object_searched, 0.2)
         is_found = search_object(list_object_result, object_searched)
         self.assertTrue(True, is_found)
 
@@ -38,7 +39,8 @@ class ModelTest(unittest.TestCase):
     def test_search_a_husky(self):
         object_searched = "Siberian_husky"
         model_vgg16 = ModelVgg16()
-        list_object_result = model_vgg16.predict(r"..\src\utils\images_vgg16", object_searched)
+        list_object_result = model_vgg16.predict(r"..\src\controller\utils\images_vgg16",
+                                                 object_searched, 0.2)
         is_found = search_object(list_object_result, object_searched)
         self.assertTrue(True, is_found)
 
