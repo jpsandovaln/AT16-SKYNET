@@ -22,6 +22,7 @@ class ModelHaarcascade:
         self.model_path = 'src\model\ModelTraining.xml'
         print('Nueva instancia creada')
 
+
     def face_recognizer(self, name, path):
         path2 = r'' + path
         result_str = 'No se ha encontrado a ' + str(name)
