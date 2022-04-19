@@ -4,7 +4,7 @@ import os
 class ModelHaarcascade:
 
     def __init__(self):
-        print('Nueva instancia creada')
+        print('Nueva instancia creada')#file
 
 
     def face_recognizer(self, name, path):
