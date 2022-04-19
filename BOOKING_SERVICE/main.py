@@ -156,5 +156,11 @@ def delete_booking(id_booking):
     return jsonify(result)
 
 
+# End Point just to verify
+@app.route('/verify', methods=['GET'])
+def verify():
+    return jsonify({"message": "success!!"})
+
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host="0.0.0.0", debug=True, port=5000)
