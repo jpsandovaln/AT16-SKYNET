@@ -34,7 +34,8 @@ class ConvertOCR(Convertor):
 
         # Executable path
         ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
-        TESSERACT_PATH = os.path.join(ROOT_DIR, 'third_party', 'win', 'tesseract', 'tesseract')
+        TESSERACT_PATH = r'third_party\win' \
+                         r'\tesseract\tesseract.exe'
         tesseract_converter.pytesseract.tesseract_cmd = TESSERACT_PATH
 
         image_to_text = Image.open(self.input_file)
@@ -42,7 +43,7 @@ class ConvertOCR(Convertor):
         return text_result
 
     # Convert string to pdf or docx or txt
-    def Exec(self):
+    def exec(self):
         # Environment variables
         load_dotenv()
         pdf_format = os.getenv('PDF_FORMAT')
