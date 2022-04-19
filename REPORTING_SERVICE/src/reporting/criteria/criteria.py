@@ -14,14 +14,44 @@
 import pandas as pd
 import os
 from src.common.exceptions.parameter_exception import ParameterException
+from REPORTING_SERVICE.src.reporting.sql_query import SqlQuery
+import psycopg2
+from decouple import config
+
+DB_NAME = config('DB_NAME')
+HOST = config('HOST')
+USER = config('USER')
+PASSWORD = config('PASSWORD')
 
 
 class Criteria:
-    def __init__(self, direction):
-        self.direction = direction
 
-    def get_direction(self):
-        return self.direction
+    @staticmethod
+    def get_df():
+        try:
+            conn = psycopg2.connect(database=DB_NAME, user=USER,
+                                    password=PASSWORD, host=HOST)
+            conn.autocommit = True
+            cur = conn.cursor()
+            # Do some setup
+            sql_query_join = SqlQuery.join_tables()
+            cur.execute(sql_query_join)
+            result = cur.fetchall()
+            df = pd.DataFrame(result,
+                              columns=['date', 'start_time', 'end_time',
+                                       'state',
+                                       'resource_name', 'resource_type',
+                                       'resource_model', 'resource_state',
+                                       'person_full_name', 'person_age',
+                                       'person_country', 'person_city',
+                                       'person_gender'])
+            conn.commit()
+            # Closing the connection
+            cur.close()
+            conn.close()
+            return df
+        except KeyError:
+            print('Failed')
 
     def get_df(self):
         excel = self.direction

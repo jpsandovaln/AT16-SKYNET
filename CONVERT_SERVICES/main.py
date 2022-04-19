@@ -55,7 +55,7 @@ def save_file():
             prueba = ConvertAudio(request, UPLOAD_FOLDER)
         if request.values.get('Convert') == 'OCR':
             prueba = ConvertOCR(request, UPLOAD_FOLDER)
-        prueba.Exec()
+        prueba.exec()
         return file.Send_File(prueba.output_file, prueba.name_output)
 
 

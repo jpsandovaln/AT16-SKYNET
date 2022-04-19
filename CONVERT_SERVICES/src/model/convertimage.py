@@ -1,5 +1,5 @@
 #
-# @object_result.py Copyright (c)
+# @convertimage.py Copyright (c)
 # 2643 Av  Melchor Perez de Olguin, Colquiri Sud, Cochabamba, Bolivia.
 # 1376 Av General Inofuentes esquina calle 20, La Paz, Bolivia.
 # All rights reserved.
@@ -22,7 +22,7 @@ class ConvertImage(Convertor):
         super().__init__(input_data, input_file)
         self.instructions = self.getInstructions()
 
-    def Init_dic(self):
+    def init_dic(self):
         dic_param = {'color': ' -colorspace {} ',
                      'rotate': ' -rotate {} ',
                      'mirrorvert': ' -flip ',
@@ -31,8 +31,8 @@ class ConvertImage(Convertor):
                      'height': 'x{}! '}
         return dic_param
 
-    def Concatenate(self):
-        dic = self.Init_dic()
+    def concatenate(self):
+        dic = self.init_dic()
         cod_cmd = "magick convert " + self.input_file + " "
         for key in dic:
             val = self.instructions.values.get(key)
@@ -42,6 +42,6 @@ class ConvertImage(Convertor):
         cod_cmd += self.output_file + '/' + self.name_output
         return cod_cmd
 
-    def Exec(self):
-        cod_cmd = self.Concatenate()
+    def exec(self):
+        cod_cmd = self.concatenate()
         os.system(cod_cmd)

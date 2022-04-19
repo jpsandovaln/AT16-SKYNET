@@ -12,17 +12,17 @@
 #
 
 
-from src.reporting.criteria.criteria import Criteria
+from REPORTING_SERVICE.src.reporting.criteria.criteria import Criteria
 
 
-class Filters_Time_Location(Criteria):
-    def __init__(self, start_time, finish_time, location, direction):
-        super().__init__(direction)
+class Filters_Time_Location:
+    def __init__(self, start_time, finish_time, location):
         self.start_time = start_time
         self.finish_time = finish_time
         self.location = location
 
     def fil_time_location(self):
-        filters = (self.get_df()['start_time'] >= self.start_time) & (self.get_df()['end_time'] <= self.finish_time) & (
-                self.get_df()['person_city'] == self.location)
+        filters = (Criteria.get_df()['start_time'] >= self.start_time) & \
+                  (Criteria.get_df()['end_time'] <= self.finish_time) & \
+                  (Criteria.get_df()['person_city'] == self.location)
         return filters

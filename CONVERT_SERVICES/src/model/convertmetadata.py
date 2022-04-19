@@ -25,7 +25,7 @@ class ConvertMetadata(Convertor):
         self.file = input_data.files['file'].filename
 
     # define function for extract metadata
-    def Exec(self):
+    def exec(self):
 
         exe = "third_party/win/Exiftool"
 

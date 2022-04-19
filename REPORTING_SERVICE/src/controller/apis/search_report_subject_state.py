@@ -12,7 +12,10 @@
 #
 
 from flask import request
-from src.reporting.criteria.filters_subject_state import Filters_Subject_State
+from REPORTING_SERVICE.src.reporting.criteria.filters_subject_state import \
+    Filters_Subject_State
+import json
+from REPORTING_SERVICE.src.reporting.criteria.criteria import Criteria
 
 
 class SearchReportSubjectState:
@@ -21,8 +24,11 @@ class SearchReportSubjectState:
 
     def search_report_subject_state(self):
         if request.method == 'POST':
-            file_route = request.form.get('file_route')  # This is for the file, the rest is for converter imagen
             subject = request.form.get('subject')
             state = request.form.get('state')
-            Criteria = Filters_Subject_State(str(subject), str(state), str(file_route))
-        return str(Criteria.get_df()[Criteria.filters_subject_state()])
+            filters = Filters_Subject_State(str(subject), str(state))
+            filter_result = filters.filters_subject_state()
+        filter_rows = (Criteria.get_df()[filter_result])
+        result = filter_rows.to_json(date_format="iso", orient="records")
+        parsed = json.loads(result)
+        return json.dumps(parsed, indent=4)

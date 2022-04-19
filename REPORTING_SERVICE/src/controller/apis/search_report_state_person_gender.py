@@ -12,7 +12,10 @@
 #
 
 from flask import request
-from src.reporting.criteria.filters_state_person_gender import Filters_State_Person_Gender
+from REPORTING_SERVICE.src.reporting.criteria.filters_state_person_gender \
+    import Filters_State_Person_Gender
+import json
+from REPORTING_SERVICE.src.reporting.criteria.criteria import Criteria
 
 
 class SearchReportStatePersonGender:
@@ -21,8 +24,11 @@ class SearchReportStatePersonGender:
 
     def search_report_state_person_gender(self):
         if request.method == 'POST':
-            file_route = request.form.get('file_route')  # This is for the file, the rest is for converter imagen
             state = request.form.get('state')
             person_gender = request.form.get('person_gender')
-            Criteria = Filters_State_Person_Gender(str(state), str(person_gender), str(file_route))
-        return str(Criteria.get_df()[Criteria.filters_state_person_gender()])
+            filters = Filters_State_Person_Gender(str(state), str(person_gender))
+            filter_result = filters.filters_state_person_gender()
+        filter_rows = (Criteria.get_df()[filter_result])
+        result = filter_rows.to_json(date_format="iso", orient="records")
+        parsed = json.loads(result)
+        return json.dumps(parsed, indent=4)

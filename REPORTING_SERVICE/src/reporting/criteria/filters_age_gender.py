@@ -11,18 +11,16 @@
 # with Jalasoft.
 #
 
-from src.reporting.criteria.criteria import Criteria
+from REPORTING_SERVICE.src.reporting.criteria.criteria import Criteria
 
 
-
-class Filters_Age_Gender(Criteria):
-    def __init__(self, person_age, person_gender, direction):
-        super().__init__(direction)
+class Filters_Age_Gender:
+    def __init__(self, person_age, person_gender):
         self.person_age = person_age
         self.person_gender = person_gender
 
     def filters_age_gender(self):
         Criteria.validate_criteria()
-        filters = (self.get_df()["person_age"] < self.person_age) & (self.get_df()["person_gender"] == self.person_gender)
+        filters = (Criteria.get_df()["person_age"] < self.person_age) & \
+                  (Criteria.get_df()["person_gender"] == self.person_gender)
         return filters
-
