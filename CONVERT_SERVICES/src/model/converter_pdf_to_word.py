@@ -1,5 +1,5 @@
 #
-# @video_converter.py Copyright (c)
+# @converter_pdf_to_word.py Copyright (c)
 # 2643 Av  Melchor Perez de Olguin, Colquiri Sud, Cochabamba, Bolivia.
 #1376 Av General Inofuentes esquina calle 20, La Paz, Bolivia.
 #All rights reserved.
