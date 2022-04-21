@@ -1,11 +1,11 @@
 #
-# @logConfigCompiler.py Copyright (c)
+# @logger.py Copyright (c)
 # 2643 Av  Melchor Perez de Olguin, Colquiri Sud, Cochabamba, Bolivia.
 # 1376 Av General Inofuentes esquina calle 20, La Paz, Bolivia.
 # All rights reserved.
 #
 # This software is the confidential and proprietary information of
-# Jalasoft, ("Condidential Information"). You shall # not
+# Jalasoft, ("Confidential Information"). You shall # not
 # disclose such Confidential Information and shall use it only in
 # accordance with the terms of the license agreement you entered into
 # with Jalasoft.
@@ -17,9 +17,9 @@ import time
 import os
 
 
-class LogConfigCompiler:
+class LogConfigBooking:
     file_path = os.path.join((os.path.dirname(os.path.abspath(__file__))), 'logs')
-    name_log = "compiler_service"
+    name_log = "booking_service"
     LOG_FILENAME = file_path + datetime.datetime.now().strftime("/" + name_log + ".log")
     logger = logging.getLogger('MyLogger')
     logger.setLevel(logging.DEBUG)
@@ -28,3 +28,5 @@ class LogConfigCompiler:
                                                         when='s', interval=86400, backupCount=100)
     handler.setFormatter(f)
     logger.addHandler(handler)
+
+    
