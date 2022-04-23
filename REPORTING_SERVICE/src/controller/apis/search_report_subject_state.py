@@ -12,10 +12,9 @@
 #
 
 from flask import request
-from REPORTING_SERVICE.src.reporting.criteria.filters_subject_state import \
-    Filters_Subject_State
+from src.reporting.criteria.filters_subject_state import Filters_Subject_State
 import json
-from REPORTING_SERVICE.src.reporting.criteria.criteria import Criteria
+from src.reporting.criteria.criteria import Criteria
 
 
 class SearchReportSubjectState:

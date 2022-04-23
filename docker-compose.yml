@@ -13,27 +13,27 @@
 
 version: '3.8'
 services:
-  mysql:
-    container_name: mysql
-    image: mysql:${TAG}
-    restart: always
-    volumes:
-      - ./sql-data/db:/var/lib/mysql
-    ports:
-      - "3306:3306"
-    hostname: ${HOSTNAME}
-    environment:
-      MYSQL_DATABASE: 'test_database'
-      MYSQL_USER: 'root'
-      MYSQL_PASSWORD: '123456'
-      MYSQL_ROOT_PASSWORD: '123456'
-
-  adminer:
-    image: adminer
-    ports:
-      - 8090:8080
-    depends_on:
-    - mysql
+#  mysql:
+#    container_name: mysql
+#    image: mysql:${TAG}
+#    restart: always
+#    volumes:
+#      - ./sql-data/db:/var/lib/mysql
+#    ports:
+#      - "3306:3306"
+#    hostname: ${HOSTNAME}
+#    environment:
+#      MYSQL_DATABASE: 'test_database'
+#      MYSQL_USER: 'root'
+#      MYSQL_PASSWORD: '123456'
+#      MYSQL_ROOT_PASSWORD: '123456'
+#
+#  adminer:
+#    image: adminer
+#    ports:
+#      - 8090:8080
+#    depends_on:
+#    - mysql
      
   postgres:
     image: postgres
@@ -56,6 +56,8 @@ services:
     depends_on:
     - postgres
 
+
+
   mongo-express:
     container_name: mongo-express
     image: mongo-express
@@ -64,11 +66,7 @@ services:
     networks: 
       - skynet_network
     environment:
-      - ME_CONFIG_MONGODB_SERVER=mongo-dev
-      - ME_CONFIG_MONGODB_ADMINUSERNAME=admin
-      - ME_CONFIG_MONGODB_ADMINPASSWORD=pass
-      - ME_CONFIG_BASICAUTH_USERNAME=admin
-      - ME_CONFIG_BASICAUTH_PASSWORD=pass
+      - ME_CONFIG_MONGODB_SERVER=db_mongo
     ports:
       - '8081:8081'
     volumes: 
@@ -78,6 +76,8 @@ services:
       container_name: main_app
       restart: always
       build: ./BOOKING_SERVICE
+      networks:
+        - skynet_network
       ports:
         - "6002:5000"
       links:
@@ -88,8 +88,11 @@ services:
   db_mongo:
       container_name: mongo_database
       image: mongo:5.0.6
+      networks:
+        - skynet_network
       ports:
         - "27018:27017"
+
 networks:
   skynet_network:
     driver: bridge

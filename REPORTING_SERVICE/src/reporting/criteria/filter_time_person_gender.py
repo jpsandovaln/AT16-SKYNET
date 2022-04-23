@@ -11,10 +11,10 @@
 # with Jalasoft.
 #
 
-from REPORTING_SERVICE.src.reporting.criteria.criteria import Criteria
-
+from src.reporting.criteria.criteria import Criteria
 from src.reporting.criteria.criteria import Criteria
 from src.common.exceptions.filter_exception import FilterException
+
 
 class Filters_Start_Finish_Time_Person_Gender:
     def __init__(self, start_time, finish_time, person_age):
