@@ -28,7 +28,6 @@ from src.controller.results.error_result import ErrorResult
 from flask import Response
 
 UPLOAD_FOLDER = 'saved_files/'  # here is the file where the images will be downloaded
-
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 api = Api(app)
@@ -54,7 +53,6 @@ def search_report_start_finish_time_person_gender():
             mimetypes='aplication/json'
         )
 
-
 @app.route('/search_report_age_gender', methods=['GET', 'POST'])
 def search_report_age_gender():
     try:
@@ -63,14 +61,14 @@ def search_report_age_gender():
     except ReportingException as error:
         result_error = ErrorResult("It is no posible consume", "400", "AT16-ERROR-404")
         return Response(
-            json.dump(result_error.__dict__),
+            json.dumps(result_error.__dict__),
             status=error.status,
             mimetypes='aplication/json'
         )
     except Exception as error:
         result_error = ErrorResult(HTTPStatus.NOT_FOUND, error, "AT16-ERROR-404")
         return Response(
-            json.dump(result_error.__dict__),
+            json.dumps(result_error.__dict__),
             status=HTTPStatus.NOT_FOUND,
             mimetypes='aplication/json'
         )
@@ -179,7 +177,6 @@ def search_report_fil_time_location():
             status=HTTPStatus.NOT_FOUND,
             mimetypes='aplication/json'
         )
-
 
 if __name__ == '__main__':
     app.run(debug=True)

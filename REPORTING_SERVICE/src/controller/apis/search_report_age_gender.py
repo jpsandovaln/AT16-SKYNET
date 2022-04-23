@@ -11,10 +11,9 @@
 # with Jalasoft.
 #
 from flask import request
-from REPORTING_SERVICE.src.reporting.criteria.filters_age_gender import \
-    Filters_Age_Gender
+from src.reporting.criteria.filters_age_gender import Filters_Age_Gender
 import json
-from REPORTING_SERVICE.src.reporting.criteria.criteria import Criteria
+from src.reporting.criteria.criteria import Criteria
 
 
 class SearchReportAgeGender:
