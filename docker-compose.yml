@@ -13,27 +13,27 @@
 
 version: '3.8'
 services:
-#  mysql:
-#    container_name: mysql
-#    image: mysql:${TAG}
-#    restart: always
-#    volumes:
-#      - ./sql-data/db:/var/lib/mysql
-#    ports:
-#      - "3306:3306"
-#    hostname: ${HOSTNAME}
-#    environment:
-#      MYSQL_DATABASE: 'test_database'
-#      MYSQL_USER: 'root'
-#      MYSQL_PASSWORD: '123456'
-#      MYSQL_ROOT_PASSWORD: '123456'
-#
-#  adminer:
-#    image: adminer
-#    ports:
-#      - 8090:8080
-#    depends_on:
-#    - mysql
+  mysql:
+    container_name: mysql
+    image: mysql
+    restart: always
+    volumes:
+      - ./sql-data/db:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    hostname: ${HOSTNAME}
+    environment:
+      MYSQL_DATABASE: 'test_database'
+      MYSQL_USER: 'root'
+      MYSQL_PASSWORD: '123456'
+      MYSQL_ROOT_PASSWORD: '123456'
+
+  adminer:
+    image: adminer
+    ports:
+      - 8090:8080
+    depends_on:
+    - mysql
      
   postgres:
     image: postgres
