@@ -47,6 +47,7 @@ class Connection:
         cur = Connection.create_table()
         data_mongo = Mongo_2_pandas()
         data_mongo_extract = data_mongo.extract_data()
+
         for index, row in data_mongo_extract.iterrows():
             postgres_insert_query = '''
                  INSERT INTO Resources (resource_name, resource_type,
@@ -102,3 +103,5 @@ class Connection:
         cur.close()
         conn.close()
         return True
+if __name__=='__main__':
+    result = Connection.close_connection()

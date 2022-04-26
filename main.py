@@ -11,12 +11,11 @@
 # with Jalasoft.
 #
 import logging
-
-from BOOKING_SERVICE.src.configLogBooking.logConfigBooking import LogConfigBooking
-from COMPILER_SERVICE.src.configLogCompiler.logConfigCompiler import LogConfigCompiler
-from CONVERT_SERVICES.src.configLogConvert.logConfigConvert import LogConfigConvert
-from MACHINE_LEARNING_SERVICE.src.configLogMachineLearning.logConfigMachine import LogConfigMachine
-from REPORTING_SERVICE.src.configLogReporting.logConfigReporting import LogConfigReporting
+from BOOKING_SERVICE.src.config.logger import LogConfigBooking
+from COMPILER_SERVICE.src.config.logger import LogConfigCompiler
+from CONVERT_SERVICES.src.config.logger import LogConfigConvert
+from MACHINE_LEARNING_SERVICE.src.config.logger import LogConfigMachine
+from REPORTING_SERVICE.src.config.logger import LogConfigReporting
 
 def print_hi(name):
     # Use a breakpoint in the code line below to debug your script.

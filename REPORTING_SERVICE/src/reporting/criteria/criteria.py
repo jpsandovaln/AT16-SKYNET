@@ -12,7 +12,9 @@
 #
 
 import pandas as pd
-from REPORTING_SERVICE.src.reporting.sql_query import SqlQuery
+import os
+from src.common.exceptions.parameter_exception import ParameterException
+from src.reporting.sql_query import SqlQuery
 import psycopg2
 from decouple import config
 
@@ -50,4 +52,3 @@ class Criteria:
             return df
         except KeyError:
             print('Failed')
-

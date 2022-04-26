@@ -11,7 +11,8 @@
 # with Jalasoft.
 #
 
-from REPORTING_SERVICE.src.reporting.criteria.criteria import Criteria
+from src.reporting.criteria.criteria import Criteria
+from src.common.exceptions.filter_exception import FilterException
 
 
 class Filters_Subject_State:
@@ -20,9 +21,14 @@ class Filters_Subject_State:
         self.state = state
 
     def filters_subject_state(self):
+        Criteria.validate_criteria()
         filters = (Criteria.get_df()["subject"] == self.subject) & \
                   (Criteria.get_df()["state"] == self.state)
-        return filters
+        if filters is None or filters == "":
+            raise FilterException("Invalid Filter, the value is empty", "101", "AT16-ERROR-101",
+                                  "Filters_Start_Finish_Time_Person_Age")
+        else:
+            return filters
 
 
 

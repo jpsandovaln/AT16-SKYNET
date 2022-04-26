@@ -12,9 +12,9 @@
 #
 
 from flask import request
-from REPORTING_SERVICE.src.reporting.criteria.filters_time_location import Filters_Time_Location
+from src.reporting.criteria.filters_time_location import Filters_Time_Location
 import json
-from REPORTING_SERVICE.src.reporting.criteria.criteria import Criteria
+from src.reporting.criteria.criteria import Criteria
 
 
 

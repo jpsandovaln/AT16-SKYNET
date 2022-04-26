@@ -12,9 +12,9 @@
 #
 
 from flask import request
-from REPORTING_SERVICE.src.reporting.criteria.filters_date_person_country import Filters_Date_Person_Country
+from src.reporting.criteria.filters_date_person_country import Filters_Date_Person_Country
 import json
-from REPORTING_SERVICE.src.reporting.criteria.criteria import Criteria
+from src.reporting.criteria.criteria import Criteria
 
 
 class SearchReportDatePersonCountry:
