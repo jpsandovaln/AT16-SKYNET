@@ -35,9 +35,10 @@ api = Api(app)
 
 @app.route('/downloader/<string:save>/<string:output_file>/<string:file_name>', methods=['GET'])
 def get_file(save, output_file, file_name):
-    x = (os.path.join(output_file, file_name))
-    y = (os.path.join(save, x))
-    return send_file(y, as_attachment=True)
+    file_path = (os.path.join(output_file, file_name))
+    save_path = (os.path.join(save, file_path))
+    # file_path = (os.path.join(save, output_file, file_name)) <-------TEST this one???!!!!!
+    return send_file(save_path, as_attachment=True)
 
 
 @app.route('/convert', methods=['POST'])

@@ -12,11 +12,12 @@
 #
 
 class Convertor:
-    #  constructor  instruciones folder
+    #  constructor instructions, folder
     def __init__(self, instructions, folder):
         name = instructions.files['file'].filename
         self.input_file = folder+'/' + name
-        self.output_file = r'saved_files/' + (instructions.values.get('convert')).lower() + '_download'
+        self.output_file = r'saved_files/' + (
+            instructions.values.get('convert')).lower() + '_download'
         name = name.split('.')
         self.format = instructions.values.get('format')
         self.name_output = name[0] + 'new.' + self.format
