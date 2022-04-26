@@ -11,22 +11,21 @@
 # with Jalasoft.
 #
 
-
 import pytesseract as tesseract_converter
-from PIL import Image
 from src.model.convertor import Convertor
 from reportlab.lib.pagesizes import A4
 from reportlab.pdfgen import canvas
 from docx import Document
-import os
 from dotenv import load_dotenv
+from PIL import Image
+import os
 
 
 class ConvertOCR(Convertor):
     # Constructor
     def __init__(self, input_data, input_file):
         super().__init__(input_data, input_file)
-        self.instructions = self.getInstructions()
+        self.instructions = self.get_instructions()
 
     # Convert image to string
     def text_result(self):

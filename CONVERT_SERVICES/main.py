@@ -11,17 +11,17 @@
 # with Jalasoft.
 #
 
-from src.model.convertimage import ConvertImage
-from src.model.convertvideo import ConvertVideo
-from src.model.convertmetadata import ConvertMetadata
-from src.model.convertaudio import ConvertAudio
-from src.model.converterocr import ConvertOCR
+from src.model.convert_image import ConvertImage
+from src.model.convert_video import ConvertVideo
+from src.model.convert_metadata import ConvertMetadata
+from src.model.convert_audio import ConvertAudio
+from src.model.convert_ocr import ConvertOCR
+from src.controller.apis.end_point_converter import EndPointConverter
 from flask import send_file
 from flask import Flask
 from flask_restful import Api
 from flask import request
 import os
-from src.controller.apis.endpointconverter import EndPointConverter
 
 
 UPLOAD_FOLDER = r'saved_files\upload'
@@ -40,23 +40,23 @@ def get_file(save, output_file, file_name):
     return send_file(y, as_attachment=True)
 
 
-@app.route('/Convert', methods=['POST'])
+@app.route('/convert', methods=['POST'])
 def save_file():
     file = EndPointConverter(request, app.config['UPLOAD_FOLDER'])
-    result = file.Upload()
+    result = file.upload()
     if result == 1:
-        if request.values.get('Convert') == 'Image':
-            prueba = ConvertImage(request, UPLOAD_FOLDER)
-        if request.values.get('Convert') == 'Video':
-            prueba = ConvertVideo(request, UPLOAD_FOLDER)
-        if request.values.get('Convert') == 'Metadata':
-            prueba = ConvertMetadata(request, UPLOAD_FOLDER)
-        if request.values.get('Convert') == 'Audio':
-            prueba = ConvertAudio(request, UPLOAD_FOLDER)
-        if request.values.get('Convert') == 'OCR':
-            prueba = ConvertOCR(request, UPLOAD_FOLDER)
-        prueba.exec()
-        return file.Send_File(prueba.output_file, prueba.name_output)
+        if request.values.get('convert') == 'Image':
+            convert = ConvertImage(request, UPLOAD_FOLDER)
+        if request.values.get('convert') == 'Video':
+            convert = ConvertVideo(request, UPLOAD_FOLDER)
+        if request.values.get('convert') == 'Metadata':
+            convert = ConvertMetadata(request, UPLOAD_FOLDER)
+        if request.values.get('convert') == 'Audio':
+            convert = ConvertAudio(request, UPLOAD_FOLDER)
+        if request.values.get('convert') == 'OCR':
+            convert = ConvertOCR(request, UPLOAD_FOLDER)
+        convert.exec()
+        return file.send_file(convert.output_file, convert.name_output)
 
 
 if __name__ == '__main__':

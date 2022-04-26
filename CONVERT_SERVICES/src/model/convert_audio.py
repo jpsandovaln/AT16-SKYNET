@@ -1,5 +1,5 @@
 # 
-# @convertaudio.py Copyright (c)
+# @convert_audio.py Copyright (c)
 # 2643 Av  Melchor Perez de Olguin, Colquiri Sud, Cochabamba, Bolivia.
 # 1376 Av General Inofuentes esquina calle 20, La Paz, Bolivia.
 # All rights reserved.
@@ -11,7 +11,6 @@
 # with Jalasoft.
 #
 
-
 from src.model.convertor import Convertor
 import subprocess
 
@@ -20,7 +19,8 @@ class ConvertAudio(Convertor):
 
     def __init__(self, input_data, input_file):
         super().__init__(input_data, input_file)
-        self.instructions = self.getInstructions()
+        self.instructions = self.get_instructions()
+
     # Method to compare the data
     def init_dic(self):
         dic_param = {'acodex': 'c:a {} ',
@@ -44,8 +44,8 @@ class ConvertAudio(Convertor):
     def exec(self):
         concatenate = self.concatenate()
         try:
-            dir = self.output_file + r'/' + self.name_output
-            ffmpeg_command = "ffmpeg -i {}  {} {}".format(self.input_file, concatenate, dir )
+            direction = self.output_file + r'/' + self.name_output
+            ffmpeg_command = "ffmpeg -i {}  {} {}".format(self.input_file, concatenate, direction)
             subprocess.call(ffmpeg_command)
             return True
         except:

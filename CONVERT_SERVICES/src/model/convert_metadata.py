@@ -1,5 +1,5 @@
 #
-# @convertmetadata.py Copyright (c) 2022 Jalasoft
+# @convert_metadata.py Copyright (c) 2022 Jalasoft
 # 2643 Av Melchor Perez de Olguin , Colquiri Sud, Cochabamba, Bolivia.
 # add direccion de jala la paz>
 # All rights reserved
@@ -15,13 +15,12 @@ from src.model.convertor import Convertor
 
 
 # Create a Class
-
 class ConvertMetadata(Convertor):
 
     # define the input of class
     def __init__(self, input_data, input_file):
         super().__init__(input_data, input_file)
-        self.path = input_file ## carpeta de entrada
+        self.path = input_file  # input folder
         self.file = input_data.files['file'].filename
 
     # define function for extract metadata
@@ -29,7 +28,7 @@ class ConvertMetadata(Convertor):
 
         exe = "third_party/win/Exiftool"
 
-        # Process all files with exiftools.exe and extract Metadatos
+        # Process all files with exiftools.exe and extract the Metadata
         if self.format == 'json':
             process = subprocess.run([exe, str(self.path) + "/" + str(self.file), '-' +
                                       str(self.format), '-W+!', str(self.output_file) + "/" +

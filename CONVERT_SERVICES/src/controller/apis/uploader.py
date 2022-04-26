@@ -1,5 +1,5 @@
 #
-# @controller_machine.py Copyright (c) 2022 Jalasoft.
+# @uploader.py Copyright (c) 2022 Jalasoft.
 # 2643 Av Melchor Perez de Olguin, Colquiri Sud, Cochabamba, Bolivia.
 # Edificio Union № 1376 Av. General Inofuentes esquina Calle 20, La Paz, Bolivia.
 # All rights reserved.
@@ -23,12 +23,6 @@ class Uploader:
     def upload(self):
         if request.method == 'POST':
             fl = request.files['file']  # This is for the file, the rest is for converter imagen
-            fr = request.form.get('frame')
-            cl = request.form.get('color')
-            frm = request.form.get('format')
-            wid = request.form.get('width')
-            hei = request.form.get('height')
-            qua = request.form.get('quality')
             fl.save(os.path.join(self.save_location, fl.filename))
         return f"http://127.0.0.1:5000/download/{fl.filename}"  # return the image URL for download
 

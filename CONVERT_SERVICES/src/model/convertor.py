@@ -16,24 +16,24 @@ class Convertor:
     def __init__(self, instructions, folder):
         name = instructions.files['file'].filename
         self.input_file = folder+'/' + name
-        self.output_file = r'saved_files/' + (instructions.values.get('Convert')).lower() + '_download'
+        self.output_file = r'saved_files/' + (instructions.values.get('convert')).lower() + '_download'
         name = name.split('.')
         self.format = instructions.values.get('format')
         self.name_output = name[0] + 'new.' + self.format
         self.instructions = instructions
 
-    def getInputFile(self):
+    def get_input_file(self):
         return self.inputfile
 
-    def getOutFile(self):
+    def get_out_file(self):
         return self.outputfile
 
-    def getFormat(self):
+    def get_format(self):
         return self.format
 
-    def getInstructions(self):
+    def get_instructions(self):
         return self.instructions
 
-    def setNameOutput(self, val):
+    def set_name_output(self, val):
         self.name_output = val
 

@@ -1,5 +1,5 @@
 #
-# @convertimage.py Copyright (c)
+# @convert_image.py Copyright (c)
 # 2643 Av  Melchor Perez de Olguin, Colquiri Sud, Cochabamba, Bolivia.
 # 1376 Av General Inofuentes esquina calle 20, La Paz, Bolivia.
 # All rights reserved.
@@ -17,17 +17,17 @@ import os
 
 class ConvertImage(Convertor):
 
-    #  constructor   instruciones folder formato folder_salida
+    # constructor input folder, output folder
     def __init__(self, input_data, input_file):
         super().__init__(input_data, input_file)
-        self.instructions = self.getInstructions()
+        self.instructions = self.get_instructions()
 
     def init_dic(self):
         dic_param = {'color': ' -colorspace {} ',
                      'rotate': ' -rotate {} ',
-                     'mirrorvert': ' -flip ',
-                     'mirrorhori': ' -flop ',
-                     'widht': ' -resize {}',
+                     'vertical_flip': ' -flip ',
+                     'horizontal_flip': ' -flop ',
+                     'width': ' -resize {}',
                      'height': 'x{}! '}
         return dic_param
 

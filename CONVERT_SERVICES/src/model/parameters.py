@@ -19,7 +19,7 @@ class Parameters:
         self.spl_str_input = str_input.split(',')
         self.dictionary = self.dic_str_input()
 
-    #This method creates a dictionary of the input parameters.
+    # This method creates a dictionary of the input parameters.
     def dic_str_input(self):
         dictionary = {}
         for k_v in self.spl_str_input:

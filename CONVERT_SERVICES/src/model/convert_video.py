@@ -1,5 +1,5 @@
 # 
-# @convertvideo.py Copyright (c)
+# @convert_video.py Copyright (c)
 # 2643 Av  Melchor Perez de Olguin, Colquiri Sud, Cochabamba, Bolivia.
 # 1376 Av General Inofuentes esquina calle 20, La Paz, Bolivia.
 # All rights reserved.
@@ -10,9 +10,9 @@
 # accordance with the terms of the license agreement you entered into
 # with Jalasoft.
 #
-import os
 
 from src.model.convertor import Convertor
+import os
 import subprocess
 import shutil
 
@@ -20,12 +20,12 @@ import shutil
 class ConvertVideo(Convertor):
     def __init__(self, input_data, input_file):
         super().__init__(input_data, input_file)
-        self.instructions = self.getInstructions()
+        self.instructions = self.get_instructions()
 
     # This method compare the data and create the ffmpeg command.
     def init_dic(self):
         dic_param = {'frame': 'fps={}',
-                     'widht': '{}/1:',
+                     'width': '{}/1:',
                      'height': '{}/2',
                      'color': 'format=gray'}
         return dic_param
@@ -36,7 +36,7 @@ class ConvertVideo(Convertor):
         for key in dic:
             val = self.instructions.values.get(key)
             if len(val) > 0:
-                if key == 'widht':
+                if key == 'width':
                     print(val)
                     cmd_input += 'scale=' + dic[key].format(val)
                 elif key in dic:
@@ -44,7 +44,7 @@ class ConvertVideo(Convertor):
         cmd_input_copy = cmd_input[:-1]
         return cmd_input_copy
 
-    #This method converter the visual content.
+    # This method converter the visual content.
     def exec(self):
         concatenate = self.concatenate()
         try:
