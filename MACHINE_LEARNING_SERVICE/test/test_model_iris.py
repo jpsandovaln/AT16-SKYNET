@@ -26,3 +26,4 @@ class Testing(unittest.TestCase):
         res = IrisModel("../src/controller/utils/images_iris_recognition/Aquiles/Img_003_L_2.bmp", 1)
         result = res.matching_data()
         self.assertEqual(result, [{'Name': 'Aquiles', 'Percentage': 100.0}])
+        
