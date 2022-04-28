@@ -37,11 +37,3 @@ class LoadFiles:
                 images_dict[name_path] = images_train
                 images_train = []
         return images_dict
-
-
-
-
-
-
-
-
