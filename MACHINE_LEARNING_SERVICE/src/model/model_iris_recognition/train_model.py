@@ -44,3 +44,4 @@ class TrainModel:
         except Exception as error:
             raise ExecuteException(error, "AT16-ERR-302", '400',
                                    'Iris recognition model')
+            
