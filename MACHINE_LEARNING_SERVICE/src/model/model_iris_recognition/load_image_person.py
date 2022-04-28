@@ -23,3 +23,4 @@ class LoadFiles:
     def load_img_compare(self):
         image = cv2.imread(self.file)
         return image
+    
