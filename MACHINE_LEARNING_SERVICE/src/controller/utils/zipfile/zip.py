@@ -22,6 +22,6 @@ class UnzipFile:
 
     def decom_zip(self):
         path_zip = format(self.path_saved)
-        fzip = zipfile.ZipFile(path_zip)  # This is the input path
-        fzip.extractall(path_img_zip)  # This is the output path
+        file_zip = zipfile.ZipFile(path_zip)  # This is the input path
+        file_zip.extractall(path_img_zip)  # This is the output path
 
