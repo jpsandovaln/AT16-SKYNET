@@ -1,5 +1,5 @@
 #
-# @zip.py Copyright (c) 2022 Jalasoft.
+# @load_image_person.py Copyright (c) 2022 Jalasoft.
 # 2643 Av Melchor Perez de Olguin, Colquiri Sud, Cochabamba, Bolivia.
 # Edificio Union № 1376 Av. General Inofuentes esquina Calle 20, La Paz, Bolivia.
 # All rights reserved.
@@ -11,17 +11,16 @@
 # with Jalasoft.
 #
 
-import zipfile
-
-path_img_zip = 'src/controller/utils/images_iris_recognition'
+import cv2
 
 
-class UnzipFile:
-    def __init__(self, path_saved):
-        self.path_saved = str(path_saved)
+# Load the image file
+class LoadFiles:
+    def __init__(self, file):
+        self.file = file
 
-    def decom_zip(self):
-        path_zip = format(self.path_saved)
-        file_zip = zipfile.ZipFile(path_zip)  # This is the input path
-        file_zip.extractall(path_img_zip)  # This is the output path
-
+    # Load the iris of the person who is required to find
+    def load_img_compare(self):
+        image = cv2.imread(self.file)
+        return image
+    

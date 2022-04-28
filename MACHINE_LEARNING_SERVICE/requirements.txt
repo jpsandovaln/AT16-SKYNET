@@ -56,8 +56,11 @@ Flask-Cors==3.0.10
 platformdirs==2.5.1
 virtualenv==20.14.0
 zipp==3.8.0
-
 opencv-python~=4.5.5.64
 matplotlib~=3.5.1
 mtcnn~=0.1.1
-scipy~=1.8.0
+scipy~=1.8.0	
+G6-iris-recognition==0.0.8	
+python-dateutil==2.8.2	
+python-decouple==3.6	
+python-dotenv==0.20.0

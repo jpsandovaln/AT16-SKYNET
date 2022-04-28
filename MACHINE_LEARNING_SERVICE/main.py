@@ -14,12 +14,13 @@
 from flask import Flask
 from flask_restful import Api
 from flask import request
-
 from src.model.model_haarcascade import ModelHaarcascade
 from src.controller.apis.controller_face_recognizer import ControllerFaceRecognizer
 from src.controller.apis.controller_machine import ControllerMachineLearning
 from src.controller.apis.downloader import Downloader
 from src.controller.apis.controller_vggface import ControllerVggFace
+from src.controller.apis.controller_iris_recognizer import ControllerIris
+from src.controller.apis.controller_iris_train_model import ControllerIrisTrain
 
 
 # This is the path where the zip file will be saved
@@ -30,6 +31,7 @@ HAARCASCADE_IMAGES = r'src\controller\utils\images_haarcascade'
 HAARCASCADE_XML = r'src\controller\utils\haarcascade_algorithms'
 VGGFACE_COMPRESS = r'saved_files\vggface_files\compress_files'
 VGGFACE_DECOMPRESS = r'saved_files\vggface_files\decompress_files'
+UPLOAD_IRIS = r'saved_files\save_iris_files'
 
 
 app = Flask(__name__)
@@ -40,6 +42,7 @@ app.config['HAARCASCADE_IMAGES'] = HAARCASCADE_IMAGES
 app.config['HAARCASCADE_XML'] = HAARCASCADE_XML
 app.config['VGGFACE_COMPRESS'] = VGGFACE_COMPRESS
 app.config['VGGFACE_DECOMPRESS'] = VGGFACE_DECOMPRESS
+app.config['UPLOAD_IRIS'] = UPLOAD_IRIS
 api = Api(app)
 
 
@@ -85,6 +88,17 @@ def face_compare():
 def face_search():
     response = ControllerVggFace(request)
     return response.search_person(app.config['VGGFACE_COMPRESS'])
+
+@app.route('/iris_recognition', methods=['POST'])
+def iris_recognition():
+    file = ControllerIris(request, app.config['UPLOAD_IRIS'])
+    return file.upload()
+
+
+@app.route('/iris_recognition_train', methods=['POST'])
+def train_iris():
+    file = ControllerIrisTrain(request, app.config['UPLOAD_IRIS'])
+    return file.upload()
 
 
 # Starts the API, maintains the debugger active, don't use it in a production
