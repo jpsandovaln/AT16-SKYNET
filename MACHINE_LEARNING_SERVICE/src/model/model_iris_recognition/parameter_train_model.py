@@ -43,3 +43,4 @@ class ParametersTrainModel:
         if not is_file:
             raise ParameterException("It is not file", "402", "AT16-ERR-305",
                                      "Iris recognition model")
+            
