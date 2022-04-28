@@ -13,3 +13,18 @@
 
 import unittest
 from src.model.convert_audio import ConvertAudio
+
+
+class TestConvertAudio(unittest.TestCase):
+
+    def test_convert_audio(self):
+        input_data = {'acodex': 'c:a {} ',
+                     'bitrate': 'ab {}k ',
+                     'sambple-rate': 'ar {} ',
+                     'audio-channel': 'ac {} '}
+        input_data =
+        input_file = './saved_files/upload'
+        convert = ConvertAudio()
+        result = convert.exec()
+        self.assertEqual()
+        self.assertTrue()

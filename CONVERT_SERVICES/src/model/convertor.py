@@ -24,10 +24,10 @@ class Convertor:
         self.instructions = instructions
 
     def get_input_file(self):
-        return self.inputfile
+        return self.input_file
 
     def get_out_file(self):
-        return self.outputfile
+        return self.output_file
 
     def get_format(self):
         return self.format
@@ -37,4 +37,3 @@ class Convertor:
 
     def set_name_output(self, val):
         self.name_output = val
-

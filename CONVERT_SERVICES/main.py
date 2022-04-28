@@ -26,24 +26,24 @@ import os
 
 UPLOAD_FOLDER = r'saved_files\upload'
 DOWNLOADER_FOLDER = r'saved_files\{}'
+SEVER_URL_DOWNLOAD = r'http://127.0.0.1:5000/downloader/'
 
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['SEVER_URL_DOWNLOAD'] = SEVER_URL_DOWNLOAD
 api = Api(app)
 
 
 @app.route('/downloader/<string:save>/<string:output_file>/<string:file_name>', methods=['GET'])
 def get_file(save, output_file, file_name):
-    file_path = (os.path.join(output_file, file_name))
-    save_path = (os.path.join(save, file_path))
-    # file_path = (os.path.join(save, output_file, file_name)) <-------TEST this one???!!!!!
+    save_path = (os.path.join(save, output_file, file_name))
     return send_file(save_path, as_attachment=True)
 
 
 @app.route('/convert', methods=['POST'])
 def save_file():
-    file = EndPointConverter(request, app.config['UPLOAD_FOLDER'])
+    file = EndPointConverter(request, app.config['UPLOAD_FOLDER'], app.config['SEVER_URL_DOWNLOAD'])
     result = file.upload()
     if result == 1:
         if request.values.get('convert') == 'Image':

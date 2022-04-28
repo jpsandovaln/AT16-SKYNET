@@ -10,3 +10,32 @@
 # accordance with the terms of the license agreement you entered into
 # with Jalasoft.
 #
+import unittest
+from src.model.convert_image import ConvertImage
+
+
+class TestConvertImage(unittest.TestCase):
+    def test_convert_image(self):
+        input_data = {'files': r'',
+                      'color': ' -colorspace sRGB ',
+                      'rotate': ' -rotate 45 ',
+                      'vertical_flip': ' -flip ',
+                      'horizontal_flip': ' -flop ',
+                      'width': ' -resize 1000',
+                      'height': 'x1000! ',
+                      'format': 'png'}
+        input_file = './saved_files/upload'
+        convert = ConvertImage(input_data, input_file)
+        result = convert.concatenate()
+        self.assertI.assertEqual(
+            r'magick convert saved_files\upload/husky-t.jpg  -colorspace sRGB  -rotate 45  -flip  -flop  -resize 1000x1000! saved_files/image_download/husky-tnew.png',
+            result)
+
+    def test_convert_image(self):
+        file = './saved_files/upload/2.jpg'
+        input_file = './saved_files/upload'
+        convert = ConvertImage(file, input_file)
+        result = convert.concatenate()
+        self.assertI.assertEqual(
+            r'magick convert saved_files\upload/husky-t.jpg  -colorspace sRGB  -rotate 45  -flip  -flop  -resize 1000x1000! saved_files/image_download/2new.png',
+            result)

@@ -15,9 +15,10 @@ import os
 
 
 class EndPointConverter:
-    def __init__(self, request, save_location):
+    def __init__(self, request, save_location, server_url):
         self.request = request
         self.save_location = save_location
+        self.server_url = server_url
 
     def upload(self):
         file = self.request.files['file']
@@ -28,4 +29,4 @@ class EndPointConverter:
         return self.request
 
     def send_file(self, dir_output, file_name):
-        return r'http://127.0.0.1:5000/downloader/' + os.path.join(dir_output, file_name)
+        return self.server_url + os.path.join(dir_output, file_name)

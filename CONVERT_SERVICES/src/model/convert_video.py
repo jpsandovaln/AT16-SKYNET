@@ -55,7 +55,7 @@ class ConvertVideo(Convertor):
             ffmpeg_command = "ffmpeg -i {} -vf {} {}".format(self.input_file, concatenate, name_dir)
             subprocess.call(ffmpeg_command)
             shutil.make_archive(output_file, 'zip', output_file)
-            self.setNameOutput(name[0] + '.zip')
+            self.set_name_output(name[0] + '.zip')
             shutil.rmtree(output_file)
             return True
         except:

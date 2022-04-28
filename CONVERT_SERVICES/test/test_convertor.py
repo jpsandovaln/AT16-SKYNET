@@ -1,5 +1,5 @@
 #
-# @downloader.py Copyright (c) 2022 Jalasoft.
+# test_convertor.py Copyright (c) 2022 Jalasoft.
 # 2643 Av Melchor Perez de Olguin, Colquiri Sud, Cochabamba, Bolivia.
 # Edificio Union № 1376 Av. General Inofuentes esquina Calle 20, La Paz, Bolivia.
 # All rights reserved.
@@ -11,15 +11,13 @@
 # with Jalasoft.
 #
 
-from flask import send_file
-import os
+import unittest
+from src.model.convertor import Convertor
 
 
-class Downloader:
-    def __init__(self, request, source_folder, file_name):
-        self.request = request
-        self.source_folder = source_folder
-        self.file_name = file_name
+class TestConvertor(unittest.TestCase):
 
-    def donwload(self):
-        return send_file(os.path.join(self.source_folder, self.file_name), as_attachment=True)
+    def test_convertor(self):
+        convertor = Convertor('', '')
+        result = convertor.get_input_file()
+        self.assertEqual('saved_files/', result)
