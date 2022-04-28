@@ -48,3 +48,4 @@ class IrisModel:
                 person_result.append({"Name": name, "Percentage": round(
                     jaccard_index * 100, 1)})
         return person_result
+    
