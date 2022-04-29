@@ -1,7 +1,7 @@
-from src.controller.results.result_machine_learning import ResultReporting
+from src.controller.results.result_machine_learning import ResultMachineLearning
 
 
-class ErrorResult(ResultReporting):
+class ErrorResult(ResultMachineLearning):
     def __init__(self, status, message, code):
         super().__init__(status)
         self.message = message
