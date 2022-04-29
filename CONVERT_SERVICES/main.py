@@ -10,17 +10,22 @@
 # accordance with the terms of the license agreement you entered into
 # with Jalasoft.
 #
-
+import json
+from http import HTTPStatus
 from src.model.convert_image import ConvertImage
 from src.model.convert_video import ConvertVideo
 from src.model.convert_metadata import ConvertMetadata
 from src.model.convert_audio import ConvertAudio
 from src.model.convert_ocr import ConvertOCR
 from src.controller.apis.end_point_converter import EndPointConverter
+from src.common.exceptions.convert_services_exception import ConvertServicesException
+from src.controller.results.success_result import SuccessResult
+from src.controller.results.error_result import ErrorResult
 from flask import send_file
 from flask import Flask
 from flask_restful import Api
 from flask import request
+from flask import Response
 import os
 
 
@@ -45,21 +50,45 @@ def get_file(save, output_file, file_name):
 # Save the file and send it to the different convertors depending on the "convert" param
 @app.route('/convert', methods=['POST'])
 def save_file():
-    file = EndPointConverter(request, app.config['UPLOAD_FOLDER'], app.config['SEVER_URL_DOWNLOAD'])
-    result = file.upload()
-    if result == 1:
-        if request.values.get('convert') == 'Image':
-            convert = ConvertImage(request, UPLOAD_FOLDER)
-        if request.values.get('convert') == 'Video':
-            convert = ConvertVideo(request, UPLOAD_FOLDER)
-        if request.values.get('convert') == 'Metadata':
-            convert = ConvertMetadata(request, UPLOAD_FOLDER)
-        if request.values.get('convert') == 'Audio':
-            convert = ConvertAudio(request, UPLOAD_FOLDER)
-        if request.values.get('convert') == 'OCR':
-            convert = ConvertOCR(request, UPLOAD_FOLDER)
-        convert.exec()
-        return file.send_file(convert.output_file, convert.name_output)
+    try:
+        file = EndPointConverter(request, app.config['UPLOAD_FOLDER'],
+                                 app.config['SEVER_URL_DOWNLOAD'])
+        result = file.upload()
+        if result == 1:
+            if request.values.get('convert') == 'Image':
+                convert = ConvertImage(request, UPLOAD_FOLDER)
+            if request.values.get('convert') == 'Video':
+                convert = ConvertVideo(request, UPLOAD_FOLDER)
+            if request.values.get('convert') == 'Metadata':
+                convert = ConvertMetadata(request, UPLOAD_FOLDER)
+            if request.values.get('convert') == 'Audio':
+                convert = ConvertAudio(request, UPLOAD_FOLDER)
+            if request.values.get('convert') == 'OCR':
+                convert = ConvertOCR(request, UPLOAD_FOLDER)
+            convert.exec()
+            result_converter = file.send_file(convert.output_file, convert.name_output)
+            result_model = SuccessResult(HTTPStatus.OK, str(result_converter))
+            return Response(
+                json.dumps(result_model.__dict__),
+                status=HTTPStatus.OK,
+                mimetype='application/json'
+            )
+    except ConvertServicesException as error:
+        result_error = ErrorResult(error.status, error.message,
+                                   error.code)
+        return Response(
+            json.dumps(result_error.__dict__),
+            status=error.status,
+            mimetype='application/json'
+        )
+    except Exception as error:
+        result_error = ErrorResult(HTTPStatus.NOT_FOUND, error,
+                                   'AT16-000451')
+        return Response(
+            json.dumps(result_error.__dict__),
+            status=HTTPStatus.NOT_FOUND,
+            mimetype='application/json'
+        )
 
 
 if __name__ == '__main__':

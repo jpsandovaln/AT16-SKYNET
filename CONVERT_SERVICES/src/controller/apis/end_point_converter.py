@@ -11,6 +11,8 @@
 # with Jalasoft.
 #
 
+from src.common.exceptions.parameter_exception import ParameterException
+from src.model.parameters import Parameters
 import os
 
 
@@ -23,7 +25,12 @@ class EndPointConverter:
 
     def upload(self):
         file = self.request.files['file']
-        file.save(os.path.join(self.save_location, file.filename))
+        path_saved = os.path.join(self.save_location, file.filename)
+        parameters = Parameters(path_saved, self.request)
+        parameters.validate()
+        parameters.validate_get_convert()
+        file.save(path_saved)  # To save the file
+        parameters.validate_file()
         return 1
 
     def get_request(self):

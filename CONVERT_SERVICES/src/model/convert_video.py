@@ -41,8 +41,6 @@ class ConvertVideo(Convertor):
                     cmd_input += 'scale=' + dic[key].format(val)
                 cmd_input += dic[key].format(val) + ','
         cmd_input_copy = cmd_input[:-1]
-        print(cmd_input)
-        print(cmd_input_copy)
         return cmd_input_copy
 
     # This method converter the visual content.

@@ -13,19 +13,40 @@
 
 #By Rodrigo This class inherits the inputs of the converter.
 
+from src.common.exceptions.parameter_exception import ParameterException
+import os
+
 
 class Parameters:
-    def __init__(self, str_input):
-        self.spl_str_input = str_input.split(',')
-        self.dictionary = self.dic_str_input()
+    def __init__(self, file, request):
+        self.file = file
+        self.request = request
 
-    # This method creates a dictionary of the input parameters.
-    def dic_str_input(self):
-        dictionary = {}
-        for k_v in self.spl_str_input:
-            if '=' in k_v:
-                k_v = k_v.split('=')
-                dictionary[(k_v[0]).strip().lower()] = (k_v[1])
-            else:
-                dictionary[(k_v[:]).strip().lower()] = ''
-        return dictionary
+    def validate(self):
+        print("print: " + os.path.split(self.file)[1])
+        if os.path.split(self.file)[1] == "":
+            raise ParameterException("Not file, put a file", "401",
+                                     "AT16-ERR-300")
+
+    # Setting exceptions to the parameter exception module
+    def validate_file(self):
+        if self.file is None or str(self.file).strip() == "":
+            raise ParameterException("Invalid file, the value is empty", "401",
+                                     "AT16-ERR-300")
+        is_file = os.path.isfile(self.file)
+
+        if not is_file:
+            raise ParameterException("It is not file", "402", "AT16-ERR-305")
+
+    def validate_get_convert(self):
+        converters = ['Image', 'Video', 'Metadata', 'Audio', 'OCR']
+        if self.request.values.get('convert') == "":
+            raise ParameterException("The convert filed is empty", "402", "AT16-ERR-305")
+        if self.request.values.get('convert') not in converters:
+            raise ParameterException("Not a recognizer converter", "402", "AT16-ERR-305")
+
+    def validate_format(self):
+        converters = ['txt', 'docx', 'pdf']
+        if self.request.values.get('convert') == 'OCR' and self.request.values.get(
+                'format') not in converters:
+            raise ParameterException("format is Not a recognized format", "402", "AT16-ERR-305")

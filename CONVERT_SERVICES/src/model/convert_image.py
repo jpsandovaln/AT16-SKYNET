@@ -11,7 +11,14 @@
 # with Jalasoft.
 #
 
+
 from src.model.convertor import Convertor
+from http import HTTPStatus
+from src.controller.results.error_result import ErrorResult
+from src.common.exceptions.convert_exception import ConvertException
+from src.common.exceptions.parameter_exception import ParameterException
+from flask import Response
+import json
 import os
 
 
@@ -41,10 +48,28 @@ class ConvertImage(Convertor):
             if len(val) > 0:
                 dic[key] = dic[key].format(val)
                 cod_cmd += dic[key]
+            else:
+                raise ParameterException(("Invalid format, " "the format needs .zip",
+                                          "401", "AT16-ERR-300",  "Iris recognition model"))
         cod_cmd += self.output_file + '/' + self.name_output
         return cod_cmd
 
     # Method to converter the visual content.
     def exec(self):
-        cod_cmd = self.concatenate()
-        os.system(cod_cmd)
+        try:
+            cod_cmd = self.concatenate()
+            os.system(cod_cmd)
+        except ConvertException as error:
+            result_error = ErrorResult(error.status, error.message, error.code)
+            return Response(
+                json.dumps(result_error.__dict__),
+                status=error.status,
+                mimetype='application/json'
+            )
+        except Exception as error:
+            result_error = ErrorResult(HTTPStatus.BAD_REQUEST, error, "AT16-ERROR-404")
+            return Response(
+                json.dumps(result_error.__dict__),
+                status=HTTPStatus.NOT_FOUND,
+                mimetype='application/json'
+            )

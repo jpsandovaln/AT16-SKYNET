@@ -26,6 +26,10 @@ class ConvertOCR(Convertor):
     def __init__(self, input_data, input_file):
         super().__init__(input_data, input_file)
         self.instructions = self.get_instructions()
+        print(input_data)
+        print("self: "+self.instructions.values.get('language'))
+        print(self.instructions)
+        print(self.input_file)
 
     # Convert image to string
     def text_result(self):

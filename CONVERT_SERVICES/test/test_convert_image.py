@@ -11,11 +11,15 @@
 # with Jalasoft.
 #
 import unittest
+from unittest.mock import patch
 from src.model.convert_image import ConvertImage
 
 
 class TestConvertImage(unittest.TestCase):
+    @patch('')
     def test_convert_image(self):
+        with mock.patch
+            data = pd.read
         input_data = {'files': r'',
                       'color': ' -colorspace sRGB ',
                       'rotate': ' -rotate 45 ',
