@@ -23,7 +23,6 @@ class Parameters:
         self.request = request
 
     def validate(self):
-        print("print: " + os.path.split(self.file)[1])
         if os.path.split(self.file)[1] == "":
             raise ParameterException("Not file, put a file", "401",
                                      "AT16-ERR-300")
