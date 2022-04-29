@@ -47,7 +47,7 @@ def get_file(save, output_file, file_name):
     return send_file(save_path, as_attachment=True)
 
 
-# Save the file and send it to the different convertors depending on the "convert" param
+# Saves the file and send it to the different convertors depending on the "convert" param
 @app.route('/convert', methods=['POST'])
 def save_file():
     try:

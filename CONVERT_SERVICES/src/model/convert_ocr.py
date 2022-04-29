@@ -27,7 +27,7 @@ class ConvertOCR(Convertor):
         super().__init__(input_data, input_file)
         self.instructions = self.get_instructions()
 
-    # Convert image to string
+    # Converts image to string
     def text_result(self):
         language = self.instructions.values.get('language')
 
@@ -38,7 +38,7 @@ class ConvertOCR(Convertor):
         text_result = tesseract_converter.image_to_string(image_to_text, lang=language)
         return text_result
 
-    # Convert string to pdf or docx or txt
+    # Converts string to pdf or docx or txt
     def exec(self):
         # Environment variables
         load_dotenv()
