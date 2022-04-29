@@ -16,6 +16,8 @@ from src.model.convertvideo import ConvertVideo
 from src.model.convertmetadata import ConvertMetadata
 from src.model.convertaudio import ConvertAudio
 from src.model.converterocr import ConvertOCR
+from src.model.converttranslator import ConvertTranslator
+from src.model.convertwavtotxt import ConvertWavTxt
 from flask import send_file
 from flask import Flask
 from flask_restful import Api
@@ -46,17 +48,21 @@ def save_file():
     result = file.Upload()
     if result == 1:
         if request.values.get('Convert') == 'Image':
-            prueba = ConvertImage(request, UPLOAD_FOLDER)
+            convert = ConvertImage(request, UPLOAD_FOLDER)
         if request.values.get('Convert') == 'Video':
-            prueba = ConvertVideo(request, UPLOAD_FOLDER)
+            convert = ConvertVideo(request, UPLOAD_FOLDER)
         if request.values.get('Convert') == 'Metadata':
-            prueba = ConvertMetadata(request, UPLOAD_FOLDER)
+            convert = ConvertMetadata(request, UPLOAD_FOLDER)
         if request.values.get('Convert') == 'Audio':
-            prueba = ConvertAudio(request, UPLOAD_FOLDER)
+            convert = ConvertAudio(request, UPLOAD_FOLDER)
         if request.values.get('Convert') == 'OCR':
-            prueba = ConvertOCR(request, UPLOAD_FOLDER)
-        prueba.exec()
-        return file.Send_File(prueba.output_file, prueba.name_output)
+            convert = ConvertOCR(request, UPLOAD_FOLDER)
+        if request.values.get('Convert') == 'Translator':
+            convert = ConvertTranslator(request, UPLOAD_FOLDER)
+        if request.values.get('Convert') == 'WavTxt':
+            convert = ConvertWavTxt(request, UPLOAD_FOLDER)
+        convert.exec()
+        return file.Send_File(convert.output_file, convert.name_output)
 
 
 if __name__ == '__main__':
