@@ -25,10 +25,9 @@ class ConvertMetadata(Convertor):
 
     # define function for extract metadata
     def exec(self):
-
         exe = "third_party/win/Exiftool"
 
-        # Process all files with exiftools.exe and extract the Metadata
+        # Process all files with exiftool.exe and extract the Metadata
         if self.format == 'json':
             process = subprocess.run([exe, str(self.path) + "/" + str(self.file), '-' +
                                       str(self.format), '-W+!', str(self.output_file) + "/" +

@@ -12,7 +12,7 @@
 #
 
 class Convertor:
-    #  constructor instructions, folder
+    #  Constructor parent for all convertors, inputs: instructions, folder
     def __init__(self, instructions, folder):
         name = instructions.files['file'].filename
         self.input_file = folder+'/' + name
@@ -35,5 +35,5 @@ class Convertor:
     def get_instructions(self):
         return self.instructions
 
-    def set_name_output(self, val):
-        self.name_output = val
+    def set_name_output(self, output_name):
+        self.name_output = output_name

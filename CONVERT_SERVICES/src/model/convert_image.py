@@ -22,6 +22,7 @@ class ConvertImage(Convertor):
         super().__init__(input_data, input_file)
         self.instructions = self.get_instructions()
 
+    # Method to compare the data
     def init_dic(self):
         dic_param = {'color': ' -colorspace {} ',
                      'rotate': ' -rotate {} ',
@@ -31,6 +32,7 @@ class ConvertImage(Convertor):
                      'height': 'x{}! '}
         return dic_param
 
+    # Method to create the ffmpeg command.
     def concatenate(self):
         dic = self.init_dic()
         cod_cmd = "magick convert " + self.input_file + " "
@@ -42,6 +44,7 @@ class ConvertImage(Convertor):
         cod_cmd += self.output_file + '/' + self.name_output
         return cod_cmd
 
+    # Method to converter the visual content.
     def exec(self):
         cod_cmd = self.concatenate()
         os.system(cod_cmd)

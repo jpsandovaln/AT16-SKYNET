@@ -17,6 +17,7 @@ import subprocess
 
 class ConvertAudio(Convertor):
 
+    # Constructor input, input data, input file
     def __init__(self, input_data, input_file):
         super().__init__(input_data, input_file)
         self.instructions = self.get_instructions()

@@ -34,7 +34,6 @@ class ConvertOCR(Convertor):
         # Executable path
         TESSERACT_PATH = r'third_party\win\tesseract\tesseract.exe'
         tesseract_converter.pytesseract.tesseract_cmd = TESSERACT_PATH
-
         image_to_text = Image.open(self.input_file)
         text_result = tesseract_converter.image_to_string(image_to_text, lang=language)
         return text_result

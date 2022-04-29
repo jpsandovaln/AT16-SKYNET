@@ -14,6 +14,7 @@
 import os
 
 
+# Take request, the save location and the server url to upload files, downloads and get the request
 class EndPointConverter:
     def __init__(self, request, save_location, server_url):
         self.request = request

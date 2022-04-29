@@ -30,6 +30,7 @@ class ConvertVideo(Convertor):
                      'color': 'format=gray'}
         return dic_param
 
+    # Method to create the ffmpeg command.
     def concatenate(self):
         dic = self.init_dic()
         cmd_input = ""
@@ -37,11 +38,11 @@ class ConvertVideo(Convertor):
             val = self.instructions.values.get(key)
             if len(val) > 0:
                 if key == 'width':
-                    print(val)
                     cmd_input += 'scale=' + dic[key].format(val)
-                elif key in dic:
-                    cmd_input += dic[key].format(val) + ','
+                cmd_input += dic[key].format(val) + ','
         cmd_input_copy = cmd_input[:-1]
+        print(cmd_input)
+        print(cmd_input_copy)
         return cmd_input_copy
 
     # This method converter the visual content.

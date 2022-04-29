@@ -24,8 +24,8 @@ from flask import request
 import os
 
 
-UPLOAD_FOLDER = r'saved_files\upload'
-DOWNLOADER_FOLDER = r'saved_files\{}'
+UPLOAD_FOLDER = r'saved_files\upload'  # here que common files are saved
+DOWNLOADER_FOLDER = r'saved_files\{}'  # here que specific files are saved after convert
 SEVER_URL_DOWNLOAD = r'http://127.0.0.1:5000/downloader/'
 
 
@@ -35,12 +35,14 @@ app.config['SEVER_URL_DOWNLOAD'] = SEVER_URL_DOWNLOAD
 api = Api(app)
 
 
+# Download the files for all convertors
 @app.route('/downloader/<string:save>/<string:output_file>/<string:file_name>', methods=['GET'])
 def get_file(save, output_file, file_name):
     save_path = (os.path.join(save, output_file, file_name))
     return send_file(save_path, as_attachment=True)
 
 
+# Save the file and send it to the different convertors depending on the "convert" param
 @app.route('/convert', methods=['POST'])
 def save_file():
     file = EndPointConverter(request, app.config['UPLOAD_FOLDER'], app.config['SEVER_URL_DOWNLOAD'])
