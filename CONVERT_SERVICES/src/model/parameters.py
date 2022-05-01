@@ -38,7 +38,7 @@ class Parameters:
             raise ParameterException("It is not file", "402", "AT16-ERR-305")
 
     def validate_get_convert(self):
-        converters = ['Image', 'Video', 'Metadata', 'Audio', 'OCR']
+        converters = ['Image', 'Video', 'Metadata', 'Audio', 'OCR', 'Translator', 'WavTxt']
         if self.request.values.get('convert') == "":
             raise ParameterException("The convert filed is empty", "402", "AT16-ERR-305")
         if self.request.values.get('convert') not in converters:

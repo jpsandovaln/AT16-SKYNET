@@ -10,6 +10,7 @@
 # accordance with the terms of the license agreement you entered into
 # with Jalasoft.
 #
+
 import json
 from http import HTTPStatus
 from src.model.convert_image import ConvertImage
@@ -17,6 +18,8 @@ from src.model.convert_video import ConvertVideo
 from src.model.convert_metadata import ConvertMetadata
 from src.model.convert_audio import ConvertAudio
 from src.model.convert_ocr import ConvertOCR
+from src.model.convert_translator import ConvertTranslator
+from src.model.convert_wav_to_txt import ConvertWavTxt
 from src.controller.apis.end_point_converter import EndPointConverter
 from src.common.exceptions.convert_services_exception import ConvertServicesException
 from src.controller.results.success_result import SuccessResult
@@ -65,6 +68,10 @@ def save_file():
                 convert = ConvertAudio(request, UPLOAD_FOLDER)
             if request.values.get('convert') == 'OCR':
                 convert = ConvertOCR(request, UPLOAD_FOLDER)
+            if request.values.get('convert') == 'Translator':
+                convert = ConvertTranslator(request, UPLOAD_FOLDER)
+            if request.values.get('convert') == 'WavTxt':
+                convert = ConvertWavTxt(request, UPLOAD_FOLDER)
             convert.exec()
             result_converter = file.send_file(convert.output_file, convert.name_output)
             result_model = SuccessResult(HTTPStatus.OK, str(result_converter))
@@ -74,16 +81,14 @@ def save_file():
                 mimetype='application/json'
             )
     except ConvertServicesException as error:
-        result_error = ErrorResult(error.status, error.message,
-                                   error.code)
+        result_error = ErrorResult(error.status, error.message, error.code)
         return Response(
             json.dumps(result_error.__dict__),
             status=error.status,
             mimetype='application/json'
         )
     except Exception as error:
-        result_error = ErrorResult(HTTPStatus.NOT_FOUND, error,
-                                   'AT16-000451')
+        result_error = ErrorResult(HTTPStatus.NOT_FOUND, error, 'AT16-000451')
         return Response(
             json.dumps(result_error.__dict__),
             status=HTTPStatus.NOT_FOUND,

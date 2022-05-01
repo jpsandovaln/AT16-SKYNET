@@ -68,4 +68,4 @@ class ConvertOCR(Convertor):
             document.add_paragraph(text_result)
             document.save(self.output_file + '/' + self.name_output)
         else:
-            print('error')
+            pass
