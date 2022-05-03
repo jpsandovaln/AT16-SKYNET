@@ -22,3 +22,5 @@ __pycache__/
 *$py.class
 .idea
 sql-data/
+data/
+postgres-data/
