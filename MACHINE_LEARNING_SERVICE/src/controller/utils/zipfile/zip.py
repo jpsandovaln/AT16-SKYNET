@@ -1,5 +1,5 @@
 #
-# @main.py Copyright (c) 2022 Jalasoft.
+# @zip.py Copyright (c) 2022 Jalasoft.
 # 2643 Av Melchor Perez de Olguin, Colquiri Sud, Cochabamba, Bolivia.
 # Edificio Union № 1376 Av. General Inofuentes esquina Calle 20, La Paz, Bolivia.
 # All rights reserved.
@@ -10,13 +10,18 @@
 # accordance with the terms of the license agreement you entered into
 # with Jalasoft.
 #
+
 import zipfile
 
+path_img_zip = 'src/controller/utils/images_iris_recognition'
 
-class Classroom:
 
-    def decom_zip(self, filename):
-        path_zip = '../../../../../compress_file/{}'.format(filename)
-        fzip = zipfile.ZipFile(path_zip)  # This is the input path
-        fzip.extractall("../../../../saved_files")  # This is the output path
-        print('Ya está')
+class UnzipFile:
+    def __init__(self, path_saved):
+        self.path_saved = str(path_saved)
+
+    def decom_zip(self):
+        path_zip = format(self.path_saved)
+        file_zip = zipfile.ZipFile(path_zip)  # This is the input path
+        file_zip.extractall(path_img_zip)  # This is the output path
+

@@ -1,6 +1,8 @@
 from src.model.execute import Execute
 from src.model.commands.java_command import JavaCommand
+from src.model.commands.java_command_proxy import JavaCommandProxy
 from src.model.commands.python_command import PythonCommand
+from src.model.commands.cshard_command_adapter import CShardCommandAdapter
 from src.model.parameter import Parameter
 
 
@@ -14,6 +16,12 @@ class CompilerFacade:
         if lang == 'python':
             python_command = PythonCommand()
             command = python_command.build(parameter)
-
+        if lang == 'cshard':
+            c_shard = CShardCommandAdapter()
+            command = c_shard.build(parameter)
+        if lang == 'java-proxy':
+            java_command_proxy = JavaCommandProxy()
+            command = java_command_proxy.build(parameter)
+            
         execute = Execute()
         return execute.run(command)
