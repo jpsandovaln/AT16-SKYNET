@@ -12,8 +12,6 @@
 #
 
 import pandas as pd
-import os
-from src.common.exceptions.parameter_exception import ParameterException
 from src.reporting.sql_query import SqlQuery
 import psycopg2
 from decouple import config
@@ -49,6 +47,7 @@ class Criteria:
             # Closing the connection
             cur.close()
             conn.close()
+            # print(df)
             return df
         except KeyError:
             print('Failed')

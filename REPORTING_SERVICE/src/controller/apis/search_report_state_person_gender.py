@@ -11,23 +11,23 @@
 # with Jalasoft.
 #
 
-from flask import request
-from src.reporting.criteria.filters_state_person_gender import Filters_State_Person_Gender
+from src.reporting.criteria.filters_state_person_gender import FiltersStatePersonGender
 import json
-from src.reporting.criteria.criteria import Criteria
 
 
 class SearchReportStatePersonGender:
-    def __init__(self, request):
-        self.request = request
+    @staticmethod
+    def search_report_state_person_gender(parameters):
+        # Validates parameters
+        parameters.validate()
+        person_gender = parameters.get_person_gender()
+        state = parameters.get_state()
+        data_frame = parameters.get_data_frame()
 
-    def search_report_state_person_gender(self):
-        if request.method == 'POST':
-            state = request.form.get('state')
-            person_gender = request.form.get('person_gender')
-            filters = Filters_State_Person_Gender(str(state), str(person_gender))
-            filter_result = filters.filters_state_person_gender()
-        filter_rows = (Criteria.get_df()[filter_result])
+        # Execute the filter
+        filters = FiltersStatePersonGender(str(state), str(person_gender))
+        filter_result = filters.filters_state_person_gender(data_frame)
+        filter_rows = (data_frame[filter_result])
         result = filter_rows.to_json(date_format="iso", orient="records")
         parsed = json.loads(result)
-        return json.dumps(parsed, indent=4)
+        return json.dumps(parsed)

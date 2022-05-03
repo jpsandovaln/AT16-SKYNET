@@ -22,9 +22,9 @@ MONGO_PASS = "pass"
 #
 # uri = "mongodb://{}:{}@{}:{}/{}?authSource=admin".format(MONGO_USER, MONGO_PASS, MONGO_HOST, MONGO_PORT, MONGO_DB)
 
-# uri = 'mongodb://db_mongo/'
-# client = MongoClient(uri)
-client = MongoClient('localhost', 27018)
+uri = 'mongodb://db_mongo/'
+client = MongoClient(uri)
+# client = MongoClient('localhost', 27018)
 db = client['project']
 
 class Mongo_2_pandas():
@@ -41,3 +41,6 @@ class Mongo_2_pandas():
                                 data_booking['schedule.end_time'], data_booking['state'],
                                 data_resource, data_person], axis=1)
         return data_reduce
+
+# data_mongo = Mongo_2_pandas
+# print(data_mongo.extract_data())

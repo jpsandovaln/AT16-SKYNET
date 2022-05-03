@@ -11,24 +11,26 @@
 # with Jalasoft.
 #
 
-from flask import request
-from src.reporting.criteria.filters_model_type import Filters_Model_Type
+from src.reporting.criteria.filters_model_type import FiltersModelType
 import json
-from src.reporting.criteria.criteria import Criteria
 
 
 class SearchReportModelType:
-    def __init__(self, request):
-        self.request = request
 
-    def search_report_model_type(self):
-        if request.method == 'POST':
-            model = request.form.get('model')
-            type = request.form.get('type')
-            filters = Filters_Model_Type(str(model), str(type))
-            filter_result = filters.filters_model_type()
-        filter_rows = (Criteria.get_df()[filter_result])
+    @staticmethod
+    def search_report_model_type(parameters):
+
+        # Validates parameters
+        parameters.validate()
+        resource_model = parameters.get_resource_model()
+        resource_type = parameters.get_resource_type()
+        data_frame = parameters.get_data_frame()
+
+        # Executes the filter
+        filters = FiltersModelType(str(resource_model), str(resource_type))
+        filter_result = filters.filters_model_type(data_frame)
+        filter_rows = (data_frame[filter_result])
         result = filter_rows.to_json(date_format="iso", orient="records")
         parsed = json.loads(result)
-        return json.dumps(parsed, indent=4)
+        return json.dumps(parsed)
 
