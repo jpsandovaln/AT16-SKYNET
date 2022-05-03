@@ -11,21 +11,14 @@
 # with Jalasoft.
 #
 
-from src.reporting.criteria.criteria import Criteria
-from src.common.exceptions.filter_exception import FilterException
 
+class FiltersModelType:
 
-class Filters_Model_Type:
-    def __init__(self, model, type):
+    def __init__(self, model, resource_type):
         self.model = model
-        self.type = type
+        self.resource_type = resource_type
 
-    def filters_model_type(self):
-        Criteria.validate_criteria()
-        filters = (Criteria.get_df()["resource_model"] == self.model) & \
-                  (Criteria.get_df()["resource_type"] == self.type)
-        if filters is None or filters == "":
-            raise FilterException("Invalid Filter, the value is empty", "101", "AT16-ERROR-101",
-                                  "Filters_Start_Finish_Time_Person_Age")
-        else:
-            return filters
+    def filters_model_type(self, data_frame):
+        filters = (data_frame["resource_model"] == self.model) & \
+                  (data_frame["resource_type"] == self.resource_type)
+        return filters

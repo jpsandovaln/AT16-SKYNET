@@ -10,9 +10,9 @@
 # accordance with the terms of the license agreement you entered into
 # with Jalasoft.
 #
-from sql_query import SqlQuery
+from src.reporting.sql_query import SqlQuery
 import psycopg2
-from change_mongo_pandas import Mongo_2_pandas
+from src.reporting.change_mongo_pandas import Mongo_2_pandas
 from decouple import config
 
 DB_NAME = config('DB_NAME')
@@ -103,5 +103,3 @@ class Connection:
         cur.close()
         conn.close()
         return True
-if __name__=='__main__':
-    result = Connection.close_connection()

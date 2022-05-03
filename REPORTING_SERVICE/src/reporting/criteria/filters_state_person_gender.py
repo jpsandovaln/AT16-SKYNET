@@ -11,22 +11,12 @@
 # with Jalasoft.
 #
 
-from src.reporting.criteria.criteria import Criteria
-from src.common.exceptions.filter_exception import FilterException
-
-
-class Filters_State_Person_Gender:
+class FiltersStatePersonGender:
     def __init__(self, state, person_gender):
         self.state = state
         self.person_gender = person_gender
 
-
-    def filters_state_person_gender(self):
-        Criteria.validate_criteria()
-        filters = (Criteria.get_df()["state"] == self.state) & \
-          (Criteria.get_df()["person_gender"] == self.person_gender)
-        if filters is None or filters == "":
-            raise FilterException("Invalid Filter, the value is empty", "101", "AT16-ERROR-101",
-                                  "Filters_Start_Finish_Time_Person_Age")
-        else:
-            return filters
+    def filters_state_person_gender(self, data_frame):
+        filters = (data_frame["state"] == self.state) & \
+          (data_frame["person_gender"] == self.person_gender)
+        return filters

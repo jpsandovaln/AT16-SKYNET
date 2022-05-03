@@ -6,6 +6,8 @@ CONVERT_SERVICES/*pyc
 CONVERT_SERVICES/venv
 CONVERT_SERVICES/.idea
 CONVERT_SERVICES/.gitignore
+CONVERT_SERVICES/saved_files/
+CONVERT_SERVICES/third_party/
 MACHINE_LEARNING_SERVICE/.gitignore
 MACHINE_LEARNING_SERVICE/.idea
 MACHINE_LEARNING_SERVICE/venv
@@ -19,3 +21,6 @@ __pycache__/
 *.py[cod]
 *$py.class
 .idea
+sql-data/
+data/
+postgres-data/

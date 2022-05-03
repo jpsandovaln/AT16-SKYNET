@@ -11,7 +11,6 @@
 # with Jalasoft.
 #
 
-# import linux sytem operating, slim buster
 FROM python:3.8.5-slim-buster
 
 # Set the work directory
@@ -24,4 +23,5 @@ COPY . /app
 RUN pip install -r requirements.txt
 
 # Execute main.py
+
 CMD ["python3", "main.py"]

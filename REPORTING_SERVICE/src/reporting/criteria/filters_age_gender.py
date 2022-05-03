@@ -11,16 +11,12 @@
 # with Jalasoft.
 #
 
-from src.reporting.criteria.criteria import Criteria
-from src.common.exceptions.filter_exception import FilterException
-
-
-class Filters_Age_Gender:
+class FiltersAgeGender:
     def __init__(self, person_age, person_gender):
         self.person_age = person_age
         self.person_gender = person_gender
 
-    def filters_age_gender(self):
-        filters = (Criteria.get_df()["person_age"] < self.person_age) & \
-                  (Criteria.get_df()["person_gender"] == self.person_gender)
+    def filters_age_gender(self, data_frame):
+        filters = (data_frame["person_age"] < self.person_age) & \
+                  (data_frame["person_gender"] == self.person_gender)
         return filters

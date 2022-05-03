@@ -1,0 +1,17 @@
+[
+    {
+        "date": "12/23/2022",
+        "start_time": "11:15:00",
+        "end_time": "20:30:00",
+        "state": "booked",
+        "resource_name": "Refrigerator",
+        "resource_type": "appliance",
+        "resource_model": "M20",
+        "resource_state": "booked",
+        "person_full_name": "Alice B",
+        "person_age": 45,
+        "person_country": "United Kindom",
+        "person_city": "London",
+        "person_gender": "F"
+    }
+]
