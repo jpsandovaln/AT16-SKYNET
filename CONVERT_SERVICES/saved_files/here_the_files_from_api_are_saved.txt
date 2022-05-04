@@ -1,2 +1,0 @@
-Here is the folder where the files from the api are saved and downloaded, please verify if the
-location is correct

@@ -11,36 +11,34 @@
 # with Jalasoft.
 #
 
-
 import pytesseract as tesseract_converter
-from PIL import Image
 from src.model.convertor import Convertor
 from reportlab.lib.pagesizes import A4
 from reportlab.pdfgen import canvas
 from docx import Document
-import os
 from dotenv import load_dotenv
+from PIL import Image
+import os
 
 
 class ConvertOCR(Convertor):
     # Constructor
     def __init__(self, input_data, input_file):
         super().__init__(input_data, input_file)
-        self.instructions = self.getInstructions()
+        self.instructions = self.get_instructions()
 
-    # Convert image to string
+    # Converts image to string
     def text_result(self):
         language = self.instructions.values.get('language')
 
         # Executable path
         TESSERACT_PATH = r'third_party\win\tesseract\tesseract.exe'
         tesseract_converter.pytesseract.tesseract_cmd = TESSERACT_PATH
-
         image_to_text = Image.open(self.input_file)
         text_result = tesseract_converter.image_to_string(image_to_text, lang=language)
         return text_result
 
-    # Convert string to pdf or docx or txt
+    # Converts string to pdf or docx or txt
     def exec(self):
         # Environment variables
         load_dotenv()
@@ -70,4 +68,4 @@ class ConvertOCR(Convertor):
             document.add_paragraph(text_result)
             document.save(self.output_file + '/' + self.name_output)
         else:
-            print('error')
+            pass

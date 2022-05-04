@@ -11,29 +11,35 @@
 # with Jalasoft .
 #
 
+from src.model.parameters import Parameters
+
+
 class Convertor:
-    #  constructor  instruciones folder
+    #  Constructor parent for all convertors, inputs: instructions, folder
     def __init__(self, instructions, folder):
         name = instructions.files['file'].filename
         self.input_file = folder+'/' + name
-        self.output_file = r'saved_files/' + (instructions.values.get('Convert')).lower() + '_download'
+        param = Parameters(folder, instructions)
+        param.validate_get_convert()
+        self.output_file = r'saved_files/' + (
+            instructions.values.get('convert')).lower() + '_download'
         name = name.split('.')
+        param.validate_format()
         self.format = instructions.values.get('format')
         self.name_output = name[0] + 'new.' + self.format
         self.instructions = instructions
 
-    def getInputFile(self):
-        return self.inputfile
+    def get_input_file(self):
+        return self.input_file
 
-    def getOutFile(self):
-        return self.outputfile
+    def get_out_file(self):
+        return self.output_file
 
-    def getFormat(self):
+    def get_format(self):
         return self.format
 
-    def getInstructions(self):
+    def get_instructions(self):
         return self.instructions
 
-    def setNameOutput(self, val):
-        self.name_output = val
-
+    def set_name_output(self, output_name):
+        self.name_output = output_name

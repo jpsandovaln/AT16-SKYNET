@@ -10,10 +10,9 @@
 # accordance with the terms of the license agreement you entered into
 # with Jalasoft.
 #
-import logging
+
 import logging.handlers
 import datetime
-import time
 import os
 
 
