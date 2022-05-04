@@ -12,6 +12,8 @@
 #
 
 import pandas as pd
+
+from src.reporting.criteria.cache import Cache
 from src.reporting.sql_query import SqlQuery
 import psycopg2
 from decouple import config
@@ -47,7 +49,8 @@ class Criteria:
             # Closing the connection
             cur.close()
             conn.close()
-            # print(df)
+            Cache.write_cache(df)
+
             return df
         except KeyError:
             print('Failed')
