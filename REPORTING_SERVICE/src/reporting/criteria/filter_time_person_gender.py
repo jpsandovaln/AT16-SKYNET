@@ -11,28 +11,21 @@
 # with Jalasoft.
 #
 
-from src.reporting.criteria.criteria import Criteria
-from src.reporting.criteria.criteria import Criteria
-from src.common.exceptions.filter_exception import FilterException
+from datetime import datetime
 
 
-class Filters_Start_Finish_Time_Person_Gender:
-    def __init__(self, start_time, finish_time, person_age):
+class FiltersStartFinishTimePersonGender:
+    def __init__(self, start_time, end_time, person_gender):
         self.start_time = start_time
-        self.finish_time = finish_time
-        self.person_age = person_age
+        self.end_time = end_time
+        self.person_gender = person_gender
 
-    def filters_start_finish_time_person_gender(self):
-        Criteria.validate_criteria()
-        filters = (Criteria.get_df()["start_time"] >= self.start_time) & \
-                  (Criteria.get_df()["end_time"] <= self.finish_time)\
-                  & (Criteria.get_df()["person_age"] >= self.person_age)
-        if filters is None or filters == "":
-            raise FilterException("Invalid Filter, the value is empty", "101", "AT16-ERROR-101",
-                                  "Filters_Start_Finish_Time_Person_Age")
-        else:
-            return filters
-
-
+    def filters_start_finish_time_person_gender(self, data_frame):
+        start_time = datetime.strptime(self.start_time, '%H:%M:%S').time()
+        end_time = datetime.strptime(self.end_time, '%H:%M:%S').time()
+        filters = (data_frame["start_time"] >= start_time) & \
+                  (data_frame["end_time"] <= end_time)\
+                  & (data_frame["person_gender"] == self.person_gender)
+        return filters
 
 

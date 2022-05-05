@@ -13,8 +13,8 @@
 
 import pickle
 from decouple import config
-PICKLE_PATH = config('PICKLE_PATH')
 
+PICKLE_PATH = config('PICKLE_PATH')
 
 class Cache:
 

@@ -11,27 +11,27 @@
 # with Jalasoft.
 #
 
-from flask import request, jsonify
 import json
-from src.reporting.criteria.criteria import Criteria
-from src.reporting.criteria.filter_time_person_gender import Filters_Start_Finish_Time_Person_Gender
+from src.reporting.criteria.filter_time_person_gender import FiltersStartFinishTimePersonGender
 
 
 class SearchReportStartFinishTimePersonGender:
-    def __init__(self, request):
-        self.request = request
+    @staticmethod
+    def search_report_start_finish_time_person_gender(parameters):
+        # Validates parameters
+        parameters.validate()
+        start_time = parameters.get_start_time()
+        end_time = parameters.get_end_time()
+        person_gender = parameters.get_person_gender()
+        data_frame = parameters.get_data_frame()
 
-    def search_report_start_finish_time_person_gender(self):
-
-        if request.method == 'POST':
-            start_time = request.form.get('start_time')
-            end_time = request.form.get('end_time')
-            person_age = request.form.get('person_age')
-            filters = Filters_Start_Finish_Time_Person_Gender(int(start_time),
-                                                              int(end_time),
-                                                              int(person_age))
-            filter_result = filters.filters_start_finish_time_person_gender()
-        filter_rows = (Criteria.get_df()[filter_result])
-        result = filter_rows.to_json(date_format="iso", orient="records")
-        parsed = json.loads(result)
-        return json.dumps(parsed, indent=4)
+        # Executes the filter
+        filters = FiltersStartFinishTimePersonGender(start_time,
+                                                          end_time,
+                                                          str(person_gender))
+        filter_result = filters.filters_start_finish_time_person_gender(data_frame)
+        filter_rows = (data_frame[filter_result])
+        result_filter = filter_rows.to_json(date_format="iso",
+                                            orient="records")
+        parsed = json.loads(result_filter)
+        return json.dumps(parsed)

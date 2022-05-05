@@ -11,25 +11,27 @@
 # with Jalasoft.
 #
 
-from flask import request
-from src.reporting.criteria.filters_time_location import Filters_Time_Location
+from src.reporting.criteria.filters_time_location import FiltersTimeLocation
 import json
-from src.reporting.criteria.criteria import Criteria
-
 
 
 class SearchReportFilTimeLocation:
-    def __init__(self, request):
-        self.request = request
 
-    def search_report_fil_time_location(self):
-        if request.method == 'POST':
-            start_time = request.form.get('start_time')
-            end_time = request.form.get('end_time')
-            location = request.form.get('location')
-            filters = Filters_Time_Location(int(start_time), int(end_time), str(location))
-            filter_result = filters.fil_time_location()
-        filter_rows = (Criteria.get_df()[filter_result])
-        result = filter_rows.to_json(date_format="iso", orient="records")
-        parsed = json.loads(result)
-        return json.dumps(parsed, indent=4)
+    @staticmethod
+    def search_report_fil_time_location(parameters):
+
+        # Validates parameters
+        parameters.validate()
+        start_time = parameters.get_start_time()
+        end_time = parameters.get_end_time()
+        location = parameters.get_location()
+        data_frame = parameters.get_data_frame()
+
+        # Executes the filter
+        filters = FiltersTimeLocation(start_time, end_time, str(location))
+        filter_result = filters.fil_time_location(data_frame)
+        filter_rows = (data_frame[filter_result])
+        result_filter = filter_rows.to_json(date_format="iso",
+                                            orient="records")
+        parsed = json.loads(result_filter)
+        return json.dumps(parsed)
