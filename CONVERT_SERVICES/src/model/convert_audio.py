@@ -46,8 +46,8 @@ class ConvertAudio(Convertor):
         concatenate = self.concatenate()
         try:
             direction = self.output_file + r'/' + self.name_output
-            ffmpeg_command = "ffmpeg -i {}  {} {}".format(self.input_file, concatenate, direction)
-            subprocess.call(ffmpeg_command)
+            # ffmpeg_command = "ffmpeg -i {}  {} {}".format(self.input_file, concatenate, direction)
+            subprocess.call(['ffmpeg', '-i', self.input_file, direction])
             return True
         except:
             return False

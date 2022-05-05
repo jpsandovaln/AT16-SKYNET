@@ -48,9 +48,6 @@ class ConvertImage(Convertor):
             if len(val) > 0:
                 dic[key] = dic[key].format(val)
                 cod_cmd += dic[key]
-            else:
-                raise ParameterException(("Invalid format, " "the format needs .zip",
-                                          "401", "AT16-ERR-300",  "Iris recognition model"))
         cod_cmd += self.output_file + '/' + self.name_output
         return cod_cmd
 
