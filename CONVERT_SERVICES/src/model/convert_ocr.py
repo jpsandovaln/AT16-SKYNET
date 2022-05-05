@@ -42,9 +42,12 @@ class ConvertOCR(Convertor):
     def exec(self):
         # Environment variables
         load_dotenv()
-        pdf_format = os.getenv('PDF_FORMAT')
-        docx_format = os.getenv('DOCX_FORMAT')
-        txt_format = os.getenv('TXT_FORMAT')
+        #pdf_format = os.getenv('PDF_FORMAT')
+        #docx_format = os.getenv('DOCX_FORMAT')
+        #txt_format = os.getenv('TXT_FORMAT')
+        pdf_format = 'pdf'
+        docx_format = 'dox'
+        txt_format = 'txt'
 
         output_format = self.instructions.values.get('format')
         text_result = self.text_result()

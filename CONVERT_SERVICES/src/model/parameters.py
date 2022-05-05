@@ -49,3 +49,10 @@ class Parameters:
         if self.request.values.get('convert') == 'OCR' and self.request.values.get(
                 'format') not in converters:
             raise ParameterException("format is Not a recognized format", "402", "AT16-ERR-305")
+
+    def validate_metadata(self):
+        valid_format = ['txt', 'json', 'xmp']
+        if self.request.values.get('convert') == 'Metadata' and self.request.values.get(
+                'format') not in valid_format:
+            raise ParameterException("The output format is not valid", "412", "AT16-ERR-305")
+        
