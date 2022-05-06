@@ -27,6 +27,7 @@ from src.common.exceptions.reporting_exception import ReportingException
 from src.controller.results.error_result import ErrorResult
 from flask import Response
 from src.reporting.connection import Connection
+from src.reporting.criteria.cache import Cache
 from src.reporting.criteria.criteria import Criteria
 from src.reporting.parameters.parameter_report_age_gender import ParameterReportAgeGender
 from src.reporting.parameters.parameter_report_fill_time_location import \
@@ -49,15 +50,13 @@ api = Api(app)
 def search_report_start_finish_time_person_gender():
     try:
         # Defines variables
-        start_time = request.form.get('start_time')
-        end_time = request.form.get('end_time')
-        person_gender = request.form.get('person_gender')
-        data_frame = Criteria.get_df()
+        open_time = request.form.get('open_time')
+        close_time = request.form.get('close_time')
+        data_frame = Cache.load_cache()
         report = SearchReportStartFinishTimePersonGender()
 
         # Gets the report
-        parameters = ParameterReportTimePersonGender(start_time, end_time,
-                                                     person_gender, data_frame)
+        parameters = ParameterReportTimePersonGender(open_time, close_time, data_frame)
         result_report = report.search_report_start_finish_time_person_gender(parameters)
 
         return Response(
@@ -89,7 +88,7 @@ def search_report_age_gender():
         # Defines variables
         person_age = request.form.get('person_age')
         person_gender = request.form.get('person_gender')
-        data_frame = Criteria.get_df()
+        data_frame = Cache.load_cache()
         report = SearchReportAgeGender()
 
         # Gets the report
@@ -125,7 +124,7 @@ def search_report_date_person_country():
         # Defines variables
         date = request.form.get('date')
         person_country = request.form.get('person_country')
-        data_frame = Criteria.get_df()
+        data_frame = Cache.load_cache()
         report = SearchReportDatePersonCountry()
 
         # Gets the report
@@ -161,7 +160,7 @@ def search_report_model_type():
         # Defines variables
         resource_model = request.form.get('model')
         resource_type = request.form.get('type')
-        data_frame = Criteria.get_df()
+        data_frame = Cache.load_cache()
         report = SearchReportModelType()
 
         # Gets the report
@@ -196,7 +195,7 @@ def search_report_state_person_gender():
         # Defines variables
         state = request.form.get('state')
         person_gender = request.form.get('person_gender')
-        data_frame = Criteria.get_df()
+        data_frame = Cache.load_cache()
         report = SearchReportStatePersonGender()
 
         # Gets the report
@@ -232,7 +231,7 @@ def search_report_fill_time_location():
         start_time = request.form.get('start_time')
         end_time = request.form.get('end_time')
         city = request.form.get('city')
-        data_frame = Criteria.get_df()
+        data_frame = Cache.load_cache()
         report = SearchReportFilTimeLocation()
 
         # Gets the report
@@ -277,4 +276,5 @@ def verify():
 
 if __name__ == '__main__':
     Connection.close_connection()
+    Criteria.get_df()
     app.run(host="0.0.0.0", debug=True, port=5001)

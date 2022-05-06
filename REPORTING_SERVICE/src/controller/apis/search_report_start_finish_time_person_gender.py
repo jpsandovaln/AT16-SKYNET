@@ -20,18 +20,14 @@ class SearchReportStartFinishTimePersonGender:
     def search_report_start_finish_time_person_gender(parameters):
         # Validates parameters
         parameters.validate()
-        start_time = parameters.get_start_time()
-        end_time = parameters.get_end_time()
-        person_gender = parameters.get_person_gender()
+        open_time = parameters.get_open_time()
+        close_time = parameters.get_close_time()
         data_frame = parameters.get_data_frame()
 
         # Executes the filter
-        filters = FiltersStartFinishTimePersonGender(start_time,
-                                                          end_time,
-                                                          str(person_gender))
+        filters = FiltersStartFinishTimePersonGender(open_time, close_time)
         filter_result = filters.filters_start_finish_time_person_gender(data_frame)
-        filter_rows = (data_frame[filter_result])
-        result_filter = filter_rows.to_json(date_format="iso",
+        result_filter = filter_result.to_json(date_format="iso",
                                             orient="records")
         parsed = json.loads(result_filter)
         return json.dumps(parsed)
