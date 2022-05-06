@@ -17,35 +17,27 @@ from src.common.exceptions.parameter_exception import ParameterException
 
 
 class ParameterReportTimePersonGender:
-    def __init__(self, start_time, end_time, person_gender, data_frame):
-        self.start_time = start_time
-        self.end_time = end_time
-        self.person_gender = person_gender
+    def __init__(self, open_time, close_time, data_frame):
+        self.open_time = open_time
+        self.close_time = close_time
         self.data_frame = data_frame
 
-    def get_start_time(self):
-        return self.start_time
+    def get_open_time(self):
+        return self.open_time
 
-    def get_end_time(self):
-        return self.end_time
-
-    def get_person_gender(self):
-        return self.person_gender
+    def get_close_time(self):
+        return self.close_time
 
     def get_data_frame(self):
         return self.data_frame
 
     def validate(self):
-        if self.start_time is None or str(self.start_time).strip() == "":
-            message = "Invalid start time, the value is empty"
+        if self.open_time is None or str(self.open_time).strip() == "":
+            message = "Invalid open time, the value is empty"
             raise ParameterException(message, "401", "AT16-ERR-351")
 
-        if self.end_time is None or str(self.end_time).strip() == "":
-            message = "Invalid end time, the value is empty"
-            raise ParameterException(message, "401", "AT16-ERR-352")
-
-        if self.person_gender is None or str(self.person_gender).strip() == "":
-            message = "Invalid age, the value is empty"
+        if self.close_time is None or str(self.close_time).strip() == "":
+            message = "Invalid close time, the value is empty"
             raise ParameterException(message, "401", "AT16-ERR-352")
 
         if self.data_frame is None or type(self.data_frame) != pd.DataFrame:

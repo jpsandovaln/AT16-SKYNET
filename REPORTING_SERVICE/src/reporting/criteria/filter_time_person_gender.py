@@ -11,21 +11,32 @@
 # with Jalasoft.
 #
 
+import pandas as pd
 from datetime import datetime
 
 
 class FiltersStartFinishTimePersonGender:
-    def __init__(self, start_time, end_time, person_gender):
-        self.start_time = start_time
-        self.end_time = end_time
-        self.person_gender = person_gender
+    def __init__(self, open_time, close_time):
+        self.open_time = open_time
+        self.close_time = close_time
 
     def filters_start_finish_time_person_gender(self, data_frame):
-        start_time = datetime.strptime(self.start_time, '%H:%M:%S').time()
-        end_time = datetime.strptime(self.end_time, '%H:%M:%S').time()
-        filters = (data_frame["start_time"] >= start_time) & \
-                  (data_frame["end_time"] <= end_time)\
-                  & (data_frame["person_gender"] == self.person_gender)
-        return filters
+        df = data_frame
+        morning = datetime.strptime(self.open_time, '%H:%M:%S').time()
+        afternoon = datetime.strptime('12:00:00', '%H:%M:%S').time()
+        night = datetime.strptime(self.close_time, '%H:%M:%S').time()
+        filters_morning = (df["start_time"] >= morning) & \
+                          (df["start_time"] < afternoon)
+        filters_afternoon = (df["start_time"] >= afternoon) & (
+                    df["start_time"] < night)
+        df_m = df[filters_morning]
+        df_a = df[filters_afternoon]
 
+        graphs_morning = df_m.groupby(['person_gender']).size().reset_index(
+            name='morning')
+        graphs_afternoon = df_a.groupby(['person_gender']).size().reset_index(
+            name='afternoon')
+        data_result = pd.merge(graphs_morning, graphs_afternoon, on='person_gender')
+        data_result.plot.bar(x='person_gender', title='Quantity vs Gender', stacked=True)
 
+        return data_result
