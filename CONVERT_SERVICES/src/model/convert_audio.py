@@ -24,9 +24,8 @@ class ConvertAudio(Convertor):
 
     # Method to compare the data
     def init_dic(self):
-        dic_param = {'acodex': 'c:a {} ',
-                     'bitrate': 'ab {}k ',
-                     'sambple-rate': 'ar {} ',
+        dic_param = {'bitrate': 'ab {}k ',
+                     'sample-rate': 'ar {} ',
                      'audio-channel': 'ac {} '}
         return dic_param
 
@@ -39,11 +38,12 @@ class ConvertAudio(Convertor):
             if len(val) > 0:
                 cmd_input += dic[key].format(val) + '-'
         cmd_input_copy = cmd_input[:-1]
+
         return cmd_input_copy
 
     # Method to converter the visual content.
     def exec(self):
-        concatenate = self.concatenate()
+        # concatenate = self.concatenate()
         try:
             direction = self.output_file + r'/' + self.name_output
             # ffmpeg_command = "ffmpeg -i {}  {} {}".format(self.input_file, concatenate, direction)

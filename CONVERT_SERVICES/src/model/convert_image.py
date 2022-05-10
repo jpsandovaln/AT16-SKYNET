@@ -70,3 +70,4 @@ class ConvertImage(Convertor):
                 status=HTTPStatus.NOT_FOUND,
                 mimetype='application/json'
             )
+
