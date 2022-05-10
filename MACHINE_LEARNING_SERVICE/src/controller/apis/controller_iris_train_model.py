@@ -21,7 +21,6 @@ from src.common.exceptions.machine_learning_exception import MachineLearningExce
 from src.controller.results.success_result import SuccessResult
 from src.controller.results.error_result import ErrorResult
 from src.model.model_iris_recognition.parameter_train_model import ParametersTrainModel
-from flask import request
 
 
 # This is for to upload a file.

@@ -24,8 +24,8 @@ from src.controller.apis.controller_iris_train_model import ControllerIrisTrain
 
 
 # This is the path where the zip file will be saved
-UPLOAD_FOLDER = 'saved_files\compress_files'
-UPLOAD_FACE_FOLDER = 'saved_files\save_recognizer_videos'
+UPLOAD_FOLDER = r'saved_files\compress_files'
+UPLOAD_FACE_FOLDER = r'saved_files\save_recognizer_videos'
 UPLOAD_VGGFACE = r'saved_files/vgg_files/'
 HAARCASCADE_IMAGES = r'src\controller\utils\images_haarcascade'
 HAARCASCADE_XML = r'src\controller\utils\haarcascade_algorithms'
@@ -88,6 +88,7 @@ def face_compare():
 def face_search():
     response = ControllerVggFace(request)
     return response.search_person(app.config['VGGFACE_COMPRESS'])
+
 
 @app.route('/iris_recognition', methods=['POST'])
 def iris_recognition():
