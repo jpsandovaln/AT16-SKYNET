@@ -12,6 +12,7 @@
 #
 
 import pickle
+from src.model.model_iris_recognition.parameters import Parameters
 from src.model.model_iris_recognition.recognition import Recognition
 from src.model.model_iris_recognition.load_image_person import LoadFiles
 from decouple import config
@@ -23,12 +24,14 @@ read_bin = 'rb'
 
 # Iris recognition model
 class IrisModel:
-    def __init__(self, file, perc):
+    def __init__(self, file, percentage):
         self.file = file
-        self.perc = perc
+        self.percentage = percentage
 
     # Matching the data in order to return the name to which the iris belongs.
     def matching_data(self):
+        parameters = Parameters(self.file, self.percentage)
+        parameters.validate()
         person_result = []
         load_files = LoadFiles(self.file)
         image = load_files.load_img_compare()
@@ -41,11 +44,9 @@ class IrisModel:
             name = codes[0]
             code2 = codes[1]
             mask2 = codes[2]
-            jaccard_index = 1 - recognition.compare_codes(code, code2, mask,
-                                                          mask2)
-
-            if jaccard_index >= float(self.perc):
+            jaccard_index = 1 - recognition.compare_codes(code, code2, mask, mask2)
+            if jaccard_index >= float(self.percentage):
                 person_result.append({"Name": name, "Percentage": round(
                     jaccard_index * 100, 1)})
         return person_result
-    
+
