@@ -1,0 +1,388 @@
+{
+	"info": {
+		"_postman_id": "f55c2218-7489-408a-9e69-6eca32b0a1db",
+		"name": "Convert service",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "OCR",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/C:/Users/RIGO LAZO/Desktop/Demo input/MicrosoftTeams-image.png"
+						},
+						{
+							"key": "language",
+							"value": "eng",
+							"type": "text"
+						},
+						{
+							"key": "format",
+							"value": "docx",
+							"type": "text"
+						},
+						{
+							"key": "convert",
+							"value": "OCR",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/convert",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"convert"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "image",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/C:/IVAN/FONDOS DE PANTALLA/CODEGEASS.png"
+						},
+						{
+							"key": "color",
+							"value": "sRGB",
+							"type": "text"
+						},
+						{
+							"key": "rotate",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "vertical_flip",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "horizontal_flip",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "height",
+							"value": "1000",
+							"type": "text"
+						},
+						{
+							"key": "width",
+							"value": "1000",
+							"type": "text"
+						},
+						{
+							"key": "format",
+							"value": "png",
+							"type": "text"
+						},
+						{
+							"key": "convert",
+							"value": "Image",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/convert",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"convert"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "video",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/C:/Users/RIGO LAZO/Downloads/videoplayback.mp4"
+						},
+						{
+							"key": "frame",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "width",
+							"value": "500",
+							"type": "text"
+						},
+						{
+							"key": "height",
+							"value": "500",
+							"type": "text"
+						},
+						{
+							"key": "color",
+							"value": "gray",
+							"type": "text"
+						},
+						{
+							"key": "format",
+							"value": "jpg",
+							"type": "text"
+						},
+						{
+							"key": "convert",
+							"value": "Video",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/convert",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"convert"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "metadata",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/C:/Users/Jhon/Pictures/2.jpg"
+						},
+						{
+							"key": "format",
+							"value": "txt",
+							"type": "text"
+						},
+						{
+							"key": "convert",
+							"value": "Metadata",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/convert",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"convert"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "audio",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": []
+						},
+						{
+							"key": "bitrate",
+							"value": "4000",
+							"type": "text"
+						},
+						{
+							"key": "sample-rate",
+							"value": "24000",
+							"type": "text"
+						},
+						{
+							"key": "audio-channel",
+							"value": "6",
+							"type": "text"
+						},
+						{
+							"key": "format",
+							"value": "wav",
+							"type": "text"
+						},
+						{
+							"key": "convert",
+							"value": "Audio",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/convert",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"convert"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "wavtxt",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/C:/Users/RIGO LAZO/Desktop/Demo input/pruebaDemo.wav"
+						},
+						{
+							"key": "format",
+							"value": "txt",
+							"type": "text"
+						},
+						{
+							"key": "convert",
+							"value": "WavTxt",
+							"type": "text"
+						},
+						{
+							"key": "language_in",
+							"value": "es-ES",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/convert",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"convert"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "translator",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/C:/Users/RIGO LAZO/Desktop/Demo input/Demo.txt"
+						},
+						{
+							"key": "language_in",
+							"value": "es-ES",
+							"type": "text"
+						},
+						{
+							"key": "language_out",
+							"value": "en-EN",
+							"type": "text"
+						},
+						{
+							"key": "format",
+							"value": "txt",
+							"type": "text"
+						},
+						{
+							"key": "convert",
+							"value": "Translator",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/convert",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"convert"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

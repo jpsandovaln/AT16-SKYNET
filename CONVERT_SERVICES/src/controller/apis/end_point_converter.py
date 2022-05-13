@@ -31,6 +31,7 @@ class EndPointConverter:
         parameters.validate_get_convert()
         file.save(path_saved)  # To save the file
         parameters.validate_file()
+        parameters.validate_in_format()
         return 1
 
     def get_request(self):

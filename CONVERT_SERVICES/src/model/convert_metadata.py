@@ -35,6 +35,8 @@ class ConvertMetadata(Convertor):
         elif self.format == 'txt':
             process = subprocess.run([exe, str(self.path) + "/" + str(self.file), '-W+!',
                                       str(self.output_file) + "/" + self.name_output])
-        else:
+        elif self.format == 'xmp':
             process = subprocess.run([exe, str(self.path) + "/" + str(self.file), '-O',
                                       str(self.output_file) + "/" + self.name_output])
+        else:
+            pass
