@@ -21,6 +21,7 @@ class Convertor:
         self.input_file = folder+'/' + name
         param = Parameters(folder, instructions)
         param.validate_get_convert()
+        #param.validate_in_format()
         self.output_file = r'saved_files/' + (
             instructions.values.get('convert')).lower() + '_download'
         name = name.split('.')
@@ -28,7 +29,7 @@ class Convertor:
         self.format = instructions.values.get('format')
         self.name_output = name[0] + 'new.' + self.format
         self.instructions = instructions
-
+        print(name, 'es nombre', param, 'es parametros')
     def get_input_file(self):
         return self.input_file
 
@@ -36,6 +37,7 @@ class Convertor:
         return self.output_file
 
     def get_format(self):
+
         return self.format
 
     def get_instructions(self):
