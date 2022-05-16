@@ -1,0 +1,59 @@
+schema {
+    query: Query
+    mutation: Mutation
+}
+
+type Resource {
+    _id: ID!
+    resource_model: String!
+    resource_name: String!
+    resource_state: String!
+    resource_type: String!
+}
+type Person {
+    _id: ID!
+    delete: Int!
+    person_age: String!
+    person_city: String!
+    person_country: String!
+    person_full_name: String!
+    person_gender: String!
+}
+
+type PostResult {
+    success: Boolean!
+    errors: [String]
+    post: Resource
+}
+
+type PostPerson {
+    success: Boolean!
+    errors: [String]
+    post: Person
+}
+
+type PostsResult {
+    success: Boolean!
+    errors: [String]
+    posts: [Resource]
+}
+type PostsResultPerson {
+    success: Boolean!
+    errors: [String]
+    posts: [Person]
+}
+
+type Query {
+    listPosts: PostsResult!
+    listPostsPerson: PostsResultPerson!
+    getPost(id: ID!): PostResult!
+    getPostPerson(id: ID!): PostPerson!
+}
+
+type Mutation {
+    createPost(name: String!, type: String!, model: String!, state: String!): PostResult!
+    updatePost(id_source: ID!, name: String!  ): PostResult!
+    deletePost(id_source: ID): PostResult!
+    createPerson(name: String!, age: String!, city:String!, country:String!, gender:String! ): PostPerson!
+    updatePerson(id_person: ID!, city: String): PostPerson!
+}
