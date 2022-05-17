@@ -11,23 +11,20 @@
 # with Jalasoft.
 #
 
-from src.reporting.criteria.criteria import Criteria
-from src.common.exceptions.filter_exception import FilterException
+from datetime import datetime
 
 
-class Filters_Time_Location:
-    def __init__(self, start_time, finish_time, location):
+class FiltersTimeLocation:
+
+    def __init__(self, start_time, end_time, location):
         self.start_time = start_time
-        self.finish_time = finish_time
+        self.end_time = end_time
         self.location = location
 
-    def fil_time_location(self):
-        Criteria.validate_criteria()
-        filters = (Criteria.get_df()['start_time'] >= self.start_time) & \
-                  (Criteria.get_df()['end_time'] <= self.finish_time) & \
-                  (Criteria.get_df()['person_city'] == self.location)
-        if filters is None or filters == "":
-            raise FilterException("Invalid Filter, the value is empty", "101", "AT16-ERROR-101",
-                                  "Filters_Start_Finish_Time_Person_Age")
-        else:
-            return filters
+    def fil_time_location(self, data_frame):
+        start_time = datetime.strptime(self.start_time, '%H:%M:%S').time()
+        end_time = datetime.strptime(self.end_time, '%H:%M:%S').time()
+        filters = (data_frame['start_time'] >= start_time) & \
+                  (data_frame['end_time'] <= end_time) & \
+                  (data_frame['person_city'] == self.location)
+        return filters

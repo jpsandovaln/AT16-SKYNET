@@ -28,40 +28,38 @@ class ControllerIris:
     def __init__(self, request, save_location):
         self.request = request
         self.save_location = save_location
+        self.percentage_request = request.form.get('percentage')
 
     # This is for to request a file and a percentage
     def upload(self):
-        if self.request.method == 'POST':
-            try:
-                file_request = self.request.files['file']
-                self.percentage_request = request.form.get('percentage')
-                path_saved = os.path.join(self.save_location, file_request.filename)
-                parameters = Parameters(path_saved, self.percentage_request)
-                parameters.validate()
-                file_request.save(path_saved)  # To save the file
-                parameters.validate_file()
-                result = IrisModel(path_saved, self.percentage_request)
-                result_model_iris = result.matching_data()
-                result_model = SuccessResult(HTTPStatus.OK, str(result_model_iris))
-                return Response(
-                    json.dumps(result_model.__dict__),
-                    status=HTTPStatus.OK,
-                    mimetype='application/json'
-                )
-            except MachineLearningException as error:
-                result_error = ErrorResult(error.status, error.message,
-                                           error.code)
-                return Response(
-                    json.dumps(result_error.__dict__),
-                    status=error.status,
-                    mimetype='application/json'
-                )
-            except Exception as error:
-                result_error = ErrorResult(HTTPStatus.NOT_FOUND, error,
-                                           'AT16-000451')
-                return Response(
-                    json.dumps(result_error.__dict__),
-                    status=HTTPStatus.NOT_FOUND,
-                    mimetype='application/json'
-                )
-
+        try:
+            file_request = self.request.files['file']
+            path_saved = os.path.join(self.save_location, file_request.filename)
+            parameters = Parameters(path_saved, self.percentage_request)
+            parameters.validate()
+            file_request.save(path_saved)  # To save the file
+            parameters.validate_file()
+            result = IrisModel(path_saved, self.percentage_request)
+            result_model_iris = result.matching_data()
+            result_model = SuccessResult(HTTPStatus.OK, str(result_model_iris))
+            return Response(
+                json.dumps(result_model.__dict__),
+                status=HTTPStatus.OK,
+                mimetype='application/json'
+            )
+        except MachineLearningException as error:
+            result_error = ErrorResult(error.status, error.message,
+                                       error.code)
+            return Response(
+                json.dumps(result_error.__dict__),
+                status=error.status,
+                mimetype='application/json'
+            )
+        except Exception as error:
+            result_error = ErrorResult(HTTPStatus.NOT_FOUND, error,
+                                       'AT16-000451')
+            return Response(
+                json.dumps(result_error.__dict__),
+                status=HTTPStatus.NOT_FOUND,
+                mimetype='application/json'
+            )

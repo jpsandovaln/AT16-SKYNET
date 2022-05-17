@@ -11,28 +11,32 @@
 # with Jalasoft.
 #
 
-from src.reporting.criteria.criteria import Criteria
-from src.reporting.criteria.criteria import Criteria
-from src.common.exceptions.filter_exception import FilterException
+import pandas as pd
+from datetime import datetime
 
 
-class Filters_Start_Finish_Time_Person_Gender:
-    def __init__(self, start_time, finish_time, person_age):
-        self.start_time = start_time
-        self.finish_time = finish_time
-        self.person_age = person_age
+class FiltersStartFinishTimePersonGender:
+    def __init__(self, open_time, close_time):
+        self.open_time = open_time
+        self.close_time = close_time
 
-    def filters_start_finish_time_person_gender(self):
-        Criteria.validate_criteria()
-        filters = (Criteria.get_df()["start_time"] >= self.start_time) & \
-                  (Criteria.get_df()["end_time"] <= self.finish_time)\
-                  & (Criteria.get_df()["person_age"] >= self.person_age)
-        if filters is None or filters == "":
-            raise FilterException("Invalid Filter, the value is empty", "101", "AT16-ERROR-101",
-                                  "Filters_Start_Finish_Time_Person_Age")
-        else:
-            return filters
+    def filters_start_finish_time_person_gender(self, data_frame):
+        df = data_frame
+        morning = datetime.strptime(self.open_time, '%H:%M:%S').time()
+        afternoon = datetime.strptime('12:00:00', '%H:%M:%S').time()
+        night = datetime.strptime(self.close_time, '%H:%M:%S').time()
+        filters_morning = (df["start_time"] >= morning) & \
+                          (df["start_time"] < afternoon)
+        filters_afternoon = (df["start_time"] >= afternoon) & (
+                    df["start_time"] < night)
+        df_m = df[filters_morning]
+        df_a = df[filters_afternoon]
 
+        graphs_morning = df_m.groupby(['person_gender']).size().reset_index(
+            name='morning')
+        graphs_afternoon = df_a.groupby(['person_gender']).size().reset_index(
+            name='afternoon')
+        data_result = pd.merge(graphs_morning, graphs_afternoon, on='person_gender')
+        data_result.plot.bar(x='person_gender', title='Quantity vs Gender', stacked=True)
 
-
-
+        return data_result

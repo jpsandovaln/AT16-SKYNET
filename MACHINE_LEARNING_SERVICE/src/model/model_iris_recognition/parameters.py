@@ -17,9 +17,9 @@ import os
 
 # Parameters needed in order to find the owner of the iris.
 class Parameters:
-    def __init__(self, file, perc):
+    def __init__(self, file, percentage):
         self.file = file
-        self.perc = perc
+        self.percentage = percentage
 
     # Setting exceptions to the parameter exception module
     def validate(self):
@@ -33,11 +33,11 @@ class Parameters:
                                      "the format needs to be jpg, png or bmp",
                                      "401", "AT16-ERR-300",
                                      "Iris recognition model")
-        if self.perc == "":
+        if self.percentage == "":
             raise ParameterException("Empty percentage", "401",
                                      "AT16-ERR-300",
                                      "Iris recognition model")
-        if self.perc.isalpha() or float(self.perc) > 1 or float(self.perc) \
+        if self.percentage.isalpha() or float(self.percentage) > 1 or float(self.percentage) \
                 <= 0:
             raise ParameterException("Invalid percentage, "
                                      "the value needs to be major than 0 and "

@@ -18,7 +18,6 @@ from reportlab.pdfgen import canvas
 from docx import Document
 from dotenv import load_dotenv
 from PIL import Image
-import os
 
 
 class ConvertOCR(Convertor):
@@ -41,10 +40,10 @@ class ConvertOCR(Convertor):
     # Converts string to pdf or docx or txt
     def exec(self):
         # Environment variables
-        load_dotenv()
-        pdf_format = os.getenv('PDF_FORMAT')
-        docx_format = os.getenv('DOCX_FORMAT')
-        txt_format = os.getenv('TXT_FORMAT')
+        # load_dotenv()
+        pdf_format = 'pdf'
+        docx_format = 'docx'
+        txt_format = 'txt'
 
         output_format = self.instructions.values.get('format')
         text_result = self.text_result()
@@ -55,9 +54,9 @@ class ConvertOCR(Convertor):
             output_file.close()
 
         elif output_format == pdf_format:
-            w, h = A4
+            width, height = A4
             pdf_document = canvas.Canvas(self.output_file + '/' + self.name_output, pagesize=A4)
-            text = pdf_document.beginText(50, h - 50)
+            text = pdf_document.beginText(50, height - 50)
             text.textLines(text_result)
             pdf_document.drawText(text)
             pdf_document.showPage()
