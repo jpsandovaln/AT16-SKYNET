@@ -116,6 +116,16 @@ services:
     volumes:
       - ./postgres-data:/var/lib/postgresql/data
 
+  machine_learning_service:
+    container_name: machine_learning_service
+    restart: always
+    build: ./MACHINE_LEARNING_SERVICE
+    ports:
+      - "6004:5002"
+    networks:
+      - skynet_network
+
+
 networks:
   skynet_network:
     driver: bridge
