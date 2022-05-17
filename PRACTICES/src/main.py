@@ -3,6 +3,7 @@ from src.state.state_object.review_state import ReviewState
 from src.state.state_object.progress_state import ProgressState
 from src.state.state_object.complete_state import CompleteState
 from src.state.state_object.finish_state import FinishState
+from src.chain.atm import ATM
 
 if __name__ == "__main__":
     print(11)
@@ -27,6 +28,7 @@ if __name__ == "__main__":
     document.set_state("complete")
     document.display_state()
     """
+    """
     review_state = ReviewState()
     progress_state = ProgressState()
     complete_state = CompleteState()
@@ -49,4 +51,7 @@ if __name__ == "__main__":
 
     doc2 = ImportantDocument("tesis", "d:/tesis/mariavargas.pdf")
     doc2.set_state(review_state)
+     """
+    atm = ATM(385)
+    atm.get_money()
 
