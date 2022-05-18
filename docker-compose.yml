@@ -91,7 +91,7 @@ services:
       - ./data:/data/db
 
   booking_service:
-    container_name: main_app
+    container_name: booking_service
     restart: always
     build: ./BOOKING_SERVICE
     networks:
