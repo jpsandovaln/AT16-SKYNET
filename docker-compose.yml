@@ -117,6 +117,15 @@ services:
     volumes:
       - ./postgres-data:/var/lib/postgresql/data
 
+  swagger_reporting:
+    container_name: swagger_reporting
+    restart: always
+    build: ./SWAGGER_REPORTING
+    networks:
+      - skynet_network
+    ports:
+      - "6005:6005"
+
 networks:
   skynet_network:
     driver: bridge
