@@ -1,18 +1,21 @@
-# coding: utf-8
+#
+# @setup.py Copyright (c) 2022 Jalasoft.
+# 2643 Av Melchor Perez de Olguin, Colquiri Sud, Cochabamba, Bolivia.
+# Edificio Union № 1376 Av. General Inofuentes esquina Calle 20, La Paz, Bolivia.
+# All rights reserved.
+#
+# This software is the confidential and proprietary information of
+# Jalasoft, ("Confidential Information"). You shall not
+# disclose such Confidential Information and shall use it only in
+# accordance with the terms of the license agreement you entered into
+# with Jalasoft.
+#
 
 import sys
 from setuptools import setup, find_packages
 
 NAME = "swagger_server"
 VERSION = "1.0.0"
-
-# To install the library, run the following
-#
-# python setup.py install
-#
-# prerequisite: setuptools
-# http://pypi.python.org/pypi/setuptools
-
 REQUIRES = [
     "connexion",
     "swagger-ui-bundle>=0.0.2"
