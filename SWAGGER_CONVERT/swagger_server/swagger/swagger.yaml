@@ -1,0 +1,208 @@
+---
+swagger: "2.0"
+info:
+  description: "This is a endpoint for convert services of SKYNET PROJECT AT16 Jalasoft"
+  version: "1.0.0"
+  title: "CONVERT_SERVICES"
+  contact:
+    email: "jalasoft@jalasoft.com"
+host: "127.0.0.1:5003"
+tags:
+- name: "Convert Services"
+  description: " `Audio formats` [mp3, mp2, m4a and wav], `Image formats`[jpg, tiff,\
+    \ gif, webp, png and bmp], `Metadata output_formats`[txt, json and xmp], `OCR\
+    \ output_formats`{txt, pdf and docx} `OCR input_formats`{jpg,png}, `translator\
+    \ formats`[txt], `video input formats`{mp4, mkv, flv, 3gp, and mpg} `Video output\
+    \ formats`{jpg,png}, `Wav_to_txtinputformats`{wav} `Wav_to_txt output formats`{txt}"
+  externalDocs:
+    description: "Convert"
+    url: "http://127.0.0.1:5003"
+schemes:
+- "http"
+paths:
+  /convert:
+    post:
+      tags:
+      - "Convert Services"
+      summary: "Add a new file deppending of service"
+      description: ""
+      operationId: "add_file"
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "convert"
+        in: "formData"
+        description: ""
+        required: true
+        type: "string"
+        default: "Audio"
+        enum:
+        - "Audio"
+        - "Image"
+        - "Metadata"
+        - "OCR"
+        - "Translator"
+        - "Video"
+        - "WavTxt"
+      - name: "file"
+        in: "formData"
+        description: "Upload a new file"
+        required: true
+        type: "file"
+      - name: "bitrate"
+        in: "formData"
+        description: "`Audio`"
+        required: false
+        type: "number"
+        default: 4000
+        format: "float"
+      - name: "sample_rate"
+        in: "formData"
+        description: "`Audio`"
+        required: false
+        type: "number"
+        default: 24000
+        format: "float"
+      - name: "audio_chanel"
+        in: "formData"
+        description: "`Audio`"
+        required: false
+        type: "number"
+        default: 2
+        format: "float"
+      - name: "frame"
+        in: "formData"
+        description: "`Video`"
+        required: true
+        type: "number"
+        default: 1
+        format: "float"
+      - name: "color"
+        in: "formData"
+        description: "`Image`[sRGB] and `Video`[RGB,gray]"
+        required: false
+        type: "string"
+        default: "RGB"
+        enum:
+        - "RGB"
+        - "gray"
+      - name: "height"
+        in: "formData"
+        description: "`Image` and `Video`"
+        required: false
+        type: "number"
+        default: 1000
+        format: "float"
+      - name: "width"
+        in: "formData"
+        description: "`Image` and `Video`"
+        required: false
+        type: "number"
+        default: 1000
+        format: "float"
+      - name: "rotate"
+        in: "formData"
+        description: "`Image`"
+        required: false
+        type: "number"
+        default: 1
+        format: "int"
+      - name: "vertical_flip"
+        in: "formData"
+        description: "`Image`"
+        required: false
+        type: "number"
+        default: 1
+        format: "int"
+      - name: "horizontal_flip"
+        in: "formData"
+        description: "`Image`"
+        required: false
+        type: "number"
+        default: 0
+        format: "int"
+      - name: "language_in"
+        in: "formData"
+        description: "`Translator` and `WavTxt`"
+        required: true
+        type: "string"
+        default: "en-EN"
+        enum:
+        - "en-EN"
+        - "es-ES"
+        - "fr-FR"
+      - name: "language_out"
+        in: "formData"
+        description: "`Translator`"
+        required: true
+        type: "string"
+        default: "es-ES"
+        enum:
+        - "en-EN"
+        - "es-ES"
+        - "fr-FR"
+      - name: "language"
+        in: "formData"
+        description: "`OCR`"
+        required: true
+        type: "string"
+        default: "eng"
+        enum:
+        - "eng"
+        - "spa"
+        - "fra"
+      - name: "format"
+        in: "formData"
+        description: " `Audio Output_formats` [mp3, mp2, m4a and wav], `Video output_formats`{jpg,png},\
+          \ `Image output_formats`[jpg, tiff, gif, webp, png and bmp], `translator\
+          \ output_formats`[txt],  `Wav_to_txt output_formats`{txt} `OCR output_formats`{txt,\
+          \ pdf and docx}, `Metadata output_formats`[txt, json and xmp]"
+        required: true
+        type: "string"
+        default: "wav"
+        enum:
+        - "wav"
+        - "mp3"
+        - "mp2"
+        - "m4a"
+        - "jpg"
+        - "png"
+        - "tiff"
+        - "gif"
+        - "webp"
+        - "bmp"
+        - "txt"
+        - "docx"
+        - "pdf"
+        - "json"
+        - "xmp"
+      responses:
+        "200":
+          description: "Successful operation"
+          schema:
+            $ref: "#/definitions/SuccessConvertPost"
+        "400":
+          description: "Bad Request"
+        "401":
+          description: "Unautorized"
+        "404":
+          description: "Not Found"
+        "405":
+          description: "Invalid input"
+        "500":
+          description: "Server error"
+      x-swagger-router-controller: "swagger_server.controllers.convert_services_controller"
+definitions:
+  SuccessConvertPost:
+    type: "object"
+    properties:
+      status:
+        type: "string"
+      message:
+        type: "string"
+    example:
+      message: "message"
+      status: "status"

@@ -29,18 +29,20 @@ from flask import Flask
 from flask_restful import Api
 from flask import request
 from flask import Response
+from flask_cors import CORS
 import os
 
 
 UPLOAD_FOLDER = r'saved_files\upload'  # here que common files are saved
 DOWNLOADER_FOLDER = r'saved_files\{}'  # here que specific files are saved after convert
-SEVER_URL_DOWNLOAD = r'http://127.0.0.1:5000/downloader/'
+SEVER_URL_DOWNLOAD = r'http://127.0.0.1:5003/downloader/'
 
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['SEVER_URL_DOWNLOAD'] = SEVER_URL_DOWNLOAD
 api = Api(app)
+cors = CORS(app)
 
 
 # Download the files for all convertors
@@ -97,4 +99,4 @@ def save_file():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host="0.0.0.0", debug=True, port=5003)
