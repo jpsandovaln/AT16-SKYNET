@@ -16,8 +16,8 @@ class SqlQuery:
 
     # Query commands to create tables in psql
     @staticmethod
-    def create_table():
-        sql_query = '''
+    def create_table()-> str:
+        sql_query: str = '''
             DROP TABLE IF EXISTS Booking;
             DROP TABLE IF EXISTS Person;
             DROP TABLE IF EXISTS Resources;
@@ -50,8 +50,8 @@ class SqlQuery:
 
     # Query commands to join tables in psql
     @staticmethod
-    def join_tables():
-        sql_query_join = '''
+    def join_tables() -> str:
+        sql_query_join: str = '''
             SELECT Booking.date, Booking.start_time, Booking.end_time, 
             Booking.state, Resources.resource_name, Resources.resource_type, 
             Resources.resource_model, Resources.resource_state, 

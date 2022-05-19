@@ -18,15 +18,15 @@ import os
 
 # Take request, the save location and the server url to upload files, downloads and get the request
 class EndPointConverter:
-    def __init__(self, request, save_location, server_url):
-        self.request = request
-        self.save_location = save_location
-        self.server_url = server_url
+    def __init__(self, request: any, save_location: any, server_url: any):
+        self.request: any = request
+        self.save_location: any = save_location
+        self.server_url: any = server_url
 
-    def upload(self):
-        file = self.request.files['file']
-        path_saved = os.path.join(self.save_location, file.filename)
-        parameters = Parameters(path_saved, self.request)
+    def upload(self) -> int:
+        file: any = self.request.files['file']
+        path_saved: str = os.path.join(self.save_location, file.filename)
+        parameters: Parameters = Parameters(path_saved, self.request)
         parameters.validate()
         parameters.validate_get_convert()
         file.save(path_saved)  # To save the file
@@ -34,8 +34,8 @@ class EndPointConverter:
         parameters.validate_in_format()
         return 1
 
-    def get_request(self):
+    def get_request(self) -> any:
         return self.request
 
-    def send_file(self, dir_output, file_name):
+    def send_file(self, dir_output: any, file_name: any):
         return self.server_url + os.path.join(dir_output, file_name)

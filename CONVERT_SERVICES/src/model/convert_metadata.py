@@ -18,25 +18,25 @@ from src.model.convertor import Convertor
 class ConvertMetadata(Convertor):
 
     # define the input of class
-    def __init__(self, input_data, input_file):
+    def __init__(self, input_data: str, input_file: str):
         super().__init__(input_data, input_file)
-        self.path = input_file  # input folder
-        self.file = input_data.files['file'].filename
+        self.path: str = input_file  # input folder
+        self.file: str = input_data.files['file'].filename
 
     # define function for extract metadata
     def exec(self):
-        exe = "third_party/win/Exiftool"
+        exe: str = "third_party/win/Exiftool"
 
         # Process all files with exiftool.exe and extract the Metadata
         if self.format == 'json':
-            process = subprocess.run([exe, str(self.path) + "/" + str(self.file), '-' +
+            process: str = subprocess.run([exe, str(self.path) + "/" + str(self.file), '-' +
                                       str(self.format), '-W+!', str(self.output_file) + "/" +
                                       self.name_output])
         elif self.format == 'txt':
-            process = subprocess.run([exe, str(self.path) + "/" + str(self.file), '-W+!',
+            process: str = subprocess.run([exe, str(self.path) + "/" + str(self.file), '-W+!',
                                       str(self.output_file) + "/" + self.name_output])
         elif self.format == 'xmp':
-            process = subprocess.run([exe, str(self.path) + "/" + str(self.file), '-O',
+            process: str = subprocess.run([exe, str(self.path) + "/" + str(self.file), '-O',
                                       str(self.output_file) + "/" + self.name_output])
         else:
             pass
