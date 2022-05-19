@@ -126,7 +126,15 @@ services:
     ports:
       - "6005:6005"
 
+  swagger_booking:
+    container_name: swagger_booking
+    restart: always
+    build: ./SWAGGER_BOOKING
+    networks:
+      - skynet_network
+    ports:
+      - "6006:6006"
+
 networks:
   skynet_network:
     driver: bridge
-
