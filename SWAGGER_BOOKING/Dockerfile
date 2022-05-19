@@ -1,4 +1,4 @@
-FROM python:3-alpine
+FROM python:3.6-alpine
 
 # Set the work directory
 WORKDIR /app
@@ -11,7 +11,7 @@ RUN pip3 --no-cache-dir install -r requirements.txt
 
 COPY . /usr/src/app
 
-EXPOSE 6005
+EXPOSE 6006
 
 # Execute main.py
 CMD ["python3", "__main__.py"]
