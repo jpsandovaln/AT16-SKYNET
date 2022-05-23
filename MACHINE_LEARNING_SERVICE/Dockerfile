@@ -24,8 +24,11 @@ WORKDIR /app
 COPY . /app
 
 # Run requirements to install all packages
+RUN pip3 install --target ./ git+https://github.com/Amilcar-B/Fix-vggFace.git
+RUN pip3 install keras==2.8.0
+RUN pip3 install Keras-Applications==1.0.8
+RUN pip3 install Keras-Preprocessing==1.1.2
 RUN pip3 --no-cache-dir install -r requirements.txt
 
-CMD ["python3","fix.py"]
 # Execute python3 and main.py
 CMD ["python3", "main.py"]

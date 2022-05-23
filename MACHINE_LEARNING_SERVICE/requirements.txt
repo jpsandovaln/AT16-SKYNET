@@ -25,10 +25,10 @@ importlib-metadata==4.11.3
 imutils==0.5.4
 itsdangerous==2.1.2
 Jinja2==3.1.1
-keras==2.8.0
-Keras-Applications==1.0.8
-Keras-Preprocessing==1.1.2
-keras-vggface==0.6
+#keras==2.8.0
+#Keras-Applications==1.0.8
+#Keras-Preprocessing==1.1.2
+#keras-vggface==0.6
 kiwisolver==1.4.2
 libclang==13.0.0
 Markdown==3.3.6

@@ -20,9 +20,10 @@ from src.controller.apis.controller_machine import ControllerMachineLearning
 from src.controller.apis.downloader import Downloader
 from src.controller.apis.controller_vggface import ControllerVggFace
 from src.controller.apis.controller_iris_recognizer import ControllerIris
-from src.controller.apis.controller_iris_train_model import ControllerIrisTrain
+from src.controller.apis.controller_iris_train_model import ControllerIrisTrai
+from fix import fix_machine
 
-
+fix_machine()
 # This is the path where the zip file will be saved
 UPLOAD_FOLDER = r'saved_files\compress_files'
 UPLOAD_FACE_FOLDER = r'saved_files\save_recognizer_videos'
