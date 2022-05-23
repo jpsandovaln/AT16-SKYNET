@@ -20,13 +20,15 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 #
+from operator import __add__, __mul__, __getitem__
+from turtle import shape
 
 from src.model.model_iris_recognition.segmentation import *
 from src.model.model_iris_recognition.coding import *
 
 
 class Recognition():
-    def compare_codes(self, a, b, mask_a, mask_b, rotation=False):
+    def compare_codes(self, a: {__add__}, b: any, mask_a: {__mul__}, mask_b: any, rotation: bool = False) -> float:
         """Compares two codes and calculates Jaccard index.
 
         :param a: Code of the first iris
@@ -39,10 +41,10 @@ class Recognition():
         :return: Distance between two codes, that means if the objects are similars will be near to 0.
         """
         if rotation:
-            d = []
+            d: list = []
             for i in range(-rotation, rotation + 1):
-                c = np.roll(b, i, axis=1)
-                mask_c = np.roll(mask_b, i, axis=1)
+                c: ndarray = np.roll(b, i, axis=1)
+                mask_c: ndarray = np.roll(mask_b, i, axis=1)
                 d.append(
                     np.sum(np.remainder(a + c, 2) * mask_a * mask_c) / np.sum(
                         mask_a * mask_c))
@@ -50,17 +52,17 @@ class Recognition():
         return np.sum(np.remainder(a + b, 2) * mask_a * mask_b) / np.sum(
             mask_a * mask_b)
 
-    def encode_photo(self, image):
+    def encode_photo(self, image: {ndim, __getitem__, shape}) -> any:
         """Finds the pupil and iris of the eye, and then encodes the unravelled iris.
 
         :param image: Image of an eye
         :return: Encoded iris (code, mask)
         :rtype: tuple (ndarray, ndarray)
         """
-        img = preprocess(image)
+        img: None = preprocess(image)
         x, y, r = find_pupil_hough(img)
         x_iris, y_iris, r_iris = find_iris_id(img, x, y, r)
-        iris = unravel_iris(image, x, y, r, x_iris, y_iris, r_iris)
+        iris: any = unravel_iris(image, x, y, r, x_iris, y_iris, r_iris)
         return iris_encode(iris)
 
 

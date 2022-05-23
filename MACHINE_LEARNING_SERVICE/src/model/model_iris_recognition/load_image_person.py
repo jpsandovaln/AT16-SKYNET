@@ -16,11 +16,11 @@ import cv2
 
 # Load the image file
 class LoadFiles:
-    def __init__(self, file):
-        self.file = file
+    def __init__(self, file: any):
+        self.file: any = file
 
     # Load the iris of the person who is required to find
-    def load_img_compare(self):
-        image = cv2.imread(self.file)
+    def load_img_compare(self) -> None:
+        image: None = cv2.imread(self.file)
         return image
     

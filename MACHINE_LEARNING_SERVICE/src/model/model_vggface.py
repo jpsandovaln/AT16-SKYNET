@@ -12,10 +12,10 @@
 #
 
 # face verification with the VGGFace2 model
-
+from keras import Model
 from matplotlib import pyplot
 from PIL import Image
-from numpy import asarray
+from numpy import asarray, ndarray
 from scipy.spatial.distance import cosine
 from mtcnn.mtcnn import MTCNN
 from keras_vggface.vggface import VGGFace
@@ -23,48 +23,48 @@ from keras_vggface.utils import preprocess_input
 
 
 class ModelVggFace:
-    def image_has_face(self, filename):
-        pixels = pyplot.imread(filename)
-        detector = MTCNN()
-        results = detector.detect_faces(pixels)
+    def image_has_face(self, filename) -> bool:
+        pixels: any = pyplot.imread(filename)
+        detector: MTCNN = MTCNN()
+        results: list = detector.detect_faces(pixels)
         if not results:
             return False
         else:
             return True
 
     # Extracts the face from an image
-    def extract_face(self, filename, required_size=(224, 224)):
-        pixels = pyplot.imread(filename)
-        detector = MTCNN()
-        results = detector.detect_faces(pixels)
+    def extract_face(self, filename: any, required_size: tuple = (224, 224)) -> ndarray | str:
+        pixels: any = pyplot.imread(filename)
+        detector: MTCNN = MTCNN()
+        results: list = detector.detect_faces(pixels)
         if self.image_has_face(filename):
             x1, y1, width, height = results[0]['box']
             x2, y2 = x1 + width, y1 + height
-            face = pixels[y1:y2, x1:x2]
-            image = Image.fromarray(face)
-            image = image.resize(required_size)
-            face_array = asarray(image)
+            face: any= pixels[y1:y2, x1:x2]
+            image: Image = Image.fromarray(face)
+            image: Image = image.resize(required_size)
+            face_array: ndarray = asarray(image)
             return face_array
         else:
             return 'There is not a recognizable face'
 
     # Calculates the embedding for the faces
-    def get_embeddings(self, file_names):
-        faces = [self.extract_face(f) for f in file_names]
-        samples = asarray(faces, 'float32')
-        samples = preprocess_input(samples, version=2)
-        model = VGGFace(model='resnet50', include_top=False, input_shape=(224, 224, 3),
+    def get_embeddings(self, file_names: any) -> Model:
+        faces: list[ndarray | str] = [self.extract_face(f) for f in file_names]
+        samples: ndarray = asarray(faces, 'float32')
+        samples: ndarray = preprocess_input(samples, version=2)
+        model: Model = VGGFace(model='resnet50', include_top=False, input_shape=(224, 224, 3),
                         pooling='avg')
-        yhat = model.predict(samples)
+        yhat: any = model.predict(samples)
         return yhat
 
     # Proves if the face images are from the same person
-    def is_match(self, known_embedding, candidate_embedding, thresh=0.5):
-        score = cosine(known_embedding, candidate_embedding)
+    def is_match(self, known_embedding: any, candidate_embedding: any, thresh: float=0.5) -> bool:
+        score: float = cosine(known_embedding, candidate_embedding)
         if score <= thresh:
             print('>face is a Match (%.3f <= %.3f)' % (score, thresh))
-            resp = True
+            resp: bool = True
         else:
             print('>face is NOT a Match (%.3f > %.3f)' % (score, thresh))
-            resp = False
+            resp: bool = False
         return resp

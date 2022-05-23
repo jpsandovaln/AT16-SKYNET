@@ -17,9 +17,9 @@ import os
 
 # Parameters needed in order to find the owner of the iris.
 class Parameters:
-    def __init__(self, file, percentage):
-        self.file = file
-        self.percentage = percentage
+    def __init__(self, file: any, percentage: float):
+        self.file: any = file
+        self.percentage: float = percentage
 
     # Setting exceptions to the parameter exception module
     def validate(self):
@@ -50,7 +50,7 @@ class Parameters:
         if self.file is None or str(self.file).strip() == "":
             raise ParameterException("Invalid file, the value is empty", "401",
                                      "AT16-ERR-300", "Iris recognition model")
-        is_file = os.path.isfile(self.file)
+        is_file: bool = os.path.isfile(self.file)
 
         if not is_file:
             raise ParameterException("It is not file", "402", "AT16-ERR-305",

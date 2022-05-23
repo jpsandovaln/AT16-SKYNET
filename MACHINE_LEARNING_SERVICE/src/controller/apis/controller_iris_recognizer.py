@@ -25,30 +25,30 @@ from src.model.model_iris_recognition.parameters import Parameters
 
 # This is for to upload a file.
 class ControllerIris:
-    def __init__(self, request, save_location):
-        self.request = request
-        self.save_location = save_location
-        self.percentage_request = request.form.get('percentage')
+    def __init__(self, request: any, save_location: any):
+        self.request: any = request
+        self.save_location: any = save_location
+        self.percentage_request: any = request.form.get('percentage')
 
     # This is for to request a file and a percentage
-    def upload(self):
+    def upload(self) -> dict:
         try:
-            file_request = self.request.files['file']
-            path_saved = os.path.join(self.save_location, file_request.filename)
-            parameters = Parameters(path_saved, self.percentage_request)
+            file_request: any = self.request.files['file']
+            path_saved: bytes | str = os.path.join(self.save_location, file_request.filename)
+            parameters: Parameters = Parameters(path_saved, self.percentage_request)
             parameters.validate()
             file_request.save(path_saved)  # To save the file
             parameters.validate_file()
-            result = IrisModel(path_saved, self.percentage_request)
-            result_model_iris = result.matching_data()
-            result_model = SuccessResult(HTTPStatus.OK, str(result_model_iris))
+            result: IrisModel = IrisModel(path_saved, self.percentage_request)
+            result_model_iris: list[dict[str, float]] = result.matching_data()
+            result_model: SuccessResult = SuccessResult(HTTPStatus.OK, str(result_model_iris))
             return Response(
                 json.dumps(result_model.__dict__),
                 status=HTTPStatus.OK,
                 mimetype='application/json'
             )
         except MachineLearningException as error:
-            result_error = ErrorResult(error.status, error.message,
+            result_error: ErrorResult = ErrorResult(error.status, error.message,
                                        error.code)
             return Response(
                 json.dumps(result_error.__dict__),
@@ -56,7 +56,7 @@ class ControllerIris:
                 mimetype='application/json'
             )
         except Exception as error:
-            result_error = ErrorResult(HTTPStatus.NOT_FOUND, error,
+            result_error: ErrorResult = ErrorResult(HTTPStatus.NOT_FOUND, error,
                                        'AT16-000451')
             return Response(
                 json.dumps(result_error.__dict__),

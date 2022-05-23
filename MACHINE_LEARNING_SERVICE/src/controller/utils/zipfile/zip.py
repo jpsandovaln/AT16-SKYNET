@@ -13,15 +13,15 @@
 
 import zipfile
 
-path_img_zip = 'src/controller/utils/images_iris_recognition'
+path_img_zip: str = 'src/controller/utils/images_iris_recognition'
 
 
 class UnzipFile:
-    def __init__(self, path_saved):
-        self.path_saved = str(path_saved)
+    def __init__(self, path_saved: str):
+        self.path_saved: str = str(path_saved)
 
     def decom_zip(self):
-        path_zip = format(self.path_saved)
-        file_zip = zipfile.ZipFile(path_zip)  # This is the input path
+        path_zip: str = format(self.path_saved)
+        file_zip: zipfile.ZipFile = zipfile.ZipFile(path_zip)  # This is the input path
         file_zip.extractall(path_img_zip)  # This is the output path
 

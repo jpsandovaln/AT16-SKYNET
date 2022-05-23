@@ -12,6 +12,8 @@
 #
 
 import pickle
+from typing import TextIO
+
 from src.model.model_iris_recognition.parameters import Parameters
 from src.model.model_iris_recognition.recognition import Recognition
 from src.model.model_iris_recognition.load_image_person import LoadFiles
@@ -24,27 +26,27 @@ read_bin = 'rb'
 
 # Iris recognition model
 class IrisModel:
-    def __init__(self, file, percentage):
-        self.file = file
-        self.percentage = percentage
+    def __init__(self, file: any, percentage: float):
+        self.file: any = file
+        self.percentage: float = percentage
 
     # Matching the data in order to return the name to which the iris belongs.
-    def matching_data(self):
-        parameters = Parameters(self.file, self.percentage)
+    def matching_data(self) -> list[dict[str, float]]:
+        parameters: Parameters = Parameters(self.file, self.percentage)
         parameters.validate()
-        person_result = []
-        load_files = LoadFiles(self.file)
-        image = load_files.load_img_compare()
-        recognition = Recognition()
+        person_result: list[dict[str, float]] = []
+        load_files: LoadFiles = LoadFiles(self.file)
+        image: None = load_files.load_img_compare()
+        recognition: Recognition = Recognition()
         code, mask = recognition.encode_photo(image)
-        infile = open(filename, read_bin)
-        code_mask_list = pickle.load(infile)
+        infile: TextIO = open(filename, read_bin)
+        code_mask_list: any = pickle.load(infile)
         infile.close()
         for codes in code_mask_list:
-            name = codes[0]
-            code2 = codes[1]
-            mask2 = codes[2]
-            jaccard_index = 1 - recognition.compare_codes(code, code2, mask, mask2)
+            name: any = codes[0]
+            code2: any = codes[1]
+            mask2: any = codes[2]
+            jaccard_index: float = 1 - recognition.compare_codes(code, code2, mask, mask2)
             if jaccard_index >= float(self.percentage):
                 person_result.append({"Name": name, "Percentage": round(
                     jaccard_index * 100, 1)})

@@ -10,6 +10,7 @@
 # accordance with the terms of the license agreement you entered into
 # with Jalasoft.
 #
+from config import Config
 
 from src.model.face_emotion import FaceEmotion
 from flask import send_file
@@ -20,13 +21,13 @@ import os
 from src.controller.apis.endpointface import EndPointConverter
 
 
-UPLOAD_FOLDER = r'saved_files/upload'
-DOWNLOADER_FOLDER = r'saved_files\{}'
+UPLOAD_FOLDER: str = r'saved_files/upload'
+DOWNLOADER_FOLDER: str = r'saved_files\{}'
 
 
-app = Flask(__name__)
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-api = Api(app)
+app: Flask = Flask(__name__)
+app.config['UPLOAD_FOLDER']: Config = UPLOAD_FOLDER
+api: Api = Api(app)
 
 @app.route('/downloader/<string:save>/<string:output_file>/<string:file_name>', methods=['GET'])
 def get_file(save, output_file, file_name):
