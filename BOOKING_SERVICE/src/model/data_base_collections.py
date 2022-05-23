@@ -14,32 +14,32 @@
 from pymongo import MongoClient
 from src.common.exceptions.execute_exception import ExecuteException
 
-MONGO_HOST = "127.0.0.1"
-MONGO_PORT = "27017"
-MONGO_DB = "database"
-MONGO_USER = "admin"
-MONGO_PASS = "pass"
+MONGO_HOST: str = "127.0.0.1"
+MONGO_PORT: str  = "27017"
+MONGO_DB: str  = "database"
+MONGO_USER: str  = "admin"
+MONGO_PASS: str  = "pass"
 
 #uri = "mongodb://{}:{}@{}:{}/{}?authSource=admin".format(MONGO_USER, MONGO_PASS, MONGO_HOST, MONGO_PORT, MONGO_DB)
 #uri = 'mongodb://127.0.0.1:27017/'
 
-uri = 'mongodb://db_mongo/'
-client = MongoClient(uri)
-db = client['project']
+uri: str  = 'mongodb://db_mongo/'
+client: any = MongoClient(uri)
+db: any = client['project']
 
 if uri is None or uri == "":
     raise ExecuteException("Error connection", "700", "AT16-ERROR-200", "uri = 'mongodb://db_mongo/'")
 
-def select_booking_collection():
-    booking = db['booking']
+def select_booking_collection() -> dict:
+    booking: dict= db['booking']
     return booking
 
 
-def select_person_collection():
-    person = db['person']
+def select_person_collection() -> dict:
+    person: dict = db['person']
     return person
 
 
-def select_resource_collection():
-    resource = db['resource']
+def select_resource_collection() -> dict:
+    resource: dict = db['resource']
     return resource

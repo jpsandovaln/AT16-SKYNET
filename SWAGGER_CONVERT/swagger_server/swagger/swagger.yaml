@@ -66,7 +66,7 @@ paths:
         type: "number"
         default: 24000
         format: "float"
-      - name: "audio_chanel"
+      - name: "audio_channel"
         in: "formData"
         description: "`Audio`"
         required: false
@@ -79,16 +79,16 @@ paths:
         required: true
         type: "number"
         default: 1
-        format: "float"
+        format: "int64"
       - name: "color"
         in: "formData"
-        description: "`Image`[sRGB] and `Video`[RGB,gray]"
-        required: false
+        description: "`Image`[RGB] and `Video`[RGB,gray]"
+        required: true
         type: "string"
-        default: "RGB"
+        default: "gray"
         enum:
-        - "RGB"
         - "gray"
+        - "RGB"
       - name: "height"
         in: "formData"
         description: "`Image` and `Video`"
@@ -109,21 +109,21 @@ paths:
         required: false
         type: "number"
         default: 1
-        format: "int"
+        format: "int64"
       - name: "vertical_flip"
         in: "formData"
         description: "`Image`"
         required: false
         type: "number"
         default: 1
-        format: "int"
+        format: "int64"
       - name: "horizontal_flip"
         in: "formData"
         description: "`Image`"
         required: false
         type: "number"
         default: 0
-        format: "int"
+        format: "int64"
       - name: "language_in"
         in: "formData"
         description: "`Translator` and `WavTxt`"

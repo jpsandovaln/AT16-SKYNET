@@ -30,14 +30,14 @@ db = client['project']
 class Mongo_2_pandas():
     # This function extract the data of MongoDB and show in pandas format
     @staticmethod
-    def extract_data():
-        booking = db['booking']
-        person = db['person']
-        resource = db['resource']
-        data_person = pd.json_normalize(person.find())
-        data_resource = pd.json_normalize(resource.find())
-        data_booking = pd.json_normalize(booking.find())
-        data_reduce = pd.concat([data_booking['schedule.date'], data_booking['schedule.start_time'],
+    def extract_data() -> any:
+        booking: dict = db['booking']
+        person: dict = db['person']
+        resource: dict = db['resource']
+        data_person: any = pd.json_normalize(person.find())
+        data_resource: any = pd.json_normalize(resource.find())
+        data_booking: any = pd.json_normalize(booking.find())
+        data_reduce: any = pd.concat([data_booking['schedule.date'], data_booking['schedule.start_time'],
                                 data_booking['schedule.end_time'], data_booking['state'],
                                 data_resource, data_person], axis=1)
         return data_reduce

@@ -1,16 +1,17 @@
-FROM python:3-alpine
+FROM python:3.6-alpine
 
-RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
+# Set the work directory
+WORKDIR /app
 
-COPY requirements.txt /usr/src/app/
+# Copy all files to app directory
+COPY . /app
 
-RUN pip3 install --no-cache-dir -r requirements.txt
+# Run requirements to install all packages
+RUN pip3 --no-cache-dir install -r requirements.txt
 
 COPY . /usr/src/app
 
-EXPOSE 8080
+EXPOSE 6007
 
-ENTRYPOINT ["python3"]
-
-CMD ["-m", "swagger_server"]
+# Execute main.py
+CMD ["python3", "__main__.py"]

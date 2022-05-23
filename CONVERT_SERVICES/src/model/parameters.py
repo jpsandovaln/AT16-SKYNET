@@ -18,9 +18,9 @@ import os
 
 
 class Parameters:
-    def __init__(self, file, request):
-        self.file = file
-        self.request = request
+    def __init__(self, file: str, request: str):
+        self.file: str = file
+        self.request: str = request
 
     def validate(self):
         if os.path.split(self.file)[1] == "":
@@ -35,7 +35,7 @@ class Parameters:
                                      "AT16-ERR-300")
         else:
             pass
-        is_file = os.path.isfile(self.file)
+        is_file: any = os.path.isfile(self.file)
 
         if not is_file:
             raise ParameterException("It is not file", "402", "AT16-ERR-305")
@@ -43,7 +43,7 @@ class Parameters:
             pass
 
     def validate_get_convert(self):
-        converters = ['Image', 'Video', 'Metadata', 'Audio', 'OCR', 'Translator', 'WavTxt']
+        converters: list = ['Image', 'Video', 'Metadata', 'Audio', 'OCR', 'Translator', 'WavTxt']
         if self.request.values.get('convert') == "":
             raise ParameterException("The convert filed is empty", "402", "AT16-ERR-305")
         elif self.request.values.get('convert') not in converters:
@@ -52,13 +52,13 @@ class Parameters:
             pass
 
     def validate_format(self):
-        ocr_converters = ['txt', 'docx', 'pdf']
-        audio_converters = ['mp3', 'mp2', 'm4a', 'wav']
-        video_converters = ['jpg', 'png']
-        metadata_converters = ['txt', 'json', 'xmp']
-        image_converters = ['jpg', 'tiff', 'gif', 'png', 'bmp', 'webp']
-        translator_converters = ['txt']
-        wav_converters = ['txt']
+        ocr_converters: list = ['txt', 'docx', 'pdf']
+        audio_converters: list = ['mp3', 'mp2', 'm4a', 'wav']
+        video_converters: list = ['jpg', 'png']
+        metadata_converters: list = ['txt', 'json', 'xmp']
+        image_converters: list = ['jpg', 'tiff', 'gif', 'png', 'bmp', 'webp']
+        translator_converters: list = ['txt']
+        wav_converters: list = ['txt']
         if self.request.values.get('convert') == 'OCR' and self.request.values.get(
                 'format') not in ocr_converters:
             raise ParameterException("format is Not a recognized format", "402", "AT16-ERR-305")
@@ -84,30 +84,34 @@ class Parameters:
             pass
 
     def validate_in_format(self):
-        ocr_converters = ['jpg', 'png']
-        audio_converters = ['mp3', 'mp2', 'm4a', 'wav']
-        video_converters = ['mp4', '3gp', 'mkv']
-        image_converters = ['jpg', 'tiff', 'gif', 'png', 'bmp', 'webp']
-        translator_converters = ['txt']
-        wav_converters = ['wav']
-        names = self.file.split('.')
-        if self.request.values.get('convert') == 'OCR' and names[1] not in ocr_converters:
+        ocr_converters: list = ['jpg', 'png']
+        audio_converters: list = ['mp3', 'mp2', 'm4a', 'wav']
+        video_converters: list = ['mp4', '3gp', 'mkv']
+        image_converters: list = ['jpg', 'tiff', 'gif', 'png', 'bmp', 'webp']
+        translator_converters: list = ['txt']
+        wav_converters: list = ['wav']
+        names: any = self.file.split('.')
+        if self.request.values.get('convert') == 'OCR' and names[1].lower() not in ocr_converters:
             raise ParameterException("format file is Not a recognized format", "402",
                                      "AT16-ERR-307")
-        elif self.request.values.get('convert') == 'Audio' and names[1] not in audio_converters:
+        elif self.request.values.get('convert') == 'Audio' and names[1].lower() not in \
+                audio_converters:
             raise ParameterException("format file is Not a recognized format", "402",
                                      "AT16-ERR-306")
-        elif self.request.values.get('convert') == 'Video' and names[1] not in video_converters:
+        elif self.request.values.get('convert') == 'Video' and names[1].lower() not in \
+                video_converters:
             raise ParameterException("format file is Not a recognized format", "402",
                                      "AT16-ERR-306")
-        elif self.request.values.get('convert') == 'Image' and names[1] not in image_converters:
+        elif self.request.values.get('convert') == 'Image' and names[1].lower() not in \
+                image_converters:
             raise ParameterException("format file is Not a recognized format", "402",
                                      "AT16-ERR-306")
-        elif self.request.values.get('convert') == 'Translator' and names[1] not in \
+        elif self.request.values.get('convert') == 'Translator' and names[1].lower() not in \
                 translator_converters:
             raise ParameterException("format file is Not a recognized format", "402",
                                      "AT16-ERR-306")
-        elif self.request.values.get('convert') == 'WavTxt' and names[1] not in wav_converters:
+        elif self.request.values.get('convert') == 'WavTxt' and names[1].lower() not in \
+                wav_converters:
             raise ParameterException("format file is Not a recognized format", "402",
                                      "AT16-ERR-306")
         else:

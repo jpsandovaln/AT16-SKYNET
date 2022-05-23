@@ -1,5 +1,5 @@
 #
-# @reporting_exception.py Copyright (c) 2022 Jalasoft.
+# @__main__.py Copyright (c) 2022 Jalasoft.
 # 2643 Av Melchor Perez de Olguin, Colquiri Sud, Cochabamba, Bolivia.
 # Edificio Union № 1376 Av. General Inofuentes esquina Calle 20, La Paz, Bolivia.
 # All rights reserved.
@@ -11,9 +11,19 @@
 # with Jalasoft.
 #
 
-class ReportingException(Exception):
-    def __init__(self, message: str, status: str, code: str):
-        self.message: str = message
-        self.status: str = status
-        self.code: str = code
-        super().__init__(self.message)
+#!/usr/bin/env python3
+
+import connexion
+
+from swagger_server import encoder
+
+
+def main():
+    app = connexion.App(__name__, specification_dir='./swagger_server/swagger/')
+    app.app.json_encoder = encoder.JSONEncoder
+    app.add_api('swagger.yaml', arguments={'title': 'CONVERT_SERVICES'}, pythonic_params=True)
+    app.run(port=6007)
+
+
+if __name__ == '__main__':
+    main()

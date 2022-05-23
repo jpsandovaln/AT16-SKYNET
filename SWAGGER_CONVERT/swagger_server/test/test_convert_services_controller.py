@@ -1,11 +1,11 @@
 #
-# @test_convert_services_controller.py Copyright (c)
-# 2643 Av  Melchor Perez de Olguin, Colquiri Sud, Cochabamba, Bolivia.
-# 1376 Av General Inofuentes esquina calle 20, La Paz, Bolivia.
+# @test_convert_services_controller.py Copyright (c) 2022 Jalasoft.
+# 2643 Av Melchor Perez de Olguin, Colquiri Sud, Cochabamba, Bolivia.
+# Edificio Union № 1376 Av. General Inofuentes esquina Calle 20, La Paz, Bolivia.
 # All rights reserved.
 #
 # This software is the confidential and proprietary information of
-# Jalasoft, ("Condidential Information"). You shall # not
+# Jalasoft, ("Confidential Information"). You shall not
 # disclose such Confidential Information and shall use it only in
 # accordance with the terms of the license agreement you entered into
 # with Jalasoft.
@@ -34,9 +34,9 @@ class TestConvertServicesController(BaseTestCase):
                     file=(BytesIO(b'some file data'), 'file.txt'),
                     bitrate=4000,
                     sample_rate=24000,
-                    audio_chanel=2,
+                    audio_channel=2,
                     frame=1,
-                    color='RGB',
+                    color='gray',
                     height=1000,
                     width=1000,
                     rotate=1,

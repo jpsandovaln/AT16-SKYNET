@@ -15,6 +15,6 @@ from src.common.exceptions.convert_services_exception import ConvertServicesExce
 
 
 class ConvertException(ConvertServicesException):
-    def __init__(self, message, status, code, type_error):
-        self.type_error = type_error
+    def __init__(self, message: str, status: str, code: str, type_error: str):
+        self.type_error: str = type_error
         super().__init__(message, status, code)

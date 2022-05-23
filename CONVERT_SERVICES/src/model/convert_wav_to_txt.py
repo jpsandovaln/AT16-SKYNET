@@ -16,22 +16,22 @@ from src.model.convertor import Convertor
 
 class ConvertWavTxt(Convertor):
     # define the input of class
-    def __init__(self, input_data, input_file):
+    def __init__(self, input_data: str, input_file: str):
         super().__init__(input_data, input_file)
-        self.path = input_file  # input folder
-        self.file = input_data.files['file'].filename
-        self.instructions = self.get_instructions()
-        self.language_in = self.instructions.values.get('language_in')
+        self.path: str = input_file  # input folder
+        self.file: str = input_data.files['file'].filename
+        self.instructions: str = self.get_instructions()
+        self.language_in: str = self.instructions.values.get('language_in')
 
     # define function for extract metadata
     def exec(self):
-        r = sr.Recognizer()
-        audio_file = sr.AudioFile(self.input_file)
+        r: any = sr.Recognizer()
+        audio_file: any = sr.AudioFile(self.input_file)
 
         with audio_file as source:
             r.adjust_for_ambient_noise(source)
-            sound = r.record(source)
-            result = r.recognize_google(sound, language=self.language_in)
+            sound: any = r.record(source)
+            result: any = r.recognize_google(sound, language=self.language_in)
 
         with open(self.output_file + '/' + self.name_output, mode='w') as file:
             file.write(result)

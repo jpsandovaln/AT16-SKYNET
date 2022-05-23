@@ -10,17 +10,17 @@
 # accordance with the terms of the license agreement you entered into
 # with Jalasoft.
 #
-
+import time
 from datetime import datetime
 
 
 class FiltersDatePersonCountry:
-    def __init__(self, date, person_country):
-        self.date = date
-        self.person_country = person_country
+    def __init__(self, date: str, person_country: str):
+        self.date: str = date
+        self.person_country: str = person_country
 
-    def filters_date_person_country(self, data_frame):
-        date_time = datetime.strptime(self.date, '%m/%d/%Y').date()
-        filters = (data_frame["date"] <= date_time) & \
-                  (data_frame["person_country"] == self.person_country)
+    def filters_date_person_country(self, data_frame) -> bool:
+        date_time: time = datetime.strptime(self.date, '%m/%d/%Y').date()
+        filters: bool = (data_frame["date"] <= date_time) & \
+                        (data_frame["person_country"] == self.person_country)
         return filters

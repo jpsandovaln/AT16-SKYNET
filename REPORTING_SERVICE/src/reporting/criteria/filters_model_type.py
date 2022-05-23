@@ -14,11 +14,11 @@
 
 class FiltersModelType:
 
-    def __init__(self, model, resource_type):
-        self.model = model
-        self.resource_type = resource_type
+    def __init__(self, model: str, resource_type: type):
+        self.model: str = model
+        self.resource_type: type = resource_type
 
-    def filters_model_type(self, data_frame):
-        filters = (data_frame["resource_model"] == self.model) & \
+    def filters_model_type(self, data_frame) ->bool:
+        filters: bool = (data_frame["resource_model"] == self.model) & \
                   (data_frame["resource_type"] == self.resource_type)
         return filters

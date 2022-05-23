@@ -39,25 +39,27 @@ from src.reporting.parameters.parameter_report_time_person_gender import \
     ParameterReportTimePersonGender
 from src.reporting.parameters.parameter_report_date_person_country import \
     ParameterReportDatePersonCountry
+from flask_cors import CORS
 
-UPLOAD_FOLDER = 'saved_files/'  # here is the file where the images will be downloaded
-app = Flask(__name__)
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-api = Api(app)
+UPLOAD_FOLDER: str = 'saved_files/'  # here is the file where the images will be downloaded
+app: Flask = Flask(__name__)
+app.config['UPLOAD_FOLDER']: str = UPLOAD_FOLDER
+api: Api = Api(app)
+cors = CORS(app)
 
 
 @app.route('/search_report_start_finish_time_person_gender', methods=['POST'])
-def search_report_start_finish_time_person_gender():
+def search_report_start_finish_time_person_gender() -> dict:
     try:
         # Defines variables
-        open_time = request.form.get('open_time')
-        close_time = request.form.get('close_time')
-        data_frame = Cache.load_cache()
-        report = SearchReportStartFinishTimePersonGender()
+        open_time: str = request.form.get('open_time')
+        close_time: str = request.form.get('close_time')
+        data_frame: type = Cache.load_cache()
+        report: SearchReportStartFinishTimePersonGender = SearchReportStartFinishTimePersonGender()
 
         # Gets the report
-        parameters = ParameterReportTimePersonGender(open_time, close_time, data_frame)
-        result_report = report.search_report_start_finish_time_person_gender(parameters)
+        parameters: ParameterReportTimePersonGender = ParameterReportTimePersonGender(open_time, close_time, data_frame)
+        result_report: dict = report.search_report_start_finish_time_person_gender(parameters)
 
         return Response(
             result_report,
@@ -66,7 +68,7 @@ def search_report_start_finish_time_person_gender():
         )
 
     except ReportingException as error:
-        result_error = ErrorResult(error.status, error.message, error.code)
+        result_error: ErrorResult = ErrorResult(error.status, error.message, error.code)
         return Response(
             json.dumps(result_error.__dict__),
             status=error.status,
@@ -74,7 +76,7 @@ def search_report_start_finish_time_person_gender():
         )
 
     except Exception as error:
-        result_error = ErrorResult(HTTPStatus.NOT_FOUND, error, "AT16-ERROR-404")
+        result_error: ErrorResult = ErrorResult(HTTPStatus.NOT_FOUND, error, "AT16-ERROR-404")
         return Response(
             json.dumps(result_error.__dict__),
             status=HTTPStatus.NOT_FOUND,
@@ -83,17 +85,17 @@ def search_report_start_finish_time_person_gender():
 
 
 @app.route('/search_report_age_gender', methods=['POST'])
-def search_report_age_gender():
+def search_report_age_gender() -> dict:
     try:
         # Defines variables
-        person_age = request.form.get('person_age')
-        person_gender = request.form.get('person_gender')
-        data_frame = Cache.load_cache()
-        report = SearchReportAgeGender()
+        person_age: str = request.form.get('person_age')
+        person_gender: str = request.form.get('person_gender')
+        data_frame: type = Cache.load_cache()
+        report: SearchReportAgeGender = SearchReportAgeGender()
 
         # Gets the report
-        parameters = ParameterReportAgeGender(person_age, person_gender, data_frame)
-        result_report = report.search_report_age_gender(parameters)
+        parameters: ParameterReportAgeGender = ParameterReportAgeGender(person_age, person_gender, data_frame)
+        result_report: dict = report.search_report_age_gender(parameters)
 
         return Response(
             result_report,
@@ -102,7 +104,7 @@ def search_report_age_gender():
         )
 
     except ReportingException as error:
-        result_error = ErrorResult(error.status, error.message, error.code)
+        result_error: ErrorResult = ErrorResult(error.status, error.message, error.code)
         return Response(
             json.dumps(result_error.__dict__),
             status=error.status,
@@ -110,7 +112,7 @@ def search_report_age_gender():
         )
 
     except Exception as error:
-        result_error = ErrorResult(HTTPStatus.NOT_FOUND, error, "AT16-ERROR-404")
+        result_error: ErrorResult = ErrorResult(HTTPStatus.NOT_FOUND, error, "AT16-ERROR-404")
         return Response(
             json.dumps(result_error.__dict__),
             status=HTTPStatus.NOT_FOUND,
@@ -119,18 +121,18 @@ def search_report_age_gender():
 
 
 @app.route('/search_report_date_person_country', methods=['POST'])
-def search_report_date_person_country():
+def search_report_date_person_country() -> dict:
     try:
         # Defines variables
-        date = request.form.get('date')
-        person_country = request.form.get('person_country')
-        data_frame = Cache.load_cache()
-        report = SearchReportDatePersonCountry()
+        date: str = request.form.get('date')
+        person_country: str = request.form.get('person_country')
+        data_frame: type = Cache.load_cache()
+        report: SearchReportDatePersonCountry = SearchReportDatePersonCountry()
 
         # Gets the report
-        parameters = ParameterReportDatePersonCountry(date, person_country,
+        parameters: ParameterReportDatePersonCountry = ParameterReportDatePersonCountry(date, person_country,
                                                       data_frame)
-        result_report = report.search_report_date_person_country(parameters)
+        result_report: dict = report.search_report_date_person_country(parameters)
         return Response(
             result_report,
             status=HTTPStatus.OK,
@@ -138,7 +140,7 @@ def search_report_date_person_country():
         )
 
     except ReportingException as error:
-        result_error = ErrorResult(error.status, error.message, error.code)
+        result_error: ErrorResult = ErrorResult(error.status, error.message, error.code)
         return Response(
             json.dumps(result_error.__dict__),
             status=error.status,
@@ -146,7 +148,7 @@ def search_report_date_person_country():
         )
 
     except Exception as error:
-        result_error = ErrorResult(HTTPStatus.NOT_FOUND, error, "AT16-ERROR-404")
+        result_error: ErrorResult = ErrorResult(HTTPStatus.NOT_FOUND, error, "AT16-ERROR-404")
         return Response(
             json.dumps(result_error.__dict__),
             status=HTTPStatus.NOT_FOUND,
@@ -155,17 +157,17 @@ def search_report_date_person_country():
 
 
 @app.route('/search_report_model_type', methods=['POST'])
-def search_report_model_type():
+def search_report_model_type() -> dict:
     try:
         # Defines variables
-        resource_model = request.form.get('model')
-        resource_type = request.form.get('type')
-        data_frame = Cache.load_cache()
-        report = SearchReportModelType()
+        resource_model: str = request.form.get('model')
+        resource_type: str = request.form.get('type')
+        data_frame: type = Cache.load_cache()
+        report: SearchReportModelType = SearchReportModelType()
 
         # Gets the report
-        parameters = ParameterReportModelType(resource_model, resource_type, data_frame)
-        result_report = report.search_report_model_type(parameters)
+        parameters: ParameterReportModelType = ParameterReportModelType(resource_model, resource_type, data_frame)
+        result_report: dict = report.search_report_model_type(parameters)
 
         return Response(
             result_report,
@@ -173,7 +175,7 @@ def search_report_model_type():
             mimetype='application/json'
         )
     except ReportingException as error:
-        result_error = ErrorResult(error.status, error.message, error.code)
+        result_error: ErrorResult = ErrorResult(error.status, error.message, error.code)
         return Response(
             json.dumps(result_error.__dict__),
             status=error.status,
@@ -181,7 +183,7 @@ def search_report_model_type():
         )
 
     except Exception as error:
-        result_error = ErrorResult(HTTPStatus.NOT_FOUND, error, "AT16-ERROR-404")
+        result_error: ErrorResult = ErrorResult(HTTPStatus.NOT_FOUND, error, "AT16-ERROR-404")
         return Response(
             json.dumps(result_error.__dict__),
             status=HTTPStatus.NOT_FOUND,
@@ -190,17 +192,17 @@ def search_report_model_type():
 
 
 @app.route('/search_report_state_person_gender', methods=['POST'])
-def search_report_state_person_gender():
+def search_report_state_person_gender() -> dict:
     try:
         # Defines variables
-        state = request.form.get('state')
-        person_gender = request.form.get('person_gender')
-        data_frame = Cache.load_cache()
-        report = SearchReportStatePersonGender()
+        state: str = request.form.get('state')
+        person_gender: str = request.form.get('person_gender')
+        data_frame: type = Cache.load_cache()
+        report: SearchReportStatePersonGender = SearchReportStatePersonGender()
 
         # Gets the report
-        parameters = ParameterReportStatePersonGender(person_gender, state, data_frame)
-        result_report = report.search_report_state_person_gender(parameters)
+        parameters: ParameterReportStatePersonGender = ParameterReportStatePersonGender(person_gender, state, data_frame)
+        result_report: dict = report.search_report_state_person_gender(parameters)
 
         return Response(
             result_report,
@@ -208,7 +210,7 @@ def search_report_state_person_gender():
             mimetype='application/json'
         )
     except ReportingException as error:
-        result_error = ErrorResult(error.status, error.message, error.code)
+        result_error: ErrorResult = ErrorResult(error.status, error.message, error.code)
         return Response(
             json.dumps(result_error.__dict__),
             status=error.status,
@@ -216,7 +218,7 @@ def search_report_state_person_gender():
         )
 
     except Exception as error:
-        result_error = ErrorResult(HTTPStatus.NOT_FOUND, error, "AT16-ERROR-404")
+        result_error: ErrorResult = ErrorResult(HTTPStatus.NOT_FOUND, error, "AT16-ERROR-404")
         return Response(
             json.dumps(result_error.__dict__),
             status=HTTPStatus.NOT_FOUND,
@@ -225,19 +227,19 @@ def search_report_state_person_gender():
 
 
 @app.route('/search_report_fill_time_location', methods=['POST'])
-def search_report_fill_time_location():
+def search_report_fill_time_location() -> dict:
     try:
         # Defines variables
-        start_time = request.form.get('start_time')
-        end_time = request.form.get('end_time')
-        city = request.form.get('city')
-        data_frame = Cache.load_cache()
-        report = SearchReportFilTimeLocation()
+        start_time: str = request.form.get('start_time')
+        end_time: str = request.form.get('end_time')
+        city: str = request.form.get('city')
+        data_frame: type = Cache.load_cache()
+        report: SearchReportFilTimeLocation = SearchReportFilTimeLocation()
 
         # Gets the report
-        parameters = ParameterReportFillTimeLocation(start_time, end_time,
+        parameters: ParameterReportFillTimeLocation = ParameterReportFillTimeLocation(start_time, end_time,
                                                     city, data_frame)
-        result_report = report.search_report_fil_time_location(parameters)
+        result_report: dict = report.search_report_fil_time_location(parameters)
 
         return Response(
             result_report,
@@ -245,7 +247,7 @@ def search_report_fill_time_location():
             mimetype='application/json'
         )
     except ReportingException as error:
-        result_error = ErrorResult(error.status, error.message, error.code)
+        result_error: ErrorResult = ErrorResult(error.status, error.message, error.code)
         return Response(
             json.dumps(result_error.__dict__),
             status=error.status,
@@ -253,7 +255,7 @@ def search_report_fill_time_location():
         )
 
     except Exception as error:
-        result_error = ErrorResult(HTTPStatus.NOT_FOUND, error,
+        result_error: ErrorResult = ErrorResult(HTTPStatus.NOT_FOUND, error,
                                    "AT16-ERROR-404")
         return Response(
             json.dumps(result_error.__dict__),
@@ -262,7 +264,7 @@ def search_report_fill_time_location():
         )
 
 @app.route('/mongo_to_postgres', methods=['GET'])
-def transfer_from_mongo_to_postgres():
+def transfer_from_mongo_to_postgres() -> dict:
     Connection.close_connection()
     Criteria.get_df()
 

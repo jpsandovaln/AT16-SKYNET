@@ -12,8 +12,8 @@
 #
 
 class ConvertServicesException(Exception):
-    def __init__(self, message, status, code):
-        self.message = message
-        self.status = status
-        self.code = code
+    def __init__(self, message: str, status: str, code: str):
+        self.message: str = message
+        self.status: str = status
+        self.code: str = code
         super().__init__(self.message)

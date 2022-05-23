@@ -33,22 +33,22 @@ from flask_cors import CORS
 import os
 
 
-UPLOAD_FOLDER = r'saved_files\upload'  # here que common files are saved
-DOWNLOADER_FOLDER = r'saved_files\{}'  # here que specific files are saved after convert
-SEVER_URL_DOWNLOAD = r'http://127.0.0.1:5003/downloader/'
+UPLOAD_FOLDER: str = r'saved_files\upload'  # here que common files are saved
+DOWNLOADER_FOLDER: str = r'saved_files\{}'  # here que specific files are saved after convert
+SEVER_URL_DOWNLOAD: str = r'http://127.0.0.1:5003/downloader/'
 
 
-app = Flask(__name__)
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-app.config['SEVER_URL_DOWNLOAD'] = SEVER_URL_DOWNLOAD
-api = Api(app)
+app: Flask = Flask(__name__)
+app.config['UPLOAD_FOLDER']: str = UPLOAD_FOLDER
+app.config['SEVER_URL_DOWNLOAD']: str = SEVER_URL_DOWNLOAD
+api: Api = Api(app)
 cors = CORS(app)
 
 
 # Download the files for all convertors
 @app.route('/downloader/<string:save>/<string:output_file>/<string:file_name>', methods=['GET'])
-def get_file(save, output_file, file_name):
-    save_path = (os.path.join(save, output_file, file_name))
+def get_file(save: any, output_file: any, file_name: any) -> str:
+    save_path: str = (os.path.join(save, output_file, file_name))
     return send_file(save_path, as_attachment=True)
 
 
@@ -56,41 +56,41 @@ def get_file(save, output_file, file_name):
 @app.route('/convert', methods=['POST'])
 def save_file():
     try:
-        file = EndPointConverter(request, app.config['UPLOAD_FOLDER'],
-                                 app.config['SEVER_URL_DOWNLOAD'])
-        result = file.upload()
+        file: EndPointConverter = EndPointConverter(request, app.config['UPLOAD_FOLDER'],
+                                                    app.config['SEVER_URL_DOWNLOAD'])
+        result: int = file.upload()
         if result == 1:
             if request.values.get('convert') == 'Image':
-                convert = ConvertImage(request, UPLOAD_FOLDER)
+                convert: ConvertImage = ConvertImage(request, UPLOAD_FOLDER)
             if request.values.get('convert') == 'Video':
-                convert = ConvertVideo(request, UPLOAD_FOLDER)
+                convert: ConvertVideo = ConvertVideo(request, UPLOAD_FOLDER)
             if request.values.get('convert') == 'Metadata':
-                convert = ConvertMetadata(request, UPLOAD_FOLDER)
+                convert: ConvertMetadata = ConvertMetadata(request, UPLOAD_FOLDER)
             if request.values.get('convert') == 'Audio':
-                convert = ConvertAudio(request, UPLOAD_FOLDER)
+                convert: ConvertAudio = ConvertAudio(request, UPLOAD_FOLDER)
             if request.values.get('convert') == 'OCR':
-                convert = ConvertOCR(request, UPLOAD_FOLDER)
+                convert: ConvertOCR = ConvertOCR(request, UPLOAD_FOLDER)
             if request.values.get('convert') == 'Translator':
-                convert = ConvertTranslator(request, UPLOAD_FOLDER)
+                convert: ConvertTranslator = ConvertTranslator(request, UPLOAD_FOLDER)
             if request.values.get('convert') == 'WavTxt':
-                convert = ConvertWavTxt(request, UPLOAD_FOLDER)
+                convert: ConvertWavTxt = ConvertWavTxt(request, UPLOAD_FOLDER)
             convert.exec()
-            result_converter = file.send_file(convert.output_file, convert.name_output)
-            result_model = SuccessResult(HTTPStatus.OK, str(result_converter))
+            result_converter: any = file.send_file(convert.output_file, convert.name_output)
+            result_model: SuccessResult = SuccessResult(HTTPStatus.OK, str(result_converter))
             return Response(
                 json.dumps(result_model.__dict__),
                 status=HTTPStatus.OK,
                 mimetype='application/json'
             )
     except ConvertServicesException as error:
-        result_error = ErrorResult(error.status, error.message, error.code)
+        result_error: ErrorResult = ErrorResult(error.status, error.message, error.code)
         return Response(
             json.dumps(result_error.__dict__),
             status=error.status,
             mimetype='application/json'
         )
     except Exception as error:
-        result_error = ErrorResult(HTTPStatus.NOT_FOUND, error, 'AT16-000451')
+        result_error: ErrorResult = ErrorResult(HTTPStatus.NOT_FOUND, error, 'AT16-000451')
         return Response(
             json.dumps(result_error.__dict__),
             status=HTTPStatus.NOT_FOUND,

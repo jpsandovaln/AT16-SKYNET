@@ -18,40 +18,40 @@ import shutil
 
 
 class ConvertVideo(Convertor):
-    def __init__(self, input_data, input_file):
+    def __init__(self, input_data, input_file: str):
         super().__init__(input_data, input_file)
-        self.instructions = self.get_instructions()
+        self.instructions: str = self.get_instructions()
 
     # This method compare the data and create the ffmpeg command.
-    def init_dic(self):
-        dic_param = {'frame': 'fps={}',
-                     'width': '{}/1:',
-                     'height': '{}/2',
-                     'color': 'format=gray'}
+    def init_dic(self) -> dict:
+        dic_param: dict = {'frame': 'fps={}',
+                           'width': '{}/1:',
+                           'height': '{}/2',
+                           'color': 'format=gray'}
         return dic_param
 
     # Method to create the ffmpeg command.
-    def concatenate(self):
-        dic = self.init_dic()
-        cmd_input = ""
+    def concatenate(self) -> str:
+        dic: dict = self.init_dic()
+        cmd_input: str = ""
         for key in dic:
-            val = self.instructions.values.get(key)
+            val: any = self.instructions.values.get(key)
             if len(val) > 0:
                 if key == 'width':
                     cmd_input += 'scale=' + dic[key].format(val)
                 cmd_input += dic[key].format(val) + ','
-        cmd_input_copy = cmd_input[:-1]
+        cmd_input_copy: str = cmd_input[:-1]
         return cmd_input_copy
 
     # This method converter the visual content.
-    def exec(self):
-        concatenate = self.concatenate()
+    def exec(self) -> bool:
+        concatenate: str = self.concatenate()
         try:
-            name = self.name_output.split('.')
-            output_file = self.output_file + '/' + name[0]
+            name: str = self.name_output.split('.')
+            output_file: str = self.output_file + '/' + name[0]
             os.mkdir(output_file)
-            name_dir = output_file + '/' + name[0] + '%d.' + name[1]
-            ffmpeg_command = "ffmpeg -i {} -vf {} {}".format(self.input_file, concatenate, name_dir)
+            name_dir: str = output_file + '/' + name[0] + '%d.' + name[1]
+            ffmpeg_command: str = "ffmpeg -i {} -vf {} {}".format(self.input_file, concatenate, name_dir)
             subprocess.call(ffmpeg_command)
             shutil.make_archive(output_file, 'zip', output_file)
             self.set_name_output(name[0] + '.zip')
