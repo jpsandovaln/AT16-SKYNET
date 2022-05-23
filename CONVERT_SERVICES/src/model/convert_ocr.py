@@ -22,48 +22,48 @@ from PIL import Image
 
 class ConvertOCR(Convertor):
     # Constructor
-    def __init__(self, input_data, input_file):
+    def __init__(self, input_data: str, input_file: str):
         super().__init__(input_data, input_file)
-        self.instructions = self.get_instructions()
+        self.instructions: str = self.get_instructions()
 
     # Converts image to string
-    def text_result(self):
-        language = self.instructions.values.get('language')
+    def text_result(self) -> tesseract_converter:
+        language: str = self.instructions.values.get('language')
 
         # Executable path
-        TESSERACT_PATH = r'third_party\win\tesseract\tesseract.exe'
-        tesseract_converter.pytesseract.tesseract_cmd = TESSERACT_PATH
-        image_to_text = Image.open(self.input_file)
-        text_result = tesseract_converter.image_to_string(image_to_text, lang=language)
+        TESSERACT_PATH: str = r'third_party\win\tesseract\tesseract.exe'
+        tesseract_converter.pytesseract.tesseract_cmd: str = TESSERACT_PATH
+        image_to_text: Image = Image.open(self.input_file)
+        text_result: tesseract_converter = tesseract_converter.image_to_string(image_to_text, lang=language)
         return text_result
 
     # Converts string to pdf or docx or txt
     def exec(self):
         # Environment variables
         # load_dotenv()
-        pdf_format = 'pdf'
-        docx_format = 'docx'
-        txt_format = 'txt'
+        pdf_format: str = 'pdf'
+        docx_format: str = 'docx'
+        txt_format: str = 'txt'
 
-        output_format = self.instructions.values.get('format')
-        text_result = self.text_result()
+        output_format: str = self.instructions.values.get('format')
+        text_result: tesseract_converter = self.text_result()
 
         if output_format == txt_format:
-            output_file = open(self.output_file + '/' + self.name_output, 'w', encoding="utf-8")
+            output_file: str = open(self.output_file + '/' + self.name_output, 'w', encoding="utf-8")
             output_file.write(text_result + '\n')
             output_file.close()
 
         elif output_format == pdf_format:
             width, height = A4
-            pdf_document = canvas.Canvas(self.output_file + '/' + self.name_output, pagesize=A4)
-            text = pdf_document.beginText(50, height - 50)
+            pdf_document: canvas = canvas.Canvas(self.output_file + '/' + self.name_output, pagesize=A4)
+            text: pdf_document = pdf_document.beginText(50, height - 50)
             text.textLines(text_result)
             pdf_document.drawText(text)
             pdf_document.showPage()
             pdf_document.save()
 
         elif output_format == docx_format:
-            document = Document()
+            document: any = Document()
             document.add_paragraph(text_result)
             document.save(self.output_file + '/' + self.name_output)
         else:

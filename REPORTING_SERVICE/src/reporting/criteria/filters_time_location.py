@@ -10,21 +10,21 @@
 # accordance with the terms of the license agreement you entered into
 # with Jalasoft.
 #
-
+import time
 from datetime import datetime
 
 
 class FiltersTimeLocation:
 
-    def __init__(self, start_time, end_time, location):
-        self.start_time = start_time
-        self.end_time = end_time
-        self.location = location
+    def __init__(self, start_time: time, end_time: time, location: str):
+        self.start_time: time = start_time
+        self.end_time: time = end_time
+        self.location: str = location
 
-    def fil_time_location(self, data_frame):
-        start_time = datetime.strptime(self.start_time, '%H:%M:%S').time()
-        end_time = datetime.strptime(self.end_time, '%H:%M:%S').time()
-        filters = (data_frame['start_time'] >= start_time) & \
+    def fil_time_location(self, data_frame: type) -> bool:
+        start_time: time = datetime.strptime(self.start_time, '%H:%M:%S').time()
+        end_time: time = datetime.strptime(self.end_time, '%H:%M:%S').time()
+        filters: bool= (data_frame['start_time'] >= start_time) & \
                   (data_frame['end_time'] <= end_time) & \
                   (data_frame['person_city'] == self.location)
         return filters

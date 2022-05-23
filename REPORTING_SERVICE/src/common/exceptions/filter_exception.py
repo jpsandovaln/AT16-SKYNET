@@ -15,6 +15,6 @@ from src.common.exceptions.reporting_exception import ReportingException
 
 
 class FilterException(ReportingException):
-    def __init__(self, message, status, code, filter):
-        self.filter = filter
+    def __init__(self, message: str, status: str, code: str, filter: str):
+        self.filter: str = filter
         super().__init__(message, status, code)

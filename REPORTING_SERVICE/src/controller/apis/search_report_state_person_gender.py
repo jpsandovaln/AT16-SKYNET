@@ -17,17 +17,17 @@ import json
 
 class SearchReportStatePersonGender:
     @staticmethod
-    def search_report_state_person_gender(parameters):
+    def search_report_state_person_gender(parameters) -> dict:
         # Validates parameters
         parameters.validate()
-        person_gender = parameters.get_person_gender()
-        state = parameters.get_state()
-        data_frame = parameters.get_data_frame()
+        person_gender: parameters = parameters.get_person_gender()
+        state: parameters = parameters.get_state()
+        data_frame: parameters = parameters.get_data_frame()
 
         # Execute the filter
-        filters = FiltersStatePersonGender(str(state), str(person_gender))
-        filter_result = filters.filters_state_person_gender(data_frame)
-        filter_rows = (data_frame[filter_result])
-        result = filter_rows.to_json(date_format="iso", orient="records")
-        parsed = json.loads(result)
+        filters: FiltersStatePersonGender = FiltersStatePersonGender(str(state), str(person_gender))
+        filter_result: bool = filters.filters_state_person_gender(data_frame)
+        filter_rows: any = (data_frame[filter_result])
+        result: any = filter_rows.to_json(date_format="iso", orient="records")
+        parsed: any = json.loads(result)
         return json.dumps(parsed)

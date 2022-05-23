@@ -27,10 +27,10 @@ class Connection:
     # Connect the psql
     @staticmethod
     def connection_psql():
-        conn = psycopg2.connect(database=DB_NAME, user=USER,
+        conn: any = psycopg2.connect(database=DB_NAME, user=USER,
                                 password=PASSWORD, host=HOST)
-        conn.autocommit = True
-        cur = conn.cursor()
+        conn.autocommit: bool = True
+        cur: any = conn.cursor()
         return cur
 
     # Create tables in psql

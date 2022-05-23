@@ -19,10 +19,10 @@ from src.reporting.criteria.cache import Cache
 
 class Graphics():
 
-    def create_graph(self):
-        result = Cache.load_cache()
-        df = pd.DataFrame(data=result)
-        result_graphs = df.groupby(['person_gender']).size().reset_index(name='cantidad')
+    def create_graph(self) -> dict:
+        result: any = Cache.load_cache()
+        df: any = pd.DataFrame(data=result)
+        result_graphs: any = df.groupby(['person_gender']).size().reset_index(name='cantidad')
         plt.bar(result_graphs['person_gender'], result_graphs['cantidad'], color=['pink', 'blue'])
         # create the bar plot
         plt.xlabel("Genero")
@@ -30,8 +30,8 @@ class Graphics():
         plt.title("Reporting server")
         plt.show()
         # the converts the graphic to json
-        result_json = result_graphs.to_json(date_format="iso", orient="records")
-        result_loaded = json.loads(result_json)
+        result_json: dict = result_graphs.to_json(date_format="iso", orient="records")
+        result_loaded: dict = json.loads(result_json)
         return json.dumps(result_loaded)
 
 

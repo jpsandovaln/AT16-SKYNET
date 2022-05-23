@@ -14,6 +14,6 @@ from src.common.exceptions.booking_service_exception import BookingServiceExcept
 
 
 class BookingException(BookingServiceException):
-    def __init__(self, message, status, code, type):
-        self.type = type
+    def __init__(self, message: str, status: str, code: str, type: str):
+        self.type: str = type
         super().__init__(message, status, code)

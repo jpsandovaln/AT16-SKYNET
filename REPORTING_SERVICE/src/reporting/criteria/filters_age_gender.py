@@ -12,11 +12,11 @@
 #
 
 class FiltersAgeGender:
-    def __init__(self, person_age, person_gender):
-        self.person_age = person_age
-        self.person_gender = person_gender
+    def __init__(self, person_age: int, person_gender: str):
+        self.person_age: int = person_age
+        self.person_gender: str = person_gender
 
-    def filters_age_gender(self, data_frame):
-        filters = (data_frame["person_age"] < self.person_age) & \
+    def filters_age_gender(self, data_frame: type) -> bool:
+        filters: bool = (data_frame["person_age"] < self.person_age) & \
                   (data_frame["person_gender"] == self.person_gender)
         return filters
