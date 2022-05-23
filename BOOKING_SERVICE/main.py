@@ -15,9 +15,10 @@ from src.model.resource import Resource
 from src.model.person import Person
 from src.model.booking import Booking
 from flask import Flask, request, Response, jsonify
-
+from flask_cors import CORS
 
 app: Flask = Flask(__name__)
+cors = CORS(app)
 
 
 # Create a Resource for Booking

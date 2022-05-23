@@ -35,7 +35,7 @@ class ConvertVideo(Convertor):
         dic: dict = self.init_dic()
         cmd_input: str = ""
         for key in dic:
-            val = self.instructions.values.get(key)
+            val: any = self.instructions.values.get(key)
             if len(val) > 0:
                 if key == 'width':
                     cmd_input += 'scale=' + dic[key].format(val)

@@ -91,23 +91,28 @@ class Parameters:
         translator_converters: list = ['txt']
         wav_converters: list = ['wav']
         names: any = self.file.split('.')
-        if self.request.values.get('convert') == 'OCR' and names[1] not in ocr_converters:
+
+        if self.request.values.get('convert') == 'OCR' and names[1].lower() not in ocr_converters:
             raise ParameterException("format file is Not a recognized format", "402",
                                      "AT16-ERR-307")
-        elif self.request.values.get('convert') == 'Audio' and names[1] not in audio_converters:
+        elif self.request.values.get('convert') == 'Audio' and names[1].lower() not in \
+                audio_converters:
             raise ParameterException("format file is Not a recognized format", "402",
                                      "AT16-ERR-306")
-        elif self.request.values.get('convert') == 'Video' and names[1] not in video_converters:
+        elif self.request.values.get('convert') == 'Video' and names[1].lower() not in \
+                video_converters:
             raise ParameterException("format file is Not a recognized format", "402",
                                      "AT16-ERR-306")
-        elif self.request.values.get('convert') == 'Image' and names[1] not in image_converters:
+        elif self.request.values.get('convert') == 'Image' and names[1].lower() not in \
+                image_converters:
             raise ParameterException("format file is Not a recognized format", "402",
                                      "AT16-ERR-306")
-        elif self.request.values.get('convert') == 'Translator' and names[1] not in \
+        elif self.request.values.get('convert') == 'Translator' and names[1].lower() not in \
                 translator_converters:
             raise ParameterException("format file is Not a recognized format", "402",
                                      "AT16-ERR-306")
-        elif self.request.values.get('convert') == 'WavTxt' and names[1] not in wav_converters:
+        elif self.request.values.get('convert') == 'WavTxt' and names[1].lower() not in \
+                wav_converters:
             raise ParameterException("format file is Not a recognized format", "402",
                                      "AT16-ERR-306")
         else:

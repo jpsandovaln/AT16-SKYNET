@@ -135,6 +135,15 @@ services:
     ports:
       - "6006:6006"
 
+  swagger_convert:
+    container_name: swagger_convert
+    restart: always
+    build: ./SWAGGER_CONVERT
+    networks:
+      - skynet_network
+    ports:
+      - "6007:6007"
+
 networks:
   skynet_network:
     driver: bridge
