@@ -91,6 +91,7 @@ class Parameters:
         translator_converters: list = ['txt']
         wav_converters: list = ['wav']
         names: any = self.file.split('.')
+
         if self.request.values.get('convert') == 'OCR' and names[1].lower() not in ocr_converters:
             raise ParameterException("format file is Not a recognized format", "402",
                                      "AT16-ERR-307")
