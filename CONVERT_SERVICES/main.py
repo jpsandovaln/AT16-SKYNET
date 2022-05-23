@@ -32,11 +32,9 @@ from flask import Response
 from flask_cors import CORS
 import os
 
-
 UPLOAD_FOLDER: str = r'saved_files\upload'  # here que common files are saved
 DOWNLOADER_FOLDER: str = r'saved_files\{}'  # here que specific files are saved after convert
 SEVER_URL_DOWNLOAD: str = r'http://127.0.0.1:5003/downloader/'
-
 
 app: Flask = Flask(__name__)
 app.config['UPLOAD_FOLDER']: str = UPLOAD_FOLDER

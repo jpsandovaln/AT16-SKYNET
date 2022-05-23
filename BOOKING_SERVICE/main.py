@@ -20,6 +20,7 @@ from flask_cors import CORS
 app: Flask = Flask(__name__)
 cors = CORS(app)
 
+
 # Create a Resource for Booking
 @app.route('/resource', methods=['POST'])
 def create_resource() -> dict:

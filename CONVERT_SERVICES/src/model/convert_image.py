@@ -32,11 +32,11 @@ class ConvertImage(Convertor):
     # Method to compare the data
     def init_dic(self):
         dic_param: dict = {'color': ' -colorspace {} ',
-                           'height': 'x{}! ',
-                           'width': ' -resize {}',
                            'rotate': ' -rotate {} ',
                            'vertical_flip': ' -flip ',
-                           'horizontal_flip': ' -flop '}
+                           'horizontal_flip': ' -flop ',
+                           'width': ' -resize {}',
+                           'height': 'x{}! '}
         return dic_param
 
     # Method to create the ffmpeg command.
