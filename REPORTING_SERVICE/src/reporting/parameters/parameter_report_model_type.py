@@ -18,29 +18,29 @@ from src.common.exceptions.parameter_exception import ParameterException
 
 class ParameterReportModelType:
 
-    def __init__(self, resource_model, resource_type, data_frame):
-        self.resource_model = resource_model
-        self.resource_type = resource_type
-        self.data_frame = data_frame
+    def __init__(self, resource_model: str, resource_type: str, data_frame: type):
+        self.resource_model: str = resource_model
+        self.resource_type: str = resource_type
+        self.data_frame: type = data_frame
 
-    def get_resource_model(self):
+    def get_resource_model(self) -> str:
         return self.resource_model
 
-    def get_resource_type(self):
+    def get_resource_type(self) -> str:
         return self.resource_type
 
-    def get_data_frame(self):
+    def get_data_frame(self) -> type:
         return self.data_frame
 
     def validate(self):
         if self.resource_model is None or str(self.resource_model).strip() == "":
-            message = "Invalid resource_model, the value is empty"
+            message: str = "Invalid resource_model, the value is empty"
             raise ParameterException(message, "401", "AT16-ERR-351")
 
         if self.resource_type is None or str(self.resource_type).strip() == "":
-            message = "Invalid resource_type, the value is empty"
+            message: str = "Invalid resource_type, the value is empty"
             raise ParameterException(message, "401", "AT16-ERR-352")
 
         if self.data_frame is None or type(self.data_frame) != pd.DataFrame:
-            message = "Invalid data_frame, the value is incorrect"
+            message: str = "Invalid data_frame, the value is incorrect"
             raise ParameterException(message, "401", "AT16-ERR-353")

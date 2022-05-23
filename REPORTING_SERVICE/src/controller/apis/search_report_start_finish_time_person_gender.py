@@ -17,17 +17,17 @@ from src.reporting.criteria.filter_time_person_gender import FiltersStartFinishT
 
 class SearchReportStartFinishTimePersonGender:
     @staticmethod
-    def search_report_start_finish_time_person_gender(parameters):
+    def search_report_start_finish_time_person_gender(parameters) -> dict:
         # Validates parameters
         parameters.validate()
-        open_time = parameters.get_open_time()
-        close_time = parameters.get_close_time()
-        data_frame = parameters.get_data_frame()
+        open_time: parameters = parameters.get_open_time()
+        close_time: parameters = parameters.get_close_time()
+        data_frame: parameters = parameters.get_data_frame()
 
         # Executes the filter
-        filters = FiltersStartFinishTimePersonGender(open_time, close_time)
-        filter_result = filters.filters_start_finish_time_person_gender(data_frame)
-        result_filter = filter_result.to_json(date_format="iso",
+        filters: FiltersStartFinishTimePersonGender = FiltersStartFinishTimePersonGender(open_time, close_time)
+        filter_result: bool = filters.filters_start_finish_time_person_gender(data_frame)
+        result_filter: any = filter_result.to_json(date_format="iso",
                                             orient="records")
-        parsed = json.loads(result_filter)
+        parsed: any = json.loads(result_filter)
         return json.dumps(parsed)

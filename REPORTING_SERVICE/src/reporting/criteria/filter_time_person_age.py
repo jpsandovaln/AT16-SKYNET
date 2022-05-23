@@ -10,6 +10,7 @@
 # accordance with the terms of the license agreement you entered into
 # with Jalasoft.
 #
+import time
 from csv import excel
 from textwrap import fill
 
@@ -20,15 +21,14 @@ from src.common.exceptions.filter_exception import FilterException
 
 
 class Filters_Start_Finish_Time_Person_Age:
-    def __init__(self, start_time, finish_time, person_age):
-        self.start_time = start_time
-        self.finish_time = finish_time
-        self.person_age = person_age
+    def __init__(self, start_time: time, finish_time: time, person_age: int):
+        self.start_time: time = start_time
+        self.finish_time: time = finish_time
+        self.person_age: int = person_age
 
-    def filters_start_finish_time_person_age(self):
-
+    def filters_start_finish_time_person_age(self) -> bool:
         Criteria.validate_criteria()
-        filters = (Criteria.get_df()["start_time"] >= self.start_time) & \
+        filters: bool = (Criteria.get_df()["start_time"] >= self.start_time) & \
                   (Criteria.get_df()["end_time"] <= self.finish_time) \
                   & (Criteria.get_df()["person_age"] >= self.person_age)
         if filters is None or filters == "":
@@ -36,7 +36,5 @@ class Filters_Start_Finish_Time_Person_Age:
                                   "Filters_Start_Finish_Time_Person_Age")
         else:
             return filters
-
-
 
 

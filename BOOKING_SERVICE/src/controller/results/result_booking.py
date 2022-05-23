@@ -11,8 +11,8 @@
 # with Jalasoft.
 #
 class ResultBooking(object):
-    def __init__(self, status):
-        self.status = status
+    def __init__(self, status: str):
+        self.status: str = status
 
-    def get_status(self):
+    def get_status(self) -> str:
         return self.status

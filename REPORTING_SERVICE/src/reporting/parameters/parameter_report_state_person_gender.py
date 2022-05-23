@@ -18,29 +18,29 @@ from src.common.exceptions.parameter_exception import ParameterException
 
 class ParameterReportStatePersonGender:
 
-    def __init__(self, person_gender, state, data_frame):
-        self.person_gender = person_gender
-        self.state = state
-        self.data_frame = data_frame
+    def __init__(self, person_gender: str, state: str, data_frame: type):
+        self.person_gender: str = person_gender
+        self.state: str = state
+        self.data_frame: type = data_frame
 
-    def get_person_gender(self):
+    def get_person_gender(self) -> str:
         return self.person_gender
 
-    def get_state(self):
+    def get_state(self) -> str:
         return self.state
 
-    def get_data_frame(self):
+    def get_data_frame(self) -> type:
         return self.data_frame
 
     def validate(self):
         if self.person_gender is None or str(self.person_gender).strip() == "":
-            message = "Invalid person_gender, the value is empty"
+            message: str = "Invalid person_gender, the value is empty"
             raise ParameterException(message, "401", "AT16-ERR-351")
 
         if self.state is None or str(self.state).strip() == "":
-            message = "Invalid state, the value is empty"
+            message: str = "Invalid state, the value is empty"
             raise ParameterException(message, "401", "AT16-ERR-352")
 
         if self.data_frame is None or type(self.data_frame) != pd.DataFrame:
-            message = "Invalid data_frame, the value is incorrect"
+            message: str = "Invalid data_frame, the value is incorrect"
             raise ParameterException(message, "401", "AT16-ERR-353")
