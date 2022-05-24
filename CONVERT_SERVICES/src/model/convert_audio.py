@@ -25,8 +25,8 @@ class ConvertAudio(Convertor):
     # Method to compare the data
     def init_dic(self) -> dict:
         dic_param: dict = {'bitrate': 'ab {}k ',
-                           'sample-rate': 'ar {} ',
-                           'audio-channel': 'ac {} '}
+                           'sample_rate': 'ar {} ',
+                           'audio_channel': 'ac {} '}
         return dic_param
 
     # Method to create the ffmpeg command.

@@ -39,11 +39,13 @@ from src.reporting.parameters.parameter_report_time_person_gender import \
     ParameterReportTimePersonGender
 from src.reporting.parameters.parameter_report_date_person_country import \
     ParameterReportDatePersonCountry
+from flask_cors import CORS
 
 UPLOAD_FOLDER: str = 'saved_files/'  # here is the file where the images will be downloaded
 app: Flask = Flask(__name__)
 app.config['UPLOAD_FOLDER']: str = UPLOAD_FOLDER
 api: Api = Api(app)
+cors = CORS(app)
 
 
 @app.route('/search_report_start_finish_time_person_gender', methods=['POST'])
