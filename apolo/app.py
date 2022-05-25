@@ -4,8 +4,8 @@ from ariadne import load_schema_from_path, make_executable_schema, \
     graphql_sync, snake_case_fallback_resolvers, ObjectType
 from ariadne.constants import PLAYGROUND_HTML
 from flask import request, jsonify
-from api.queries import listPosts_resolver, getPost_resolver, listPosts_resolver_person, getPost_resolver_person
-from api.mutations import create_post_resolver, update_post_resolver, delete_post_resolver, create_post_resolver_person, update_post_resolver_person
+from api.queries import listPosts_resolver, getPost_resolver, listPosts_resolver_person, getPost_resolver_person, listPosts_resolver_booking
+from api.mutations import create_post_resolver, update_post_resolver, delete_post_resolver, create_post_resolver_person, update_post_resolver_person, update_post_resolver_booking
 
 query = ObjectType("Query")
 mutation = ObjectType("Mutation")
@@ -16,12 +16,16 @@ query.set_field("getPost", getPost_resolver)
 query.set_field("listPostsPerson", listPosts_resolver_person)
 query.set_field("getPostPerson", getPost_resolver_person)
 
+query.set_field("listPostsBooking", listPosts_resolver_booking)
+
 mutation.set_field("createPost", create_post_resolver)
 mutation.set_field("updatePost", update_post_resolver)
 mutation.set_field("deletePost", delete_post_resolver)
 
 mutation.set_field("createPerson", create_post_resolver_person)
 mutation.set_field("updatePerson", update_post_resolver_person)
+
+mutation.set_field("updateBooking", update_post_resolver_booking)
 
 type_defs = load_schema_from_path("schema.graphql")
 schema = make_executable_schema(

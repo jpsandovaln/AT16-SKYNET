@@ -3,7 +3,7 @@ from datetime import date
 from ariadne import convert_kwargs_to_snake_case
 
 from api import db
-from api.models import Post, Person
+from api.models import Post, Person, Person_put, Booking_put
 from decouple import config
 address = config('address')
 import requests
@@ -108,11 +108,11 @@ def create_post_resolver_person(obj, info, name, age, city, country, gender):
 
 
 @convert_kwargs_to_snake_case
-def update_post_resolver_person(obj, info, id_person, city):
+def update_post_resolver_person(obj, info, id_person, age=None, city=None, country=None, name=None, gender=None):
     try:
         url = address + '/person/' + id_person
-        dates = {'person_city': city}
-        response = requests.put(url, json=dates)
+        put = Person_put(age, city, country, name, gender)
+        response = requests.put(url, json=put.to_dict())
         payload = {
             "success": True,
             "post": response.json()
@@ -122,5 +122,54 @@ def update_post_resolver_person(obj, info, id_person, city):
             "success": False,
             "errors": ["item matching id {id} not found"]
         }
+    return payload
 
+
+@convert_kwargs_to_snake_case
+def create_post_resolver_Booking(obj, info, description, subject, person_id, resource_id, date, end_time, start_time, state, type):
+    try:
+        url = address + '/booking'
+
+        post = Person(
+            description=description,
+            subject = subject,
+            person_id = person_id,
+            resource_id = resource_id,
+            date = date,
+            end_time = end_time,
+            start_time = start_time,
+            state = state,
+            type = type
+        )
+        response = requests.post(url, json=post.to_dict())
+        payload = {
+
+            "success": True,
+            "post": response.json()
+        }
+    except ValueError:  # date format errors
+
+        payload = {
+
+            "success": False,
+            "errors": [f"Incorrect date format provided. Date should be in "
+                       f"the format dd-mm-yyyy"]
+        }
+
+    return payload
+
+def update_post_resolver_booking(obj, info, id_booking, description=None, subject=None, person_id=None, resource_id=None, date=None, end_time=None, start_time=None, state=None, type=None):
+    try:
+        url = address + '/booking/' + id_booking
+        put = Booking_put(description, subject, person_id, resource_id, date, end_time, start_time, state, type)
+        response = requests.put(url, json=put.to_dict())
+        payload = {
+            "success": True,
+            "post": response.json()
+        }
+    except AttributeError:  # todo not found
+        payload = {
+            "success": False,
+            "errors": ["item matching id {id} not found"]
+        }
     return payload

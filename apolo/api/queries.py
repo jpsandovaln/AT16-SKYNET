@@ -73,3 +73,19 @@ def getPost_resolver_person(obj, info, id):
         }
 
     return payload
+
+@convert_kwargs_to_snake_case
+def listPosts_resolver_booking(obj, info):
+    try:
+        url = address + '/booking'
+        response = requests.get(url)
+        payload = {
+            "success": True,
+            "posts": response.json()
+        }
+    except Exception as error:
+        payload = {
+            "success": False,
+            "errors": [str(error)]
+        }
+    return payload

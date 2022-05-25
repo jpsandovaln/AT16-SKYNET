@@ -10,6 +10,8 @@ type Resource {
     resource_state: String!
     resource_type: String!
 }
+
+
 type Person {
     _id: ID!
     delete: Int!
@@ -18,6 +20,33 @@ type Person {
     person_country: String!
     person_full_name: String!
     person_gender: String!
+}
+
+type details{
+    description: String!
+    subject: String!
+}
+type schedule{
+    date: String!
+    start_time: String!
+    end_time: String!
+}
+type resource{
+    id: [String!]
+}
+type person{
+    id: String!
+}
+
+type Booking {
+    _id: ID!
+    delete: Int!
+    details: details!
+    schedule: schedule!
+    state: String!
+    type: String!
+    resource: resource!
+    person: person!
 }
 
 type PostResult {
@@ -37,15 +66,32 @@ type PostsResult {
     errors: [String]
     posts: [Resource]
 }
+
+
 type PostsResultPerson {
     success: Boolean!
     errors: [String]
     posts: [Person]
 }
 
+type PostBooking {
+    success: Boolean!
+    errors: [String]
+    post: Booking
+}
+
+type PostsResultBooking {
+    success: Boolean!
+    errors: [String]
+    posts: [Booking]
+}
+
+
+
 type Query {
     listPosts: PostsResult!
     listPostsPerson: PostsResultPerson!
+    listPostsBooking: PostsResultBooking!
     getPost(id: ID!): PostResult!
     getPostPerson(id: ID!): PostPerson!
 }
@@ -55,5 +101,7 @@ type Mutation {
     updatePost(id_source: ID!, name: String!  ): PostResult!
     deletePost(id_source: ID): PostResult!
     createPerson(name: String!, age: String!, city:String!, country:String!, gender:String! ): PostPerson!
-    updatePerson(id_person: ID!, city: String): PostPerson!
+    updatePerson(id_person: ID!, age: String, city:String, country:String, name: String, gender:String): PostPerson!
+    createBooking(id_booking: ID!, description: String!, subject:String!, person_id:String!, resource_id:String!, date:String!, end_time:String!, start_time:String!, state:String!, type:String!): PostBooking!
+    updateBooking(id_booking: ID!, description: String, subject:String, person_id:String, resource_id:String, date:String, end_time:String, start_time:String, state:String, type:String): PostBooking!
 }
