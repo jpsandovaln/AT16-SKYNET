@@ -1,0 +1,168 @@
+schema {
+#    query: Query
+    mutation: Mutation
+}
+
+type post_body{
+    mode:String!,
+    fromdata:Mutation_vgg!
+}
+type post_fromdata{
+    key_file: String!,
+    tipe_file:String!,
+    src_url:String!
+    key_name: String!,
+    value_race:String!,
+    tipe_text:String!
+    key_percentage: String!,
+    value_model:String!,
+    tipe_text_model:String!
+    key_percentage: String!,
+    value_num:String!,
+    tipe_text_percentage:String
+}
+
+type Mutation_vgg {
+    createPost(key: String!, tipes: String!, src:String!): post_fromdata!
+    updatePost(value: ID!, pug: String!): PostResult!
+    deletePost(type: ID!, text: String!) :PostResult!
+}
+#type Mutation {
+#    createPost(key: String!, percentage: String!): PostResult!
+#    updatePost(value: ID!, value: String!): PostResult!
+#    deletePost(type: ID!, text: String!) :PostResult!
+#}
+#type Mutation {
+#    createPost(key: String!, model: String!): PostResult!
+#    updatePost(value: ID!, InceptionV3: String!): PostResult!
+#    deletePost(type: ID!, text: String!) :PostResult!
+#}
+
+#type Post mutation vgg16 {
+#  createPost(mode: string!, formdata: [
+#      {
+#          key: string!,
+#          type: "file",
+#          src: "/C:/Users/Jhon/Pictures/Machine Learning/images_vgg16.zip"
+#      },
+#      {
+#          key: "name",
+#          value: "Siberian_husky",
+#          type: "text"
+#      },
+#      {
+#          key: "model",
+#          value: "ModelVgg16",
+#          type: "text"
+#      },
+#      {
+#          key: "percentage",
+#          value: "0.2",
+#          type: "text"
+#      }
+#  ]
+#  )}
+#type Post mutation inception {
+#  addBook(mode: "formdata",
+#        formdata: [
+#        {
+#        key: "file",
+#        type: "file",
+#        src: "/C:/Users/Jhon/Pictures/Machine Learning/images_inceptionV3.zip"
+#        },
+#        {
+#        key: "name",
+#        value: "pug",
+#        type: "text"
+#        },
+#        {
+#        key: "percentage",
+#        value: "0.8",
+#        type: "text"
+#        },
+#        {
+#        key: "model",
+#        value: "InceptionV3",
+#        type: "text"
+#        }
+#        ]
+#        )}
+
+#type Post mutation iris_recognition {
+#  addBook(mode: "formdata", formdata: [
+#						{
+#							key: "file",
+#							type: "file",
+#							src: "/C:/Users/Jhon/Pictures/Machine Learning/Donald/Img_037_L_3.bmp"
+#						},
+#						{
+#							key: "percentage",
+#							value: "0.6",
+#							type: "text"
+#						},
+#						{
+#							key: "",
+#							value: "",
+#							type: "text",
+#							disabled: true
+#						}
+#					]
+#)}
+#type Post mutation iris_train {
+#  addBook(mode: "formdata",    formdata: [
+#      {
+#          key: "zip",
+#          type: "file",
+#          src: "/C:/Users/Jhon/Pictures/Machine Learning/Donald.zip"
+#      }
+#  ]
+#response: []
+#)},
+
+#type Mutation {
+#    createPost(key: String!, name: String!): dataresult!
+#    updatePost(value: ID!, pug: String!): dataresult!
+#    deletePost(type: ID!, text: String!) :dataresult!
+#}
+#type Mutation {
+#    createPost(key: String!, percentage: String!): dataresult!
+#    updatePost(value: ID!, value: String!): dataresult!
+#    deletePost(type: ID!, text: String!) :dataresult!
+#}
+#type Mutation {
+#    createPost(key: String!, model: String!): dataresult!
+#    updatePost(value: ID!, InceptionV3: String!): dataresult!
+#    deletePost(type: ID!, text: String!) :dataresult!
+#}
+
+#mutation ReportSchemaMutation($coreSchema: String, $report: SchemaReport!) {
+#  reportSchema(coreSchema: $coreSchema, report: $report) {
+#    inSeconds
+#    withCoreSchema
+#    ... on ReportSchemaError {
+#      code
+#      message
+#    }
+#  }
+#}
+
+#type Mutation {
+#    createPost(name: String!, type: String!, model: String!, state: String!): PostResult!
+#    updatePost(id_source: ID!, name: String!  ): PostResult!
+#    deletePost(id_source: ID): PostResult!
+#    createPerson(name: String!, age: String!, city:String!, country:String!, gender:String! ): PostPerson!
+#    updatePerson(id_person: ID!, city: String): PostPerson!
+#}
+#"Description for the type"
+#type MyObjectType {
+#  """
+#  Description for field
+#  Supports **multi-line** description for your [API](http://example.com)!
+#  """
+#  myField: String!
+#
+#  otherField(
+#    "Description for argument"
+#    arg: Int
+#  )
+#}
