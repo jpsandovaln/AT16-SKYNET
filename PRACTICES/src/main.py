@@ -8,6 +8,8 @@ from src.composite.software import SoftWare
 from src.composite.hardware import HardWare
 from src.composite.composite import CompositeProduct
 from src.composite.sales import Sales
+from src.memento.computer import Computer
+from src.memento.caretaker import Caretaker
 
 if __name__ == "__main__":
     print(11)
@@ -60,6 +62,7 @@ if __name__ == "__main__":
     atm = ATM(492)
     atm.get_money()
     """
+    """
     memory = HardWare("memory", 100, "abc")
     hdd = HardWare("hdd", 200, "xyz")
     motherboard = HardWare("motherboard", 300, "asus")
@@ -107,3 +110,35 @@ if __name__ == "__main__":
     sales4.add_product(product_pc2)
     sales4.add_product(motherboard)
     sales4.display()
+    """
+    computer = Computer("unix", "16GB", "1TB")
+    computer.to_string()
+    print("---------------------------")
+    computer.os = "win"
+    computer.memory = "128MB"
+    computer.hdd = "512GB"
+    computer.to_string()
+
+    computer2 = Computer("win", "128MB", "512GB")
+    computer2.to_string()
+
+    print("+++++++++++++++++++++++++++++")
+    computer3 = Computer("unix", "16GB", "1TB")
+    computer3.to_string()
+    caretaker = Caretaker()
+    caretaker.add_computer(1, computer3.backup())
+
+    print("---------------------------")
+    computer3.os = "win"
+    computer3.memory = "128MB"
+    computer3.hdd = "512GB"
+    computer3.to_string()
+    caretaker.add_computer(2, computer3.backup())
+
+    print("---------------------------")
+    computer3.restore(caretaker.get_computer(1))
+    computer3.to_string()
+
+    print("---------------------------")
+    computer3.restore(caretaker.get_computer(2))
+    computer3.to_string()
