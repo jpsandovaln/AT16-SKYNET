@@ -15,18 +15,18 @@ import os
 
 
 class ControllerFaceRecognizer:
-    def __init__(self, request, save_location):
-        self.request = request
-        self.save_location = save_location
-        self.name_request = request.form.get('name')
+    def __init__(self, request: any, save_location: any):
+        self.request: any = request
+        self.save_location: any = save_location
+        self.name_request: any = request.form.get('name')
 
     def save_file(self):
-        file = self.request.files['file']
+        file: any = self.request.files['file']
         file.save(os.path.join(self.save_location, file.filename))
 
     def get_path(self):
         if self.request.method == 'POST':
-            file_request = self.request.files['file']
+            file_request: any = self.request.files['file']
             file_request.save(os.path.join(self.save_location, file_request.filename))
             print(os.path.join(self.save_location, file_request.filename))
         return os.path.join(self.save_location, file_request.filename)

@@ -11,15 +11,15 @@
 # with Jalasoft.
 #
 
-from flask import send_file
+from flask import send_file, Response
 import os
 
 
 class Downloader:
-    def __init__(self, request, source_folder, file_name):
-        self.request = request
-        self.source_folder = source_folder
-        self.file_name = file_name
+    def __init__(self, request: any, source_folder: any, file_name: str):
+        self.request: any = request
+        self.source_folder: any = source_folder
+        self.file_name: str = file_name
 
-    def donwload(self):
+    def donwload(self) -> Response:
         return send_file(os.path.join(self.source_folder, self.file_name), as_attachment=True)

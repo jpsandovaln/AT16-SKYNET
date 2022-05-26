@@ -25,32 +25,32 @@ from src.model.model_iris_recognition.parameter_train_model import ParametersTra
 
 # This is for to upload a file.
 class ControllerIrisTrain:
-    def __init__(self, request, save_location):
-        self.request = request
-        self.save_location = save_location
+    def __init__(self, request: any, save_location: any):
+        self.request: any = request
+        self.save_location: any = save_location
 
     # This is for to request a file and a percentage
-    def upload(self):
+    def upload(self) -> dict:
         if self.request.method == 'POST':
             try:
-                zip_request = self.request.files['zip']
-                path_saved_zip = os.path.join(self.save_location, zip_request.filename)
-                parameters = ParametersTrainModel(path_saved_zip)
+                zip_request: any = self.request.files['zip']
+                path_saved_zip: bytes | str = os.path.join(self.save_location, zip_request.filename)
+                parameters: ParametersTrainModel = ParametersTrainModel(path_saved_zip)
                 parameters.validate()
                 zip_request.save(path_saved_zip)
                 parameters.validate_file()
-                path_zip = UnzipFile(path_saved_zip)
+                path_zip: UnzipFile = UnzipFile(path_saved_zip)
                 path_zip.decom_zip()
 
-                result = TrainModel.train_model()
-                result_model = SuccessResult(HTTPStatus.OK, str(result))
+                result: str = TrainModel.train_model()
+                result_model: SuccessResult = SuccessResult(HTTPStatus.OK, str(result))
                 return Response(
                     json.dumps(result_model.__dict__),
                     status=HTTPStatus.OK,
                     mimetype='application/json'
                 )
             except MachineLearningException as error:
-                result_error = ErrorResult(error.status, error.message,
+                result_error: ErrorResult = ErrorResult(error.status, error.message,
                                            error.code)
                 return Response(
                     json.dumps(result_error.__dict__),
@@ -58,7 +58,7 @@ class ControllerIrisTrain:
                     mimetype='application/json'
                 )
             except Exception as error:
-                result_error = ErrorResult(HTTPStatus.NOT_FOUND, error,
+                result_error: ErrorResult = ErrorResult(HTTPStatus.NOT_FOUND, error,
                                            'AT16-000451')
                 return Response(
                     json.dumps(result_error.__dict__),

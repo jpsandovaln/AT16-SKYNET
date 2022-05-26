@@ -17,8 +17,8 @@ import os
 
 # Parameter needed in order to train the model
 class ParametersTrainModel:
-    def __init__(self, zip):
-        self.zip = zip
+    def __init__(self, zip: any):
+        self.zip: any = zip
 
     # Adding exceptions
     def validate(self):
@@ -38,7 +38,7 @@ class ParametersTrainModel:
         if self.zip is None or str(self.zip).strip() == "":
             raise ParameterException("Invalid file, the value is empty", "401",
                                      "AT16-ERR-300", "Iris recognition model")
-        is_file = os.path.isfile(self.zip)
+        is_file: bool = os.path.isfile(self.zip)
 
         if not is_file:
             raise ParameterException("It is not file", "402", "AT16-ERR-305",

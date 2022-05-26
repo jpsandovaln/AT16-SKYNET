@@ -15,7 +15,7 @@ import os
 import cv2
 from decouple import config
 
-path_img = config('PATH_IMAGE')
+path_img: any = config('PATH_IMAGE')
 
 
 # Load the image file
@@ -23,18 +23,18 @@ class LoadFiles:
 
     # Load the images of some person in order to train the model
     @staticmethod
-    def load_img_train():
-        images_train = []
-        images_dict = {}
+    def load_img_train() -> dict[any, list]:
+        images_train: list = []
+        images_dict: dict[any, list] = {}
         for dirpath, dirnames, filenames in os.walk(path_img):
-            path_components = dirpath.split(os.sep)
-            name_path = path_components[-1]
+            path_components: any = dirpath.split(os.sep)
+            name_path: any = path_components[-1]
             for f in filenames:
                 images_train.append(cv2.imread('{}\{}'.format(dirpath, f)))
             if not images_train:
                 pass
             else:
-                images_dict[name_path] = images_train
-                images_train = []
+                images_dict[name_path]: dict[any, list] = images_train
+                images_train: list = []
         return images_dict
     

@@ -12,14 +12,16 @@
 #
 
 import pickle
+from typing import TextIO
+
 from src.model.model_iris_recognition.recognition import Recognition
 from src.model.model_iris_recognition.load_image_train import LoadFiles
 from src.common.exceptions.execute_exception import ExecuteException
 from decouple import config
 
-path_img = config('PATH_IMAGE')
-filename = config('FILENAME')
-write_bin = 'wb'
+path_img: any = config('PATH_IMAGE')
+filename: any = config('FILENAME')
+write_bin: str = 'wb'
 
 
 # Training the iris recognition
@@ -27,17 +29,17 @@ class TrainModel:
 
     # Training the model
     @staticmethod
-    def train_model():
-        code_mask_list = []
-        images_dic = LoadFiles.load_img_train()
+    def train_model() -> str:
+        code_mask_list: list = []
+        images_dic: dict[any, list[None]] = LoadFiles.load_img_train()
         try:
             for name, imgs in images_dic.items():
                 for img in imgs:
-                    image2 = img
-                    recognition = Recognition()
+                    image2: None = img
+                    recognition: Recognition = Recognition()
                     code2, mask2 = recognition.encode_photo(image2)
                     code_mask_list.append([name, code2, mask2])
-            outfile = open(filename, write_bin)
+            outfile: TextIO = open(filename, write_bin)
             pickle.dump(code_mask_list, outfile)
             outfile.close()
             return 'Model Trained'
