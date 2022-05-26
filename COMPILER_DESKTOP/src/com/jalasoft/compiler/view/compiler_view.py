@@ -15,3 +15,6 @@ class CompilerView(QMainWindow):
         self.setCentralWidget(self.main_widget)
         self.showMaximized()
         self.show()
+
+    def get_main_widget(self):
+        return self.main_widget
