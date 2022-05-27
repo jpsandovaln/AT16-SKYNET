@@ -134,6 +134,14 @@ services:
       - skynet_network
     ports:
       - "6006:6006"
+  swagger_machine:
+    container_name: swagger_machine
+    restart: always
+    build: ./SWAGGER_MACHINE_LEARNING
+    networks:
+      - skynet_network
+    ports:
+      - "6004:6004"
 
   swagger_convert:
     container_name: swagger_convert
