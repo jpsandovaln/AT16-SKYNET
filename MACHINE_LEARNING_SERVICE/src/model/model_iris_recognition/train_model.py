@@ -16,9 +16,12 @@ from src.model.model_iris_recognition.recognition import Recognition
 from src.model.model_iris_recognition.load_image_train import LoadFiles
 from src.common.exceptions.execute_exception import ExecuteException
 from decouple import config
+from absolute_path import AbsolutePath
+import os
 
-path_img = config('PATH_IMAGE')
-filename = config('FILENAME')
+absolute_path = AbsolutePath.get_absolute_path()
+filename = os.path.join(absolute_path, config('FILENAME'))
+path_img = os.path.join(absolute_path, config('PATH_IMAGE'))
 write_bin = 'wb'
 
 
@@ -44,4 +47,3 @@ class TrainModel:
         except Exception as error:
             raise ExecuteException(error, "AT16-ERR-302", '400',
                                    'Iris recognition model')
-            

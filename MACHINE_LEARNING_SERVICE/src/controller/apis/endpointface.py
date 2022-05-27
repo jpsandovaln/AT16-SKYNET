@@ -12,6 +12,10 @@
 #
 
 import os
+from decouple import config
+
+
+URL = config('URL')
 
 
 # Class para endpoint in Postman
@@ -32,4 +36,4 @@ class EndPointConverter:
 
     # Download files in folder of Machine Learning Saved Files
     def Send_File(self, dir_output, file_name):
-        return ( r'http://127.0.0.1:5000/downloader/' + os.path.join(dir_output, file_name))
+        return URL + os.path.join(dir_output, file_name)

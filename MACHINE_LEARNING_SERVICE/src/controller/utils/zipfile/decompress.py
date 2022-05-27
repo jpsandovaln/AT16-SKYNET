@@ -12,8 +12,6 @@
 #
 import zipfile
 
-PATH = r'C:\Skynet\AT16-SKYNET\MACHINE_LEARNING_SERVICE'
-
 
 # Unzip a compressed file.
 class Decompress:

@@ -12,8 +12,14 @@
 #
 
 import zipfile
+from decouple import config
+from absolute_path import AbsolutePath
+import os
 
-path_img_zip = 'src/controller/utils/images_iris_recognition'
+
+absolute_path = AbsolutePath.get_absolute_path()
+# This is the path where the zip file will be saved
+path_img_zip = os.path.join(absolute_path, config('PATH_IMAGE'))
 
 
 class UnzipFile:
@@ -24,4 +30,3 @@ class UnzipFile:
         path_zip = format(self.path_saved)
         file_zip = zipfile.ZipFile(path_zip)  # This is the input path
         file_zip.extractall(path_img_zip)  # This is the output path
-
