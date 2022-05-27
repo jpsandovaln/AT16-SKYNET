@@ -18,7 +18,7 @@ import cv2
 import numpy as np
 
 
-CLASS_LABELS = ['Enojado', 'Feliz', 'Neutral', 'Triste', 'Sorprendido']
+CLASS_LABELS = ['Angry', 'Happy', 'Neutral', 'Sad', 'Surprised']
 GRAY = 0
 COLOR = 2
 SIZE_X = 48

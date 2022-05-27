@@ -38,10 +38,10 @@ def get_file(save, output_file, file_name):
 def save_file():
     file = EndPointConverter(request, app.config['UPLOAD_FOLDER'])
     prueba = FaceEmotion(request, UPLOAD_FOLDER)
-    result = file.Upload()
+    result = file.upload()
     image_new = prueba.find_faces()
 
-    return file.Send_File(UPLOAD_FOLDER, prueba.name)
+    return file.send_file(UPLOAD_FOLDER, prueba.name)
 
 
 if __name__ == '__main__':
