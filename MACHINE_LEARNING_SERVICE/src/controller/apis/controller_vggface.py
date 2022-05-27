@@ -75,7 +75,8 @@ class ControllerVggFace:
         model = ModelVggFace()
         response = []
         if model.image_has_face(file_person):
-            path_files = [(path_zip_result + "\\" + f) for f in os.listdir(path_zip_result)
+            path_files = [(path_zip_result + "/" + f) for f in os.listdir(path_zip_result)
+            #path_files = [(path_zip_result + "\\" + f) for f in os.listdir(path_zip_result)
                           if os.path.isfile(os.path.join(path_zip_result, f))]
             for file in path_files:
                 if model.image_has_face(file):

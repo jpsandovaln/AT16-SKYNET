@@ -33,7 +33,8 @@ class ModelVgg16:
         model = VGG16()
 
         # Create the paths for the images
-        path_files = [(path + "\\" + f) for f in os.listdir(path)
+        path_files = [(path + "/" + f) for f in os.listdir(path)
+        #path_files = [(path + "\\" + f) for f in os.listdir(path)
                       if os.path.isfile(os.path.join(path, f))]
 
         # Predict the objects that are in the images
