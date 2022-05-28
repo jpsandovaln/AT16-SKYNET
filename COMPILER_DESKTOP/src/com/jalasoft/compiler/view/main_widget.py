@@ -1,3 +1,4 @@
+import os
 from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QPlainTextEdit, QLabel, QLineEdit, QPushButton, \
     QComboBox, QSpacerItem, QSizePolicy, QFileDialog
 
@@ -5,6 +6,8 @@ from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QPlainTextEdit, Q
 class MainWidget(QWidget):
     def __init__(self):
         super().__init__()
+        self.style = os.getcwd() + "/../../../../resources/compiler.css"
+        self.setStyleSheet(open(self.style).read())
         self.layout = QHBoxLayout()
         self.layout.addLayout(self.get_left_layout(), 25)
         self.result = QPlainTextEdit()
@@ -24,7 +27,7 @@ class MainWidget(QWidget):
         self.languages.addItem("python")
         self.languages.addItem("java-proxy")
 
-        compile_button = QPushButton("Compile")
+        self.compile_button = QPushButton("Compile")
 
         vertical_spacer = QSpacerItem(10, 450, QSizePolicy.Expanding)
 
@@ -36,7 +39,7 @@ class MainWidget(QWidget):
         parameter_layout.addWidget(self.version)
         parameter_layout.addWidget(QLabel("Languages"))
         parameter_layout.addWidget(self.languages)
-        parameter_layout.addWidget(compile_button)
+        parameter_layout.addWidget(self.compile_button)
         parameter_layout.addSpacerItem(vertical_spacer)
         return parameter_layout
 
@@ -48,10 +51,13 @@ class MainWidget(QWidget):
         self.result.appendPlainText(message)
 
     def get_file_path(self):
-        return self.file_path
+        return str(self.file_path.text())
 
     def get_languages(self):
-        return self.languages
+        return str(self.languages.currentText())
 
     def get_version(self):
-        return self.version
+        return str(self.version.text())
+
+    def get_compiler_button(self):
+        return self.compile_button
