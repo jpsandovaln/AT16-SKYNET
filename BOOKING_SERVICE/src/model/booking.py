@@ -66,7 +66,7 @@ class Booking:
         id_object: any = ObjectId(id_booking)
         filter: dict = {"delete": 0}
         result: any = booking.find_one({"_id": id_object}, filter)
-        if len(id_booking) == 24:
+        if len(id_booking) != 24:
             raise BookingException("Invalid id long", "501", "AT16-ERROR-301", "booking_read_specific_id")
 
         if result:
