@@ -13,136 +13,136 @@
 
 version: '3.8'
 services:
-#  mysql:
-#    container_name: mysql
-#    image: mysql
-#    restart: always
-#    volumes:
-#      - ./sql-data/db:/var/lib/mysql
-#    ports:
-#      - "3306:3306"
-#    hostname: ${HOSTNAME}
-#    environment:
-#      MYSQL_DATABASE: 'test_database'
-#      MYSQL_USER: 'root'
-#      MYSQL_PASSWORD: '123456'
-#      MYSQL_ROOT_PASSWORD: '123456'
-#
-#  adminer:
-#    image: adminer
-#    ports:
-#      - 8090:8080
-#    depends_on:
-#    - mysql
-#
-#  postgres:
-#    image: postgres
-#    restart: always
-#    networks:
-#      - skynet_network
-#    ports:
-#      - "5432:5432"
-#    environment:
-#      - DATABASE_HOST=127.0.0.1
-#      - POSTGRES_USER=root
-#      - POSTGRES_PASSWORD=root
-#      - POSTGRES_DB=root
-#    volumes:
-#      - ./postgres-data:/var/lib/postgresql/data
-#
-#  pgadmin:
-#    image: dpage/pgadmin4
-#    environment:
-#      PGADMIN_DEFAULT_EMAIL: "admin@admin.com"
-#      PGADMIN_DEFAULT_PASSWORD: "admin"
-#    networks:
-#      - skynet_network
-#    ports:
-#      - "80:80"
-#    depends_on:
-#      - postgres
-#    volumes:
-#      - ./postgres-data:/var/lib/postgresql/data
-#
-#  db_mongo:
-#    container_name: mongo_database
-#    restart: always
-#    image: mongo:5.0.6
-#    networks:
-#      - skynet_network
-#    ports:
-#      - "27018:27017"
-#    volumes:
-#      - ./data:/data/db
-#
-#  mongo-express:
-#    container_name: mongo-express
-#    restart: always
-#    image: mongo-express
-#    depends_on:
-#      - db_mongo
-#    networks:
-#      - skynet_network
-#    environment:
-#      - ME_CONFIG_MONGODB_SERVER=db_mongo
-#    ports:
-#      - '8082:8081'
-#    volumes:
-#      - ./data:/data/db
-#
-#  booking_service:
-#    container_name: booking_service
-#    restart: always
-#    build: ./BOOKING_SERVICE
-#    networks:
-#      - skynet_network
-#    ports:
-#      - "6002:5000"
-#    links:
-#      - db_mongo
-#    volumes:
-#      - ./data:/data/db
-#
-#  reporting_service:
-#    container_name: reporting_service
-#    restart: always
-#    build: ./REPORTING_SERVICE
-#    depends_on:
-#      - postgres
-#      - db_mongo
-#    networks:
-#      - skynet_network
-#    ports:
-#      - "6003:5001"
-#    volumes:
-#      - ./postgres-data:/var/lib/postgresql/data
-#
-#  swagger_reporting:
-#    container_name: swagger_reporting
-#    restart: always
-#    build: ./SWAGGER_REPORTING
-#    networks:
-#      - skynet_network
-#    ports:
-#      - "6005:6005"
-#
-#  swagger_booking:
-#    container_name: swagger_booking
-#    restart: always
-#    build: ./SWAGGER_BOOKING
-#    networks:
-#      - skynet_network
-#    ports:
-#      - "6006:6006"
+  mysql:
+    container_name: mysql
+    image: mysql
+    restart: always
+    volumes:
+      - ./sql-data/db:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    hostname: ${HOSTNAME}
+    environment:
+      MYSQL_DATABASE: 'test_database'
+      MYSQL_USER: 'root'
+      MYSQL_PASSWORD: '123456'
+      MYSQL_ROOT_PASSWORD: '123456'
 
-#  swagger_convert:
-#    container_name: swagger_convert
-#    restart: always
-#    build: ./SWAGGER_CONVERT
-#    networks:
-#      - skynet_network
-#    ports:
-#      - "6007:6007"
+  adminer:
+    image: adminer
+    ports:
+      - 8090:8080
+    depends_on:
+    - mysql
+
+  postgres:
+    image: postgres
+    restart: always
+    networks:
+      - skynet_network
+    ports:
+      - "5432:5432"
+    environment:
+      - DATABASE_HOST=127.0.0.1
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=root
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "admin@admin.com"
+      PGADMIN_DEFAULT_PASSWORD: "admin"
+    networks:
+      - skynet_network
+    ports:
+      - "80:80"
+    depends_on:
+      - postgres
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+
+  db_mongo:
+    container_name: mongo_database
+    restart: always
+    image: mongo:5.0.6
+    networks:
+      - skynet_network
+    ports:
+      - "27018:27017"
+    volumes:
+      - ./data:/data/db
+
+  mongo-express:
+    container_name: mongo-express
+    restart: always
+    image: mongo-express
+    depends_on:
+      - db_mongo
+    networks:
+      - skynet_network
+    environment:
+      - ME_CONFIG_MONGODB_SERVER=db_mongo
+    ports:
+      - '8082:8081'
+    volumes:
+      - ./data:/data/db
+
+  booking_service:
+    container_name: booking_service
+    restart: always
+    build: ./BOOKING_SERVICE
+    networks:
+      - skynet_network
+    ports:
+      - "6002:5000"
+    links:
+      - db_mongo
+    volumes:
+      - ./data:/data/db
+
+  reporting_service:
+    container_name: reporting_service
+    restart: always
+    build: ./REPORTING_SERVICE
+    depends_on:
+      - postgres
+      - db_mongo
+    networks:
+      - skynet_network
+    ports:
+      - "6003:5001"
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+
+  swagger_reporting:
+    container_name: swagger_reporting
+    restart: always
+    build: ./SWAGGER_REPORTING
+    networks:
+      - skynet_network
+    ports:
+      - "6005:6005"
+
+  swagger_booking:
+    container_name: swagger_booking
+    restart: always
+    build: ./SWAGGER_BOOKING
+    networks:
+      - skynet_network
+    ports:
+      - "6006:6006"
+
+  swagger_convert:
+    container_name: swagger_convert
+    restart: always
+    build: ./SWAGGER_CONVERT
+    networks:
+      - skynet_network
+    ports:
+      - "6007:6007"
 
   machine_learning:
     container_name: machine_learning
@@ -152,6 +152,17 @@ services:
       - skynet_network
     ports:
       - "6009:5000"
+
+  machine_learning-jupyter:
+    container_name: machine_learning_jupyter
+    restart: always
+    build:
+      context: ./MACHINE_LEARNING_SERVICE
+      dockerfile: Dockerfile-jupyter
+    networks:
+      - skynet_network
+    ports:
+      - "6010:5000"
 
 networks:
   skynet_network:

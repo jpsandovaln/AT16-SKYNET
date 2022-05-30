@@ -32,6 +32,7 @@ from src.controller.apis.endpointface import EndPointConverter
 absolute_path = AbsolutePath.get_absolute_path()
 # This is the path where the zip file will be saved
 UPLOAD_FOLDER = os.path.join(absolute_path, config('UPLOAD_FOLDER'))
+UPLOAD_FOLDER_EMOTION = os.path.join(absolute_path, config('UPLOAD_FOLDER_EMOTION'))
 UPLOAD_FACE_FOLDER = os.path.join(absolute_path, config('UPLOAD_FACE_FOLDER'))
 UPLOAD_VGGFACE = os.path.join(absolute_path, config('UPLOAD_VGGFACE'))
 HAARCASCADE_IMAGES = os.path.join(absolute_path, config('HAARCASCADE_IMAGES'))
@@ -46,6 +47,7 @@ DOWNLOADER_FOLDER = r'saved_files/{}'
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['UPLOAD_FOLDER_EMOTION'] = UPLOAD_FOLDER_EMOTION
 app.config['UPLOAD_FACE_FOLDER'] = UPLOAD_FACE_FOLDER
 app.config['UPLOAD_VGGFACE'] = UPLOAD_VGGFACE
 app.config['HAARCASCADE_IMAGES'] = HAARCASCADE_IMAGES
@@ -56,20 +58,19 @@ app.config['UPLOAD_IRIS'] = UPLOAD_IRIS
 api = Api(app)
 
 
-@app.route('/downloader/<string:save>/<string:output_file>/<string:file_name>', methods=['GET'])
-def get_file(save, output_file, file_name):
-    x = (os.path.join(output_file, file_name))
-    y = (os.path.join(save, x))
-    return send_file(y, as_attachment=True)
+# End point of the downloader file
+@app.route('/download/<string:save>/<string:output_file>/<string:file_name>', methods=['GET'])
+def download_file(save, output_file, file_name):
+    return send_file(os.path.join(save, output_file, file_name), as_attachment=True)
 
 
-@app.route('/Emotion', methods=['POST'])
+@app.route('/emotion', methods=['POST'])
 def save_file_emotion():
-    file = EndPointConverter(request, app.config['UPLOAD_FOLDER'])
-    prueba = FaceEmotion(request, UPLOAD_FOLDER)
-    result = file.Upload()
-    image_new = prueba.find_faces()
-    return file.Send_File(UPLOAD_FOLDER_EMOTIONS, prueba.name)
+    file = EndPointConverter(request, app.config['UPLOAD_FOLDER_EMOTION'])
+    prueba = FaceEmotion(request, UPLOAD_FOLDER_EMOTION)
+    file.upload()
+    prueba.find_faces()
+    return file.send_file(UPLOAD_FOLDER_EMOTIONS, prueba.name)
 
 
 # End point of the uploader file
@@ -79,33 +80,12 @@ def save_file():
     return file.upload()
 
 
-# End point of the downloader file
-@app.route('/download/<string:file_name>')
-def download_file(file_name):
-    file = Downloader(request, app.config['UPLOAD_FOLDER'], file_name)
-    return file.download()
-
-
 @app.route('/face_recognizer', methods=['POST'])
 def identify():
     file = ControllerFaceRecognizer(request, app.config['UPLOAD_FACE_FOLDER'])
     file.save_file()
     model = ModelHaarcascade(app.config['HAARCASCADE_IMAGES'], app.config['HAARCASCADE_XML'])
     return model.face_recognizer(file.get_name(), file.get_path())
-
-
-# Endpoint for crop a face in an image
-@app.route('/vggface_crop', methods=['POST'])
-def crop_face():
-    face = ControllerVggFace(request)
-    return face.crop_face(app.config['VGGFACE_DECOMPRESS'])
-
-
-# Endpoint for compare 2 persons in 2 images
-@app.route('/vggface_compare', methods=['POST'])
-def face_compare():
-    response = ControllerVggFace(request)
-    return response.compare_faces()
 
 
 # Endpoint for compare 1 persons in a folder with images

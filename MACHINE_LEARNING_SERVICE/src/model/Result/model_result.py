@@ -41,9 +41,9 @@ class ModelResult:
             dic_json = json.dumps(list_object_result, indent=4)
             return dic_json
 
-        #elif self.model_request == 'Resnet':
-        #    model_resnet = Resnet()
-        #    list_object_result = model_resnet.prediction(self.save_location, self.name_request,
-        #                                                 self.percentage_request)
-        #    dic_json = json.dumps(list_object_result, indent=4)
-        #    return dic_json
+        # elif self.model_request == 'Resnet':
+        #     model_resnet = Resnet()
+        #     list_object_result = model_resnet.prediction(self.save_location, self.name_request,
+        #                                                  self.percentage_request)
+        #     dic_json = json.dumps(list_object_result, indent=4)
+        #     return dic_json
