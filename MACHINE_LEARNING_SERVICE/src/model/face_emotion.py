@@ -16,7 +16,15 @@ from keras.models import load_model
 from keras.preprocessing.image import img_to_array
 import cv2
 import numpy as np
+from decouple import config
+from absolute_path import AbsolutePath
+import os
 
+
+absolute_path = AbsolutePath.get_absolute_path()
+# This is the path where the zip file will be saved
+FACE_CLASSIFIER = os.path.join(absolute_path, config('FACE_CLASSIFIER'))
+CLASSIFIER = os.path.join(absolute_path, config('CLASSIFIER'))
 
 CLASS_LABELS = ['Enojado', 'Feliz', 'Neutral', 'Triste', 'Sorprendido']
 GRAY = 0
@@ -31,8 +39,8 @@ SIZE_FONT = 1
 SCALE_FACTOR = 1.3
 MIN_NEIGHBOURS = 5
 
-face_classifier = cv2.CascadeClassifier(r'src\model\haarcascade_frontalface_default.xml')
-classifier = load_model(r'src\model\Emotion_Detection.h5')
+face_classifier = cv2.CascadeClassifier(FACE_CLASSIFIER)
+classifier = load_model(CLASSIFIER)
 
 
 # This method is static because all objects of kind FaceEmotion use this method for recognize emotion in a face

@@ -16,9 +16,11 @@ from src.model.model_iris_recognition.parameters import Parameters
 from src.model.model_iris_recognition.recognition import Recognition
 from src.model.model_iris_recognition.load_image_person import LoadFiles
 from decouple import config
+from absolute_path import AbsolutePath
+import os
 
-
-filename = config('FILENAME')
+absolute_path = AbsolutePath.get_absolute_path()
+filename = os.path.join(absolute_path, config('FILENAME'))
 read_bin = 'rb'
 
 
@@ -49,4 +51,3 @@ class IrisModel:
                 person_result.append({"Name": name, "Percentage": round(
                     jaccard_index * 100, 1)})
         return person_result
-

@@ -11,11 +11,13 @@
 # with Jalasoft.
 #
 
-import os
 import cv2
 from decouple import config
+from absolute_path import AbsolutePath
+import os
 
-path_img = config('PATH_IMAGE')
+absolute_path = AbsolutePath.get_absolute_path()
+path_img = os.path.join(absolute_path, config('PATH_IMAGE'))
 
 
 # Load the image file
@@ -30,11 +32,10 @@ class LoadFiles:
             path_components = dirpath.split(os.sep)
             name_path = path_components[-1]
             for f in filenames:
-                images_train.append(cv2.imread('{}\{}'.format(dirpath, f)))
+                images_train.append(cv2.imread('{}/{}'.format(dirpath, f)))
             if not images_train:
                 pass
             else:
                 images_dict[name_path] = images_train
                 images_train = []
         return images_dict
-    

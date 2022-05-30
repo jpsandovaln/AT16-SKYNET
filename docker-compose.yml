@@ -34,7 +34,7 @@ services:
       - 8090:8080
     depends_on:
     - mysql
-     
+
   postgres:
     image: postgres
     restart: always
@@ -151,6 +151,26 @@ services:
       - skynet_network
     ports:
       - "6007:6007"
+
+  machine_learning:
+    container_name: machine_learning
+    restart: always
+    build: ./MACHINE_LEARNING_SERVICE
+    networks:
+      - skynet_network
+    ports:
+      - "6009:5000"
+
+  machine_learning-jupyter:
+    container_name: machine_learning_jupyter
+    restart: always
+    build:
+      context: ./MACHINE_LEARNING_SERVICE
+      dockerfile: Dockerfile-jupyter
+    networks:
+      - skynet_network
+    ports:
+      - "6010:5000"
 
 networks:
   skynet_network:

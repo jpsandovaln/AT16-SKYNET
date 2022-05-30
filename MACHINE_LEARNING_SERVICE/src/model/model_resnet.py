@@ -20,8 +20,7 @@ class Resnet:
     """Class that represent to the Object Recognition Model"""
 
     def prediction(self, path, word, per):
-    """Method that return a list with the objects predicted"""
-
+        """Method that return a list with the objects predicted"""
         output_path = "./output/newimage.jpg"
         list_object_result = []
         execution_path = os.getcwd()
