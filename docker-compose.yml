@@ -90,6 +90,16 @@ services:
     volumes:
       - ./data:/data/db
 
+  convert_service:
+    container_name: convert_service
+    restart: always
+    build: ./CONVERT_SERVICES
+    networks:
+      - skynet_network
+    ports:
+      - "6005:5003"
+
+
   booking_service:
     container_name: main_app
     restart: always
@@ -116,6 +126,7 @@ services:
       - "6003:5001"
     volumes:
       - ./postgres-data:/var/lib/postgresql/data
+
 
 networks:
   skynet_network:

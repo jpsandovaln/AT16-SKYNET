@@ -32,9 +32,9 @@ from flask import Response
 import os
 
 
-UPLOAD_FOLDER = r'saved_files\upload'  # here que common files are saved
-DOWNLOADER_FOLDER = r'saved_files\{}'  # here que specific files are saved after convert
-SEVER_URL_DOWNLOAD = r'http://127.0.0.1:5000/downloader/'
+UPLOAD_FOLDER = r'saved_files/upload'  # here que common files are saved
+DOWNLOADER_FOLDER = r'saved_files/{}'  # here que specific files are saved after convert
+SEVER_URL_DOWNLOAD = r'http://127.0.0.1:6005/downloader/'
 
 
 app = Flask(__name__)
@@ -97,4 +97,4 @@ def save_file():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host="0.0.0.0", debug=True, port=5003)

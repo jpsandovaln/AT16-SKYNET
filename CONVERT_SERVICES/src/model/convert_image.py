@@ -42,7 +42,7 @@ class ConvertImage(Convertor):
     # Method to create the ffmpeg command.
     def concatenate(self):
         dic = self.init_dic()
-        cod_cmd = "magick convert " + self.input_file + " "
+        cod_cmd = "convert " + self.input_file + " "
         for key in dic:
             val = self.instructions.values.get(key)
             if len(val) > 0:

@@ -29,7 +29,8 @@ class Convertor:
         self.format = instructions.values.get('format')
         self.name_output = name[0] + 'new.' + self.format
         self.instructions = instructions
-        print(name, 'es nombre', param, 'es parametros')
+
+
     def get_input_file(self):
         return self.input_file
 
