@@ -11,13 +11,12 @@
 # with Jalasoft.
 #
 
+import cv2
 import pytesseract as tesseract_converter
 from src.model.convertor import Convertor
 from reportlab.lib.pagesizes import A4
 from reportlab.pdfgen import canvas
 from docx import Document
-from dotenv import load_dotenv
-from PIL import Image
 
 
 class ConvertOCR(Convertor):
@@ -30,12 +29,10 @@ class ConvertOCR(Convertor):
     def text_result(self) -> tesseract_converter:
         language: str = self.instructions.values.get('language')
 
-        # Executable path
-        TESSERACT_PATH: str = r'third_party\win\tesseract\tesseract.exe'
-        tesseract_converter.pytesseract.tesseract_cmd: str = TESSERACT_PATH
-        image_to_text: Image = Image.open(self.input_file)
-        text_result: tesseract_converter = tesseract_converter.image_to_string(image_to_text, lang=language)
-        return text_result
+        # the executeble path was deleted, because now tesseract is consumed directly once it is installed in the docker container
+        image_to_text = cv2.imread(self.input_file)
+        text_result2: tesseract_converter = tesseract_converter.image_to_string(image_to_text, lang=language)
+        return text_result2
 
     # Converts string to pdf or docx or txt
     def exec(self):
@@ -68,3 +65,6 @@ class ConvertOCR(Convertor):
             document.save(self.output_file + '/' + self.name_output)
         else:
             pass
+
+
+
