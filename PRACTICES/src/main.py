@@ -10,6 +10,10 @@ from src.composite.composite import CompositeProduct
 from src.composite.sales import Sales
 from src.memento.computer import Computer
 from src.memento.caretaker import Caretaker
+from src.observer.product_notification import ProductNotification
+from src.observer.consumer import Consumer
+from src.observer.company import Company
+
 
 if __name__ == "__main__":
     print(11)
@@ -111,6 +115,7 @@ if __name__ == "__main__":
     sales4.add_product(motherboard)
     sales4.display()
     """
+    """    
     computer = Computer("unix", "16GB", "1TB")
     computer.to_string()
     print("---------------------------")
@@ -142,3 +147,19 @@ if __name__ == "__main__":
     print("---------------------------")
     computer3.restore(caretaker.get_computer(2))
     computer3.to_string()
+    """
+    ob1 = ProductNotification()
+    ob1.add_observer_client("pc", Consumer("Maria", "Arce", "maria@gmail.com"))
+    ob1.add_observer_client("pc", Consumer("Carlos", "Lima", "carlos@gmail.com"))
+
+    ob1.add_observer_client("car", Consumer("Pepe", "Vargas", "pepe@gmail.com"))
+    ob1.add_observer_client("car", Company("Toyota", 12345688))
+    ob1.add_observer_client("car", Consumer("Juan", "Perez", "juan@gmail.com"))
+
+    new_product1 = input("Add Product1: ")
+    ob1.notify_all_client(new_product1, "The product is available.")
+
+    new_product2 = input("Add Product2: ")
+    ob1.notify_all_client(new_product2, "The product is available.")
+
+

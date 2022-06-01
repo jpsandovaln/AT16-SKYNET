@@ -8,6 +8,7 @@ class CompilerView(QMainWindow):
         super().__init__()
         self.menu_bar = MenuBar()
         self.main_widget = MainWidget()
+        self.menu_bar.set_main_widget(self.main_widget)
 
     def init_ui(self):
         self.setWindowTitle("Compiler Desktop")

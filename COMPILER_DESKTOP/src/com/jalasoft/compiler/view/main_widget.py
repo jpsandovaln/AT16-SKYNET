@@ -6,7 +6,7 @@ from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QPlainTextEdit, Q
 class MainWidget(QWidget):
     def __init__(self):
         super().__init__()
-        self.style = os.getcwd() + "/../../../../resources/compiler.css"
+        self.style = os.getcwd() + "/../../../../resources/compiler_light.css"
         self.setStyleSheet(open(self.style).read())
         self.layout = QHBoxLayout()
         self.layout.addLayout(self.get_left_layout(), 25)
