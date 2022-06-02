@@ -46,8 +46,19 @@ class ConvertImage(Convertor):
         for key in dic:
             val: any = self.instructions.values.get(key)
             if len(val) > 0:
-                dic[key]: dict = dic[key].format(val)
-                cod_cmd += dic[key]
+                if key == 'horizontal_flip' and val == 1:
+                    dic[key]: dict = dic[key].format(val)
+                    cod_cmd += dic[key]
+                if key == 'vertical_flip' and val == 1:
+                    dic[key]: dict = dic[key].format(val)
+                    cod_cmd += dic[key]
+                if key != 'horizontal_flip' and key != 'vertical_flip':
+                    dic[key]: dict = dic[key].format(val)
+                    cod_cmd += dic[key]
+                    print(val+' - '+key)
+            else:
+                pass
+
         cod_cmd += self.output_file + '/' + self.name_output
         return cod_cmd
 

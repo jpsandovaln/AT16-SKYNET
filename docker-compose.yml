@@ -117,6 +117,15 @@ services:
     volumes:
       - ./postgres-data:/var/lib/postgresql/data
 
+  convert_service:
+      container_name: convert_service
+      restart: always
+      build: ./CONVERT_SERVICES
+      networks:
+        - skynet_network
+      ports:
+        - "6004:5002"
+
   swagger_reporting:
     container_name: swagger_reporting
     restart: always
