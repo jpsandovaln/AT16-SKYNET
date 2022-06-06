@@ -1,7 +1,10 @@
 import os
 from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QPlainTextEdit, QLabel, QLineEdit, QPushButton, \
     QComboBox, QSpacerItem, QSizePolicy, QFileDialog
-
+from src.com.jalasoft.compiler.view.decorator.primary_button import PrimaryButton
+from src.com.jalasoft.compiler.view.decorator.secondary_button import SecondaryButton
+from src.com.jalasoft.compiler.view.decorator.green_style import GreenStyle
+from src.com.jalasoft.compiler.view.decorator.border_style import BorderStyle
 
 class MainWidget(QWidget):
     def __init__(self):
@@ -41,6 +44,21 @@ class MainWidget(QWidget):
         parameter_layout.addWidget(self.languages)
         parameter_layout.addWidget(self.compile_button)
         parameter_layout.addSpacerItem(vertical_spacer)
+
+        accept = PrimaryButton("Accept")
+        cancel = SecondaryButton("Cancel")
+
+        parameter_layout.addWidget(accept.get_button())
+        parameter_layout.addWidget(cancel.get_button())
+
+        accept_2 = GreenStyle(PrimaryButton("Accept 2"))
+        accept_3 = BorderStyle(GreenStyle(PrimaryButton("Accept 3")))
+        accept_4 = BorderStyle(PrimaryButton("Accept 4"))
+
+        parameter_layout.addWidget(accept_2.get_button())
+        parameter_layout.addWidget(accept_3.get_button())
+        parameter_layout.addWidget(accept_4.get_button())
+
         return parameter_layout
 
     def browse_file(self):
