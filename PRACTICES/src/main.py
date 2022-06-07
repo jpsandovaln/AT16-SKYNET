@@ -13,6 +13,25 @@ from src.memento.caretaker import Caretaker
 from src.observer.product_notification import ProductNotification
 from src.observer.consumer import Consumer
 from src.observer.company import Company
+from src.builder.pizza import Pizza
+from src.builder.hawaiana import Hawaiana
+from src.builder.bolognesa import Bolognesa
+from src.builder.napolitana import Napolitana
+
+
+def display(pizza):
+    print("****************Pizza********************")
+    print(pizza.get_dough())
+    print(pizza.get_sauce())
+    print(pizza.get_cheese())
+    print(pizza.get_ham())
+    print(pizza.get_pineapple())
+    print(pizza.get_olive())
+    print(pizza.get_basil())
+    print(pizza.get_tomato())
+    print(pizza.get_corn())
+    print(pizza.get_meat())
+    print("*****************************************")
 
 
 if __name__ == "__main__":
@@ -148,6 +167,7 @@ if __name__ == "__main__":
     computer3.restore(caretaker.get_computer(2))
     computer3.to_string()
     """
+    """
     ob1 = ProductNotification()
     ob1.add_observer_client("pc", Consumer("Maria", "Arce", "maria@gmail.com"))
     ob1.add_observer_client("pc", Consumer("Carlos", "Lima", "carlos@gmail.com"))
@@ -161,5 +181,42 @@ if __name__ == "__main__":
 
     new_product2 = input("Add Product2: ")
     ob1.notify_all_client(new_product2, "The product is available.")
+    """
+
+    #hawaiana = Pizza("soft", "sweet", "mozarella", 1, 1, None, None, None, None, None)
+    hawaiana = Pizza()
+    hawaiana.set_dough("soft")
+    hawaiana.set_sauce("sweet")
+    hawaiana.set_cheese("mozarella")
+    hawaiana.set_ham(1)
+    hawaiana.set_pineapple(1)
+
+    #napolitana = Pizza("soft", "spicy", "cheddar", None, None, "green", 1, 1, None, None)
+    napolitana = Pizza()
+    napolitana.set_dough("soft")
+    napolitana.set_sauce("spicy")
+    napolitana.set_cheese("cheddar")
+    napolitana.set_olive("green")
+    napolitana.set_basil(1)
+    napolitana.set_tomato(1)
+    display(napolitana)
+
+    #bolognesa = Pizza("soft", "sweet", "mozarella", None, None, None, None, None, "yes", 2)
+    bolognesa = Pizza()
+    bolognesa.set_dough("soft")
+    bolognesa.set_sauce("sweet")
+    bolognesa.set_cheese("mozarella")
+    bolognesa.set_corn("yes")
+    bolognesa.set_meat(2)
+    display(bolognesa)
+
+    hawaiana_2 = Hawaiana().with_ham("1").with_pineapple("1").build()
+    display(hawaiana_2)
+
+    napolitana_2 = Napolitana().build()
+    display(napolitana_2)
+
+    bolognesa_2 = Bolognesa().with_corn("2").with_meat("yes").build()
+    display(bolognesa_2)
 
 
