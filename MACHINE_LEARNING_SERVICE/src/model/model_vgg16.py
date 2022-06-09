@@ -56,8 +56,7 @@ class ModelVgg16:
                         object_result.set_path_file(file)
                         list_object_result.append(object_result)
 
-        object_dict = {}
-        num_obj = 1
+        object_list = []
         for object_result in list_object_result:
             path = object_result.get_path_file()
             normalized_path = os.path.normpath(path)
@@ -66,14 +65,9 @@ class ModelVgg16:
             try:
                 time_img = int(img[:-4])
                 convert_time = str(datetime.timedelta(seconds=time_img))
-            except :
+            except:
                 convert_time = img[:-4]
-
-            object_dict["Object "+str(num_obj)] = {"Name": object_result.get_name(),
+            object_list.append({"Name": object_result.get_name(),
                                                    "Time": convert_time,
-                                                   "Percentage": object_result.get_percentage() * 100}
-            num_obj += 1
-        return object_dict
-
-
-
+                                                   "Percentage": object_result.get_percentage() * 100})
+        return object_list

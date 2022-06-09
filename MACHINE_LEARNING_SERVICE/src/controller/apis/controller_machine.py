@@ -16,6 +16,10 @@ from flask import request
 from src.model.Result.model_result import ModelResult
 from src.controller.utils.zipfile.decompress import Decompress
 import os
+import json
+from flask import Response
+from http import HTTPStatus
+from src.controller.results.success_result import SuccessResult
 
 
 # This is for to upload a file.
@@ -38,5 +42,10 @@ class ControllerMachineLearning:
             path_zip_result = path_zip.path_decompress()
             result = ModelResult(path_zip_result, self.name_request,
                                  self.model_request, self.percentage_request)
-            result_model = result.models_results()
-            return result_model
+            result_model_machine = result.models_results()
+            result_model = SuccessResult(HTTPStatus.OK, str(result_model_machine))
+            return Response(
+                json.dumps(result_model.__dict__),
+                status=HTTPStatus.OK,
+                mimetype='application/json'
+            )
