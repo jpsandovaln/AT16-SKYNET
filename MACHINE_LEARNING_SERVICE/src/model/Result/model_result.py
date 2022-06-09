@@ -31,15 +31,13 @@ class ModelResult:
             model_vgg16 = ModelVgg16()
             list_object_result = model_vgg16.predict(self.save_location, self.name_request,
                                                      self.percentage_request)
-            dic_json = json.dumps(list_object_result, indent=4)
-            return dic_json
+            return list_object_result
 
         elif self.model_request == 'InceptionV3':
             inception_v3_match = ModelInceptionV3()
             list_object_result = inception_v3_match.prediction(self.save_location, self.name_request,
                                                                self.percentage_request)
-            dic_json = json.dumps(list_object_result, indent=4)
-            return dic_json
+            return list_object_result
 
         # elif self.model_request == 'Resnet':
         #     model_resnet = Resnet()
