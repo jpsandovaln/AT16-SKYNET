@@ -46,4 +46,3 @@ class EndPointConverter:
             status=HTTPStatus.OK,
             mimetype='application/json'
         )
-        #return URL + os.path.join(dir_output, file_name)
