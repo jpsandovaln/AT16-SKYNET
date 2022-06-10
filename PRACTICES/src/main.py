@@ -17,6 +17,11 @@ from src.builder.pizza import Pizza
 from src.builder.hawaiana import Hawaiana
 from src.builder.bolognesa import Bolognesa
 from src.builder.napolitana import Napolitana
+from src.command.cbba_server import CbbaServer
+from src.command.lp_server import LPServer
+from src.command.invoker import Invoker
+from src.command.start_cbba_server import StartCbbaServer
+from src.command.end_cbba_server import EndCbbaServer
 
 
 def display(pizza):
@@ -182,7 +187,7 @@ if __name__ == "__main__":
     new_product2 = input("Add Product2: ")
     ob1.notify_all_client(new_product2, "The product is available.")
     """
-
+    """
     #hawaiana = Pizza("soft", "sweet", "mozarella", 1, 1, None, None, None, None, None)
     hawaiana = Pizza()
     hawaiana.set_dough("soft")
@@ -218,5 +223,12 @@ if __name__ == "__main__":
 
     bolognesa_2 = Bolognesa().with_corn("2").with_meat("yes").build()
     display(bolognesa_2)
+    """
+    command = StartCbbaServer(CbbaServer())
+    server_admin = Invoker(command)
+    server_admin.run()
 
-
+    print("******************************")
+    command = EndCbbaServer(CbbaServer())
+    server_admin = Invoker(command)
+    server_admin.run()
