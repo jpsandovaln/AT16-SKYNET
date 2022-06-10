@@ -276,6 +276,7 @@ def transfer_from_mongo_to_postgres() -> dict:
 def verify():
     return "Success!!"
 
+
 if __name__ == '__main__':
     Connection.close_connection()
     Criteria.get_df()

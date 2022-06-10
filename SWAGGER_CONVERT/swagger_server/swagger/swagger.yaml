@@ -6,7 +6,7 @@ info:
   title: "CONVERT_SERVICES"
   contact:
     email: "jalasoft@jalasoft.com"
-host: "127.0.0.1:5003"
+host: "127.0.0.1:6008"
 tags:
 - name: "Convert Services"
   description: " `Audio formats` [mp3, mp2, m4a and wav], `Image formats`[jpg, tiff,\
@@ -16,7 +16,7 @@ tags:
     \ formats`{jpg,png}, `Wav_to_txtinputformats`{wav} `Wav_to_txt output formats`{txt}"
   externalDocs:
     description: "Convert"
-    url: "http://127.0.0.1:5003"
+    url: "http://127.0.0.1:6008"
 schemes:
 - "http"
 paths:
