@@ -10,9 +10,10 @@
 # accordance with the terms of the license agreement you entered into
 # with Jalasoft.
 #
+
 from src.reporting.sql_query import SqlQuery
 import psycopg2
-from src.reporting.change_mongo_pandas import Mongo_2_pandas
+from src.reporting.change_mongo_pandas import Mongo2pandas
 from decouple import config
 
 DB_NAME = config('DB_NAME')
@@ -27,10 +28,10 @@ class Connection:
     # Connect the psql
     @staticmethod
     def connection_psql():
-        conn: any = psycopg2.connect(database=DB_NAME, user=USER,
+        conn = psycopg2.connect(database=DB_NAME, user=USER,
                                 password=PASSWORD, host=HOST)
-        conn.autocommit: bool = True
-        cur: any = conn.cursor()
+        conn.autocommit = True
+        cur = conn.cursor()
         return cur
 
     # Create tables in psql
@@ -45,7 +46,7 @@ class Connection:
     @staticmethod
     def insert_data():
         cur = Connection.create_table()
-        data_mongo = Mongo_2_pandas()
+        data_mongo = Mongo2pandas()
         data_mongo_extract = data_mongo.extract_data()
 
         for index, row in data_mongo_extract.iterrows():

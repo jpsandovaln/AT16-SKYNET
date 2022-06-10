@@ -16,8 +16,8 @@ class SqlQuery:
 
     # Query commands to create tables in psql
     @staticmethod
-    def create_table()-> str:
-        sql_query: str = '''
+    def create_table():
+        sql_query = '''
             DROP TABLE IF EXISTS Booking;
             DROP TABLE IF EXISTS Person;
             DROP TABLE IF EXISTS Resources;
@@ -35,7 +35,7 @@ class SqlQuery:
                 person_city TEXT,
                 person_gender TEXT,
                 person_age INTEGER
-            ); 
+            );
              CREATE TABLE Booking (
                 id SERIAL NOT NULL PRIMARY KEY,
                 date DATE,
@@ -50,14 +50,14 @@ class SqlQuery:
 
     # Query commands to join tables in psql
     @staticmethod
-    def join_tables() -> str:
-        sql_query_join: str = '''
-            SELECT Booking.date, Booking.start_time, Booking.end_time, 
-            Booking.state, Resources.resource_name, Resources.resource_type, 
-            Resources.resource_model, Resources.resource_state, 
-            Person.person_full_name, Person.person_age, Person.person_country, 
-            Person.person_city, Person.person_gender 
-            FROM Booking JOIN Resources ON Booking.person_id = Resources.id 
+    def join_tables():
+        sql_query_join = '''
+            SELECT Booking.date, Booking.start_time, Booking.end_time,
+            Booking.state, Resources.resource_name, Resources.resource_type,
+            Resources.resource_model, Resources.resource_state,
+            Person.person_full_name, Person.person_age, Person.person_country,
+            Person.person_city, Person.person_gender
+            FROM Booking JOIN Resources ON Booking.person_id = Resources.id
             JOIN Person ON Booking.person_id = Person.id;
         '''
         return sql_query_join
