@@ -64,7 +64,6 @@ class ConvertVideo(Convertor):
             name_dir: str = output_file + '/' + name[0] + '%d.' + name[1]
             ffmpeg_command: str = "ffmpeg -i {} -vf {} {}".format(self.input_file, concatenate, name_dir)
             subprocess.call(ffmpeg_command)
-            print(ffmpeg_command)
             shutil.make_archive(output_file, 'zip', output_file)
             self.set_name_output(name[0] + '.zip')
             shutil.rmtree(output_file)
