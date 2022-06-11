@@ -24,9 +24,11 @@ from src.controller.apis.controller_iris_train_model import ControllerIrisTrain
 from decouple import config
 from absolute_path import AbsolutePath
 import os
+from flask_cors import CORS
 from src.model.face_emotion import FaceEmotion
 from flask import send_file
 from src.controller.apis.endpointface import EndPointConverter
+
 
 
 absolute_path = AbsolutePath.get_absolute_path()
@@ -46,6 +48,7 @@ DOWNLOADER_FOLDER = r'saved_files/{}'
 
 
 app = Flask(__name__)
+cors = CORS(app)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['UPLOAD_FOLDER_EMOTION'] = UPLOAD_FOLDER_EMOTION
 app.config['UPLOAD_FACE_FOLDER'] = UPLOAD_FACE_FOLDER
@@ -56,6 +59,7 @@ app.config['VGGFACE_COMPRESS'] = VGGFACE_COMPRESS
 app.config['VGGFACE_DECOMPRESS'] = VGGFACE_DECOMPRESS
 app.config['UPLOAD_IRIS'] = UPLOAD_IRIS
 api = Api(app)
+
 
 
 # End point of the downloader file
