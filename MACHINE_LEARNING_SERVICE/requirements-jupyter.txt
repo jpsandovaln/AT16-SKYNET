@@ -1,5 +1,6 @@
 Flask==2.1.1
 Flask-RESTful==0.3.9
+Flask-Cors==3.0.10
 Pillow>=9.0.1
 keras-vggface==0.6
 
