@@ -30,16 +30,19 @@ from flask_restful import Api
 from flask import request
 from flask import Response
 import os
-#modified path to work with linux in a docker container
+from flask_cors import CORS
+
+
+# modified path to work with linux in a docker container
 UPLOAD_FOLDER: str = r'saved_files/upload'  # here que common files are saved
 DOWNLOADER_FOLDER: str = r'saved_files/{}'  # here que specific files are saved after convert
-SEVER_URL_DOWNLOAD: str = r'http://127.0.0.1:5002/downloader/'
+SEVER_URL_DOWNLOAD: str = r'http://127.0.0.1:6008/downloader/'
 
 app: Flask = Flask(__name__)
+cors = CORS(app)
 app.config['UPLOAD_FOLDER']: str = UPLOAD_FOLDER
 app.config['SEVER_URL_DOWNLOAD']: str = SEVER_URL_DOWNLOAD
 api: Api = Api(app)
-
 
 
 # Download the files for all convertors
@@ -96,4 +99,4 @@ def save_file():
 
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", debug=True, port=5002)
+    app.run(host="0.0.0.0", debug=True, port=5003)
