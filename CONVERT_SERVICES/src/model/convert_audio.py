@@ -12,7 +12,7 @@
 #
 
 from src.model.convertor import Convertor
-import subprocess
+import os
 
 
 class ConvertAudio(Convertor):
@@ -47,7 +47,7 @@ class ConvertAudio(Convertor):
         try:
             direction: str = self.output_file + r'/' + self.name_output
             ffmpeg_command: str = "ffmpeg -i {}  {} {}".format(self.input_file, concatenate, direction)
-            subprocess.call(ffmpeg_command)
+            os.system(ffmpeg_command)
             return True
         except:
             return False
