@@ -27,17 +27,17 @@ PASSWORD = config('PASSWORD')
 class Criteria:
 
     @staticmethod
-    def get_df() -> any:
+    def get_df():
         try:
-            conn: any = psycopg2.connect(database=DB_NAME, user=USER,
+            conn = psycopg2.connect(database=DB_NAME, user=USER,
                                     password=PASSWORD, host=HOST)
-            conn.autocommit: bool = True
-            cur: any = conn.cursor()
+            conn.autocommit = True
+            cur = conn.cursor()
             # Do some setup
-            sql_query_join: str = SqlQuery.join_tables()
+            sql_query_join = SqlQuery.join_tables()
             cur.execute(sql_query_join)
-            result: any = cur.fetchall()
-            df: any = pd.DataFrame(result,
+            result = cur.fetchall()
+            df = pd.DataFrame(result,
                               columns=['date', 'start_time', 'end_time',
                                        'state',
                                        'resource_name', 'resource_type',

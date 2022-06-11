@@ -17,29 +17,29 @@ from src.common.exceptions.parameter_exception import ParameterException
 
 
 class ParameterReportDatePersonCountry:
-    def __init__(self, date: str, person_country: str, data_frame: type):
-        self.date: str = date
-        self.person_country: str = person_country
-        self.data_frame: type = data_frame
+    def __init__(self, start_date, end_date, data_frame):
+        self.start_date = start_date
+        self.end_date = end_date
+        self.data_frame = data_frame
 
-    def get_date(self) -> str:
-        return self.date
+    def get_start_date(self):
+        return self.start_date
 
-    def get_person_country(self) -> str:
-        return self.person_country
+    def get_end_date(self):
+        return self.end_date
 
-    def get_data_frame(self) -> type:
+    def get_data_frame(self):
         return self.data_frame
 
     def validate(self):
-        if self.date is None or str(self.date).strip() == "":
-            message: str = "Invalid date, the value is empty"
+        if self.start_date is None or str(self.start_date).strip() == "":
+            message = "Invalid date, the value is empty"
             raise ParameterException(message, "401", "AT16-ERR-351")
 
-        if self.person_country is None or str(self.person_country).strip() == "":
-            message: str = "Invalid country, the value is empty"
-            raise ParameterException(message, "401", "AT16-ERR-352")
+        if self.end_date is None or str(self.end_date).strip() == "":
+            message = "Invalid date, the value is empty"
+            raise ParameterException(message, "401", "AT16-ERR-351")
 
         if self.data_frame is None or type(self.data_frame) != pd.DataFrame:
-            message: str = "Invalid dataframe, the value is incorrect"
+            message = "Invalid dataframe, the value is incorrect"
             raise ParameterException(message, "401", "AT16-ERR-353")

@@ -12,8 +12,6 @@
 #
 
 import pickle
-from typing import BinaryIO
-
 from decouple import config
 
 PICKLE_PATH = config('PICKLE_PATH')
@@ -21,14 +19,14 @@ PICKLE_PATH = config('PICKLE_PATH')
 class Cache:
 
     @staticmethod
-    def write_cache(pd_data: any):
-        outfile: BinaryIO = open(PICKLE_PATH, 'wb')
+    def write_cache(pd_data):
+        outfile = open(PICKLE_PATH, 'wb')
         pickle.dump(pd_data, outfile)
         outfile.close()
 
     @staticmethod
-    def load_cache() -> type:
-        infile: BinaryIO = open(PICKLE_PATH, 'rb')
-        pd_cache: type = pickle.load(infile)
+    def load_cache():
+        infile = open(PICKLE_PATH, 'rb')
+        pd_cache = pickle.load(infile)
         infile.close()
         return pd_cache
