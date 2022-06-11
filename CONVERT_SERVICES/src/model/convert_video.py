@@ -24,8 +24,8 @@ class ConvertVideo(Convertor):
     # This method compare the data and create the ffmpeg command.
     def init_dic(self) -> dict:
         dic_param: dict = {'frame': 'fps={}',
-                           'width': '{}/1:',
-                           'height': '{}/2',
+                           'width': '{}',
+                           'height': '{}',
                            'color': 'format=gray'}
         return dic_param
 
@@ -36,13 +36,24 @@ class ConvertVideo(Convertor):
         for key in dic:
             val: any = self.instructions.values.get(key)
             if len(val) > 0:
-                if key == 'width':
-                    cmd_input += 'scale=' + dic[key].format(val)
-                cmd_input += dic[key].format(val) + ','
+                if key == 'width' or key == 'height':
+                    scale: str = self.resize(dic['width'].format(val), dic['height'].format(val))
+                    cmd_input += scale + ','
+                else:
+                    cmd_input += dic[key].format(val) + ','
         cmd_input_copy: str = cmd_input[:-1]
         return cmd_input_copy
 
     # This method converter the visual content.
+    def resize(self, width, height) -> str:
+        if width == '':
+            resp: str = 'scale=:-1' + height
+        elif height == '':
+            resp: str = 'scale=' + width + ":-1"
+        else:
+            resp: str = 'scale=' + width + ":" + height
+        return resp
+
     def exec(self) -> bool:
         concatenate: str = self.concatenate()
         try:

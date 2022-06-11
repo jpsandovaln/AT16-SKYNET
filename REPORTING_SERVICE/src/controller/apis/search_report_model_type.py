@@ -18,19 +18,18 @@ import json
 class SearchReportModelType:
 
     @staticmethod
-    def search_report_model_type(parameters) -> dict:
+    def search_report_model_type(parameters):
 
         # Validates parameters
         parameters.validate()
-        resource_model: parameters = parameters.get_resource_model()
-        resource_type: parameters = parameters.get_resource_type()
-        data_frame: parameters = parameters.get_data_frame()
+        resource_model = parameters.get_resource_model()
+        resource_type = parameters.get_resource_type()
+        data_frame = parameters.get_data_frame()
 
         # Executes the filter
-        filters: FiltersModelType = FiltersModelType(str(resource_model), str(resource_type))
-        filter_result: bool = filters.filters_model_type(data_frame)
-        filter_rows: any = (data_frame[filter_result])
-        result: any = filter_rows.to_json(date_format="iso", orient="records")
-        parsed: any = json.loads(result)
+        filters = FiltersModelType(str(resource_model), str(resource_type))
+        filter_result = filters.filters_model_type(data_frame)
+        filter_rows = (data_frame[filter_result])
+        result = filter_rows.to_json(date_format="iso", orient="records")
+        parsed = json.loads(result)
         return json.dumps(parsed)
-

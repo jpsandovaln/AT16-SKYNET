@@ -17,37 +17,29 @@ from src.common.exceptions.parameter_exception import ParameterException
 
 
 class ParameterReportFillTimeLocation:
-    def __init__(self, start_time: str, end_time: str, location: str, data_frame: type):
-        self.start_time: str = start_time
-        self.end_time: str = end_time
-        self.location: str = location
-        self.data_frame: type = data_frame
+    def __init__(self, start_date, end_date, data_frame):
+        self.start_date = start_date
+        self.end_date = end_date
+        self.data_frame = data_frame
 
-    def get_start_time(self) -> str:
-        return self.start_time
+    def get_start_date(self):
+        return self.start_date
 
-    def get_end_time(self) -> str:
-        return self.end_time
+    def get_end_date(self):
+        return self.end_date
 
-    def get_location(self) -> str:
-        return self.location
-
-    def get_data_frame(self) -> type:
+    def get_data_frame(self):
         return self.data_frame
 
     def validate(self):
-        if self.start_time is None or str(self.start_time).strip() == "":
-            message: str = "Invalid start time, the value is empty"
+        if self.start_date is None or str(self.start_date).strip() == "":
+            message = "Invalid date, the value is empty"
             raise ParameterException(message, "401", "AT16-ERR-351")
 
-        if self.end_time is None or str(self.end_time).strip() == "":
-            message: str = "Invalid end time, the value is empty"
-            raise ParameterException(message, "401", "AT16-ERR-352")
-
-        if self.location is None or str(self.location).strip() == "":
-            message: str = "Invalid location, the value is empty"
-            raise ParameterException(message, "401", "AT16-ERR-352")
+        if self.end_date is None or str(self.end_date).strip() == "":
+            message = "Invalid date, the value is empty"
+            raise ParameterException(message, "401", "AT16-ERR-351")
 
         if self.data_frame is None or type(self.data_frame) != pd.DataFrame:
-            message: str = "Invalid dataframe, the value is incorrect"
+            message = "Invalid dataframe, the value is incorrect"
             raise ParameterException(message, "401", "AT16-ERR-353")

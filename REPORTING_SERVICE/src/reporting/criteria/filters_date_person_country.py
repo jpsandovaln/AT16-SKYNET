@@ -10,17 +10,20 @@
 # accordance with the terms of the license agreement you entered into
 # with Jalasoft.
 #
-import time
+
 from datetime import datetime
 
 
 class FiltersDatePersonCountry:
-    def __init__(self, date: str, person_country: str):
-        self.date: str = date
-        self.person_country: str = person_country
+    def __init__(self, start_date, end_date):
+        self.start_date = start_date
+        self.end_date = end_date
 
-    def filters_date_person_country(self, data_frame) -> bool:
-        date_time: time = datetime.strptime(self.date, '%m/%d/%Y').date()
-        filters: bool = (data_frame["date"] <= date_time) & \
-                        (data_frame["person_country"] == self.person_country)
-        return filters
+    def filters_date_person_country(self, data_frame):
+        end_date = datetime.strptime(self.end_date, '%m/%d/%Y').date()
+        start_date = datetime.strptime(self.start_date, '%m/%d/%Y').date()
+        filters_date = (data_frame["date"] >= start_date) & (data_frame["date"] <= end_date)
+        df_date = data_frame[filters_date]
+        result_graphs = df_date.groupby(['person_country']).size().reset_index(
+            name='quantity')
+        return result_graphs

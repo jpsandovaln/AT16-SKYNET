@@ -18,18 +18,17 @@ import json
 class SearchReportDatePersonCountry:
 
     @staticmethod
-    def search_report_date_person_country(parameters) -> dict:
+    def search_report_date_person_country(parameters):
         # Validates parameters
         parameters.validate()
-        date: parameters = parameters.get_date()
-        person_country: parameters = parameters.get_person_country()
-        data_frame: parameters = parameters.get_data_frame()
+        start_date = parameters.get_start_date()
+        end_date = parameters.get_end_date()
+        data_frame = parameters.get_data_frame()
 
         # Executes the filter
-        filters: FiltersDatePersonCountry = FiltersDatePersonCountry(date, str(person_country))
-        filter_result: bool = filters.filters_date_person_country(data_frame)
-        filter_rows: any = (data_frame[filter_result])
-        result_filter: any = filter_rows.to_json(date_format="iso",
+        filters = FiltersDatePersonCountry(start_date, end_date)
+        filter_result = filters.filters_date_person_country(data_frame)
+        result_filter = filter_result.to_json(date_format="iso",
                                             orient="records")
-        parsed:any = json.loads(result_filter)
+        parsed = json.loads(result_filter)
         return json.dumps(parsed)

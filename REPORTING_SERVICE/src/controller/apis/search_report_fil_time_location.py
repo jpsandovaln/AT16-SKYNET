@@ -19,19 +19,16 @@ class SearchReportFilTimeLocation:
 
     @staticmethod
     def search_report_fil_time_location(parameters):
-
         # Validates parameters
         parameters.validate()
-        start_time: parameters = parameters.get_start_time()
-        end_time: parameters = parameters.get_end_time()
-        location: parameters = parameters.get_location()
-        data_frame: parameters = parameters.get_data_frame()
+        start_date = parameters.get_start_date()
+        end_date = parameters.get_end_date()
+        data_frame = parameters.get_data_frame()
 
         # Executes the filter
-        filters: FiltersTimeLocation = FiltersTimeLocation(start_time, end_time, str(location))
-        filter_result: bool = filters.fil_time_location(data_frame)
-        filter_rows: any = (data_frame[filter_result])
-        result_filter: any = filter_rows.to_json(date_format="iso",
-                                            orient="records")
-        parsed: any = json.loads(result_filter)
+        filters = FiltersTimeLocation(start_date, end_date)
+        filter_result = filters.fil_time_location(data_frame)
+        result_filter = filter_result.to_json(date_format="iso",
+                                              orient="records")
+        parsed = json.loads(result_filter)
         return json.dumps(parsed)
