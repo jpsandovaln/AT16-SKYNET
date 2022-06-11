@@ -22,6 +22,8 @@ from src.command.lp_server import LPServer
 from src.command.invoker import Invoker
 from src.command.start_cbba_server import StartCbbaServer
 from src.command.end_cbba_server import EndCbbaServer
+from src.singleton.property import Property
+from src.singleton.singleton_property import SingletonProperty
 
 
 def display(pizza):
@@ -224,6 +226,7 @@ if __name__ == "__main__":
     bolognesa_2 = Bolognesa().with_corn("2").with_meat("yes").build()
     display(bolognesa_2)
     """
+    """
     command = StartCbbaServer(CbbaServer())
     server_admin = Invoker(command)
     server_admin.run()
@@ -232,3 +235,22 @@ if __name__ == "__main__":
     command = EndCbbaServer(CbbaServer())
     server_admin = Invoker(command)
     server_admin.run()
+    """
+
+    pro1 = Property()
+    pro2 = Property()
+    print(pro1)
+    print(pro2)
+    print(pro1.get_host())
+    print(pro2.get_host())
+
+    singleton1 = SingletonProperty()
+    singleton2 = SingletonProperty()
+    print(singleton1)
+    print(singleton2)
+    print(singleton1.get_property().get_host())
+    print(singleton2.get_property().get_host())
+    print(singleton1.get_property().get_user())
+    print(singleton2.get_property().get_user())
+    print(singleton1.get_property().get_pwd())
+    print(singleton2.get_property().get_pwd())
