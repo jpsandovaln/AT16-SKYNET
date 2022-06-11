@@ -281,7 +281,7 @@ def transfer_from_mongo_to_postgres():
         Criteria.get_df()
         result_report = "Transfer from Mongo to Postgres, Success"
         return Response(
-            result_report,
+            json.dumps(result_report),
             status=HTTPStatus.OK,
             mimetype='application/json'
         )
