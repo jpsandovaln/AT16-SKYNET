@@ -36,7 +36,5 @@ COPY . /app
 RUN pip3 --no-cache-dir install -r requirements.txt
 
 
-
-
 # Execute python3 and main.py
 CMD ["python3", "main.py"]
