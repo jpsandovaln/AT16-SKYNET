@@ -13,6 +13,10 @@
 
 import os
 from decouple import config
+import json
+from flask import Response
+from http import HTTPStatus
+from src.controller.results.success_result import SuccessResult
 
 
 URL = config('URL')
@@ -36,4 +40,9 @@ class EndPointConverter:
 
     # Download files in folder of Machine Learning Saved Files
     def send_file(self, dir_output, file_name):
-        return URL + os.path.join(dir_output, file_name)
+        result_model = SuccessResult(HTTPStatus.OK, str(URL + os.path.join(dir_output, file_name)))
+        return Response(
+            json.dumps(result_model.__dict__),
+            status=HTTPStatus.OK,
+            mimetype='application/json'
+        )

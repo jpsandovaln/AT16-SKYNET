@@ -168,7 +168,7 @@ services:
     networks:
       - skynet_network
     ports:
-      - "6009:5000"
+      - "6009:5009"
 
   machine_learning-jupyter:
     container_name: machine_learning_jupyter
@@ -179,7 +179,7 @@ services:
     networks:
       - skynet_network
     ports:
-      - "6010:5000"
+      - "6010:5009"
 
 networks:
   skynet_network:
