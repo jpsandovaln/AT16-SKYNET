@@ -21,6 +21,7 @@ RUN apt install tesseract-ocr -y
 RUN apt-get install tesseract-ocr-spa -y
 RUN apt install python3-opencv -y
 RUN apt install -y libimage-exiftool-perl
+RUN apt-get install -y ffmpeg
 # RUN apt add --no-cache python3-dev \
 #    && pip3 install --upgrade pip
 # Set the work directory
