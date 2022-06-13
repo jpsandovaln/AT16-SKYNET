@@ -18,6 +18,12 @@ from src.model.model_vggface import ModelVggFace
 from flask import send_file
 from PIL import Image
 from src.controller.utils.zipfile.decompress import Decompress
+from flask import Response
+from http import HTTPStatus
+from src.common.exceptions.machine_learning_exception import MachineLearningException
+from src.controller.results.success_result import SuccessResult
+from src.controller.results.error_result import ErrorResult
+from src.model.model_iris_recognition.parameters import Parameters
 
 
 class ControllerVggFace:
@@ -66,28 +72,50 @@ class ControllerVggFace:
 
     # Search a person from an image in a bunch of images from a zip file
     def search_person(self, save_location):
-        file_request = self.request.files['file']
-        file_person = self.request.files['person']
-        path_saved = os.path.join(save_location, file_request.filename)
-        file_request.save(path_saved)
-        path_zip = Decompress(path_saved)
-        path_zip_result = path_zip.path_decompress()
-        model = ModelVggFace()
-        response = []
-        if model.image_has_face(file_person):
-            path_files = [(path_zip_result + '''/''' + f) for f in os.listdir(path_zip_result)
-                          if os.path.isfile(os.path.join(path_zip_result, f))]
-            for file in path_files:
-                if model.image_has_face(file):
-                    images = [file_person, file]
-                    embeddings = model.get_embeddings(images)
-                    resp = model.is_match(embeddings[0], embeddings[1])
-                    if resp:
-                        response.append({
-                                "The person appears in": str(ntpath.basename(file))
-                            })
-        else:
-            response = ({
-                    "there is not a face in": str(file_person.filename)
-                })
-        return json.dumps(response)
+        try:
+            file_request = self.request.files['file']
+            file_person = self.request.files['person']
+            path_saved = os.path.join(save_location, file_request.filename)
+            file_request.save(path_saved)
+            path_zip = Decompress(path_saved)
+            path_zip_result = path_zip.path_decompress()
+            model = ModelVggFace()
+            response = []
+            if model.image_has_face(file_person):
+                path_files = [(path_zip_result + '''/''' + f) for f in os.listdir(path_zip_result)
+                              if os.path.isfile(os.path.join(path_zip_result, f))]
+                for file in path_files:
+                    if model.image_has_face(file):
+                        images = [file_person, file]
+                        embeddings = model.get_embeddings(images)
+                        resp = model.is_match(embeddings[0], embeddings[1])
+                        if resp:
+                            response.append({
+                                    "The person appears in": str(ntpath.basename(file))
+                                })
+            else:
+                response = ({
+                        "there is not a face in": str(file_person.filename)
+                    })
+            result_model = SuccessResult(HTTPStatus.OK, str(response))
+            return Response(
+                json.dumps(result_model.__dict__),
+                status=HTTPStatus.OK,
+                mimetype='application/json'
+            )
+
+        except MachineLearningException as error:
+            result_error = ErrorResult(error.status, error.message, error.code)
+            return Response(
+                json.dumps(result_error.__dict__),
+                status=error.status,
+                mimetype='application/json'
+            )
+
+        except Exception as error:
+            result_error = ErrorResult(HTTPStatus.NOT_FOUND, error, 'AT16-000451')
+            return Response(
+                json.dumps(result_error.__dict__),
+                status=HTTPStatus.NOT_FOUND,
+                mimetype='application/json'
+            )

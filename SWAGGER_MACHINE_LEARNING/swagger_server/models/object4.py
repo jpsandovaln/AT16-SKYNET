@@ -1,15 +1,4 @@
-#
-# @object4.py Copyright (c) 2022 Jalasoft.
-# 2643 Av Melchor Perez de Olguin, Colquiri Sud, Cochabamba, Bolivia.
-# Edificio Union № 1376 Av. General Inofuentes esquina Calle 20, La Paz, Bolivia.
-# All rights reserved.
-#
-# This software is the confidential and proprietary information of
-# Jalasoft, ("Confidential Information"). You shall not
-# disclose such Confidential Information and shall use it only in
-# accordance with the terms of the license agreement you entered into
-# with Jalasoft.
-#
+# coding: utf-8
 
 from __future__ import absolute_import
 from datetime import date, datetime  # noqa: F401
@@ -26,21 +15,21 @@ class Object4(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, http127_0_0_15000downloadersaved_filescompress_files: str=None):  # noqa: E501
+    def __init__(self, http127_0_0_16009downloadersaved_filescompress_files: str=None):  # noqa: E501
         """Object4 - a model defined in Swagger
 
-        :param http127_0_0_15000downloadersaved_filescompress_files: The http127_0_0_15000downloadersaved_filescompress_files of this Object4.  # noqa: E501
-        :type http127_0_0_15000downloadersaved_filescompress_files: str
+        :param http127_0_0_16009downloadersaved_filescompress_files: The http127_0_0_16009downloadersaved_filescompress_files of this Object4.  # noqa: E501
+        :type http127_0_0_16009downloadersaved_filescompress_files: str
         """
         self.swagger_types = {
-            'http127_0_0_15000downloadersaved_filescompress_files': str
+            'http127_0_0_16009downloadersaved_filescompress_files': str
         }
 
         self.attribute_map = {
-            'http127_0_0_15000downloadersaved_filescompress_files': 'http://127.0.0.1:5000/downloader/saved_files/compress_files/'
+            'http127_0_0_16009downloadersaved_filescompress_files': 'http://127.0.0.1:6009/downloader/saved_files/compress_files/'
         }
 
-        self._http127_0_0_15000downloadersaved_filescompress_files = http127_0_0_15000downloadersaved_filescompress_files
+        self._http127_0_0_16009downloadersaved_filescompress_files = http127_0_0_16009downloadersaved_filescompress_files
 
     @classmethod
     def from_dict(cls, dikt) -> 'Object4':
@@ -54,22 +43,22 @@ class Object4(Model):
         return util.deserialize_model(dikt, cls)
 
     @property
-    def http127_0_0_15000downloadersaved_filescompress_files(self) -> str:
-        """Gets the http127_0_0_15000downloadersaved_filescompress_files of this Object4.
+    def http127_0_0_16009downloadersaved_filescompress_files(self) -> str:
+        """Gets the http127_0_0_16009downloadersaved_filescompress_files of this Object4.
 
 
-        :return: The http127_0_0_15000downloadersaved_filescompress_files of this Object4.
+        :return: The http127_0_0_16009downloadersaved_filescompress_files of this Object4.
         :rtype: str
         """
-        return self._http127_0_0_15000downloadersaved_filescompress_files
+        return self._http127_0_0_16009downloadersaved_filescompress_files
 
-    @http127_0_0_15000downloadersaved_filescompress_files.setter
-    def http127_0_0_15000downloadersaved_filescompress_files(self, http127_0_0_15000downloadersaved_filescompress_files: str):
-        """Sets the http127_0_0_15000downloadersaved_filescompress_files of this Object4.
+    @http127_0_0_16009downloadersaved_filescompress_files.setter
+    def http127_0_0_16009downloadersaved_filescompress_files(self, http127_0_0_16009downloadersaved_filescompress_files: str):
+        """Sets the http127_0_0_16009downloadersaved_filescompress_files of this Object4.
 
 
-        :param http127_0_0_15000downloadersaved_filescompress_files: The http127_0_0_15000downloadersaved_filescompress_files of this Object4.
-        :type http127_0_0_15000downloadersaved_filescompress_files: str
+        :param http127_0_0_16009downloadersaved_filescompress_files: The http127_0_0_16009downloadersaved_filescompress_files of this Object4.
+        :type http127_0_0_16009downloadersaved_filescompress_files: str
         """
 
-        self._http127_0_0_15000downloadersaved_filescompress_files = http127_0_0_15000downloadersaved_filescompress_files
+        self._http127_0_0_16009downloadersaved_filescompress_files = http127_0_0_16009downloadersaved_filescompress_files

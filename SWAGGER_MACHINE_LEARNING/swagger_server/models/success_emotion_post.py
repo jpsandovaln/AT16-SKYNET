@@ -1,15 +1,4 @@
-#
-# @success_emotion_post.py Copyright (c) 2022 Jalasoft.
-# 2643 Av Melchor Perez de Olguin, Colquiri Sud, Cochabamba, Bolivia.
-# Edificio Union № 1376 Av. General Inofuentes esquina Calle 20, La Paz, Bolivia.
-# All rights reserved.
-#
-# This software is the confidential and proprietary information of
-# Jalasoft, ("Confidential Information"). You shall not
-# disclose such Confidential Information and shall use it only in
-# accordance with the terms of the license agreement you entered into
-# with Jalasoft.
-#
+# coding: utf-8
 
 from __future__ import absolute_import
 from datetime import date, datetime  # noqa: F401
@@ -17,7 +6,6 @@ from datetime import date, datetime  # noqa: F401
 from typing import List, Dict  # noqa: F401
 
 from swagger_server.models.base_model_ import Model
-from swagger_server.models.object4 import Object4
 from swagger_server import util
 
 
@@ -27,21 +15,26 @@ class SuccessEmotionPost(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, url: Object4=None):  # noqa: E501
+    def __init__(self, status: str=None, message: object=None):  # noqa: E501
         """SuccessEmotionPost - a model defined in Swagger
 
-        :param url: The url of this SuccessEmotionPost.  # noqa: E501
-        :type url: Object4
+        :param status: The status of this SuccessEmotionPost.  # noqa: E501
+        :type status: str
+        :param message: The message of this SuccessEmotionPost.  # noqa: E501
+        :type message: object
         """
         self.swagger_types = {
-            'url': Object4
+            'status': str,
+            'message': object
         }
 
         self.attribute_map = {
-            'url': 'URL'
+            'status': 'status',
+            'message': 'message'
         }
 
-        self._url = url
+        self._status = status
+        self._message = message
 
     @classmethod
     def from_dict(cls, dikt) -> 'SuccessEmotionPost':
@@ -55,22 +48,43 @@ class SuccessEmotionPost(Model):
         return util.deserialize_model(dikt, cls)
 
     @property
-    def url(self) -> Object4:
-        """Gets the url of this SuccessEmotionPost.
+    def status(self) -> str:
+        """Gets the status of this SuccessEmotionPost.
 
 
-        :return: The url of this SuccessEmotionPost.
-        :rtype: Object4
+        :return: The status of this SuccessEmotionPost.
+        :rtype: str
         """
-        return self._url
+        return self._status
 
-    @url.setter
-    def url(self, url: Object4):
-        """Sets the url of this SuccessEmotionPost.
+    @status.setter
+    def status(self, status: str):
+        """Sets the status of this SuccessEmotionPost.
 
 
-        :param url: The url of this SuccessEmotionPost.
-        :type url: Object4
+        :param status: The status of this SuccessEmotionPost.
+        :type status: str
         """
 
-        self._url = url
+        self._status = status
+
+    @property
+    def message(self) -> object:
+        """Gets the message of this SuccessEmotionPost.
+
+
+        :return: The message of this SuccessEmotionPost.
+        :rtype: object
+        """
+        return self._message
+
+    @message.setter
+    def message(self, message: object):
+        """Sets the message of this SuccessEmotionPost.
+
+
+        :param message: The message of this SuccessEmotionPost.
+        :type message: object
+        """
+
+        self._message = message
