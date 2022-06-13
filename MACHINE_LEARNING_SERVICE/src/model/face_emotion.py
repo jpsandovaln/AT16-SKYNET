@@ -26,7 +26,7 @@ absolute_path = AbsolutePath.get_absolute_path()
 FACE_CLASSIFIER = os.path.join(absolute_path, config('FACE_CLASSIFIER'))
 CLASSIFIER = os.path.join(absolute_path, config('CLASSIFIER'))
 
-CLASS_LABELS = ['Enojado', 'Feliz', 'Neutral', 'Triste', 'Sorprendido']
+CLASS_LABELS = ['Angry', 'Happy', 'Neutral', 'Sad', 'Surprised']
 GRAY = 0
 COLOR = 2
 SIZE_X = 48

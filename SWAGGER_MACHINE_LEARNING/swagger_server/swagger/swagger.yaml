@@ -6,28 +6,28 @@ info:
   title: "Machine Learning"
   contact:
     email: "jalasoft@jalasoft.com"
-host: "127.0.0.1:5000"
+host: "127.0.0.1:6009"
 tags:
 - name: "Iris recognition"
   description: "Train and recognize an iris"
   externalDocs:
     description: "Train and recognize an iris"
-    url: "http://127.0.0.1:5000"
+    url: "http://127.0.0.1:6009"
 - name: "Object recognition"
-  description: "Vgg16, Resnet, Inception V3"
+  description: "Vgg16, Inception V3"
   externalDocs:
     description: "Object recognition"
-    url: "http://127.0.0.1:5000"
+    url: "http://127.0.0.1:6009"
 - name: "Face recognition"
   description: "VggFace"
   externalDocs:
     description: "Face recognition"
-    url: "http://127.0.0.1:5000"
+    url: "http://127.0.0.1:6009"
 - name: "Emotion recognition"
   description: "Emotion"
   externalDocs:
     description: "Emotion recognition"
-    url: "http://127.0.0.1:5000"
+    url: "http://127.0.0.1:6009"
 schemes:
 - "http"
 paths:
@@ -128,9 +128,13 @@ paths:
         type: "string"
       - name: "model"
         in: "formData"
-        description: "ModelVgg16, InceptionV3, Resnet"
+        description: "ModelVgg16, InceptionV3"
         required: true
         type: "string"
+        default: "ModelVgg16"
+        enum:
+        - "ModelVgg16"
+        - "InceptionV3"
       - name: "percentage"
         in: "formData"
         description: "Percentage between 0-1"
@@ -192,7 +196,7 @@ paths:
         "500":
           description: "Server Error"
       x-swagger-router-controller: "swagger_server.controllers.face_recognition_controller"
-  /Emotion:
+  /emotion:
     post:
       tags:
       - "Emotion recognition"
@@ -238,7 +242,7 @@ definitions:
         type: "number"
         format: "float"
     example:
-      Percentage: 0.8008282
+      Percentage: 0.8008281999999999900552438703016377985477447509765625
       Time: "Time"
       Name: "Name"
   Object2:
@@ -249,20 +253,31 @@ definitions:
       The person appears in: "The person appears in"
   Object4:
     properties:
-      http://127.0.0.1:5000/downloader/saved_files/compress_files/:
+      http://127.0.0.1:6009/downloader/saved_files/compress_files/:
         type: "string"
     example:
-      http://127.0.0.1:5000/downloader/saved_files/compress_files/: "http://127.0.0.1:5000/downloader/saved_files/compress_files/"
+      http://127.0.0.1:6009/downloader/saved_files/compress_files/: "http://127.0.0.1:6009/downloader/saved_files/compress_files/"
   SuccessIrisPost:
     type: "object"
     properties:
-      Name:
+      status:
         type: "string"
-      Percentage:
-        type: "number"
-        format: "float"
+      message:
+        type: "object"
+        properties: {}
     example:
-      Percentage: 0.8008282
+      Percentage: 0.8008281999999999900552438703016377985477447509765625
+      Name: "Name"
+  SuccessIrisTrain:
+    type: "object"
+    properties:
+      status:
+        type: "string"
+      message:
+        type: "object"
+        properties: {}
+    example:
+      Percentage: 0.8008281999999999900552438703016377985477447509765625
       Name: "Name"
   SuccessObjectRecognitionPost:
     type: "object"
@@ -271,20 +286,26 @@ definitions:
         $ref: "#/definitions/Object"
     example:
       object:
-        Percentage: 0.8008282
+        Percentage: 0.8008281999999999900552438703016377985477447509765625
         Time: "Time"
         Name: "Name"
   SuccessFaceRecognitionPost:
+    type: "object"
     properties:
-      array:
-        $ref: "#/definitions/Object2"
+      status:
+        type: "string"
+      message:
+        type: "object"
+        properties: {}
     example:
-      array:
-        The person appears in: "The person appears in"
+      Name: "Name"
   SuccessEmotionPost:
+    type: "object"
     properties:
-      URL:
-        $ref: "#/definitions/Object4"
+      status:
+        type: "string"
+      message:
+        type: "object"
+        properties: {}
     example:
-      URL:
-        http://127.0.0.1:5000/downloader/saved_files/compress_files/: "http://127.0.0.1:5000/downloader/saved_files/compress_files/"
+      Name: "Name"
