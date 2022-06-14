@@ -43,7 +43,8 @@ class Parameters:
             pass
 
     def validate_get_convert(self):
-        converters: list = ['Image', 'Video', 'Metadata', 'Audio', 'OCR', 'Translator', 'WavTxt']
+        converters: list = ['Image', 'Video', 'Metadata', 'Audio', 'OCR', 'Translator', 'WavTxt',
+                            'WavTranslator', 'OCRTranslator']
         if self.request.values.get('convert') == "":
             raise ParameterException("The convert filed is empty", "402", "AT16-ERR-305")
         elif self.request.values.get('convert') not in converters:
@@ -59,6 +60,7 @@ class Parameters:
         image_converters: list = ['jpg', 'tiff', 'gif', 'png', 'bmp', 'webp']
         translator_converters: list = ['txt']
         wav_converters: list = ['txt']
+        wav_translator_converters: list = ['txt']
         if self.request.values.get('convert') == 'OCR' and self.request.values.get(
                 'format') not in ocr_converters:
             raise ParameterException("format is Not a recognized format", "402", "AT16-ERR-305")
@@ -79,6 +81,9 @@ class Parameters:
             raise ParameterException("format is Not a recognized format", "402", "AT16-ERR-305")
         elif self.request.values.get('convert') == 'WavTxt' and self.request.values.get(
                 'format') not in wav_converters:
+            raise ParameterException("format is Not a recognized format", "402", "AT16-ERR-305")
+        elif self.request.values.get('convert') == 'WavTranslator' and self.request.values.get(
+                'format') not in wav_translator_converters:
             raise ParameterException("format is Not a recognized format", "402", "AT16-ERR-305")
         else:
             pass

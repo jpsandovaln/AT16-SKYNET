@@ -20,6 +20,8 @@ from src.model.convert_audio import ConvertAudio
 from src.model.convert_ocr import ConvertOCR
 from src.model.convert_translator import ConvertTranslator
 from src.model.convert_wav_to_txt import ConvertWavTxt
+from src.model.convert_wav_translator import ConvertWavTranslator
+from src.model.convert_ocr_translator import ConvertOCRTranslator
 from src.controller.apis.end_point_converter import EndPointConverter
 from src.common.exceptions.convert_services_exception import ConvertServicesException
 from src.controller.results.success_result import SuccessResult
@@ -74,6 +76,10 @@ def save_file():
                 convert: ConvertTranslator = ConvertTranslator(request, UPLOAD_FOLDER)
             if request.values.get('convert') == 'WavTxt':
                 convert: ConvertWavTxt = ConvertWavTxt(request, UPLOAD_FOLDER)
+            if request.values.get('convert') == 'WavTranslator':
+                convert: ConvertWavTranslator = ConvertWavTranslator(request, UPLOAD_FOLDER)
+            if request.values.get('convert') == 'OCRTranslator':
+                convert: ConvertOCRTranslator = ConvertOCRTranslator(request, UPLOAD_FOLDER)
             convert.exec()
             result_converter: any = file.send_file(convert.output_file, convert.name_output)
             result_model: SuccessResult = SuccessResult(HTTPStatus.OK, str(result_converter))
