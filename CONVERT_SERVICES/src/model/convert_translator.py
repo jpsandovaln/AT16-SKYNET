@@ -56,3 +56,11 @@ class ConvertTranslator(Convertor):
                 status=HTTPStatus.NOT_FOUND,
                 mimetype='application/json'
             )
+
+    def translator_text(self, text_in):
+        language_in: str = self.language_in.split('-')
+        language_out: str = self.language_out.split('-')
+        translator: any = GoogleTranslator(source=language_in[0], target=language_out[0])
+        result: any = translator.translate(text_in)
+        return result
+
