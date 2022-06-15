@@ -1,0 +1,393 @@
+---
+swagger: "2.0"
+info:
+  description: "Reporting Service"
+  version: "1.0.0"
+  title: "Reporting Service"
+  contact:
+    email: "jalasoft@jalasoft.com"
+host: "127.0.0.1:6003"
+tags:
+- name: "Search report fill time location"
+  description: "Search by a range of date"
+- name: "Search report by time"
+  description: "Search report by time"
+- name: "Search report by age and gender"
+  description: "Search report by age and gender"
+- name: "Search reservations for each country by range of date"
+  description: "Search the number of reservations for each country within a range\
+    \ of dates"
+- name: "Search report by state and gender"
+  description: "Search report by state and gender"
+- name: "Search report by type and model"
+  description: "Search report by type and model"
+- name: "Extract data from Mongo and load into Psql"
+  description: "Extract data from Mongo and load into Psql"
+schemes:
+- "http"
+paths:
+  /search_report_fill_time_location:
+    post:
+      tags:
+      - "Search report fill time location"
+      summary: "Search the number of reservations for each city within a range of\
+        \ dates"
+      description: ""
+      operationId: "updatelocation_with_form"
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "start_date"
+        in: "formData"
+        description: "MM/DD/YYYY eg. 01/18/1995"
+        required: true
+        type: "string"
+      - name: "end_date"
+        in: "formData"
+        description: "MM/DD/YYYY eg. 12/30/2022"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/SuccessLocationPost"
+        "400":
+          description: "Bad Request"
+        "401":
+          description: "Unauthorized"
+        "404":
+          description: "Not found"
+        "405":
+          description: "Invalid input"
+        "500":
+          description: "Server Error"
+      x-swagger-router-controller: "swagger_server.controllers.search_report_fill_time_location_controller"
+  /search_report_start_finish_time_person_gender:
+    post:
+      tags:
+      - "Search report by time"
+      summary: "Search the number of reservations made in the morning and afternoon\
+        \ for each gender"
+      description: ""
+      operationId: "update_gender_with_form"
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "open_time"
+        in: "formData"
+        description: "HH:MM:SS eg. 08:30:00"
+        required: true
+        type: "string"
+      - name: "close_time"
+        in: "formData"
+        description: "HH:MM:SS eg. 18:30:00"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/SuccessGenderPost"
+        "400":
+          description: "Bad Request"
+        "401":
+          description: "Unauthorized"
+        "404":
+          description: "Not found"
+        "405":
+          description: "Invalid input"
+        "500":
+          description: "Server Error"
+      x-swagger-router-controller: "swagger_server.controllers.search_report_by_time_controller"
+  /search_report_age_gender:
+    post:
+      tags:
+      - "Search report by age and gender"
+      summary: "Search report by age and gender"
+      description: ""
+      operationId: "update_ageand_gender_with_form"
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "person_age"
+        in: "formData"
+        description: "Integer eg. 55"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "person_gender"
+        in: "formData"
+        description: "M or F"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/SuccessPost"
+        "400":
+          description: "Bad Request"
+        "401":
+          description: "Unauthorized"
+        "404":
+          description: "Not found"
+        "405":
+          description: "Invalid input"
+        "500":
+          description: "Server Error"
+      x-swagger-router-controller: "swagger_server.controllers.search_report_by_age_and_gender_controller"
+  /search_report_date_person_country:
+    post:
+      tags:
+      - "Search reservations for each country by range of date"
+      summary: "Search the number of reservations for each country within a range\
+        \ of dates"
+      description: ""
+      operationId: "update_country_with_form"
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "start_date"
+        in: "formData"
+        description: "MM/DD/YYYY eg. 01/18/1995"
+        required: true
+        type: "string"
+      - name: "end_date"
+        in: "formData"
+        description: "MM/DD/YYYY eg. 01/18/2019"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/SuccessCountryPost"
+        "400":
+          description: "Bad Request"
+        "401":
+          description: "Unauthorized"
+        "404":
+          description: "Not found"
+        "405":
+          description: "Invalid input"
+        "500":
+          description: "Server Error"
+      x-swagger-router-controller: "swagger_server.controllers.search_reservations_for_each_country_by_range_of_date_controller"
+  /search_report_state_person_gender:
+    post:
+      tags:
+      - "Search report by state and gender"
+      summary: "Search report by state and gender"
+      description: ""
+      operationId: "update_state_with_form"
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "state"
+        in: "formData"
+        description: "String eg. new"
+        required: true
+        type: "string"
+      - name: "person_gender"
+        in: "formData"
+        description: "M or F"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/SuccessPost"
+        "400":
+          description: "Bad Request"
+        "401":
+          description: "Unauthorized"
+        "404":
+          description: "Not found"
+        "405":
+          description: "Invalid input"
+        "500":
+          description: "Server Error"
+      x-swagger-router-controller: "swagger_server.controllers.search_report_by_state_and_gender_controller"
+  /search_report_model_type:
+    post:
+      tags:
+      - "Search report by type and model"
+      summary: "Search report by type and model"
+      description: ""
+      operationId: "update_report_type_with_form"
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "type"
+        in: "formData"
+        description: "String eg. Asus"
+        required: true
+        type: "string"
+      - name: "model"
+        in: "formData"
+        description: "String eg. Jeep"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/SuccessPost"
+        "400":
+          description: "Bad Request"
+        "401":
+          description: "Unauthorized"
+        "404":
+          description: "Not found"
+        "405":
+          description: "Invalid input"
+        "500":
+          description: "Server Error"
+      x-swagger-router-controller: "swagger_server.controllers.search_report_by_type_and_model_controller"
+  /mongo_to_postgres:
+    get:
+      tags:
+      - "Extract data from Mongo and load into Psql"
+      summary: "Extract data from Mongo and load into Psql"
+      description: ""
+      operationId: "get_data_base_with_form"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters: []
+      responses:
+        "200":
+          description: "successful operation"
+        "400":
+          description: "Bad Request"
+        "401":
+          description: "Unauthorized"
+        "404":
+          description: "Not found"
+        "405":
+          description: "Invalid input"
+        "500":
+          description: "Server Error"
+      x-swagger-router-controller: "swagger_server.controllers.extract_data_from_mongo_and_load_into_psql_controller"
+definitions:
+  SuccessLocationPost:
+    type: "object"
+    properties:
+      person_city:
+        type: "string"
+        example: "Houston"
+      quantity:
+        type: "integer"
+        format: "int32"
+        example: 380
+    example:
+      quantity: 380
+      person_city: "Houston"
+  SuccessGenderPost:
+    type: "object"
+    properties:
+      person_gender:
+        type: "string"
+        example: "M"
+      morning:
+        type: "integer"
+        format: "int32"
+        example: 55
+      afternoon:
+        type: "integer"
+        format: "int32"
+        example: 180
+    example:
+      afternoon: 180
+      person_gender: "M"
+      morning: 55
+  SuccessPost:
+    type: "object"
+    properties:
+      date:
+        type: "string"
+        example: "12/24/2016"
+      start_time:
+        type: "string"
+        example: "11:00:00"
+      end_time:
+        type: "string"
+        example: "16:35:40"
+      state:
+        type: "string"
+        example: "new"
+      resource_name:
+        type: "string"
+        example: "TV"
+      resource_type:
+        type: "string"
+        example: "MG-002"
+      resource_model:
+        type: "string"
+        example: "SG-0029"
+      resource_state:
+        type: "string"
+        example: "new"
+      person_gender:
+        type: "string"
+        example: "M"
+      person_full_name:
+        type: "string"
+        example: "Messi"
+      person_age:
+        type: "integer"
+        format: "int32"
+        example: 23
+      person_country:
+        type: "string"
+        example: "Bolivia"
+      person_city:
+        type: "string"
+        example: "Oruro"
+    example:
+      date: "12/24/2016"
+      resource_state: "new"
+      person_full_name: "Messi"
+      end_time: "16:35:40"
+      resource_type: "MG-002"
+      resource_model: "SG-0029"
+      person_gender: "M"
+      person_age: 23
+      person_city: "Oruro"
+      start_time: "11:00:00"
+      person_country: "Bolivia"
+      state: "new"
+      resource_name: "TV"
+  SuccessCountryPost:
+    type: "object"
+    properties:
+      person_country:
+        type: "string"
+        example: "Bolivia"
+      quantity:
+        type: "integer"
+        format: "int32"
+        example: 321
+    example:
+      quantity: 321
+      person_country: "Bolivia"

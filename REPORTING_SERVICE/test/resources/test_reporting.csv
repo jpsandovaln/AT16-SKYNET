@@ -1,0 +1,5 @@
+date;start_time;end_time;state;resource_name;resource_type;resource_model;resource_state;person_full_name;person_age;person_country;person_city;person_gender
+2/3/2017;09:00:00;16:30:00;free;Jeep;vehicles;Jeep;free;Frank Sinatra;31;EEUU;California;M
+06/21/2020;06:30:00;13:45:00;free;Pickup;vehicles;Pickup;free;Janeth Jackson;17;Colombia;Medellin;F
+12/23/2022;11:15:00;20:30:00;booked;Refrigerator;appliance;M20;free;Bono B;45;United Kindom;London;M
+12/23/2022;11:15:00;20:30:00;booked;Refrigerator;appliance;M20;booked;Alice B;45;United Kindom;London;F

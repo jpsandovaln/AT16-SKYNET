@@ -1,0 +1,17 @@
+[
+    {
+        "date": "2/3/2017",
+        "start_time": "09:00:00",
+        "end_time": "16:30:00",
+        "state": "free",
+        "resource_name": "Jeep",
+        "resource_type": "vehicles",
+        "resource_model": "Jeep",
+        "resource_state": "free",
+        "person_full_name": "Frank Sinatra",
+        "person_age": 31,
+        "person_country": "EEUU",
+        "person_city": "California",
+        "person_gender": "M"
+    }
+]

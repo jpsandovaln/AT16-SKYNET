@@ -1,0 +1,975 @@
+---
+swagger: "2.0"
+info:
+  description: "Booking service"
+  version: "1.0.0"
+  title: "API booking service"
+host: "127.0.0.1:6002"
+tags:
+- name: "Resource"
+  description: "Resource endpoint"
+- name: "Person"
+  description: "Person endpoint"
+- name: "Booking"
+  description: "Booking endpoint"
+schemes:
+- "http"
+paths:
+  /resource:
+    get:
+      tags:
+      - "Resource"
+      summary: "Find a resource"
+      description: "Find a resource"
+      operationId: "findresource"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters: []
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/SuccessResourceGet"
+        "400":
+          description: "Bad Request"
+        "401":
+          description: "Unauthorized"
+        "404":
+          description: "Not found"
+        "405":
+          description: "Invalid input"
+        "500":
+          description: "Server Error"
+      x-swagger-router-controller: "swagger_server.controllers.resource_controller"
+    post:
+      tags:
+      - "Resource"
+      summary: "Insert a resource"
+      description: ""
+      operationId: "insertresource"
+      consumes:
+      - "application/json"
+      - "application/xml"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Insert a resource"
+        required: true
+        schema:
+          $ref: "#/definitions/BodyResourcePost"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/SuccessResourcePost"
+        "400":
+          description: "Bad Request"
+        "401":
+          description: "Unauthorized"
+        "404":
+          description: "Not found"
+        "405":
+          description: "Invalid input"
+        "500":
+          description: "Server Error"
+      x-swagger-router-controller: "swagger_server.controllers.resource_controller"
+  /resource/id/{id_resource}:
+    get:
+      tags:
+      - "Resource"
+      summary: "Find a resource by id"
+      description: "Find a resource by id"
+      operationId: "findresourcebyid"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "id_resource"
+        in: "path"
+        description: "Find a resource by id"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/SuccessResourceIdGet"
+        "400":
+          description: "Bad Request"
+        "401":
+          description: "Unauthorized"
+        "404":
+          description: "Not found"
+        "405":
+          description: "Invalid input"
+        "500":
+          description: "Server Error"
+      x-swagger-router-controller: "swagger_server.controllers.resource_controller"
+  /resource/name/{resource_name}:
+    get:
+      tags:
+      - "Resource"
+      summary: "Find a resource by name"
+      description: "Find a resource by name"
+      operationId: "findresourcebyname"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "resource_name"
+        in: "path"
+        description: "Resource name"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/SuccessResourceIdGet"
+        "400":
+          description: "Bad Request"
+        "401":
+          description: "Unauthorized"
+        "404":
+          description: "Not found"
+        "405":
+          description: "Invalid input"
+        "500":
+          description: "Server Error"
+      x-swagger-router-controller: "swagger_server.controllers.resource_controller"
+  /resource/{id_resource}:
+    put:
+      tags:
+      - "Resource"
+      summary: "Update a Resource by Id"
+      description: "Update a resource"
+      operationId: "updateresource"
+      consumes:
+      - "application/json"
+      - "application/xml"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "id_resource"
+        in: "path"
+        description: "Id resource"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "body"
+        description: "Find a resource"
+        required: true
+        schema:
+          $ref: "#/definitions/BodyResourcePut"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/SuccessResourceGet"
+        "400":
+          description: "Bad Request"
+        "401":
+          description: "Unauthorized"
+        "404":
+          description: "Not found"
+        "405":
+          description: "Invalid input"
+        "500":
+          description: "Server Error"
+      x-swagger-router-controller: "swagger_server.controllers.resource_controller"
+    delete:
+      tags:
+      - "Resource"
+      summary: "Delete a Resource by Id of the Database of Booking"
+      description: "Delete a resource"
+      operationId: "deleteresource"
+      parameters:
+      - name: "id_resource"
+        in: "path"
+        description: "Id resource"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/SuccessResourceGet"
+        "400":
+          description: "Bad Request"
+        "401":
+          description: "Unauthorized"
+        "404":
+          description: "Not found"
+        "405":
+          description: "Invalid input"
+        "500":
+          description: "Server Error"
+      x-swagger-router-controller: "swagger_server.controllers.resource_controller"
+  /person:
+    get:
+      tags:
+      - "Person"
+      summary: "Get all Persons of the Database of Booking"
+      description: ""
+      operationId: "get_all"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters: []
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/SuccessPersonGet"
+        "400":
+          description: "Bad Request"
+        "401":
+          description: "Unauthorized"
+        "404":
+          description: "Not found"
+        "405":
+          description: "Invalid input"
+        "500":
+          description: "Server Error"
+      x-swagger-router-controller: "swagger_server.controllers.person_controller"
+    post:
+      tags:
+      - "Person"
+      summary: "Create a Person into the Database of Booking"
+      operationId: "person_post"
+      consumes:
+      - "application/json"
+      - "application/xml"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Insert a person"
+        required: true
+        schema:
+          $ref: "#/definitions/BodyPersonPost"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/SuccessPersonPost"
+        "400":
+          description: "Bad Request"
+        "401":
+          description: "Unauthorized"
+        "404":
+          description: "Not found"
+        "405":
+          description: "Invalid input"
+        "500":
+          description: "Server Error"
+      x-swagger-router-controller: "swagger_server.controllers.person_controller"
+  /person/id/{id_person}:
+    get:
+      tags:
+      - "Person"
+      summary: "Get a Person by Id of the Database of Booking"
+      operationId: "person_id_id_person_get"
+      parameters:
+      - name: "id_person"
+        in: "path"
+        description: "Id person"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/SuccessPersonIdGet"
+        "400":
+          description: "Bad Request"
+        "401":
+          description: "Unauthorized"
+        "404":
+          description: "Not found"
+        "405":
+          description: "Invalid input"
+        "500":
+          description: "Server Error"
+      x-swagger-router-controller: "swagger_server.controllers.person_controller"
+  /person/name/{person_name}:
+    get:
+      tags:
+      - "Person"
+      summary: "Get a Person by Name of the Database of Booking"
+      operationId: "person_name_person_name_get"
+      parameters:
+      - name: "person_name"
+        in: "path"
+        description: "Person name"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/SuccessPersonIdGet"
+        "400":
+          description: "Bad Request"
+        "401":
+          description: "Unauthorized"
+        "404":
+          description: "Not found"
+        "405":
+          description: "Invalid input"
+        "500":
+          description: "Server Error"
+      x-swagger-router-controller: "swagger_server.controllers.person_controller"
+  /person/{id_person}:
+    put:
+      tags:
+      - "Person"
+      summary: "Update a Person by Id of the Database of Booking"
+      operationId: "person_id_person_put"
+      consumes:
+      - "application/json"
+      - "application/xml"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "id_person"
+        in: "path"
+        description: "Id person"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "body"
+        description: "Insert a person"
+        required: true
+        schema:
+          $ref: "#/definitions/BodyPersonPut"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/SuccessPersonGet"
+        "400":
+          description: "Bad Request"
+        "401":
+          description: "Unauthorized"
+        "404":
+          description: "Not found"
+        "405":
+          description: "Invalid input"
+        "500":
+          description: "Server Error"
+      x-swagger-router-controller: "swagger_server.controllers.person_controller"
+    delete:
+      tags:
+      - "Person"
+      summary: "Delete a Resource by Id of the Database of Booking"
+      operationId: "person_id_person_delete"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "id_person"
+        in: "path"
+        description: "Id person"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/SuccessPersonGet"
+        "400":
+          description: "Bad Request"
+        "401":
+          description: "Unauthorized"
+        "404":
+          description: "Not found"
+        "405":
+          description: "Invalid input"
+        "500":
+          description: "Server Error"
+      x-swagger-router-controller: "swagger_server.controllers.person_controller"
+  /booking:
+    get:
+      tags:
+      - "Booking"
+      summary: "Get all booking of the DataBase"
+      operationId: "booking_get"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters: []
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/SuccessBookingGet"
+        "400":
+          description: "Bad Request"
+        "401":
+          description: "Unauthorized"
+        "404":
+          description: "Not found"
+        "405":
+          description: "Invalid input"
+        "500":
+          description: "Server Error"
+      x-swagger-router-controller: "swagger_server.controllers.booking_controller"
+    post:
+      tags:
+      - "Booking"
+      summary: "Create a Booking"
+      operationId: "booking_post"
+      consumes:
+      - "application/json"
+      - "application/xml"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Insert a booking"
+        required: true
+        schema:
+          $ref: "#/definitions/BodyBookingPost"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/SuccessBookingPost"
+        "400":
+          description: "Bad Request"
+        "401":
+          description: "Unauthorized"
+        "404":
+          description: "Not found"
+        "405":
+          description: "Invalid input"
+        "500":
+          description: "Server Error"
+      x-swagger-router-controller: "swagger_server.controllers.booking_controller"
+  /booking/id/{id_booking}:
+    get:
+      tags:
+      - "Booking"
+      summary: "Get a Booking by Id"
+      operationId: "booking_id_id_booking_get"
+      parameters:
+      - name: "id_booking"
+        in: "path"
+        description: "Id booking"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/SuccessBookingGet"
+        "400":
+          description: "Bad Request"
+        "401":
+          description: "Unauthorized"
+        "404":
+          description: "Not found"
+        "405":
+          description: "Invalid input"
+        "500":
+          description: "Server Error"
+      x-swagger-router-controller: "swagger_server.controllers.booking_controller"
+  /booking/{id_booking}:
+    put:
+      tags:
+      - "Booking"
+      summary: "Update a Booking by Id"
+      operationId: "booking_id_booking_put"
+      consumes:
+      - "application/json"
+      - "application/xml"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "id_booking"
+        in: "path"
+        description: "Id booking"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "body"
+        description: "Insert a booking"
+        required: true
+        schema:
+          $ref: "#/definitions/BodyBookingPut"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/SuccessBookingGet"
+        "400":
+          description: "Bad Request"
+        "401":
+          description: "Unauthorized"
+        "404":
+          description: "Not found"
+        "405":
+          description: "Invalid input"
+        "500":
+          description: "Server Error"
+      x-swagger-router-controller: "swagger_server.controllers.booking_controller"
+    delete:
+      tags:
+      - "Booking"
+      summary: "Delete a booking of the DataBase"
+      operationId: "booking_id_booking_delete"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "id_booking"
+        in: "path"
+        description: "Id booking"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/SuccessBookingGet"
+        "400":
+          description: "Bad Request"
+        "401":
+          description: "Unauthorized"
+        "404":
+          description: "Not found"
+        "405":
+          description: "Invalid input"
+        "500":
+          description: "Server Error"
+      x-swagger-router-controller: "swagger_server.controllers.booking_controller"
+definitions:
+  BodyResourcePost:
+    type: "object"
+    properties:
+      resource_name:
+        type: "string"
+        description: "Resource name"
+      resource_type:
+        type: "string"
+        description: "Resource type"
+      resource_model:
+        type: "string"
+        description: "Resource model"
+      resource_state:
+        type: "string"
+        description: "Resource state"
+    example:
+      resource_state: "resource_state"
+      resource_type: "resource_type"
+      resource_model: "resource_model"
+      resource_name: "resource_name"
+  SuccessResourcePost:
+    type: "object"
+    properties:
+      _id:
+        type: "string"
+        description: "ID Resource"
+      resource_name:
+        type: "string"
+        description: "Resource name"
+      resource_type:
+        type: "string"
+        description: "Resource type"
+      resource_model:
+        type: "string"
+        description: "Resource model"
+      resource_state:
+        type: "string"
+        description: "Resource state"
+    example:
+      resource_state: "resource_state"
+      resource_type: "resource_type"
+      resource_model: "resource_model"
+      _id: "_id"
+      resource_name: "resource_name"
+  SuccessResourceGet:
+    type: "object"
+    properties:
+      _id:
+        type: "string"
+        description: "ID Resource"
+      delete:
+        type: "integer"
+        description: "Integer"
+      resource_name:
+        type: "string"
+        description: "Resource name"
+      resource_type:
+        type: "string"
+        description: "Resource type"
+      resource_model:
+        type: "string"
+        description: "Resource model"
+      resource_state:
+        type: "string"
+        description: "Resource state"
+    example:
+      resource_state: "resource_state"
+      resource_type: "resource_type"
+      resource_model: "resource_model"
+      _id: "_id"
+      resource_name: "resource_name"
+      delete: 0
+  SuccessResourceIdGet:
+    type: "object"
+    properties:
+      _id:
+        type: "string"
+        description: "ID Resource"
+      resource_name:
+        type: "string"
+        description: "Resource name"
+      resource_type:
+        type: "string"
+        description: "Resource type"
+      resource_model:
+        type: "string"
+        description: "Resource model"
+      resource_state:
+        type: "string"
+        description: "Resource state"
+    example:
+      resource_state: "resource_state"
+      resource_type: "resource_type"
+      resource_model: "resource_model"
+      _id: "_id"
+      resource_name: "resource_name"
+  BodyResourcePut:
+    type: "object"
+    properties:
+      resource_name:
+        type: "string"
+        description: "Resource name"
+      resource_type:
+        type: "string"
+        description: "Resource type"
+      resource_model:
+        type: "string"
+        description: "Resource model"
+      resource_state:
+        type: "string"
+        description: "Resource state"
+    example:
+      resource_state: "resource_state"
+      resource_type: "resource_type"
+      resource_model: "resource_model"
+      resource_name: "resource_name"
+  BodyPersonPost:
+    type: "object"
+    properties:
+      person_full_name:
+        type: "string"
+        description: "Full name"
+      person_age:
+        type: "integer"
+        description: "Age"
+      person_country:
+        type: "string"
+        description: "Country"
+      person_city:
+        type: "string"
+        description: "City"
+      person_gender:
+        type: "string"
+        description: "Gender"
+    example:
+      person_country: "person_country"
+      person_full_name: "person_full_name"
+      person_gender: "person_gender"
+      person_age: 0
+      person_city: "person_city"
+  SuccessPersonPost:
+    type: "object"
+    properties:
+      _id:
+        type: "string"
+        description: "ID Person"
+      person_full_name:
+        type: "string"
+        description: "Full name"
+      person_age:
+        type: "integer"
+        description: "Age"
+      person_country:
+        type: "string"
+        description: "Country"
+      person_city:
+        type: "string"
+        description: "City"
+      person_gender:
+        type: "string"
+        description: "Gender"
+    example:
+      person_country: "person_country"
+      person_full_name: "person_full_name"
+      person_gender: "person_gender"
+      _id: "_id"
+      person_age: 0
+      person_city: "person_city"
+  SuccessPersonGet:
+    type: "object"
+    properties:
+      _id:
+        type: "string"
+        description: "ID Person"
+      delete:
+        type: "integer"
+        description: "Integer"
+      person_full_name:
+        type: "string"
+        description: "Full name"
+      person_age:
+        type: "integer"
+        description: "Age"
+      person_country:
+        type: "string"
+        description: "Country"
+      person_city:
+        type: "string"
+        description: "City"
+      person_gender:
+        type: "string"
+        description: "Gender"
+    example:
+      person_country: "person_country"
+      person_full_name: "person_full_name"
+      person_gender: "person_gender"
+      _id: "_id"
+      delete: 0
+      person_age: 6
+      person_city: "person_city"
+  SuccessPersonIdGet:
+    type: "object"
+    properties:
+      _id:
+        type: "string"
+        description: "ID Person"
+      person_full_name:
+        type: "string"
+        description: "Full name"
+      person_age:
+        type: "integer"
+        description: "Age"
+      person_country:
+        type: "string"
+        description: "Country"
+      person_city:
+        type: "string"
+        description: "City"
+      person_gender:
+        type: "string"
+        description: "Gender"
+    example:
+      person_country: "person_country"
+      person_full_name: "person_full_name"
+      person_gender: "person_gender"
+      _id: "_id"
+      person_age: 0
+      person_city: "person_city"
+  BodyPersonPut:
+    type: "object"
+    properties:
+      person_full_name:
+        type: "string"
+        description: "Full name"
+      person_age:
+        type: "integer"
+        description: "Age"
+      person_country:
+        type: "string"
+        description: "Country"
+      person_city:
+        type: "string"
+        description: "City"
+      person_gender:
+        type: "string"
+        description: "Gender"
+    example:
+      person_country: "person_country"
+      person_full_name: "person_full_name"
+      person_gender: "person_gender"
+      person_age: 0
+      person_city: "person_city"
+  Details:
+    type: "object"
+    properties:
+      subject:
+        type: "string"
+      description:
+        type: "string"
+    example:
+      subject: "subject"
+      description: "description"
+  Schedule:
+    type: "object"
+    properties:
+      date:
+        type: "string"
+        description: "MM/DD/YYYY"
+      start_time:
+        type: "string"
+        description: "HH:MM:SS"
+      end_time:
+        type: "string"
+        description: "HH:MM:SS"
+    example:
+      date: "date"
+      start_time: "start_time"
+      end_time: "end_time"
+  Resource:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+    example:
+      id: "id"
+  Person:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+    example:
+      id: "id"
+  BodyBookingPost:
+    type: "object"
+    properties:
+      details:
+        $ref: "#/definitions/Details"
+      schedule:
+        $ref: "#/definitions/Schedule"
+      state:
+        type: "string"
+      type:
+        type: "string"
+      resource:
+        $ref: "#/definitions/Resource"
+      person:
+        $ref: "#/definitions/Person"
+    example:
+      schedule:
+        date: "date"
+        start_time: "start_time"
+        end_time: "end_time"
+      resource:
+        id: "id"
+      person:
+        id: "id"
+      details:
+        subject: "subject"
+        description: "description"
+      state: "state"
+      type: "type"
+  SuccessBookingPost:
+    type: "object"
+    properties:
+      _id:
+        type: "string"
+      details:
+        $ref: "#/definitions/Details"
+      schedule:
+        $ref: "#/definitions/Schedule"
+      state:
+        type: "string"
+      type:
+        type: "string"
+      resource:
+        $ref: "#/definitions/Resource"
+      person:
+        $ref: "#/definitions/Person"
+    example:
+      schedule:
+        date: "date"
+        start_time: "start_time"
+        end_time: "end_time"
+      resource:
+        id: "id"
+      person:
+        id: "id"
+      details:
+        subject: "subject"
+        description: "description"
+      _id: "_id"
+      state: "state"
+      type: "type"
+  SuccessBookingGet:
+    type: "object"
+    properties:
+      _id:
+        type: "string"
+      delete:
+        type: "integer"
+      details:
+        $ref: "#/definitions/Details"
+      schedule:
+        $ref: "#/definitions/Schedule"
+      state:
+        type: "string"
+      type:
+        type: "string"
+      resource:
+        $ref: "#/definitions/Resource"
+      person:
+        $ref: "#/definitions/Person"
+    example:
+      schedule:
+        date: "date"
+        start_time: "start_time"
+        end_time: "end_time"
+      resource:
+        id: "id"
+      person:
+        id: "id"
+      details:
+        subject: "subject"
+        description: "description"
+      _id: "_id"
+      state: "state"
+      type: "type"
+      delete: 0
+  BodyBookingPut:
+    type: "object"
+    properties:
+      details:
+        $ref: "#/definitions/Details"
+      schedule:
+        $ref: "#/definitions/Schedule"
+      state:
+        type: "string"
+      type:
+        type: "string"
+      resource:
+        $ref: "#/definitions/Resource"
+      person:
+        $ref: "#/definitions/Person"
+    example:
+      schedule:
+        date: "date"
+        start_time: "start_time"
+        end_time: "end_time"
+      resource:
+        id: "id"
+      person:
+        id: "id"
+      details:
+        subject: "subject"
+        description: "description"
+      state: "state"
+      type: "type"

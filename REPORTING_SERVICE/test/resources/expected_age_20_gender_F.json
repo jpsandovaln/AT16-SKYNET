@@ -1,0 +1,17 @@
+[
+   {
+      "date":"06/21/2020",
+      "start_time":"06:30:00",
+      "end_time":"13:45:00",
+      "state":"free",
+      "resource_name":"Pickup",
+      "resource_type":"vehicles",
+      "resource_model":"Pickup",
+      "resource_state":"free",
+      "person_full_name":"Janeth Jackson",
+      "person_age":17,
+      "person_country":"Colombia",
+      "person_city":"Medellin",
+      "person_gender":"F"
+   }
+]
